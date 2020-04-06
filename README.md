@@ -37,9 +37,9 @@ The following action sets are currently implemented.
 | | "&lt;&lt;" | "&gt;&gt;" | "&laquo;" | "&raquo;" |
 | quotes.german | " '" | "'" | " &sbquo;" | "&rsquo;" |
 | | "\"" | "\"" | "&bdquo;" | "&rdquo;" |
-| to_quotes | " '" | "'" | " <q>" | "</q>" |
-| | "\"" | "\"" | "<q>" | "</q>" |
-| | "&lt;&lt;" | "&gt;&gt;" | "<q>" | "</q>" |
+| to_quotes | " '" | "'" | " &lt;q&gt;" | "&lt;/q&gt;" |
+| | "\"" | "\"" | "&lt;q&gt;" | "&lt;/q&gt;" |
+| | "&lt;&lt;" | "&gt;&gt;" | "&lt;q&gt;" | "&lt;/q&gt;" |
 | commercial | "(c)" | | "&copy;" | |
 | | "(C)" | | "&copy;" | |
 | | "(r)" | | "&reg;" | |
