@@ -1,6 +1,6 @@
 degrotesque - a tiny web type setter
 
-The script loads a HTML page - or several in batch, one after the other - and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typograhic representant for improving the pages' appearance.  
+The script loads a HTML page - or several in batch, one after the other - and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representant for improving the pages' appearance.  
 
 E.g.:
 
