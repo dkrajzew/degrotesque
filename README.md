@@ -8,7 +8,7 @@ E.g.:
 
 will become:
 
- &ldquo;Well &mdash; that&apo;s not what I had expected.&rdquo;
+ &ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;
 
 jjj
  
