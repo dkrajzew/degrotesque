@@ -27,6 +27,8 @@ There are some caveats, yes:
 * If you embed HTML code in HTML (not suported by HTML, but who cares), it may yield in odd behaviour.
 * If you have php-pages and combine php-generated and plain HTML text, it may yield in odd behaviour. Etc. So you should check your pages for correctness after applying degrotesque.
 
+degrotesque is licensed under the [GPL v3.0](License.txt).
+
 Well, have fun. If you have any questions or comments, let me know.
 
 Named Actions
