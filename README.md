@@ -20,7 +20,12 @@ The script has the following options:
 There are some caveats, yes. If you embed HTML code in HTML (not suported by HTML, but who cares), it may yield in odd behaviour.
 If you have php-pages and combine php-generated and plain HTML text, it may yield in odd behaviour. Etc. So you should check your pages for correctness after applying degrotesque.
 
-Currently, the following actions are supported:
+The default actions are: quotes.english, dashes, ellipsis, math, apostroph. The list of all implemented actions is given below, as well as the default extensions of files that will be passed if a folder is given.
+
+Well, have fun. If you have any questions or comments, let me know.
+
+==Named Actions==
+The following action sets are currently implemented. 
 
 | Action Name | From Opening String | From Closing String | To Opening String | To Closing String |
 | ---- | ---- | ---- | ---- | ---- |
@@ -52,4 +57,15 @@ Currently, the following actions are supported:
 | | ">=" | | "&ge;" | |
 | dagger | "*" | | "&dagger;" | |
 | | "**" | | "&Dagger;" | |
+ 
+==Default Extensions==
+Files with the following extensions are parsed per default:
+* html, htm, xhtml,
+* php, phtml, phtm, php2, php3, php4, php5,
+* asp, 
+* jsp, jspx, 
+* shtml, shtm, sht, stm,
+* vbhtml,
+* ppthtml,   
+* ssp, jhtml
  
