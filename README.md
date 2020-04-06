@@ -26,7 +26,9 @@ The default actions are: quotes.english, dashes, ellipsis, math, apostroph. The 
 
 Well, have fun. If you have any questions or comments, let me know.
 
-==Named Actions==
+Named Actions
+-------------
+
 The following action sets are currently implemented. 
 
 | Action Name | From Opening String | From Closing String | To Opening String | To Closing String |
@@ -60,7 +62,9 @@ The following action sets are currently implemented.
 | dagger | "*" | | "&dagger;" | |
 | | "**" | | "&Dagger;" | |
  
-==Default Extensions==
+Default Extensions
+------------------
+
 Files with the following extensions are parsed per default:
 * html, htm, xhtml,
 * php, phtml, phtm, php2, php3, php4, php5,
@@ -71,3 +75,8 @@ Files with the following extensions are parsed per default:
 * ppthtml,   
 * ssp, jhtml
  
+Notes
+-----
+* I tried [Genshi](https://genshi.edgewall.org/), [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/), and [lxml](https://lxml.de/). All missed in keeping the code unchanged. 
+
+
