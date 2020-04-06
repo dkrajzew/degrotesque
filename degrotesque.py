@@ -83,7 +83,7 @@ actionsDB = {
 
  # bullets
  "bullets": [
-   [["*"], ["", "&null;", ""]],
+   [["*"], ["", "&bull;", ""]],
   ],
     
  # ellipsis
@@ -105,6 +105,7 @@ actionsDB = {
    [["~"], ["", "&asymp;", ""]],
    [["!="], ["", "&ne;", ""]],
    [["<="], ["", "&le;", ""]],
+   [[">="], ["", "&ge;", ""]],
   ],
     
  # dagger
@@ -166,13 +167,16 @@ def skipIfCode(html, i):
   This counts for script, style, and pre elements."""
   toFind = None
   i = i + 1
-  if html[i:i+6]=="script":
+  if html[i:i+6].lower()=="script":
     toFind = "</script"       
     i = i + 6
-  if html[i:i+5]=="style":
+  if html[i:i+4].lower()=="code":
+    toFind = "</code"
+    i = i + 4
+  if html[i:i+5].lower()=="style":
     toFind = "</style"
     i = i + 5
-  if html[i:i+3]=="pre":
+  if html[i:i+3].lower()=="pre":
     toFind = "</pre"
     i = i + 3
   if html[i:i+1]=="?":
@@ -182,7 +186,7 @@ def skipIfCode(html, i):
     return i, True
   while i<len(html) and html[i:i+len(toFind)]!=toFind:
     i = i + 1
-  if html[i:i+len(toFind)]!=toFind:
+  if html[i:i+len(toFind)].lower()!=toFind:
     raise ValueError("Could not find matching end of '%s'" % toFind)
   while i<len(html) and html[i]!='>':
     i = i + 1
