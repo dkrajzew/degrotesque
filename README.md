@@ -23,9 +23,9 @@ If you have php-pages and combine php-generated and plain HTML text, it may yiel
 Currently, the following actions are supported:
 * quotes.english
 
-| Action Name | Opening String | Closing String | Opening String | Closing String
-| ---- | ---- | ---- |
+| Action Name | Opening String | Closing String | Opening String | Closing String |
+| ---- | ---- | ---- | ---- | ---- |
 | quotes.english | " '" | "'" | " &lsquo;" | "&rsquo;" |
-| ---- | ---- | ---- |
+| ---- | ---- | ---- | ---- | ---- |
 | quotes.english | " '" | "'" | " &lsquo;" | "&rsquo;" |
  
