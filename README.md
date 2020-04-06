@@ -17,5 +17,15 @@ The script has the following options:
 * --actions/-a: Name the actions that shall be applied
 * --extensions/-e: The extensions of files that shall be processed
 
+There are some caveats, yes. If you embed HTML code in HTML (not suported by HTML, but who cares), it may yield in odd behaviour.
+If you have php-pages and combine php-generated and plain HTML text, it may yield in odd behaviour. Etc. So you should check your pages for correctness after applying degrotesque.
 
+Currently, the following actions are supported:
+* quotes.english
+
+| Action Name | Opening String | Closing String | Opening String | Closing String
+| ---- | ---- | ---- |
+| quotes.english | " '" | "'" | " &lsquo;" | "&rsquo;" |
+| ---- | ---- | ---- |
+| quotes.english | " '" | "'" | " &lsquo;" | "&rsquo;" |
  
