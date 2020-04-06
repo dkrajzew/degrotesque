@@ -10,6 +10,8 @@ will become:
 
  &ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;
 
+(Uhm, uhm, for those who don't see it, the starting and ending quotes have been replaced by &amp;ldquo; and &amp;rdquo;, respectively, the ' by &amp;amp; and the - by a &amp;mdash;.)
+
 The script has the following options:
 * --input/-i: the file or the folder to process
 * --recursive/-r: Set if the folder - if given - shall be processed recursively
