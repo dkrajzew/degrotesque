@@ -21,10 +21,35 @@ There are some caveats, yes. If you embed HTML code in HTML (not suported by HTM
 If you have php-pages and combine php-generated and plain HTML text, it may yield in odd behaviour. Etc. So you should check your pages for correctness after applying degrotesque.
 
 Currently, the following actions are supported:
-* quotes.english
 
-| Action Name | Opening String | Closing String | Opening String | Closing String |
+| Action Name | From Opening String | From Closing String | To Opening String | To Closing String |
 | ---- | ---- | ---- | ---- | ---- |
 | quotes.english | " '" | "'" | " &lsquo;" | "&rsquo;" |
-| | "\"" | "\"" | " &ldquo;" | "&rdquo;" |
+| | "\"" | "\"" | "&ldquo;" | "&rdquo;" |
+| quotes.french | "&lt;" | "&gt;" | "&lsaquo;" | "&rsaquo;" |
+| | "&lt;&lt;" | "&gt;&gt;" | "&laquo;" | "&raquo;" |
+| quotes.german | " '" | "'" | " &sbquo;" | "&rsquo;" |
+| | "\"" | "\"" | "&bdquo;" | "&rdquo;" |
+| to_quotes | " '" | "'" | " <q>" | "</q>" |
+| | "\"" | "\"" | "<q>" | "</q>" |
+| | "&lt;&lt;" | "&gt;&gt;" | "<q>" | "</q>" |
+| commercial | "(c)" | | "&copy;" | |
+| | "(C)" | | "&copy;" | |
+| | "(r)" | | "&reg;" | |
+| | "(R)" | | "&reg;" | |
+| | "(tm)" | | "&trade;" | |
+| | "(TM)" | | "&trade;" | |
+| dashes | " - " | | "&mdash;" | |
+| bullets | "*" | | "&bull;" | |
+| ellipsis | "..." | | "&hellip;" | |
+| apostroph | "'" | | "&apos;" | |
+| math | "+/-" | | "&plusmn;" | |
+| | "1/2" | | "&frac12;" | |
+| | "1/4" | | "&frac14;" | |
+| | "~" | | "&asymp;" | |
+| | "!=" | | "&ne;" | |
+| | "<=" | | "&le;" | |
+| | ">=" | | "&ge;" | |
+| dagger | "*" | | "&dagger;" | |
+| | "**" | | "&Dagger;" | |
  
