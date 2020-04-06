@@ -26,6 +26,5 @@ Currently, the following actions are supported:
 | Action Name | Opening String | Closing String | Opening String | Closing String |
 | ---- | ---- | ---- | ---- | ---- |
 | quotes.english | " '" | "'" | " &lsquo;" | "&rsquo;" |
-| ---- | ---- | ---- | ---- | ---- |
-| quotes.english | " '" | "'" | " &lsquo;" | "&rsquo;" |
+| | "\"" | "\"" | " &ldquo;" | "&rdquo;" |
  
