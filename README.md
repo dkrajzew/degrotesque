@@ -19,10 +19,13 @@ The script has the following options:
 * --actions/-a: Name the actions that shall be applied
 * --extensions/-e: The extensions of files that shall be processed
 
-There are some caveats, yes. If you embed HTML code in HTML (not suported by HTML, but who cares), it may yield in odd behaviour.
-If you have php-pages and combine php-generated and plain HTML text, it may yield in odd behaviour. Etc. So you should check your pages for correctness after applying degrotesque.
+All of the text is replaced. This means everything not within a &lt; and a &gt;. But yes, the script is smart enough to skip the contents of the elements "pre", "style", "script", "code", and "<?".
 
 The default actions are: quotes.english, dashes, ellipsis, math, apostroph. The list of all implemented actions is given below, as well as the default extensions of files that will be passed if a folder is given.
+
+There are some caveats, yes:
+* If you embed HTML code in HTML (not suported by HTML, but who cares), it may yield in odd behaviour.
+* If you have php-pages and combine php-generated and plain HTML text, it may yield in odd behaviour. Etc. So you should check your pages for correctness after applying degrotesque.
 
 Well, have fun. If you have any questions or comments, let me know.
 
@@ -77,6 +80,6 @@ Files with the following extensions are parsed per default:
  
 Notes
 -----
-* I tried [Genshi](https://genshi.edgewall.org/), [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/), and [lxml](https://lxml.de/). All missed in keeping the code unchanged. 
+* I tried [Genshi](https://genshi.edgewall.org/), [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/), and [lxml](https://lxml.de/). All missed in keeping the code unchanged. So the parser
 
 
