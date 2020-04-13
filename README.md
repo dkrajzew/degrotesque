@@ -64,8 +64,8 @@ The following action sets are currently implemented.
 | | "!=" | | "&ne;" | |
 | | "<=" | | "&le;" | |
 | | ">=" | | "&ge;" | |
-| dagger | "*" | | "&dagger;" | |
-| | "**" | | "&Dagger;" | |
+| dagger | "**" | | "&Dagger;" | |
+| | "*" | | "&dagger;" | |
  
 Default Extensions
 ------------------
