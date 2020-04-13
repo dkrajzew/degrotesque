@@ -119,16 +119,17 @@
     <replaceable>&lt;PATH&gt;</replaceable></option> for short). If a path is
     given, the option <option>--recursive</option> (or <option>-r</option> for
     short) forces degrotesque to scan its subfolders as well. When scanning a
-    folder (and its subfolders), only those files iwll be processed that match
+    folder (and its subfolders), only those files will be processed that match
     the list of extension. Per default, the following extensions are
     processed: html, htm, xhtml, php, phtml, phtm, php2, php3, php4, php5,
     asp, jsp, jspx, shtml, shtm, sht, stm, vbhtml, ppthtml, ssp, jhtml. The
-    list of extensions to rpcess can be changed using the <option>--extensions
+    list of extensions to process can be changed using the
+    <option>--extensions
     <replaceable>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</replaceable></option>
     option (or <option>-e
     <replaceable>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</replaceable></option>
-    for short). Before replacing the contents, each processed file is backupd
-    per default. If the option <option>--no-backup</option> (or
+    for short). Before replacing the contents, a backup of each processed file
+    is done per default. If the option <option>--no-backup</option> (or
     <option>-B</option> for short) is set, no backup files are generated.
     Backup files keep the name of the original file, but get the appendix
     ".orig".</para>
