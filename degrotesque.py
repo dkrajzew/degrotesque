@@ -282,7 +282,7 @@ def main(call):
   optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
   optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
   optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
-  optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions to process")
+  optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
   optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
   options, remaining_args = optParser.parse_args(args=call)
   extensions = getExtensions(options.extensions)
