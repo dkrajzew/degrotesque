@@ -1,0 +1,52 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>degrotesque</title><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="refentry"><a name="id555666"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p><span class="application">degrotesque</span> &#8212; A tiny web type setter.</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">degrotesque</code>  [<code class="option">( --input | -i )
+      <em class="replaceable"><code>&lt;PATH&gt;</code></em></code>] [<code class="option">( --recursive | -r )</code>] [<code class="option">( --no-backup | -B ) </code>] [<code class="option">( --extensions | -e )
+      <em class="replaceable"><code>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</code></em></code>] [<code class="option">( --actions | -a )
+      <em class="replaceable"><code>&lt;ACTION_SET&gt;[,&lt;ACTION_SET&gt;]*</code></em></code>]</p></div><div class="cmdsynopsis"><p><code class="command">degrotesque</code>  [<code class="option">--help</code>]</p></div></div><div class="refsect1"><a name="id555766"></a><h2>DESCRIPTION</h2><p>degrotesque is a small python script that replaces plain ASCII
+    characters into their typographic counterparts.</p></div><div class="refsect1"><a name="id555788"></a><h2>OPTIONS</h2><div class="variablelist"><dl class="variablelist"><dt><span class="term">--input <em class="replaceable"><code>&lt;PATH&gt;[;&lt;PATH&gt;]*</code></em>, --i
+        <em class="replaceable"><code>&lt;PATH&gt;[;&lt;PATH&gt;]*</code></em></span></dt><dd><p>Defines the files to read; paths are accepted as well.
+          <em><span class="remark">Mandatory, type:file- or pathname, default:
+          none</span></em></p></dd><dt><span class="term">--recursive, --r</span></dt><dd><p>Whether a given path shall be processed recursively.
+          <em><span class="remark">Optional, default: false</span></em></p></dd><dt><span class="term">--no-backup, --B</span></dt><dd><p>Whether no backup shall be generated. <em><span class="remark">Optional (backup
+          files are generated if not given), default: false</span></em></p></dd><dt><span class="term">--extensions <em class="replaceable"><code>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</code></em>,
+        --f <em class="replaceable"><code>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</code></em></span></dt><dd><p>Defines the extensions of files to process. <em><span class="remark">Optional,
+          default:
+          html,htm,xhtml,php,phtml,phtm,php2,php3,php4,php5,asp,jsp,jspx,shtml,shtm,sht,stm,vbhtml,ppthtml,ssp,jhtml</span></em></p></dd><dt><span class="term">--actions <em class="replaceable"><code>&lt;ACTION&gt;[,&lt;ACTION&gt;]*</code></em>, --a
+        <em class="replaceable"><code>&lt;ACTION&gt;[,&lt;ACTION&gt;]*</code></em></span></dt><dd><p>Defines the actions to perform. <em><span class="remark">Optional, default:
+          quotes.english,dashes,ellipsis,math,apostrophe</span></em></p></dd></dl></div></div><div class="refsect1"><a name="id555926"></a><h2>USAGE</h2><p>The application reads the given file or the files from the folder
+    defined by the <code class="option">--input
+    <em class="replaceable"><code>&lt;PATH&gt;</code></em></code> option (or <code class="option">-i
+    <em class="replaceable"><code>&lt;PATH&gt;</code></em></code> for short). If a path is
+    given, the option <code class="option">--recursive</code> (or <code class="option">-r</code> for
+    short) forces degrotesque to scan its subfolders as well. When scanning a
+    folder (and its subfolders), only those files iwll be processed that match
+    the list of extension. Per default, the following extensions are
+    processed: html, htm, xhtml, php, phtml, phtm, php2, php3, php4, php5,
+    asp, jsp, jspx, shtml, shtm, sht, stm, vbhtml, ppthtml, ssp, jhtml. The
+    list of extensions to rpcess can be changed using the <code class="option">--extensions
+    <em class="replaceable"><code>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</code></em></code>
+    option (or <code class="option">-e
+    <em class="replaceable"><code>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</code></em></code>
+    for short). Before replacing the contents, each processed file is backupd
+    per default. If the option <code class="option">--no-backup</code> (or
+    <code class="option">-B</code> for short) is set, no backup files are generated.
+    Backup files keep the name of the original file, but get the appendix
+    ".orig".</p><p>When being processed, a set of actions is applied to the document.
+    The default actions are: quotes.english,dashes,ellipsis,math,apostrophe.
+    You may choose the actions to apply by naming them using the
+    <code class="option">--actions
+    <em class="replaceable"><code>&lt;ACTION&gt;[,&lt;ACTION&gt;]*</code></em></code> (or
+    <code class="option">-a
+    <em class="replaceable"><code>&lt;ACTION&gt;[,&lt;ACTION&gt;]*</code></em></code> for
+    short) option.</p><div class="refsect2"><a name="id555992"></a><h3>Known Actions</h3><p>The actions that can be applied are:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>quotes.english</p></li><li class="listitem"><p>quotes.french</p></li><li class="listitem"><p>quotes.german</p></li><li class="listitem"><p>to_quotes</p></li><li class="listitem"><p>commercial</p></li><li class="listitem"><p>dashes</p></li><li class="listitem"><p>bullets</p></li><li class="listitem"><p>ellipsis</p></li><li class="listitem"><p>apostrophe</p></li><li class="listitem"><p>math</p></li><li class="listitem"><p>dagger</p></li></ul></div><p>Please consult the online documentation
+      (http://www.krajzewicz.de/blog/degrotesque.php or
+      https://github.com/dkrajzew/degrotesque) for further information about
+      the actions.</p></div></div><div class="refsect1"><a name="id556088"></a><h2>EXAMPLES</h2><p><span class="command"><strong>degrotesque -i my_page.html -a
+    quotes.german</strong></span></p><p>Replaces single and double quotes within the file "my_page.html" by
+    their typographic German counterparts.</p><p><span class="command"><strong>paletteconverter.exe -i my_folder -r
+    --no-backup</strong></span></p><p>Applies the default actions to all files that match the extension in
+    the folder "my_folder" and all subfolders. No backup files are
+    generated.</p></div><div class="refsect1"><a name="id556125"></a><h2>CAVEATS</h2><p>You may combine php- and html-code in a way that the parser replaces
+    wrong elements - especially quotes. The tool also fails if you embed
+    html-elements within other html-elements.</p><p>You should thereby verify the results.</p></div><div class="refsect1"><a name="id556116"></a><h2>DIAGNOSTICS</h2><p>degrotesque reports errors if something fails.</p></div><div class="refsect1"><a name="id556105"></a><h2>BUGS</h2><p>Nothing is known besides the named caveats, yet. Please report bugs
+    to daniel@krajzewicz.de.</p></div><div class="refsect1"><a name="id556134"></a><h2>SEE ALSO</h2><p>Internet pages at
+    http://www.krajzewicz.de/blog/degrotesque.php</p><p>git project at https://github.com/dkrajzew/degrotesque</p></div><div class="refsect1"><a name="id556149"></a><h2>COPYRIGHT</h2><p>(c) 2020 Daniel Krajzewicz</p><p>http://www.krajzewicz.de/blog/degrotesque.php</p></div></div></body></html>

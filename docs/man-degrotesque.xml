@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.0/docbookx.dtd">
+<refentry>
+  <refmeta>
+    <refentrytitle><application>degrotesque</application></refentrytitle>
+
+    <manvolnum>1</manvolnum>
+
+    <refmiscinfo>degrotesque 0.2</refmiscinfo>
+  </refmeta>
+
+  <refnamediv>
+    <refname><application>degrotesque</application></refname>
+
+    <refpurpose>A tiny web type setter.</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>degrotesque</command>
+
+      <arg><option>( --input | -i )
+      <replaceable>&lt;PATH&gt;</replaceable></option></arg>
+
+      <arg><option>( --recursive | -r )</option></arg>
+
+      <arg><option>( --no-backup | -B ) </option></arg>
+
+      <arg><option>( --extensions | -e )
+      <replaceable>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</replaceable></option></arg>
+
+      <arg><option>( --actions | -a )
+      <replaceable>&lt;ACTION_SET&gt;[,&lt;ACTION_SET&gt;]*</replaceable></option></arg>
+    </cmdsynopsis>
+
+    <cmdsynopsis>
+      <command>degrotesque</command>
+
+      <arg><option>--help</option></arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsect1>
+    <title>DESCRIPTION</title>
+
+    <para>degrotesque is a small python script that replaces plain ASCII
+    characters into their typographic counterparts.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>OPTIONS</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>--input <replaceable
+        class="parameter">&lt;PATH&gt;[;&lt;PATH&gt;]*</replaceable>, --i
+        <replaceable
+        class="parameter">&lt;PATH&gt;[;&lt;PATH&gt;]*</replaceable></term>
+
+        <listitem>
+          <para>Defines the files to read; paths are accepted as well.
+          <remark>Mandatory, type:file- or pathname, default:
+          none</remark></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>--recursive, --r</term>
+
+        <listitem>
+          <para>Whether a given path shall be processed recursively.
+          <remark>Optional, default: false</remark></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>--no-backup, --B</term>
+
+        <listitem>
+          <para>Whether no backup shall be generated. <remark>Optional (backup
+          files are generated if not given), default: false</remark></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>--extensions <replaceable
+        class="parameter">&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</replaceable>,
+        --f <replaceable
+        class="parameter">&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</replaceable></term>
+
+        <listitem>
+          <para>Defines the extensions of files to process. <remark>Optional,
+          default:
+          html,htm,xhtml,php,phtml,phtm,php2,php3,php4,php5,asp,jsp,jspx,shtml,shtm,sht,stm,vbhtml,ppthtml,ssp,jhtml</remark></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>--actions <replaceable
+        class="parameter">&lt;ACTION&gt;[,&lt;ACTION&gt;]*</replaceable>, --a
+        <replaceable
+        class="parameter">&lt;ACTION&gt;[,&lt;ACTION&gt;]*</replaceable></term>
+
+        <listitem>
+          <para>Defines the actions to perform. <remark>Optional, default:
+          quotes.english,dashes,ellipsis,math,apostrophe</remark></para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1>
+    <title>USAGE</title>
+
+    <para>The application reads the given file or the files from the folder
+    defined by the <option>--input
+    <replaceable>&lt;PATH&gt;</replaceable></option> option (or <option>-i
+    <replaceable>&lt;PATH&gt;</replaceable></option> for short). If a path is
+    given, the option <option>--recursive</option> (or <option>-r</option> for
+    short) forces degrotesque to scan its subfolders as well. When scanning a
+    folder (and its subfolders), only those files iwll be processed that match
+    the list of extension. Per default, the following extensions are
+    processed: html, htm, xhtml, php, phtml, phtm, php2, php3, php4, php5,
+    asp, jsp, jspx, shtml, shtm, sht, stm, vbhtml, ppthtml, ssp, jhtml. The
+    list of extensions to rpcess can be changed using the <option>--extensions
+    <replaceable>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</replaceable></option>
+    option (or <option>-e
+    <replaceable>&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*</replaceable></option>
+    for short). Before replacing the contents, each processed file is backupd
+    per default. If the option <option>--no-backup</option> (or
+    <option>-B</option> for short) is set, no backup files are generated.
+    Backup files keep the name of the original file, but get the appendix
+    ".orig".</para>
+
+    <para>When being processed, a set of actions is applied to the document.
+    The default actions are: quotes.english,dashes,ellipsis,math,apostrophe.
+    You may choose the actions to apply by naming them using the
+    <option>--actions
+    <replaceable>&lt;ACTION&gt;[,&lt;ACTION&gt;]*</replaceable></option> (or
+    <option>-a
+    <replaceable>&lt;ACTION&gt;[,&lt;ACTION&gt;]*</replaceable></option> for
+    short) option.</para>
+
+    <refsect2>
+      <title>Known Actions</title>
+
+      <para>The actions that can be applied are:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>quotes.english</para>
+        </listitem>
+
+        <listitem>
+          <para>quotes.french</para>
+        </listitem>
+
+        <listitem>
+          <para>quotes.german</para>
+        </listitem>
+
+        <listitem>
+          <para>to_quotes</para>
+        </listitem>
+
+        <listitem>
+          <para>commercial</para>
+        </listitem>
+
+        <listitem>
+          <para>dashes</para>
+        </listitem>
+
+        <listitem>
+          <para>bullets</para>
+        </listitem>
+
+        <listitem>
+          <para>ellipsis</para>
+        </listitem>
+
+        <listitem>
+          <para>apostrophe</para>
+        </listitem>
+
+        <listitem>
+          <para>math</para>
+        </listitem>
+
+        <listitem>
+          <para>dagger</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Please consult the online documentation
+      (http://www.krajzewicz.de/blog/degrotesque.php or
+      https://github.com/dkrajzew/degrotesque) for further information about
+      the actions.</para>
+    </refsect2>
+  </refsect1>
+
+  <refsect1>
+    <title>EXAMPLES</title>
+
+    <para><command>degrotesque -i my_page.html -a
+    quotes.german</command></para>
+
+    <para>Replaces single and double quotes within the file "my_page.html" by
+    their typographic German counterparts.</para>
+
+    <para><command>paletteconverter.exe -i my_folder -r
+    --no-backup</command></para>
+
+    <para>Applies the default actions to all files that match the extension in
+    the folder "my_folder" and all subfolders. No backup files are
+    generated.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>CAVEATS</title>
+
+    <para>You may combine php- and html-code in a way that the parser replaces
+    wrong elements - especially quotes. The tool also fails if you embed
+    html-elements within other html-elements.</para>
+
+    <para>You should thereby verify the results.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>DIAGNOSTICS</title>
+
+    <para>degrotesque reports errors if something fails.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>BUGS</title>
+
+    <para>Nothing is known besides the named caveats, yet. Please report bugs
+    to daniel@krajzewicz.de.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>SEE ALSO</title>
+
+    <para>Internet pages at
+    http://www.krajzewicz.de/blog/degrotesque.php</para>
+
+    <para>git project at https://github.com/dkrajzew/degrotesque</para>
+  </refsect1>
+
+  <refsect1>
+    <title>COPYRIGHT</title>
+
+    <para>(c) 2020 Daniel Krajzewicz</para>
+
+    <para>http://www.krajzewicz.de/blog/degrotesque.php</para>
+  </refsect1>
+</refentry>

@@ -91,8 +91,8 @@ actionsDB = {
    [["..."], ["", "&hellip;", ""]],
   ],
     
- # apostroph
- "apostroph": [
+ # apostrophe
+ "apostrophe": [
    [["'"], ["", "&apos;", ""]],
   ],
     
@@ -110,8 +110,8 @@ actionsDB = {
     
  # dagger
  "dagger": [
-   [["*"], ["", "&dagger;", ""]],
    [["**"], ["", "&Dagger;", ""]],
+   [["*"], ["", "&dagger;", ""]],
   ]    
 }
 
@@ -239,7 +239,7 @@ def getActions(actNames):
     actions.extend(actionsDB["ellipsis"])
     actions.extend(actionsDB["math"])
     #actions.extend(actionsDB["dagger"])
-    actions.extend(actionsDB["apostroph"])
+    actions.extend(actionsDB["apostrophe"])
     return actions
   actNames = actNames.split(",")
   for an in actNames:
