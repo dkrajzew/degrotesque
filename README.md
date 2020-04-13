@@ -56,7 +56,7 @@ The following action sets are currently implemented.
 | dashes | " - " | | "&mdash;" | |
 | bullets | "*" | | "&bull;" | |
 | ellipsis | "..." | | "&hellip;" | |
-| apostroph | "'" | | "&apos;" | |
+| apostrophe | "'" | | "&apos;" | |
 | math | "+/-" | | "&plusmn;" | |
 | | "1/2" | | "&frac12;" | |
 | | "1/4" | | "&frac14;" | |
@@ -64,8 +64,8 @@ The following action sets are currently implemented.
 | | "!=" | | "&ne;" | |
 | | "<=" | | "&le;" | |
 | | ">=" | | "&ge;" | |
-| dagger | "*" | | "&dagger;" | |
-| | "**" | | "&Dagger;" | |
+| dagger | "**" | | "&Dagger;" | |
+| | "*" | | "&dagger;" | |
  
 Default Extensions
 ------------------
