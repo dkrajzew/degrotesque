@@ -29,6 +29,13 @@ There are some caveats, yes:
 
 degrotesque is licensed under the [GPL v3.0](LICENSE.txt).
 
+You may install it using
+python -m pip install degrotesque
+
+The web page is located at: http://www.krajzewicz.de/blog/degrotesque.php
+The PyPI page is located at: https://pypi.org/project/degrotesque/
+
+
 Well, have fun. If you have any questions or comments, let me know.
 
 Named Actions
