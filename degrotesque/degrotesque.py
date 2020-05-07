@@ -1,3 +1,4 @@
+from __future__ import print_function
 """degrotesque.py
 
 A tiny web type setter.
@@ -23,6 +24,8 @@ file with the appendix ".orig".
 
 (c) Daniel Krajzewicz 2020
 daniel@krajzewicz.de
+http://www.krajzewicz.de
+http://www.krajzewicz.de/blog/degrotesque.php
 
 Available under GPL 3.0, all rights reserved
 """
@@ -278,7 +281,7 @@ def main(call):
   the files to process, and the actions to apply. Goes through the list of 
   files and prettyfies (degrotesques) them. 
   """
-  optParser = OptionParser(usage="""usage:\n  %prog [options]""")
+  optParser = OptionParser(usage="usage:\n  %prog [options]", version="%prog 0.5")
   optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
   optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
   optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
@@ -287,9 +290,12 @@ def main(call):
   options, remaining_args = optParser.parse_args(args=call)
   extensions = getExtensions(options.extensions)
   actions = getActions(options.actions)
+  if options.input==None:
+    optParser.error("no input file(s) given...")
+    sys.exit()
   files = getFiles(options.input, options.recursive, extensions)
   for f in files:
-    print "Processing %s" % f
+    print("Processing %s" % f)
     try:
       with open(f, 'r') as file:
         html = file.read()
@@ -299,7 +305,7 @@ def main(call):
       with open(f, 'w') as file:
         file.write(html)
     except ValueError as err:
-      print str(err)
+      print(str(err))
       continue
 
 
