@@ -1,4 +1,4 @@
-[![License: GPL3](https://img.shields.io/badge/License-GPL3-yellow.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE.txt)
+[![License: GPL3](https://img.shields.io/badge/License-GPL3-yellow.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE.txt) [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/prov2bigchaindb)
 
 degrotesque - A tiny web type setter
 
