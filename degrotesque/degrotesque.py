@@ -29,9 +29,6 @@ http://www.krajzewicz.de
 http://www.krajzewicz.de/blog/degrotesque.php
 
 Available under GPL 3.0, all rights reserved
-
-todos:
-:param inline docus 
 """
 
 
@@ -151,10 +148,8 @@ def getTagName(html):
   
      :param html The HTML-subpart"""
   i = 0
-  while i<len(html) and ord(html[i])<=32:
+  while i<len(html) and (ord(html[i])<=32 or html[i]=="/"):
     i = i + 1 
-  if html[i]=="/":
-    i = i + 1
   ib = i
   ie = i
   while ie<len(html) and html[ie] not in " \n\r\t>/":
@@ -273,7 +268,8 @@ def prettify(html, actions):
 def getExtensions(extNames):
   """Returns the file extensions of files to process.
   
-     If the given names of extensions are None, the default extensions are used.
+     If the given names of extensions are None or empty, the default 
+     extensions are used.
      Otherwise, the given string is split and returned as a list.
   
      :param extNames The names of extensions to process (or None if default 
@@ -286,7 +282,8 @@ def getExtensions(extNames):
 def getActions(actNames):
   """Returns the actions to apply.
   
-     If the given names of actions are None, the default actions are used.
+     If the given names of actions are None or empty, the default actions 
+     are used.
      Otherwise, the actions matching the given names are retrieved from the
      internal database and their list is returned.
   
@@ -325,8 +322,7 @@ def getFiles(name, recursive, extensions):
     for root, dirs, dfiles in os.walk(name):
       for f in dfiles:
         n, e = os.path.splitext(os.path.join(root, f))
-        e = e[1:]
-        if e not in extensions:
+        if e[1:] not in extensions:
           continue
         files.append(os.path.join(root, f))
       if not recursive:
@@ -345,6 +341,7 @@ def main(call):
   the files to process, and the actions to apply. Goes through the list of 
   files and prettyfies (degrotesques) them. 
   """
+  # parse options
   optParser = OptionParser(usage="usage:\n  %prog [options]", version="%prog 0.6")
   optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
   optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8'")
@@ -353,12 +350,14 @@ def main(call):
   optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
   optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
   options, remaining_args = optParser.parse_args(args=call)
+  # setup variable lists
   extensions = getExtensions(options.extensions)
   actions = getActions(options.actions)
   if options.input==None:
     optParser.error("no input file(s) given...")
     sys.exit()
   files = getFiles(options.input, options.recursive, extensions)
+  # loop through files
   for f in files:
     print("Processing %s" % f)
     try:
@@ -369,10 +368,11 @@ def main(call):
       html = html.encode("utf-8", "ignore")
       # apply the beautifications
       html = prettify(html, actions)
-      # save it
-      html = html.decode(options.encoding)
+      # build a backup
       if not options.no_backup:
         shutil.copy(f, f+".orig")
+      # save the new contents
+      html = html.decode(options.encoding)
       fd = io.open(f, mode="w", encoding=options.encoding)
       fd.write(html)
       fd.close()
