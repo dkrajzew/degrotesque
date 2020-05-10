@@ -29,6 +29,9 @@ http://www.krajzewicz.de
 http://www.krajzewicz.de/blog/degrotesque.php
 
 Available under GPL 3.0, all rights reserved
+
+todos:
+:param inline docus 
 """
 
 
@@ -38,13 +41,7 @@ from optparse import OptionParser
 
 
 # --- variables and constants ---------------------------------------
-"""A database of actions
-Each action consists of
-:param [0]: The string to match / the opening string to match
-:param [1]: The closing string to match
-:param [0]: The string to match
-:param [0]: The string to match
-"""
+"""A database of actions"""
 actionsDB = {
  # english quotes
  "quotes.english": [
@@ -54,8 +51,8 @@ actionsDB = {
 
  # french quotes
  "quotes.french": [
-   [[r"&lt;", r"&gt;"], [u"&lsaquo;", u"&rsaquo;"]], # !!! does nothing, I did not found the right replacement, yet
    [[r"&lt;&lt;", r"&gt;&gt;"], [u"&laquo;", u"&raquo;"]],
+   [[r"&lt;", r"&gt;"], [u"&lsaquo;", u"&rsaquo;"]],
   ],
   
  # german quotes
@@ -69,22 +66,23 @@ actionsDB = {
    [[r" '", r"'"], [u" <q>", u"</q>"]],
    [[r"\"", r"\""], [u"<q>", u"</q>"]],
    [[r"&lt;&lt;", r"&gt;&gt;"], [u"<q>", u"</q>"]],
+   [[r"&lt;", r"&gt;"], [u"<q>", u"</q>"]],
   ],
   
  # commercial signs
  "commercial": [
-   [[r"\(c\)", None], [u"&copy;", None]],
-   [[r"\(C\)", None], [u"&copy;", None]],
-   [[r"\(r\)", None], [u"&reg;", None]],
-   [[r"\(R\)", None], [u"&reg;", None]],
-   [[r"\(tm\)", None], [u"&trade;", None]],
-   [[r"\(TM\)", None], [u"&trade;", None]],
+   [[r"\([c|C]\)", None], [u"&copy;", None]],
+   [[r"\([r|R]\)", None], [u"&reg;", None]],
+   [[r"\([t|T][m|M]\)", None], [u"&trade;", None]],
   ],
   
  # dashes
  "dashes": [
    # missing: ndash for number ranges 
-   [[r" - ", None], [u" &mdash; ", None]],
+   [[r"(\s+)-(\s+)", None], [r"\1&mdash;\2", None]],
+   [[r"([\d]+)-([\d]+)", None], [r"\1&ndash;\2", None]],
+   [[r"-([\d]+)", None], [r"&ndash;\1", None]],
+   [[r"([\d]+)-", None], [r"\1&ndash;", None]],
   ],
 
  # bullets
@@ -108,10 +106,14 @@ actionsDB = {
    [[r"\+/-", None], [u"&plusmn;", None]],
    [[r"1/2", None], [u"&frac12;", None]],
    [[r"1/4", None], [u"&frac14;", None]],
+   [[r"3/4", None], [u"&frac34;", None]],
    [[r"\~", None], [u"&asymp;", None]],
    [[r"\!=", None], [u"&ne;", None]],
-   [[r"<=", None], [u"&le;", None]],
-   [[r">=", None], [u"&ge;", None]],
+   [[r"&lt;=", None], [u"&le;", None]],
+   [[r"&gt;=", None], [u"&ge;", None]],
+   [[r"([\d]+)(\s*)\*(\s*)([\d]+)", None], [r"\1\2&times;\3\4", None]],
+   [[r"([\d]+)(\s*)x(\s*)([\d]+)", None], [r"\1\2&times;\3\4", None]],
+   [[r"([\d]+)(\s*)/(\s*)([\d]+)", None], [r"\1\2&divide;\3\4", None]],
   ],
     
  # dagger
@@ -132,6 +134,7 @@ extensionsDB = [
   "vbhtml",
   "ppthtml",   
   "ssp", "jhtml" ]
+  
 
 """List of elements which coontents shall not be processed"""
 elementsToSkip = [
@@ -241,11 +244,15 @@ def prettify(html, actions):
       if a[0][1]!=None and closing==None:
         continue
       if closing!=None:
-        html = html[:ib] + re.sub(a[0][1], a[1][1], html[ib:], 1)
-        marks = marks[:ib+closing.start()] + "0"*len(a[1][1]) + marks[ib+closing.end():]
+        tmp = re.sub(a[0][1], a[1][1], html[ib:], 1)
+        l = closing.end() - closing.start() + len(tmp) - len(html[ib:]) 
+        html = html[:ib] + tmp
+        marks = marks[:ib+closing.start()] + "0"*l + marks[ib+closing.end():]
         assert(len(html)==len(marks))
-      html = html[:i] + re.sub(a[0][0], a[1][0], html[i:], 1)
-      marks = marks[:i] + "0"*len(a[1][0]) + marks[i+opening.end():]
+      tmp = re.sub(a[0][0], a[1][0], html[i:], 1)
+      l = opening.end() - 0 + len(tmp) - len(html[i:])
+      html = html[:i] + tmp
+      marks = marks[:i] + "0"*l + marks[i+opening.end():]
       assert(len(html)==len(marks))
       break
     i = i + 1
