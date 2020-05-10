@@ -13,7 +13,7 @@ The following options are optional
 :param --no-backup/-B: Set if no backup files shall be generated
 :param --actions/-a: Name the actions that shall be applied
 :param --extensions/-e: The extensions of files that shall be processed
-:param --encoding/-f: File encoding (default: 'utf-8'")
+:param --encoding/-E: File encoding (default: 'utf-8'")
 
 The application reads the given file or the files from the folder (optionally 
 recursive) defined by the -i/--input option that match either the default or
@@ -133,10 +133,11 @@ extensionsDB = [
   "shtml", "shtm", "sht", "stm",
   "vbhtml",
   "ppthtml",   
-  "ssp", "jhtml" ]
+  "ssp", "jhtml" 
+]
   
 
-"""List of elements which coontents shall not be processed"""
+"""List of elements which contents shall not be processed"""
 elementsToSkip = [
  u"script", u"code", u"style", u"pre", u"?", u"?php"
 ]
@@ -144,8 +145,11 @@ elementsToSkip = [
 
 
 # --- methods -------------------------------------------------------
-# -- degrotesquing
+# -- HTML annotation
 def getTagName(html):
+  """Returns the name of the tag that starts at the begin of the given string.
+  
+     :param html The HTML-subpart"""
   i = 0
   while i<len(html) and ord(html[i])<=32:
     i = i + 1 
@@ -156,10 +160,12 @@ def getTagName(html):
   while ie<len(html) and html[ie] not in " \n\r\t>/":
     ie += 1 
   return html[ib:ie]      
-   
 
 
 def mark(html):
+  """Returns a string where all HTML-elements are denoted as '1' and plain text as '0'.
+  
+     :param html The html document (contents) to process"""
   opened = 0
   # mark HTML elements, first
   ret = ""
@@ -212,12 +218,15 @@ def mark(html):
   return ret      
 
 
+# -- degrotesquing
 def prettify(html, actions):
   """Prettifies (degrotesques) the given HTML snipplet using the given actions.
   
-  It is assumed that the input is given in utf-8.
-  The result is returned in utf-8 as well.
-  """
+     It is assumed that the input is given in utf-8.
+     The result is returned in utf-8 as well.
+  
+     :param html The html document (contents) to process
+     :param actions The actions to apply"""
   i = 0
   # extract text parts
   marks = mark(html)
@@ -262,14 +271,27 @@ def prettify(html, actions):
 
 # -- options parsing
 def getExtensions(extNames):
-  """Returns the file extensions of files to process by evaluating the given options."""
+  """Returns the file extensions of files to process.
+  
+     If the given names of extensions are None, the default extensions are used.
+     Otherwise, the given string is split and returned as a list.
+  
+     :param extNames The names of extensions to process (or None if default 
+                     extensions shall be used)"""
   if extNames==None or len(extNames)==0:
     return extensionsDB
   return extNames.split(",")
 
 
 def getActions(actNames):
-  """Returns the actions to apply by evaluating the given options."""
+  """Returns the actions to apply.
+  
+     If the given names of actions are None, the default actions are used.
+     Otherwise, the actions matching the given names are retrieved from the
+     internal database and their list is returned.
+  
+     :param actNames The names of the actions to use (or None if default 
+            actions shall be used)"""
   actions = []
   if actNames==None or len(actNames)==0:
     actions.extend(actionsDB["quotes.english"])
@@ -288,7 +310,16 @@ def getActions(actNames):
 
 
 def getFiles(name, recursive, extensions):
-  """Returns the files to process."""
+  """Returns the files to process.
+  
+     If a file name is given, a list with only this filename is returned.
+     If a folder name is given, the files to process are determined by walking
+     throgh the folder - recursively if wished - and collecting all files
+     that match the extensions. Returned is the list of collected files.   
+  
+     :param name The name of the file/folder
+     :param recursive Whether the folder (if given) shall be processed recursively
+     :param extensions The extensions of the files to process"""
   files = []
   if os.path.isdir(name):  
     for root, dirs, dfiles in os.walk(name):
@@ -316,7 +347,7 @@ def main(call):
   """
   optParser = OptionParser(usage="usage:\n  %prog [options]", version="%prog 0.6")
   optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
-  optParser.add_option("-f", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8'")
+  optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8'")
   optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
   optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
   optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
