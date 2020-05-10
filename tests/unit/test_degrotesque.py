@@ -1,9 +1,24 @@
+"""test_degrotesque.py
+
+Unittests for degrotesque, a tiny web type setter.
+
+(c) Daniel Krajzewicz 2020
+daniel@krajzewicz.de
+http://www.krajzewicz.de
+http://www.krajzewicz.de/blog/degrotesque.php
+
+Available under GPL 3.0, all rights reserved
+"""
+
+
+# --- imports -------------------------------------------------------
 import unittest
 import degrotesque
 from degrotesque import degrotesque
 
 
 
+# --- classes -------------------------------------------------------
 class TestDegrotesquePrettify(unittest.TestCase):
     """Testing the prettify method"""
 
@@ -93,7 +108,8 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
 
 
-
+# --- methods -------------------------------------------------------
+# -- main check
 if __name__ == '__main__':
     unittest.main()
 
