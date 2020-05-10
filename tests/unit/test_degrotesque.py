@@ -5,6 +5,8 @@ from degrotesque import degrotesque
 
 
 class TestDegrotesquePrettify(unittest.TestCase):
+    """Testing the prettify method"""
+
     def test_example(self):
         """The plain example test"""
         assert(degrotesque.prettify("\"Well - that's not what I had expected.\"", degrotesque.getActions(None))=="&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;")
