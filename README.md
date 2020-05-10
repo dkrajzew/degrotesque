@@ -1,4 +1,6 @@
-degrotesque - a tiny web type setter
+[![License: GPL3](https://img.shields.io/badge/License-GPL3-yellow.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE.txt) [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/prov2bigchaindb)
+
+degrotesque - A tiny web type setter
 
 The script loads a HTML page - or several in batch, one after the other - and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representant for improving the pages' appearance.  
 
@@ -28,6 +30,14 @@ There are some caveats, yes:
 * If you have php-pages and combine php-generated and plain HTML text, it may yield in odd behaviour. Etc. So you should check your pages for correctness after applying degrotesque.
 
 degrotesque is licensed under the [GPL v3.0](LICENSE.txt).
+
+You may install it using
+python -m pip install degrotesque
+
+Documentation:
+* The web page is located at: http://www.krajzewicz.de/blog/degrotesque.php
+* The PyPI page is located at: https://pypi.org/project/degrotesque/
+
 
 Well, have fun. If you have any questions or comments, let me know.
 
