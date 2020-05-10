@@ -136,7 +136,9 @@ extensionsDB = [
 
 """List of elements which contents shall not be processed"""
 elementsToSkip = [
- u"script", u"code", u"style", u"pre", u"?", u"?php"
+ u"script", u"code", u"style", u"pre", u"?", u"?php", 
+ u"%", u"%=", u"%@", u"%--", u"%!",
+ u"!--"
 ]
 
 
@@ -157,7 +159,7 @@ def getTagName(html):
   return html[ib:ie]      
 
 
-def mark(html):
+def mark(html, toSkip):
   """Returns a string where all HTML-elements are denoted as '1' and plain text as '0'.
   
      :param html The html document (contents) to process"""
@@ -179,12 +181,18 @@ def mark(html):
   while i<len(html):
     if html[i]=='<':
       tb = getTagName(html[i+1:])
-      if tb not in elementsToSkip:
+      if tb not in toSkip:
         i = i + len(tb)
         continue
       if tb=="?" or tb=="?php":
         ib = i
         ie = html.index("?>", ib)
+      elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
+        ib = i
+        ie = html.index("%>", ib)
+      elif tb=="!--":
+        ib = i
+        ie = html.index("-->", ib)
       else:
         ie = -1
         i = html.find(">", i)
@@ -214,7 +222,7 @@ def mark(html):
 
 
 # -- degrotesquing
-def prettify(html, actions):
+def prettify(html, actions, toSkip):
   """Prettifies (degrotesques) the given HTML snipplet using the given actions.
   
      It is assumed that the input is given in utf-8.
@@ -224,7 +232,7 @@ def prettify(html, actions):
      :param actions The actions to apply"""
   i = 0
   # extract text parts
-  marks = mark(html)
+  marks = mark(html, toSkip)
   assert(len(html)==len(marks))
   while i<len(html):
     if marks[i]=="1":
@@ -279,33 +287,6 @@ def getExtensions(extNames):
   return extNames.split(",")
 
 
-def getActions(actNames):
-  """Returns the actions to apply.
-  
-     If the given names of actions are None or empty, the default actions 
-     are used.
-     Otherwise, the actions matching the given names are retrieved from the
-     internal database and their list is returned.
-  
-     :param actNames The names of the actions to use (or None if default 
-            actions shall be used)"""
-  actions = []
-  if actNames==None or len(actNames)==0:
-    actions.extend(actionsDB["quotes.english"])
-    actions.extend(actionsDB["dashes"])
-    actions.extend(actionsDB["ellipsis"])
-    actions.extend(actionsDB["math"])
-    actions.extend(actionsDB["apostrophe"])
-    return actions
-  actNames = actNames.split(",")
-  for an in actNames:
-    if an in actionsDB:
-      actions.extend(actionsDB[an])
-    else:
-      raise ValueError("Action '%s' is not known." % (an))
-  return actions
-
-
 def getFiles(name, recursive, extensions):
   """Returns the files to process.
   
@@ -334,6 +315,46 @@ def getFiles(name, recursive, extensions):
   return files
 
 
+def getActions(actNames):
+  """Returns the actions to apply.
+  
+     If the given names of actions are None or empty, the default actions 
+     are used.
+     Otherwise, the actions matching the given names are retrieved from the
+     internal database and their list is returned.
+  
+     :param actNames The names of the actions to use (or None if default 
+            actions shall be used)"""
+  actions = []
+  if actNames==None or len(actNames)==0:
+    actions.extend(actionsDB["quotes.english"])
+    actions.extend(actionsDB["dashes"])
+    actions.extend(actionsDB["ellipsis"])
+    actions.extend(actionsDB["math"])
+    actions.extend(actionsDB["apostrophe"])
+    return actions
+  actNames = actNames.split(",")
+  for an in actNames:
+    if an in actionsDB:
+      actions.extend(actionsDB[an])
+    else:
+      raise ValueError("Action '%s' is not known." % (an))
+  return actions
+
+
+def getToSkip(toSkipNames):
+  """Returns the elements which contents shall not be changed.
+  
+     If the given names of elements are None or empty, the default elements 
+     to skip are used.
+     Otherwise, a list with the elements to skip is built.
+  
+     :param toSkipNames The names of elements which shall not be changed"""
+  if toSkipNames==None or len(toSkipNames)==0:
+    return elementsToSkip
+  return toSkipNames.split(",")
+
+
 
 # -- main
 def main(call):
@@ -348,6 +369,7 @@ def main(call):
   optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
   optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
   optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
+  optParser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
   optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
   options, remaining_args = optParser.parse_args(args=call)
   # setup variable lists
@@ -357,6 +379,7 @@ def main(call):
     optParser.error("no input file(s) given...")
     sys.exit()
   files = getFiles(options.input, options.recursive, extensions)
+  toSkip = getToSkip(options.skip)
   # loop through files
   for f in files:
     print("Processing %s" % f)
@@ -367,7 +390,7 @@ def main(call):
       fd.close()
       html = html.encode("utf-8", "ignore")
       # apply the beautifications
-      html = prettify(html, actions)
+      html = prettify(html, actions, toSkip)
       # build a backup
       if not options.no_backup:
         shutil.copy(f, f+".orig")
