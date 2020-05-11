@@ -14,6 +14,7 @@ The following options are optional
 :param --actions/-a: Name the actions that shall be applied
 :param --extensions/-e: The extensions of files that shall be processed
 :param --encoding/-E: File encoding (default: 'utf-8'")
+:param --skip/-s: Elements which contents shall not be changed
 
 The application reads the given file or the files from the folder (optionally 
 recursive) defined by the -i/--input option that match either the default or
@@ -42,239 +43,282 @@ from optparse import OptionParser
 actionsDB = {
  # english quotes
  "quotes.english": [
-   [[r" '", r"'"], [u" &lsquo;", u"&rsquo;"]],
-   [[r"\"", r"\""], [u"&ldquo;", u"&rdquo;"]],
+   [[ur"(\s+)'", ur"'"], [ur"\1&lsquo;", u"&rsquo;"]],
+   [[ur"\"", ur"\""], [u"&ldquo;", u"&rdquo;"]],
   ],
 
  # french quotes
  "quotes.french": [
-   [[r"&lt;&lt;", r"&gt;&gt;"], [u"&laquo;", u"&raquo;"]],
-   [[r"&lt;", r"&gt;"], [u"&lsaquo;", u"&rsaquo;"]],
+   [[ur"&lt;&lt;", ur"&gt;&gt;"], [u"&laquo;", u"&raquo;"]],
+   [[ur"&lt;", ur"&gt;"], [u"&lsaquo;", u"&rsaquo;"]],
   ],
   
  # german quotes
  "quotes.german": [
-   [[r" '", r"'"], [u" &sbquo;", u"&rsquo;"]],
-   [[r"\"", r"\""], [u"&bdquo;", u"&rdquo;"]],
+   [[ur"(\s+)'", ur"'"], [ur"\1&sbquo;", u"&rsquo;"]],
+   [[ur"\"", ur"\""], [u"&bdquo;", u"&rdquo;"]],
   ],
   
  # conversion to HTML quotes (<q>)
  "to_quotes": [
-   [[r" '", r"'"], [u" <q>", u"</q>"]],
-   [[r"\"", r"\""], [u"<q>", u"</q>"]],
-   [[r"&lt;&lt;", r"&gt;&gt;"], [u"<q>", u"</q>"]],
-   [[r"&lt;", r"&gt;"], [u"<q>", u"</q>"]],
+   [[ur"(\s+)'", ur"'"], [ur"\1<q>", u"</q>"]],
+   [[ur"\"", ur"\""], [u"<q>", u"</q>"]],
+   [[ur"&lt;&lt;", ur"&gt;&gt;"], [u"<q>", u"</q>"]],
+   [[ur"&lt;", ur"&gt;"], [u"<q>", u"</q>"]],
   ],
   
  # commercial signs
  "commercial": [
-   [[r"\([c|C]\)", None], [u"&copy;", None]],
-   [[r"\([r|R]\)", None], [u"&reg;", None]],
-   [[r"\([t|T][m|M]\)", None], [u"&trade;", None]],
+   [[ur"\([c|C]\)", None], [u"&copy;", None]],
+   [[ur"\([r|R]\)", None], [u"&reg;", None]],
+   [[ur"\([t|T][m|M]\)", None], [u"&trade;", None]],
   ],
   
  # dashes
  "dashes": [
    # missing: ndash for number ranges 
-   [[r"(\s+)-(\s+)", None], [r"\1&mdash;\2", None]],
-   [[r"([\d]+)-([\d]+)", None], [r"\1&ndash;\2", None]],
-   [[r"-([\d]+)", None], [r"&ndash;\1", None]],
-   [[r"([\d]+)-", None], [r"\1&ndash;", None]],
+   [[ur"(\s+)-(\s+)", None], [ur"\1&mdash;\2", None]],
+   [[ur"([\d]+)-([\d]+)", None], [ur"\1&ndash;\2", None]],
+   #[[ur"\W-([\d]+)", None], [ur"&ndash;\1", None]],
+   #[[ur"([\d]+)-\W", None], [ur"\1&ndash;", None]],
   ],
 
  # bullets
  "bullets": [
-   [[r"\*", None], [u"&bull;", None]],
+   [[ur"\*", None], [u"&bull;", None]],
   ],
     
  # ellipsis
  "ellipsis": [
-   [[r"\.\.\.", None], [u"&hellip;", None]],
+   [[ur"\.\.\.", None], [u"&hellip;", None]],
   ],
     
  # apostrophe
  "apostrophe": [
-   [[r"'", None], [u"&apos;", None]],
+   [[ur"'", None], [u"&apos;", None]],
   ],
     
  # math signs
  "math": [
    # [[""], ["", "&deg;", ""]],
-   [[r"\+/-", None], [u"&plusmn;", None]],
-   [[r"1/2", None], [u"&frac12;", None]],
-   [[r"1/4", None], [u"&frac14;", None]],
-   [[r"3/4", None], [u"&frac34;", None]],
-   [[r"\~", None], [u"&asymp;", None]],
-   [[r"\!=", None], [u"&ne;", None]],
-   [[r"&lt;=", None], [u"&le;", None]],
-   [[r"&gt;=", None], [u"&ge;", None]],
-   [[r"([\d]+)(\s*)\*(\s*)([\d]+)", None], [r"\1\2&times;\3\4", None]],
-   [[r"([\d]+)(\s*)x(\s*)([\d]+)", None], [r"\1\2&times;\3\4", None]],
-   [[r"([\d]+)(\s*)/(\s*)([\d]+)", None], [r"\1\2&divide;\3\4", None]],
+   [[ur"\+/-", None], [u"&plusmn;", None]],
+   [[ur"1/2", None], [u"&frac12;", None]],
+   [[ur"1/4", None], [u"&frac14;", None]],
+   [[ur"3/4", None], [u"&frac34;", None]],
+   [[ur"\~", None], [u"&asymp;", None]],
+   [[ur"\!=", None], [u"&ne;", None]],
+   [[ur"&lt;=", None], [u"&le;", None]],
+   [[ur"&gt;=", None], [u"&ge;", None]],
+   [[ur"([\d]+)(\s*)\*(\s*)([\d]+)", None], [ur"\1\2&times;\3\4", None]],
+   [[ur"([\d]+)(\s*)x(\s*)([\d]+)", None], [ur"\1\2&times;\3\4", None]],
+   [[ur"([\d]+)(\s*)/(\s*)([\d]+)", None], [ur"\1\2&divide;\3\4", None]],
   ],
     
  # dagger
  "dagger": [
-   [[r"\*\*", None], [u"&Dagger;", None]],
-   [[r"\*", None], [u"&dagger;", None]],
+   [[ur"\*\*", None], [u"&Dagger;", None]],
+   [[ur"\*", None], [u"&dagger;", None]],
   ]    
 }
 
 
 """A database of extensions of files to process"""
-extensionsDB = [ 
+extensionsDB = [
   "html", "htm", "xhtml",
   "php", "phtml", "phtm", "php2", "php3", "php4", "php5",
-  "asp", 
-  "jsp", "jspx", 
+  "asp",
+  "jsp", "jspx",
   "shtml", "shtm", "sht", "stm",
-  "vbhtml",
-  "ppthtml",   
-  "ssp", "jhtml" 
+  "vbhtml", "ppthtml", "ssp", "jhtml"
 ]
-  
 
-"""List of elements which contents shall not be processed"""
-elementsToSkip = [
- u"script", u"code", u"style", u"pre", u"?", u"?php", 
- u"%", u"%=", u"%@", u"%--", u"%!",
- u"!--"
-]
+
+
+# --- class ---------------------------------------------------------
+class Degrotesque():
+  def __init__(self):
+     """List of elements which contents shall not be processed"""
+     self._elementsToSkip = [
+       u"script", u"code", u"style", u"pre", u"?", u"?php", 
+       u"%", u"%=", u"%@", u"%--", u"%!",
+       u"!--"
+     ]
+     """The actions to apply"""
+     self._actions = []
+     self._actions.extend(actionsDB["quotes.english"])
+     self._actions.extend(actionsDB["dashes"])
+     self._actions.extend(actionsDB["ellipsis"])
+     self._actions.extend(actionsDB["math"])
+     self._actions.extend(actionsDB["apostrophe"])
+
+
+
+
+  def _getTagName(self, html):
+    """Returns the name of the tag that starts at the begin of the given string.
+  
+       :param html The HTML-subpart"""
+    i = 0
+    while i<len(html) and (ord(html[i])<=32 or html[i]=="/"):
+      i = i + 1 
+    ib = i
+    ie = i
+    while ie<len(html) and html[ie] not in " \n\r\t>/":
+      ie += 1 
+    return html[ib:ie]      
+
+
+  def _mark(self, html):
+    """Returns a string where all HTML-elements are denoted as '1' and plain text as '0'.
+  
+       :param html The html document (contents) to process"""
+    opened = 0
+    # mark HTML elements, first
+    ret = ""
+    for i in range(0, len(html)):
+      if opened==0:
+        ret = ret + "0"
+      else:
+        ret = ret + "1"
+      if html[i]=='<':
+        opened += 1   
+        ret = ret[:-1] + "1"
+      if html[i]=='>':
+        opened -= 1
+    # mark code parts
+    i = 0
+    while i<len(html):
+      if html[i]=='<':
+        tb = self._getTagName(html[i+1:])
+        if tb not in self._elementsToSkip:
+          i = i + len(tb)
+          continue
+        if tb=="?" or tb=="?php":
+          ib = i
+          ie = html.index("?>", ib)
+        elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
+          ib = i
+          ie = html.index("%>", ib)
+        elif tb=="!--":
+          ib = i
+          ie = html.index("-->", ib)
+        else:
+          ie = -1
+          i = html.find(">", i)
+          ib = i
+          while i<len(html) and ib<=i:
+            n = html.find("/"+tb, i)
+            if n<0:
+              print ("unclosed element")
+              print (tb)
+              exit()
+            if n<ib:
+              print ("false")
+              break
+            te = self._getTagName(html[n:])
+            if tb==te:
+              ie = html.index(">", n+len(te))
+              break
+            print ("Nope")
+        assert(len(ret)==len(html))
+        if ib>=0 and ie>=0:
+          ret = ret[:ib] + "1"*(ie-ib) + ret[ie:]
+        assert(len(ret)==len(html))
+        i = ie - 1
+      i = i + 1
+      assert(len(ret)==len(html))
+    return ret      
+
+
+  def prettify(self, html):
+    """Prettifies (degrotesques) the given HTML snipplet using the given actions.
+  
+       It is assumed that the input is given in utf-8.
+       The result is returned in utf-8 as well.
+  
+       :param html The html document (contents) to process
+       :param actions The actions to apply"""
+    i = 0
+    # extract text parts
+    marks = self._mark(html)
+    assert(len(html)==len(marks))
+    while i<len(html):
+      if marks[i]=="1":
+        i = i + 1
+        continue
+      for a in self._actions:
+        opening = re.match(a[0][0], html[i:])
+        if not opening or marks[i+opening.start():i+opening.end()].find("1")>=0:
+          continue 
+        ib = i + opening.end()
+        closing = None
+        if a[0][1]!=None:
+          while True:
+            closing = re.search(a[0][1], html[ib:])
+            if not closing:
+              break
+            if marks[ib+closing.start():ib+closing.end()].find("1")<0:
+              break
+            ib = ib + closing.end() 
+            closing = None
+        if a[0][1]!=None and closing==None:
+          continue
+        if closing!=None:
+          tmp = re.sub(a[0][1], a[1][1], html[ib:], 1)
+          l = closing.end() - closing.start() + len(tmp) - len(html[ib:]) 
+          html = html[:ib] + tmp
+          marks = marks[:ib+closing.start()] + "0"*l + marks[ib+closing.end():]
+          assert(len(html)==len(marks))
+        tmp = re.sub(a[0][0], a[1][0], html[i:], 1)
+        l = opening.end() - 0 + len(tmp) - len(html[i:])
+        html = html[:i] + tmp
+        marks = marks[:i] + "0"*l + marks[i+opening.end():]
+        assert(len(html)==len(marks))
+        break
+      i = i + 1
+    return html
+  
+    
+  def setActions(self, actNames):
+    """Returns the actions to apply.
+  
+       If the given names of actions are None or empty, the default actions 
+       are used.
+       Otherwise, the actions matching the given names are retrieved from the
+       internal database and their list is returned.
+  
+       :param actNames The names of the actions to use (or None if default 
+              actions shall be used)"""
+    if actNames==None or len(actNames)==0:
+      return
+    actNames = actNames.split(",")
+    self._actions = []
+    for an in actNames:
+      if an in actionsDB:
+        self._actions.extend(actionsDB[an])
+      else:
+        raise ValueError("Action '%s' is not known." % (an))
+
+
+  def setToSkip(self, toSkipNames):
+    """Returns the elements which contents shall not be changed.
+  
+       If the given names of elements are None or empty, the default elements 
+       to skip are used.
+       Otherwise, a list with the elements to skip is built.
+  
+       :param toSkipNames The names of elements which shall not be changed"""
+    if toSkipNames==None or len(toSkipNames)==0:
+      return 
+    self._elementsToSkip = [x.strip() for x in toSkipNames.split(',')] 
+
 
 
 
 # --- methods -------------------------------------------------------
-# -- HTML annotation
-def getTagName(html):
-  """Returns the name of the tag that starts at the begin of the given string.
-  
-     :param html The HTML-subpart"""
-  i = 0
-  while i<len(html) and (ord(html[i])<=32 or html[i]=="/"):
-    i = i + 1 
-  ib = i
-  ie = i
-  while ie<len(html) and html[ie] not in " \n\r\t>/":
-    ie += 1 
-  return html[ib:ie]      
-
-
-def mark(html, toSkip):
-  """Returns a string where all HTML-elements are denoted as '1' and plain text as '0'.
-  
-     :param html The html document (contents) to process"""
-  opened = 0
-  # mark HTML elements, first
-  ret = ""
-  for i in range(0, len(html)):
-    if opened==0:
-      ret = ret + "0"
-    else:
-      ret = ret + "1"
-    if html[i]=='<':
-      opened += 1   
-      ret = ret[:-1] + "1"
-    if html[i]=='>':
-      opened -= 1
-  # mark code parts
-  i = 0
-  while i<len(html):
-    if html[i]=='<':
-      tb = getTagName(html[i+1:])
-      if tb not in toSkip:
-        i = i + len(tb)
-        continue
-      if tb=="?" or tb=="?php":
-        ib = i
-        ie = html.index("?>", ib)
-      elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
-        ib = i
-        ie = html.index("%>", ib)
-      elif tb=="!--":
-        ib = i
-        ie = html.index("-->", ib)
-      else:
-        ie = -1
-        i = html.find(">", i)
-        ib = i
-        while i<len(html) and ib<=i:
-          n = html.find("/"+tb, i)
-          if n<0:
-            print ("unclosed element")
-            print (tb)
-            exit()
-          if n<ib:
-            print ("false")
-            break
-          te = getTagName(html[n:])
-          if tb==te:
-            ie = html.index(">", n+len(te))
-            break
-          print ("Nope")
-      assert(len(ret)==len(html))
-      if ib>=0 and ie>=0:
-        ret = ret[:ib] + "1"*(ie-ib) + ret[ie:]
-      assert(len(ret)==len(html))
-      i = ie - 1
-    i = i + 1
-    assert(len(ret)==len(html))
-  return ret      
-
-
-# -- degrotesquing
-def prettify(html, actions, toSkip):
-  """Prettifies (degrotesques) the given HTML snipplet using the given actions.
-  
-     It is assumed that the input is given in utf-8.
-     The result is returned in utf-8 as well.
-  
-     :param html The html document (contents) to process
-     :param actions The actions to apply"""
-  i = 0
-  # extract text parts
-  marks = mark(html, toSkip)
-  assert(len(html)==len(marks))
-  while i<len(html):
-    if marks[i]=="1":
-      i = i + 1
-      continue
-    for a in actions:
-      opening = re.match(a[0][0], html[i:])
-      if not opening or marks[i+opening.start():i+opening.end()].find("1")>=0:
-        continue 
-      ib = i + opening.end()
-      closing = None
-      if a[0][1]!=None:
-        while True:
-          closing = re.search(a[0][1], html[ib:])
-          if not closing:
-            break
-          if marks[ib+closing.start():ib+closing.end()].find("1")<0:
-            break
-          ib = ib + closing.end() 
-          closing = None
-      if a[0][1]!=None and closing==None:
-        continue
-      if closing!=None:
-        tmp = re.sub(a[0][1], a[1][1], html[ib:], 1)
-        l = closing.end() - closing.start() + len(tmp) - len(html[ib:]) 
-        html = html[:ib] + tmp
-        marks = marks[:ib+closing.start()] + "0"*l + marks[ib+closing.end():]
-        assert(len(html)==len(marks))
-      tmp = re.sub(a[0][0], a[1][0], html[i:], 1)
-      l = opening.end() - 0 + len(tmp) - len(html[i:])
-      html = html[:i] + tmp
-      marks = marks[:i] + "0"*l + marks[i+opening.end():]
-      assert(len(html)==len(marks))
-      break
-    i = i + 1
-  return html
-  
-
-
-# -- options parsing
+# -- helper
 def getExtensions(extNames):
-  """Returns the file extensions of files to process.
+  """Sets the list of extensions of files to process
   
      If the given names of extensions are None or empty, the default 
      extensions are used.
@@ -284,7 +328,8 @@ def getExtensions(extNames):
                      extensions shall be used)"""
   if extNames==None or len(extNames)==0:
     return extensionsDB
-  return extNames.split(",")
+  return [x.strip() for x in extNames.split(',')] 
+
 
 
 def getFiles(name, recursive, extensions):
@@ -315,52 +360,14 @@ def getFiles(name, recursive, extensions):
   return files
 
 
-def getActions(actNames):
-  """Returns the actions to apply.
-  
-     If the given names of actions are None or empty, the default actions 
-     are used.
-     Otherwise, the actions matching the given names are retrieved from the
-     internal database and their list is returned.
-  
-     :param actNames The names of the actions to use (or None if default 
-            actions shall be used)"""
-  actions = []
-  if actNames==None or len(actNames)==0:
-    actions.extend(actionsDB["quotes.english"])
-    actions.extend(actionsDB["dashes"])
-    actions.extend(actionsDB["ellipsis"])
-    actions.extend(actionsDB["math"])
-    actions.extend(actionsDB["apostrophe"])
-    return actions
-  actNames = actNames.split(",")
-  for an in actNames:
-    if an in actionsDB:
-      actions.extend(actionsDB[an])
-    else:
-      raise ValueError("Action '%s' is not known." % (an))
-  return actions
-
-
-def getToSkip(toSkipNames):
-  """Returns the elements which contents shall not be changed.
-  
-     If the given names of elements are None or empty, the default elements 
-     to skip are used.
-     Otherwise, a list with the elements to skip is built.
-  
-     :param toSkipNames The names of elements which shall not be changed"""
-  if toSkipNames==None or len(toSkipNames)==0:
-    return elementsToSkip
-  return toSkipNames.split(",")
-
-
 
 # -- main
 def main(call):
-  """Parses the options, first. Determines the extenions of files to consider, 
-  the files to process, and the actions to apply. Goes through the list of 
-  files and prettyfies (degrotesques) them. 
+  """Parses the options, first. Builds the degrotesquer with given options, 
+  setting the actions to apply and the elements to skip. 
+  Determines the extenions of files to consider, the files to process.
+  Goes through the list of files and prettyfies (degrotesques) them, 
+  backupping the original ones.  
   """
   # parse options
   optParser = OptionParser(usage="usage:\n  %prog [options]", version="%prog 0.6")
@@ -372,14 +379,17 @@ def main(call):
   optParser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
   optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
   options, remaining_args = optParser.parse_args(args=call)
-  # setup variable lists
-  extensions = getExtensions(options.extensions)
-  actions = getActions(options.actions)
+  # check options
   if options.input==None:
     optParser.error("no input file(s) given...")
     sys.exit()
+  # setup degrotesque
+  degrotesque = Degrotesque()
+  degrotesque.setActions(options.actions)
+  degrotesque.setToSkip(options.skip)
+  # collect files
+  extensions = getExtensions(options.extensions)
   files = getFiles(options.input, options.recursive, extensions)
-  toSkip = getToSkip(options.skip)
   # loop through files
   for f in files:
     print("Processing %s" % f)
@@ -388,14 +398,13 @@ def main(call):
       fd = io.open(f, mode="r", encoding=options.encoding)
       html = fd.read()
       fd.close()
-      html = html.encode("utf-8", "ignore")
+      assert(isinstance(html, unicode))
       # apply the beautifications
-      html = prettify(html, actions, toSkip)
+      html = degrotesque.prettify(html)
       # build a backup
       if not options.no_backup:
         shutil.copy(f, f+".orig")
       # save the new contents
-      html = html.decode(options.encoding)
       fd = io.open(f, mode="w", encoding=options.encoding)
       fd.write(html)
       fd.close()
