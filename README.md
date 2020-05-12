@@ -58,74 +58,113 @@ The current version is degrotesque-0.8.
 You may install __degrotesque__ using
 :python -m pip install degrotesque
  
-<p>The current version is degrotesque-0.8.</p>
-<p>You may install <b>degrotesque</b> using</p>
-<pre class="prettypring">python -m pip install degrotesque</pre>
-<p>You may download a copy or fork the code at the 
-<a href="https://github.com/dkrajzew/degrotesque">degrotesque's github page</a>.</p>
-<p>Besides, you may download the current <a href="https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-0.2">pre-release v0.8</a> here:
-<ul>
- <li><a href="https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.zip">degrotesque-0.8.zip</a></li>
- <li><a href="https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.tar.gz">degrotesque-0.8.tar.gz</a></li>
-</ul>
-</div>
+You may download a copy or fork the code at the [degrotesque's github page](https://github.com/dkrajzew/degrotesque).
 
+Besides, you may download the current [pre-release v0.8](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-0.2) here:
+* [degrotesque-0.8.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.zip)
+* [degrotesque-0.8.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.tar.gz)
 
-
-There are some caveats, yes:
-* If you embed HTML code in HTML (not suported by HTML, but who cares), it may yield in odd behaviour.
-* If you have php-pages and combine php-generated and plain HTML text, it may yield in odd behaviour. Etc. So you should check your pages for correctness after applying degrotesque.
+Licence
+-------
 
 degrotesque is licensed under the [GPL v3.0](LICENSE.txt).
 
-You may install it using
-python -m pip install degrotesque
+Further Documentation
+---------------------
 
-Documentation:
 * The web page is located at: http://www.krajzewicz.de/blog/degrotesque.php
 * The PyPI page is located at: https://pypi.org/project/degrotesque/
 
+* The web page is located at: http://www.krajzewicz.de/blog/degrotesque.php
+* The PyPI page is located at: https://pypi.org/project/degrotesque/
+* The github repository is located at: https://github.com/dkrajzew/degrotesque
+* The issue tracker is located at: https://github.com/dkrajzew/degrotesque/issues
 
-Well, have fun. If you have any questions or comments, let me know.
+Implementation Notes
+--------------------
 
-Named Actions
--------------
+* I tried [Genshi](https://genshi.edgewall.org/), [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/), and [lxml](https://lxml.de/). All missed in keeping the code unchanged. So the parser just skips HTML-elements and the contents of some special elements, see above. Works in most cases.
+
+Summary
+=======
+
+Well, have fun. If you have any comments / ideas / issues, please submit them to [degrotesque's issue tracker](https://github.com/dkrajzew/degrotesque/issues) on github.
+
+Appendices
+==========
+
+Appendix A: Default Extensions
+------------------------------
+
+Files with the following extensions are parsed per default:
+* html, htm, xhtml,
+* php, phtml, phtm, php2, php3, php4, php5,
+* asp,
+* jsp, jspx,
+* shtml, shtm, sht, stm,
+* vbhtml,
+* ppthtml,
+* ssp, jhtml
+
+Appendix B: Named Actions
+-------------------------
 
 The following action sets are currently implemented. 
 
 | Action Name | From Opening String | From Closing String | To Opening String | To Closing String |
 | ---- | ---- | ---- | ---- | ---- |
-| quotes.english | " '" | "'" | " &lsquo;" | "&rsquo;" |
-| | "\"" | "\"" | "&ldquo;" | "&rdquo;" |
-| quotes.french | "&lt;" | "&gt;" | "&lsaquo;" | "&rsaquo;" |
-| | "&lt;&lt;" | "&gt;&gt;" | "&laquo;" | "&raquo;" |
-| quotes.german | " '" | "'" | " &sbquo;" | "&rsquo;" |
-| | "\"" | "\"" | "&bdquo;" | "&rdquo;" |
-| to_quotes | " '" | "'" | " &lt;q&gt;" | "&lt;/q&gt;" |
-| | "\"" | "\"" | "&lt;q&gt;" | "&lt;/q&gt;" |
-| | "&lt;&lt;" | "&gt;&gt;" | "&lt;q&gt;" | "&lt;/q&gt;" |
-| commercial | "(c)" | | "&copy;" | |
-| | "(C)" | | "&copy;" | |
-| | "(r)" | | "&reg;" | |
-| | "(R)" | | "&reg;" | |
-| | "(tm)" | | "&trade;" | |
-| | "(TM)" | | "&trade;" | |
-| dashes | " - " | | "&mdash;" | |
-| bullets | "*" | | "&bull;" | |
-| ellipsis | "..." | | "&hellip;" | |
-| apostrophe | "'" | | "&apos;" | |
-| math | "+/-" | | "&plusmn;" | |
-| | "1/2" | | "&frac12;" | |
-| | "1/4" | | "&frac14;" | |
-| | "~" | | "&asymp;" | |
-| | "!=" | | "&ne;" | |
-| | "<=" | | "&le;" | |
-| | ">=" | | "&ge;" | |
-| dagger | "**" | | "&Dagger;" | |
-| | "*" | | "&dagger;" | |
+| quotes.english | ' | ' | &lsquo; | &rsquo; |
+| | " | " | &ldquo; | &rdquo; |
+| quotes.french | &lt; | &gt; | &lsaquo; | &rsaquo; |
+| | &lt;&lt; | &gt;&gt; | &laquo; | &raquo; |
+| quotes.german | ' | ' | &sbquo; | &rsquo; |
+| | " | " | &bdquo; | &rdquo; |
+| to_quotes | ' | ' | &lt;q&gt; | &lt;/q&gt; |
+| | " | " | &lt;q&gt; | &lt;/q&gt; |
+| | &lt;&lt; | &gt;&gt; | &lt;q&gt; | &lt;/q&gt; |
+| | &lt; | &gt; | &lt;q&gt; | &lt;/q&gt; |
+| commercial | (c) | | &copy; | |
+| | (r) | | &reg; | |
+| | (tm) | | &trade; | |
+| dashes |  -  | | &mdash; | |
+| | &lt;NUMBER&gt;-&lt;NUMBER&gt; | | &lt;NUMBER&gt;&ndash;&lt;NUMBER&gt; | |
+| bullets | * | | &bull; | |
+| ellipsis | ... | | &hellip; | |
+| apostrophe | ' | | &apos; | |
+| math | +/- | | &plusmn; | |
+| | 1/2 | | &frac12; | |
+| | 1/4 | | &frac14; | |
+| | 3/4 | | &frac34; | |
+| | ~ | | "&asymp; | |
+| | != | | "&ne; | |
+| | &lt;= | | &le; | |
+| | &gt;= | | &ge; | |
+| | &lt;NUMBER&gt;\*&lt;NUMBER&gt; | | &lt;NUMBER&gt;&times;&lt;NUMBER&gt; | |
+| | &lt;NUMBER&gt;x&lt;NUMBER&gt; | | &lt;NUMBER&gt;&times;&lt;NUMBER&gt; | |
+| | &lt;NUMBER&gt;/&lt;NUMBER&gt; | | &lt;NUMBER&gt;&divide;&lt;NUMBER&gt; | |
+| dagger | ** | | &Dagger; | |
+| | * | | &dagger; | |
  
-Default Extensions
-------------------
+Appendix C: Skipped Elements
+----------------------------
+
+The contents of the following elements are not processed by default:
+* script
+* code
+* style
+* pre
+* ?
+* ?php
+* %
+* %=
+* %@
+* %--
+* %!
+* !--
+
+
+Appendix D: Default Extensions
+------------------------------
 
 Files with the following extensions are parsed per default:
 * html, htm, xhtml,
@@ -137,9 +176,7 @@ Files with the following extensions are parsed per default:
 * ppthtml,   
 * ssp, jhtml
  
-Notes
------
-* I tried [Genshi](https://genshi.edgewall.org/), [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/), and [lxml](https://lxml.de/). All missed in keeping the code unchanged. So the parser just skips HTML-elements and the contents of some special elements, see above. Works in most cases.
+
 
 
 
