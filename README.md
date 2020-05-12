@@ -54,8 +54,10 @@ The script has the following options:
 Download and Installation
 -------------------------
 The current version is degrotesque-0.8.
+
 You may install __degrotesque__ using
- python -m pip install degrotesque
+:python -m pip install degrotesque
+ 
 <p>The current version is degrotesque-0.8.</p>
 <p>You may install <b>degrotesque</b> using</p>
 <pre class="prettypring">python -m pip install degrotesque</pre>
