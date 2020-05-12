@@ -55,7 +55,7 @@ The current version is degrotesque-0.8.
 
 You may install __degrotesque__ using
 
-:python -m pip install degrotesque
+:python -m pip install degrotesque:
  
 You may download a copy or fork the code at the [degrotesque's github page](https://github.com/dkrajzew/degrotesque).
 
