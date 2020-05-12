@@ -27,17 +27,15 @@ __degrotesque__ is currently implemented in Python. It is started on the command
 
 The tool processes only HTML-files and its derivatives. The extensions of those file types that are processed are given in Appendix A. But you may name the extensions of files to process using the __-e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___ / __--extensions _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___ option.
 
-The files are read one by one and the replacement of plain ASCII-chars by some nicer ones is based upon a chosen set of “actions”. Known and default actions are given in Appendix B. You may select the actions to apply using the __-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ / __--actions _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ option.
+The files are read one by one and the replacement of plain ASCII-chars by some nicer ones is based upon a chosen set of &ldquo;actions&rdquo;. Known and default actions are given in Appendix B. You may select the actions to apply using the __-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ / __--actions _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ option.
 
-The files are assumed to be encoded as "UTF-8" per default. You may change the encoding using the option __-E _&lt;ENCODING&gt;___ / __--encoding _&lt;ENCODING&gt;___.
+The files are assumed to be encoded as &ldquo;UTF-8&ldquo; per default. You may change the encoding using the option __-E _&lt;ENCODING&gt;___ / __--encoding _&lt;ENCODING&gt;___.
 
-The script does not change the quotation marks of HTML elements, of course. As well, the contents of several elements, given in Appendix C are skipped. You may change the list of elements which contents shall not be processed using the option __-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___ / __--skip _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___.
+The script does not change the quotation marks of HTML elements, of course. As well, the contents of several elements, given in Appendix C are skipped. You may change the list of elements which contents shall not be processed using the option __-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___ / __--skip _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___. The default elements which contents are not processed are given in Appendix C.
 
-After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix “.orig”. You may omit the creation of these backup files using the option __-B / --no-backup__.
+After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
-All of the text is replaced. This means everything not within a &lt; and a &gt;, so the elements and their attributes stay untouched. But yes, the script is smart enough to skip the contents of the elements "pre", "style", "script", "code", and "<?" as well.
-
-The default actions are: quotes.english, dashes, ellipsis, math, apostroph. The list of all implemented actions is given below, as well as the default extensions of files that will be processed if a folder is given.
+The default actions are: quotes.english, dashes, ellipsis, math, apostroph.
 
 Options
 -------
@@ -45,7 +43,7 @@ Options
 The script has the following options:
 * __--input/-i _&lt;PATH&gt;___: the file or the folder to process
 * __--encoding/-E _&lt;ENCODING&gt;___: The assumed encoding of the files
-* __--recursive/-r__: Set if the folder - if given - shall be processed recursively
+* __--recursive/-r__: Set if the folder &mdash; if given &mdash; shall be processed recursively
 * __--no-backup/-B__: Set if no backup files shall be generated
 * __--actions/-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___: Name the actions that shall be applied
 * __--extensions/-e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___: The extensions of files that shall be processed
@@ -71,9 +69,6 @@ degrotesque is licensed under the [GPL v3.0](LICENSE.txt).
 
 Further Documentation
 ---------------------
-
-* The web page is located at: http://www.krajzewicz.de/blog/degrotesque.php
-* The PyPI page is located at: https://pypi.org/project/degrotesque/
 
 * The web page is located at: http://www.krajzewicz.de/blog/degrotesque.php
 * The PyPI page is located at: https://pypi.org/project/degrotesque/
@@ -163,22 +158,4 @@ The contents of the following elements are not processed by default:
 * %--
 * %!
 * !--
-
-
-Appendix D: Default Extensions
-------------------------------
-
-Files with the following extensions are parsed per default:
-* html, htm, xhtml,
-* php, phtml, phtm, php2, php3, php4, php5,
-* asp, 
-* jsp, jspx, 
-* shtml, shtm, sht, stm,
-* vbhtml,
-* ppthtml,   
-* ssp, jhtml
- 
-
-
-
 
