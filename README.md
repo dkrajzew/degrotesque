@@ -35,23 +35,40 @@ The script does not change the quotation marks of HTML elements, of course. As w
 
 After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix “.orig”. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
+All of the text is replaced. This means everything not within a &lt; and a &gt;, so the elements and their attributes stay untouched. But yes, the script is smart enough to skip the contents of the elements "pre", "style", "script", "code", and "<?" as well.
 
+The default actions are: quotes.english, dashes, ellipsis, math, apostroph. The list of all implemented actions is given below, as well as the default extensions of files that will be processed if a folder is given.
 
 Options
 -------
 
 The script has the following options:
-* --input/-i: the file or the folder to process
-* --encoding/-E: The assumed encoding of the files
-* --recursive/-r: Set if the folder - if given - shall be processed recursively
-* --no-backup/-B: Set if no backup files shall be generated
-* --actions/-a: Name the actions that shall be applied
-* --extensions/-e: The extensions of files that shall be processed
-* --skip/-s: Elements which contents shall not be changed
+* __--input/-i _&lt;PATH&gt;___: the file or the folder to process
+* __--encoding/-E _&lt;ENCODING&gt;___: The assumed encoding of the files
+* __--recursive/-r__: Set if the folder - if given - shall be processed recursively
+* __--no-backup/-B__: Set if no backup files shall be generated
+* __--actions/-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___: Name the actions that shall be applied
+* __--extensions/-e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___: The extensions of files that shall be processed
+* __--skip/-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___: Elements which contents shall not be changed
 
-All of the text is replaced. This means everything not within a &lt; and a &gt;. But yes, the script is smart enough to skip the contents of the elements "pre", "style", "script", "code", and "<?".
+Download and Installation
+-------------------------
+The current version is degrotesque-0.8.
+You may install __degrotesque__ using
+ python -m pip install degrotesque
+<p>The current version is degrotesque-0.8.</p>
+<p>You may install <b>degrotesque</b> using</p>
+<pre class="prettypring">python -m pip install degrotesque</pre>
+<p>You may download a copy or fork the code at the 
+<a href="https://github.com/dkrajzew/degrotesque">degrotesque's github page</a>.</p>
+<p>Besides, you may download the current <a href="https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-0.2">pre-release v0.8</a> here:
+<ul>
+ <li><a href="https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.zip">degrotesque-0.8.zip</a></li>
+ <li><a href="https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.tar.gz">degrotesque-0.8.tar.gz</a></li>
+</ul>
+</div>
 
-The default actions are: quotes.english, dashes, ellipsis, math, apostroph. The list of all implemented actions is given below, as well as the default extensions of files that will be passed if a folder is given.
+
 
 There are some caveats, yes:
 * If you embed HTML code in HTML (not suported by HTML, but who cares), it may yield in odd behaviour.
