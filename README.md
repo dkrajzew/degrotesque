@@ -2,6 +2,7 @@
 
 degrotesque - A tiny web type setter
 
+=Introduction=
 The script loads a HTML page &mdash; or several in batch, one after the other &mdash; and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representant for improving the pages&apos; appearance.  
 
 E.g.:
@@ -12,7 +13,7 @@ will become:
 
  &ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;
 
-(Uhm, uhm, for those who don't see it, the starting and ending quotes have been replaced by &amp;ldquo; and &amp;rdquo;, respectively, the ' by &amp;amp; and the - by a &amp;mdash;.)
+(Uhm, uhm, for those who don't see it, the starting and ending quotes have been replaced by &amp;ldquo; and &amp;rdquo;, respectively, the ' by &amp;amp; and the - by an &amp;mdash;.)
 
 The script has the following options:
 * --input/-i: the file or the folder to process
