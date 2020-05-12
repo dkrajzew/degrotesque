@@ -15,14 +15,24 @@ will become:
 
  &ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;
 
-(Uhm, uhm, for those who don't see it, the starting and ending quotes have been replaced by &amp;ldquo; and &amp;rdquo;, respectively, the ' by &amp;amp; and the - by an &amp;mdash;.)
+(Uhm, uhm, for those who don't see it, the starting and ending quotes have been replaced by &amp;ldquo; and &amp;rdquo;, respectively, the ' by &amp;apos; and the - by an &amp;mdash;.)
 
 Documentation
 =============
 
 Usage
 -----
+__degrotesque__ is currently implemented in Python. It is started on the command line. The option _-i <PATH> / --input <PATH>_ tells the script which file(s) shall be read — you may name a file or a folder, here. If the option -r / --recursive is set, the given folder will be processed recursively.
 
+The tool processes only HTML-files and its derivatives. The extensions of those file types that are processed are given in Appendix A. But you may name the extensions of files to process using the -e <EXTENSION>[,<EXTENSION>]* / --extensions <EXTENSION>[,<EXTENSION>]* option.
+
+The files are read one by one and the replacement of plain ASCII-chars by some nicer ones is based upon a chosen set of “actions”. Known and default actions are given in Appendix B. You may select the actions to apply using the -a <ACTION>[,<ACTION>]* / --actions <ACTION>[,<ACTION>]* option.
+
+After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix “.orig” before. You may omit the creation of these backup files using the option -B / --no-backup.
+
+
+Options
+-------
 
 The script has the following options:
 * --input/-i: the file or the folder to process
