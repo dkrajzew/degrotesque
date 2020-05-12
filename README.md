@@ -51,22 +51,22 @@ The script has the following options:
 
 Download and Installation
 -------------------------
-The current version is degrotesque-0.8.
+The current version is [degrotesque-0.8](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-0.8).
 
 You may install __degrotesque__ using
 
- :python -m pip install degrotesque
+:python -m pip install degrotesque
  
 You may download a copy or fork the code at the [degrotesque's github page](https://github.com/dkrajzew/degrotesque).
 
-Besides, you may download the current [pre-release v0.8](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-0.2) here:
+Besides, you may download the current release [degrotesque-0.8](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-0.8) here:
 * [degrotesque-0.8.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.zip)
 * [degrotesque-0.8.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.tar.gz)
 
 Licence
 -------
 
-degrotesque is licensed under the [GPL v3.0](LICENSE.txt).
+__degrotesque__ is licensed under the [GPL v3.0](LICENSE.txt).
 
 Further Documentation
 ---------------------
