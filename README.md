@@ -109,7 +109,9 @@ Files with the following extensions are parsed per default:
 Appendix B: Named Actions
 -------------------------
 
-The following action sets are currently implemented. 
+The following action sets are currently implemented.
+
+Please note that the actions are realised using regular expressions. I decided not to show them in the following for a better readability and show the visible changes only.
 
 | Action Name | From Opening String | From Closing String | To Opening String | To Closing String |
 | ---- | ---- | ---- | ---- | ---- |
@@ -135,8 +137,8 @@ The following action sets are currently implemented.
 | | 1/2 | | &frac12; | |
 | | 1/4 | | &frac14; | |
 | | 3/4 | | &frac34; | |
-| | ~ | | "&asymp; | |
-| | != | | "&ne; | |
+| | ~ | | &asymp; | |
+| | != | | &ne; | |
 | | &lt;= | | &le; | |
 | | &gt;= | | &ge; | |
 | | &lt;NUMBER&gt;\*&lt;NUMBER&gt; | | &lt;NUMBER&gt;&times;&lt;NUMBER&gt; | |
