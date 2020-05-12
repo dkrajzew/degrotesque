@@ -22,13 +22,19 @@ Documentation
 
 Usage
 -----
-__degrotesque__ is currently implemented in Python. It is started on the command line. The option _-i <PATH> / --input <PATH>_ tells the script which file(s) shall be read — you may name a file or a folder, here. If the option -r / --recursive is set, the given folder will be processed recursively.
 
-The tool processes only HTML-files and its derivatives. The extensions of those file types that are processed are given in Appendix A. But you may name the extensions of files to process using the -e <EXTENSION>[,<EXTENSION>]* / --extensions <EXTENSION>[,<EXTENSION>]* option.
+__degrotesque__ is currently implemented in Python. It is started on the command line. The option __-i _<PATH>___ / __--input _<PATH>___ tells the script which file(s) shall be read — you may name a file or a folder, here. If the option __-r__ / __--recursive__ is set, the given folder will be processed recursively.
 
-The files are read one by one and the replacement of plain ASCII-chars by some nicer ones is based upon a chosen set of “actions”. Known and default actions are given in Appendix B. You may select the actions to apply using the -a <ACTION>[,<ACTION>]* / --actions <ACTION>[,<ACTION>]* option.
+The tool processes only HTML-files and its derivatives. The extensions of those file types that are processed are given in Appendix A. But you may name the extensions of files to process using the __-e <EXTENSION>[,<EXTENSION>]* / --extensions <EXTENSION>[,<EXTENSION>]*__ option.
 
-After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix “.orig” before. You may omit the creation of these backup files using the option -B / --no-backup.
+The files are read one by one and the replacement of plain ASCII-chars by some nicer ones is based upon a chosen set of “actions”. Known and default actions are given in Appendix B. You may select the actions to apply using the __-a <ACTION>[,<ACTION>]* / --actions <ACTION>[,<ACTION>]*__ option.
+
+The files are assumed to be encoded as "UTF-8" per default. You may change the encoding using the option __-E <ENCODING> / --encoding <ENCODING>__.
+
+The script does not change the quotation marks of HTML elements, of course. As well, the contents of several elements, given in Appendix C are skipped. You may change the list of elements which contents shall not be processed using the option __-s <ELEMENT_NAME>[,<ELEMENT_NAME>]* / --skip <ELEMENT_NAME>[,<ELEMENT_NAME>]*__.
+
+After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix “.orig”. You may omit the creation of these backup files using the option __-B / --no-backup__.
+
 
 
 Options
