@@ -17,6 +17,13 @@ will become:
 
 (Uhm, uhm, for those who don't see it, the starting and ending quotes have been replaced by &amp;ldquo; and &amp;rdquo;, respectively, the ' by &amp;amp; and the - by an &amp;mdash;.)
 
+Documentation
+=============
+
+Usage
+-----
+
+
 The script has the following options:
 * --input/-i: the file or the folder to process
 * --encoding/-E: The assumed encoding of the files
