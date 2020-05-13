@@ -81,6 +81,8 @@ Further Documentation
 * The PyPI page is located at: https://pypi.org/project/degrotesque/
 * The github repository is located at: https://github.com/dkrajzew/degrotesque
 * The issue tracker is located at: https://github.com/dkrajzew/degrotesque/issues
+* The Travis CI page is located at: https://travis-ci.com/github/dkrajzew/degrotesque
+* The code documentation (pydoc) is located at: http://www.krajzewicz.de/blog/degrotesque.html
 
 Implementation Notes
 --------------------
