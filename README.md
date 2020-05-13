@@ -63,7 +63,7 @@ You may install __degrotesque__ using
 python -m pip install degrotesque
 ```
 
-You may download a copy or fork the code at the [degrotesque's github page](https://github.com/dkrajzew/degrotesque).
+You may download a copy or fork the code at the [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque).
 
 Besides, you may download the current release [degrotesque-0.8](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-0.8) here:
 * [degrotesque-0.8.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.zip)
