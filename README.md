@@ -2,8 +2,6 @@
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
 [![Travis CI](https://travis-ci.com/dkrajzew/degrotesque.svg?branch=master)](https://travis-ci.com/dkrajzew/degrotesque)
 
-
-
 degrotesque - A tiny web type setter.
 
 Introduction
@@ -55,7 +53,7 @@ The script has the following options:
 
 Download and Installation
 -------------------------
-The current version is [degrotesque-0.8](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-0.8).
+The current version is [degrotesque-1.0](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.0).
 
 You may install __degrotesque__ using
 
@@ -65,9 +63,9 @@ python -m pip install degrotesque
 
 You may download a copy or fork the code at the [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque).
 
-Besides, you may download the current release [degrotesque-0.8](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-0.8) here:
-* [degrotesque-0.8.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.zip)
-* [degrotesque-0.8.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-0.8.tar.gz)
+Besides, you may download the current release [degrotesque-1.0](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.0) here:
+* [degrotesque-1.0.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.0.zip)
+* [degrotesque-1.0.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.0.tar.gz)
 
 Licence
 -------
