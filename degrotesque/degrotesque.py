@@ -3,27 +3,6 @@ from __future__ import print_function
 
 A tiny web type setter.
 
-The following options must be set
-
-:param --input/-i: the file or the folder to process
-
-The following options are optional
-
-:param --recursive/-r: Set if the folder - if given - shall be processed recursively
-:param --no-backup/-B: Set if no backup files shall be generated
-:param --actions/-a: Name the actions that shall be applied
-:param --extensions/-e: The extensions of files that shall be processed
-:param --encoding/-E: File encoding (default: 'utf-8'")
-:param --skip/-s: Elements which contents shall not be changed
-
-The application reads the given file or the files from the folder (optionally 
-recursive) defined by the -i/--input option that match either the default or
-the extensions given using the -e/--extension option, applies the default
-or the actions named using the -a/--actions option to the contents and
-save the files under their original name. If the option -B/--no-backup is not
-given, a backup of the original files is generated named as the original
-file with the appendix ".orig".
-
 (c) Daniel Krajzewicz 2020
 daniel@krajzewicz.de
 http://www.krajzewicz.de
@@ -43,81 +22,81 @@ from optparse import OptionParser
 actionsDB = {
  # english quotes
  "quotes.english": [
-   [[ur"(\s+)'", ur"'"], [ur"\1&lsquo;", u"&rsquo;"]],
-   [[ur"\"", ur"\""], [u"&ldquo;", u"&rdquo;"]],
+   [[u"(\\s+)'", u"'"], [u"\\1&lsquo;", u"&rsquo;"]],
+   [[u"\"", u"\""], [u"&ldquo;", u"&rdquo;"]],
   ],
 
  # french quotes
  "quotes.french": [
-   [[ur"&lt;&lt;", ur"&gt;&gt;"], [u"&laquo;", u"&raquo;"]],
-   [[ur"&lt;", ur"&gt;"], [u"&lsaquo;", u"&rsaquo;"]],
+   [[u"&lt;&lt;", u"&gt;&gt;"], [u"&laquo;", u"&raquo;"]],
+   [[u"&lt;", u"&gt;"], [u"&lsaquo;", u"&rsaquo;"]],
   ],
   
  # german quotes
  "quotes.german": [
-   [[ur"(\s+)'", ur"'"], [ur"\1&sbquo;", u"&rsquo;"]],
-   [[ur"\"", ur"\""], [u"&bdquo;", u"&rdquo;"]],
+   [[u"(\\s+)'", u"'"], [u"\\1&sbquo;", u"&rsquo;"]],
+   [[u"\"", u"\""], [u"&bdquo;", u"&rdquo;"]],
   ],
   
  # conversion to HTML quotes (<q>)
  "to_quotes": [
-   [[ur"(\s+)'", ur"'"], [ur"\1<q>", u"</q>"]],
-   [[ur"\"", ur"\""], [u"<q>", u"</q>"]],
-   [[ur"&lt;&lt;", ur"&gt;&gt;"], [u"<q>", u"</q>"]],
-   [[ur"&lt;", ur"&gt;"], [u"<q>", u"</q>"]],
+   [[u"(\\s+)'", u"'"], [u"\\1<q>", u"</q>"]],
+   [[u"\"", u"\""], [u"<q>", u"</q>"]],
+   [[u"&lt;&lt;", u"&gt;&gt;"], [u"<q>", u"</q>"]],
+   [[u"&lt;", u"&gt;"], [u"<q>", u"</q>"]],
   ],
   
  # commercial signs
  "commercial": [
-   [[ur"\([c|C]\)", None], [u"&copy;", None]],
-   [[ur"\([r|R]\)", None], [u"&reg;", None]],
-   [[ur"\([t|T][m|M]\)", None], [u"&trade;", None]],
+   [[u"\\([c|C]\\)", None], [u"&copy;", None]],
+   [[u"\\([r|R]\\)", None], [u"&reg;", None]],
+   [[u"\\([t|T][m|M]\\)", None], [u"&trade;", None]],
   ],
   
  # dashes
  "dashes": [
    # missing: ndash for number ranges 
-   [[ur"(\s+)-(\s+)", None], [ur"\1&mdash;\2", None]],
-   [[ur"([\d]+)-([\d]+)", None], [ur"\1&ndash;\2", None]],
-   #[[ur"\W-([\d]+)", None], [ur"&ndash;\1", None]],
-   #[[ur"([\d]+)-\W", None], [ur"\1&ndash;", None]],
+   [[u"(\\s+)-(\\s+)", None], [u"\\1&mdash;\\2", None]],
+   [[u"([\\d]+)-([\\d]+)", None], [u"\\1&ndash;\\2", None]],
+   #[[u"\\W-([\\d]+)", None], [u"&ndash;\\1", None]],
+   #[[u"([\\d]+)-\\W", None], [u"\\1&ndash;", None]],
   ],
 
  # bullets
  "bullets": [
-   [[ur"\*", None], [u"&bull;", None]],
+   [[u"\\*", None], [u"&bull;", None]],
   ],
     
  # ellipsis
  "ellipsis": [
-   [[ur"\.\.\.", None], [u"&hellip;", None]],
+   [[u"\\.\\.\\.", None], [u"&hellip;", None]],
   ],
     
  # apostrophe
  "apostrophe": [
-   [[ur"'", None], [u"&apos;", None]],
+   [[u"'", None], [u"&apos;", None]],
   ],
     
  # math signs
  "math": [
    # [[""], ["", "&deg;", ""]],
-   [[ur"\+/-", None], [u"&plusmn;", None]],
-   [[ur"1/2", None], [u"&frac12;", None]],
-   [[ur"1/4", None], [u"&frac14;", None]],
-   [[ur"3/4", None], [u"&frac34;", None]],
-   [[ur"\~", None], [u"&asymp;", None]],
-   [[ur"\!=", None], [u"&ne;", None]],
-   [[ur"&lt;=", None], [u"&le;", None]],
-   [[ur"&gt;=", None], [u"&ge;", None]],
-   [[ur"([\d]+)(\s*)\*(\s*)([\d]+)", None], [ur"\1\2&times;\3\4", None]],
-   [[ur"([\d]+)(\s*)x(\s*)([\d]+)", None], [ur"\1\2&times;\3\4", None]],
-   [[ur"([\d]+)(\s*)/(\s*)([\d]+)", None], [ur"\1\2&divide;\3\4", None]],
+   [[u"\\+/-", None], [u"&plusmn;", None]],
+   [[u"1/2", None], [u"&frac12;", None]],
+   [[u"1/4", None], [u"&frac14;", None]],
+   [[u"3/4", None], [u"&frac34;", None]],
+   [[u"\\~", None], [u"&asymp;", None]],
+   [[u"\\!=", None], [u"&ne;", None]],
+   [[u"&lt;=", None], [u"&le;", None]],
+   [[u"&gt;=", None], [u"&ge;", None]],
+   [[u"([\\d]+)(\\s*)\*(\\s*)([\\d]+)", None], [u"\\1\\2&times;\\3\\4", None]],
+   [[u"([\\d]+)(\\s*)x(\\s*)([\\d]+)", None], [u"\\1\\2&times;\\3\\4", None]],
+   [[u"([\\d]+)(\\s*)/(\\s*)([\\d]+)", None], [u"\\1\\2&divide;\\3\\4", None]],
   ],
     
  # dagger
  "dagger": [
-   [[ur"\*\*", None], [u"&Dagger;", None]],
-   [[ur"\*", None], [u"&dagger;", None]],
+   [[u"\\*\\*", None], [u"&Dagger;", None]],
+   [[u"\\*", None], [u"&dagger;", None]],
   ]    
 }
 
@@ -136,14 +115,25 @@ extensionsDB = [
 
 # --- class ---------------------------------------------------------
 class Degrotesque():
+  """The tiny web type setter.
+     The main method "prettify" uses the list of actions to change the contents
+     of the given HTML page.
+     Elements are skipped as well as the contents of some specific elements.
+     Additional method support parsing and setting of new values for actions
+     and elements to skip.
+     Some internal methods exist for determining which parts of the document 
+     shall processed and which ones are to skip."""
+  # --- init
   def __init__(self):
-     """List of elements which contents shall not be processed"""
+     """Sets defaults for the elements which contents shall not be processed.
+        Sets defaults for actions to perform."""
+     # list of elements which contents shall not be processed
      self._elementsToSkip = [
        u"script", u"code", u"style", u"pre", u"?", u"?php", 
        u"%", u"%=", u"%@", u"%--", u"%!",
        u"!--"
      ]
-     """The actions to apply"""
+     # the actions to apply
      self._actions = []
      self._actions.extend(actionsDB["quotes.english"])
      self._actions.extend(actionsDB["dashes"])
@@ -152,11 +142,9 @@ class Degrotesque():
      self._actions.extend(actionsDB["apostrophe"])
 
 
-
-
+  # --- _getTagName
   def _getTagName(self, html):
     """Returns the name of the tag that starts at the begin of the given string.
-  
        :param html The HTML-subpart"""
     i = 0
     while i<len(html) and (ord(html[i])<=32 or html[i]=="/"):
@@ -168,9 +156,9 @@ class Degrotesque():
     return html[ib:ie]      
 
 
+  # --- _mark
   def _mark(self, html):
     """Returns a string where all HTML-elements are denoted as '1' and plain text as '0'.
-  
        :param html The html document (contents) to process"""
     opened = 0
     # mark HTML elements, first
@@ -230,12 +218,11 @@ class Degrotesque():
     return ret      
 
 
+  # --- prettify
   def prettify(self, html):
     """Prettifies (degrotesques) the given HTML snipplet using the given actions.
-  
        It is assumed that the input is given in utf-8.
        The result is returned in utf-8 as well.
-  
        :param html The html document (contents) to process
        :param actions The actions to apply"""
     i = 0
@@ -279,16 +266,15 @@ class Degrotesque():
     return html
   
     
+  # --- setActions
   def setActions(self, actNames):
     """Returns the actions to apply.
-  
        If the given names of actions are None or empty, the default actions 
        are used.
        Otherwise, the actions matching the given names are retrieved from the
        internal database and their list is returned.
-  
        :param actNames The names of the actions to use (or None if default 
-              actions shall be used)"""
+                       actions shall be used)"""
     if actNames==None or len(actNames)==0:
       return
     actNames = actNames.split(",")
@@ -300,13 +286,12 @@ class Degrotesque():
         raise ValueError("Action '%s' is not known." % (an))
 
 
+  # --- setToSkip
   def setToSkip(self, toSkipNames):
     """Returns the elements which contents shall not be changed.
-  
        If the given names of elements are None or empty, the default elements 
        to skip are used.
        Otherwise, a list with the elements to skip is built.
-  
        :param toSkipNames The names of elements which shall not be changed"""
     if toSkipNames==None or len(toSkipNames)==0:
       return 
@@ -316,14 +301,12 @@ class Degrotesque():
 
 
 # --- methods -------------------------------------------------------
-# -- helper
+# --- getExtensions 
 def getExtensions(extNames):
-  """Sets the list of extensions of files to process
-  
+  """Returns the list of extensions of files to process
      If the given names of extensions are None or empty, the default 
      extensions are used.
      Otherwise, the given string is split and returned as a list.
-  
      :param extNames The names of extensions to process (or None if default 
                      extensions shall be used)"""
   if extNames==None or len(extNames)==0:
@@ -331,15 +314,13 @@ def getExtensions(extNames):
   return [x.strip() for x in extNames.split(',')] 
 
 
-
+# --- getFiles 
 def getFiles(name, recursive, extensions):
   """Returns the files to process.
-  
      If a file name is given, a list with only this filename is returned.
      If a folder name is given, the files to process are determined by walking
      throgh the folder - recursively if wished - and collecting all files
      that match the extensions. Returned is the list of collected files.   
-  
      :param name The name of the file/folder
      :param recursive Whether the folder (if given) shall be processed recursively
      :param extensions The extensions of the files to process"""
@@ -360,14 +341,30 @@ def getFiles(name, recursive, extensions):
   return files
 
 
+# --- main
+def main(args):
+  """The main method
+  
+  The following options must be set:
 
-# -- main
-def main(call):
-  """Parses the options, first. Builds the degrotesquer with given options, 
-  setting the actions to apply and the elements to skip. 
-  Determines the extenions of files to consider, the files to process.
-  Goes through the list of files and prettyfies (degrotesques) them, 
-  backupping the original ones.  
+  :param --input/-i: the file or the folder to process
+
+  The following options are optional:
+
+  :param --recursive/-r: Set if the folder - if given - shall be processed recursively
+  :param --no-backup/-B: Set if no backup files shall be generated
+  :param --actions/-a: Name the actions that shall be applied
+  :param --extensions/-e: The extensions of files that shall be processed
+  :param --encoding/-E: File encoding (default: 'utf-8'")
+  :param --skip/-s: Elements which contents shall not be changed
+
+  The application reads the given file or the files from the folder (optionally 
+  recursive) defined by the -i/--input option that match either the default or
+  the extensions given using the -e/--extension option, applies the default
+  or the actions named using the -a/--actions option to the contents and
+  save the files under their original name. If the option -B/--no-backup is not
+  given, a backup of the original files is generated named as the original
+  file with the appendix ".orig".
   """
   # parse options
   optParser = OptionParser(usage="usage:\n  %prog [options]", version="%prog 0.6")
@@ -378,7 +375,7 @@ def main(call):
   optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
   optParser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
   optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
-  options, remaining_args = optParser.parse_args(args=call)
+  options, remaining_args = optParser.parse_args(args=args)
   # check options
   if options.input==None:
     optParser.error("no input file(s) given...")
@@ -411,7 +408,6 @@ def main(call):
     except ValueError as err:
       print(str(err))
       continue
-
 
 
 # -- main check
