@@ -227,7 +227,8 @@ class Degrotesque():
        :param actions The actions to apply"""
     i = 0
     # extract text parts
-    marks = self._mark(html)
+    lowerHTML = html.lower()
+    marks = self._mark(lowerHTML)
     assert(len(html)==len(marks))
     while i<len(html):
       if marks[i]=="1":
