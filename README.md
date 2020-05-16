@@ -37,7 +37,7 @@ The script does not change the quotation marks of HTML elements, of course. As w
 
 After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
-The default actions are: quotes.english, dashes, ellipsis, math, apostroph.
+The default actions are: masks, quotes.english, dashes, ellipsis, math, apostroph. __Change after version 1.0__: Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks actions set is given in Appendix D.
 
 Options
 -------
@@ -170,4 +170,15 @@ The contents of the following elements are not processed by default:
 * %--
 * %!
 * !--
+
+Appendix D: Masking Action Set
+------------------------------
+
+The &ldquo;masks&rdquo; action set is masking some patterns to avoid replacements. When matching, the matching string is kept. The actions are given in the following. Please note that the numbers in { } brackets give the number of subsequent elements.
+
+* 978-&lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;{1}&lt;NO_NUMBER&gt;: avoid ISBN replacement
+* 979-&lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;{1}&lt;NO_NUMBER&gt;: avoid ISBN replacement
+* &lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;{1}&lt;NO_NUMBER&gt;: avoid ISBN replacement
+* ISSN &lt;NUMBER&gt;{4}-&lt;NUMBER&gt;{4}: avoid ISSN replacement
+
 
