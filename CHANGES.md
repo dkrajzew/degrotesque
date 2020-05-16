@@ -8,13 +8,13 @@ http:https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
 
-degrotesque-1.2
----------------
+to come: degrotesque-1.2
+------------------------
 * added a ChangeLog file (https://github.com/dkrajzew/degrotesque/blob/master/CHANGES.md)
 
 
-degrotesque-1.0
----------------
+degrotesque-1.0 (13.05.2020)
+----------------------------
 First complete release
 
 
