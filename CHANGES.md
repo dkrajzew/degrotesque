@@ -10,7 +10,7 @@ http://www.krajzewicz.de/blog/degrotesque.php
 
 to come: degrotesque-1.2
 ------------------------
-* added a ChangeLog file (https://github.com/dkrajzew/degrotesque/blob/master/CHANGES.md)
+* added a ChangeLog file (https://github.com/dkrajzew/degrotesque/blob/master/CHANGES.md) (https://github.com/dkrajzew/degrotesque/issues/8)
 
 
 degrotesque-1.0 (13.05.2020)
