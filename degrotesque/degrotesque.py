@@ -23,19 +23,19 @@ actionsDB = {
  # english quotes
  "quotes.english": [
    [[u"(\\s+)'", u"'"], [u"\\1&lsquo;", u"&rsquo;"]],
-   [[u"\"", u"\""], [u"&ldquo;", u"&rdquo;"]],
+   [[u"\"", u"\""], [u"&ldquo;", u"&rdquo;"]]
   ],
 
  # french quotes
  "quotes.french": [
    [[u"&lt;&lt;", u"&gt;&gt;"], [u"&laquo;", u"&raquo;"]],
-   [[u"&lt;", u"&gt;"], [u"&lsaquo;", u"&rsaquo;"]],
+   [[u"&lt;", u"&gt;"], [u"&lsaquo;", u"&rsaquo;"]]
   ],
   
  # german quotes
  "quotes.german": [
    [[u"(\\s+)'", u"'"], [u"\\1&sbquo;", u"&rsquo;"]],
-   [[u"\"", u"\""], [u"&bdquo;", u"&rdquo;"]],
+   [[u"\"", u"\""], [u"&bdquo;", u"&rdquo;"]]
   ],
   
  # conversion to HTML quotes (<q>)
@@ -43,38 +43,38 @@ actionsDB = {
    [[u"(\\s+)'", u"'"], [u"\\1<q>", u"</q>"]],
    [[u"\"", u"\""], [u"<q>", u"</q>"]],
    [[u"&lt;&lt;", u"&gt;&gt;"], [u"<q>", u"</q>"]],
-   [[u"&lt;", u"&gt;"], [u"<q>", u"</q>"]],
+   [[u"&lt;", u"&gt;"], [u"<q>", u"</q>"]]
   ],
   
  # commercial signs
  "commercial": [
    [[u"\\([c|C]\\)", None], [u"&copy;", None]],
    [[u"\\([r|R]\\)", None], [u"&reg;", None]],
-   [[u"\\([t|T][m|M]\\)", None], [u"&trade;", None]],
+   [[u"\\([t|T][m|M]\\)", None], [u"&trade;", None]]
   ],
   
  # dashes
  "dashes": [
    # missing: ndash for number ranges 
    [[u"(\\s+)-(\\s+)", None], [u"\\1&mdash;\\2", None]],
-   [[u"([\\d]+)-([\\d]+)", None], [u"\\1&ndash;\\2", None]],
+   [[u"([\\d]+)-([\\d]+)", None], [u"\\1&ndash;\\2", None]]
    #[[u"\\W-([\\d]+)", None], [u"&ndash;\\1", None]],
    #[[u"([\\d]+)-\\W", None], [u"\\1&ndash;", None]],
   ],
 
  # bullets
  "bullets": [
-   [[u"\\*", None], [u"&bull;", None]],
+   [[u"\\*", None], [u"&bull;", None]]
   ],
     
  # ellipsis
  "ellipsis": [
-   [[u"\\.\\.\\.", None], [u"&hellip;", None]],
+   [[u"\\.\\.\\.", None], [u"&hellip;", None]]
   ],
     
  # apostrophe
  "apostrophe": [
-   [[u"'", None], [u"&apos;", None]],
+   [[u"'", None], [u"&apos;", None]]
   ],
     
  # math signs
@@ -90,13 +90,21 @@ actionsDB = {
    [[u"&gt;=", None], [u"&ge;", None]],
    [[u"([\\d]+)(\\s*)\*(\\s*)([\\d]+)", None], [u"\\1\\2&times;\\3\\4", None]],
    [[u"([\\d]+)(\\s*)x(\\s*)([\\d]+)", None], [u"\\1\\2&times;\\3\\4", None]],
-   [[u"([\\d]+)(\\s*)/(\\s*)([\\d]+)", None], [u"\\1\\2&divide;\\3\\4", None]],
+   [[u"([\\d]+)(\\s*)/(\\s*)([\\d]+)", None], [u"\\1\\2&divide;\\3\\4", None]]
   ],
     
  # dagger
  "dagger": [
    [[u"\\*\\*", None], [u"&Dagger;", None]],
-   [[u"\\*", None], [u"&dagger;", None]],
+   [[u"\\*", None], [u"&dagger;", None]]
+  ],    
+
+ # masks
+ "masks": [
+   [[u"978-([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"978-\\1-\\2-\\3-\\4\\5", None]],
+   [[u"979-([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"979-\\1-\\2-\\3-\\4\\5", None]],
+   [[u"([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"\\1-\\2-\\3-\\4\\5", None]],
+   [[u"ISSN (\\d{4})-(\\d{4})(\\D)", None], [u"ISSN \\1-\\2\\3", None]]
   ]    
 }
 
@@ -134,7 +142,13 @@ class Degrotesque():
        u"!--"
      ]
      # the actions to apply
+     self.restoreDefaultActions()
+     
+     
+  def restoreDefaultActions(self):
+     """Instantiates default actions"""     
      self._actions = []
+     self._actions.extend(actionsDB["masks"])
      self._actions.extend(actionsDB["quotes.english"])
      self._actions.extend(actionsDB["dashes"])
      self._actions.extend(actionsDB["ellipsis"])
@@ -262,6 +276,7 @@ class Degrotesque():
         html = html[:i] + tmp
         marks = marks[:i] + "0"*l + marks[i+opening.end():]
         assert(len(html)==len(marks))
+        i = i + opening.end() - 1
         break
       i = i + 1
     return html
