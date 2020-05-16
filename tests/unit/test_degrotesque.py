@@ -27,14 +27,17 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def test_example(self):
         """The plain example test"""
+        self._degrotesque.restoreDefaultActions()
         assert(self._degrotesque.prettify("\"Well - that's not what I had expected.\"")=="&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;")
     
     def test_example_between_elements(self):
         """Example embedded in a tag"""
+        self._degrotesque.restoreDefaultActions()
         assert(self._degrotesque.prettify("<b>\"Well - that's not what I had expected.\"</b>")=="<b>&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;</b>")
     
     def test_example_in_pre(self):
         """Example in masked tag (pre)"""
+        self._degrotesque.restoreDefaultActions()
         assert(self._degrotesque.prettify("<pre>\"Well - that's not what I had expected.\"</pre>")=="<pre>\"Well - that's not what I had expected.\"</pre>")
 
     def test_action_quotes_english(self):
@@ -119,6 +122,14 @@ class TestDegrotesquePrettify(unittest.TestCase):
         self._degrotesque.setActions("dagger")
         assert(self._degrotesque.prettify(" ** ")==" &Dagger; ")
         assert(self._degrotesque.prettify(" * ")==" &dagger; ")
+
+    def test_masks(self):
+        """Testing 'dagger' action"""
+        self._degrotesque.setActions("masks,dashes")
+        assert(self._degrotesque.prettify(" ISSN 1001-1001 ")==" ISSN 1001-1001 ")
+        assert(self._degrotesque.prettify(" ISBN 978-3-86680-192-9 ")==" ISBN 978-3-86680-192-9 ")
+        assert(self._degrotesque.prettify(" ISBN 979-3-86680-192-9 ")==" ISBN 979-3-86680-192-9 ")
+        assert(self._degrotesque.prettify(" ISBN 978-3-86680-192 ")==" ISBN 978&ndash;3&ndash;86680&ndash;192 ")
 
 
 
