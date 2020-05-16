@@ -1,4 +1,4 @@
-[![License: GPL3](https://img.shields.io/badge/License-GPL3-yellow.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE.txt) 
+[![License: LGPL3](https://img.shields.io/badge/License-GPL3-yellow.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE.txt) 
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
 [![Travis CI](https://travis-ci.com/dkrajzew/degrotesque.svg?branch=master)](https://travis-ci.com/dkrajzew/degrotesque)
 
@@ -70,7 +70,7 @@ Besides, you may download the current release [degrotesque-1.0](https://github.c
 Licence
 -------
 
-__degrotesque__ is licensed under the [GPL v3.0](LICENSE.txt).
+__degrotesque__ is licensed under the [LGPL v3.0](LICENSE).
 
 Further Documentation
 ---------------------
