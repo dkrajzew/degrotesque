@@ -21,7 +21,7 @@ will become:
 
 Download and Installation
 =========================
-The current version is [degrotesque-1.0](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.0).
+The current version is [degrotesque-1.2](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.2).
 
 You may install __degrotesque__ using
 
@@ -31,9 +31,9 @@ python -m pip install degrotesque
 
 You may download a copy or fork the code at the [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque).
 
-Besides, you may download the current release [degrotesque-1.0](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.0) here:
-* [degrotesque-1.0.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.0.zip)
-* [degrotesque-1.0.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.0.tar.gz)
+Besides, you may download the current release [degrotesque-1.2](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.2) here:
+* [degrotesque-1.2.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.2.zip)
+* [degrotesque-1.2.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.2.tar.gz)
 
 Licence
 =======
@@ -58,7 +58,7 @@ The script does not change the quotation marks of HTML elements, of course. As w
 
 After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
-The default actions are: masks, quotes.english, dashes, ellipsis, math, apostroph. __Change after version 1.0__: Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks actions set is given in Appendix D.
+The default actions are: masks, quotes.english, dashes, ellipsis, math, apostroph. __Changes in version 1.2__: Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks actions set is given in Appendix D.
 
 Options
 -------
