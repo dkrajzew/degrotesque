@@ -3,7 +3,7 @@ ChangeLog for degrotesque
 
 &copy; Daniel Krajzewicz 2020
 
-http:https://github.com/dkrajzew/degrotesque
+https://github.com/dkrajzew/degrotesque
 
 http://www.krajzewicz.de/blog/degrotesque.php
 
