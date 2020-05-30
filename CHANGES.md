@@ -8,6 +8,10 @@ https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
 
+to come(?): degrotesque-1.4
+---------------------------
+* added a HowToRelease file (https://github.com/dkrajzew/degrotesque/blob/master/HowToRelease.md)
+
 degrotesque-1.2 (30.05.2020)
 ----------------------------
 * [issue #8](https://github.com/dkrajzew/degrotesque/issues/8): added a ChangeLog file (https://github.com/dkrajzew/degrotesque/blob/master/CHANGES.md) 
