@@ -19,6 +19,27 @@ will become:
 
 (Uhm, uhm, for those who don't see it, the starting and ending quotes have been replaced by &amp;ldquo; and &amp;rdquo;, respectively, the ' by &amp;apos; and the - by an &amp;mdash;.)
 
+Download and Installation
+=========================
+The current version is [degrotesque-1.0](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.0).
+
+You may install __degrotesque__ using
+
+```console
+python -m pip install degrotesque
+```
+
+You may download a copy or fork the code at the [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque).
+
+Besides, you may download the current release [degrotesque-1.0](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.0) here:
+* [degrotesque-1.0.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.0.zip)
+* [degrotesque-1.0.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.0.tar.gz)
+
+Licence
+=======
+
+__degrotesque__ is licensed under the [LGPL v3.0](LICENSE).
+
 Documentation
 =============
 
@@ -51,26 +72,29 @@ The script has the following options:
 * __--extensions/-e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___: The extensions of files that shall be processed
 * __--skip/-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___: Elements which contents shall not be changed
 
-Download and Installation
--------------------------
-The current version is [degrotesque-1.0](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.0).
+Application Programming Interface - API
+---------------------------------------
 
-You may install __degrotesque__ using
-
+You may as well embedd __degrotesque__ within your own applications. The usage is very straightforward:
 ```console
-python -m pip install degrotesque
+import degrotesque
+# build the degrotesque instance with default values
+degrotesque = degrotesque.Degrotesque()
+# apply degroteque
+prettyString = degrotesque.prettify(uglyString)
 ```
 
-You may download a copy or fork the code at the [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque).
+The default values can be replaced using some of the class' interfaces (methods):
+```console
+# change the actions to apply (by naming them)
+# here: apply french quotes and math symbols
+degrotesque.setActions("quotes.french,math")
+# change the elements which contents shall be skipped
+# here: skip the contents of "code", "script", and "style" elements
+degrotesque.setToSkip("code,script,style")
+```
 
-Besides, you may download the current release [degrotesque-1.0](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.0) here:
-* [degrotesque-1.0.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.0.zip)
-* [degrotesque-1.0.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.0.tar.gz)
-
-Licence
--------
-
-__degrotesque__ is licensed under the [LGPL v3.0](LICENSE).
+You may as well consult the [degrotesque pydoc code documentation](http://www.krajzewicz.de/blog/degrotesque.html).
 
 Further Documentation
 ---------------------
