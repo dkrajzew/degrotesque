@@ -84,7 +84,7 @@ degrotesque = degrotesque.Degrotesque()
 prettyString = degrotesque.prettify(uglyString)
 ```
 
-The default values can be replaced using some of the class' interfaces (methods):
+The default values can be replaced using some of the class&apos; interfaces (methods):
 ```console
 # change the actions to apply (by naming them)
 # here: apply french quotes and math symbols
