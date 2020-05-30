@@ -6,9 +6,10 @@ A tiny web type setter.
 (c) Daniel Krajzewicz 2020
 daniel@krajzewicz.de
 http://www.krajzewicz.de
+https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
-Available under GPL 3.0, all rights reserved
+Available under LGPL 3.0 or later, all rights reserved
 """
 
 
@@ -145,6 +146,7 @@ class Degrotesque():
      self.restoreDefaultActions()
      
      
+  # --- restoreDefaultActions
   def restoreDefaultActions(self):
      """Instantiates default actions"""     
      self._actions = []
@@ -154,6 +156,38 @@ class Degrotesque():
      self._actions.extend(actionsDB["ellipsis"])
      self._actions.extend(actionsDB["math"])
      self._actions.extend(actionsDB["apostrophe"])
+  
+    
+  # --- setActions
+  def setActions(self, actNames):
+    """Returns the actions to apply.
+       If the given names of actions are None or empty, the default actions 
+       are used.
+       Otherwise, the actions matching the given names are retrieved from the
+       internal database and their list is returned.
+       :param actNames The names of the actions to use (or None if default 
+                       actions shall be used)"""
+    if actNames==None or len(actNames)==0:
+      return
+    actNames = actNames.split(",")
+    self._actions = []
+    for an in actNames:
+      if an in actionsDB:
+        self._actions.extend(actionsDB[an])
+      else:
+        raise ValueError("Action '%s' is not known." % (an))
+
+
+  # --- setToSkip
+  def setToSkip(self, toSkipNames):
+    """Returns the elements which contents shall not be changed.
+       If the given names of elements are None or empty, the default elements 
+       to skip are used.
+       Otherwise, a list with the elements to skip is built.
+       :param toSkipNames The names of elements which shall not be changed"""
+    if toSkipNames==None or len(toSkipNames)==0:
+      return 
+    self._elementsToSkip = [x.strip() for x in toSkipNames.split(',')] 
 
 
   # --- _getTagName
@@ -280,38 +314,6 @@ class Degrotesque():
         break
       i = i + 1
     return html
-  
-    
-  # --- setActions
-  def setActions(self, actNames):
-    """Returns the actions to apply.
-       If the given names of actions are None or empty, the default actions 
-       are used.
-       Otherwise, the actions matching the given names are retrieved from the
-       internal database and their list is returned.
-       :param actNames The names of the actions to use (or None if default 
-                       actions shall be used)"""
-    if actNames==None or len(actNames)==0:
-      return
-    actNames = actNames.split(",")
-    self._actions = []
-    for an in actNames:
-      if an in actionsDB:
-        self._actions.extend(actionsDB[an])
-      else:
-        raise ValueError("Action '%s' is not known." % (an))
-
-
-  # --- setToSkip
-  def setToSkip(self, toSkipNames):
-    """Returns the elements which contents shall not be changed.
-       If the given names of elements are None or empty, the default elements 
-       to skip are used.
-       Otherwise, a list with the elements to skip is built.
-       :param toSkipNames The names of elements which shall not be changed"""
-    if toSkipNames==None or len(toSkipNames)==0:
-      return 
-    self._elementsToSkip = [x.strip() for x in toSkipNames.split(',')] 
 
 
 

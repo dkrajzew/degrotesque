@@ -5,9 +5,10 @@ Unittests for degrotesque, a tiny web type setter.
 (c) Daniel Krajzewicz 2020
 daniel@krajzewicz.de
 http://www.krajzewicz.de
+https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
-Available under GPL 3.0, all rights reserved
+Available under LGPL 3.0 or later, all rights reserved
 """
 
 
