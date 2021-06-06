@@ -132,6 +132,16 @@ class TestDegrotesquePrettify(unittest.TestCase):
         assert(self._degrotesque.prettify(" ISBN 979-3-86680-192-9 ")==" ISBN 979-3-86680-192-9 ")
         assert(self._degrotesque.prettify(" ISBN 978-3-86680-192 ")==" ISBN 978&ndash;3&ndash;86680&ndash;192 ")
 
+    def test_skip(self):
+        """Testing whether skipping code works"""
+        self._degrotesque.setActions("quotes.english")
+        assert(self._degrotesque.prettify(" <script> if(i<0) echo \"a\"</script> \"Hello World\" ")==" <script> if(i<0) echo \"a\"</script> &ldquo;Hello World&rdquo; ")
+
+    def test_attributes(self):
+        """Testing whether skipping code works"""
+        self._degrotesque.setActions("quotes.english")
+        assert(self._degrotesque.prettify("\"<a href=\"test.html\">Hello World\"</a>\"")=="&ldquo;<a href=\"test.html\">Hello World&rdquo;</a>\"")
+
 
 
 # --- methods -------------------------------------------------------

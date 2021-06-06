@@ -33,12 +33,13 @@ setuptools.setup(
   # see https://pypi.org/classifiers/
   classifiers=[
     "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Programming Language :: Python",
     "Programming Language :: Python :: 2.7",
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
     "Operating System :: OS Independent",
     "Intended Audience :: Developers",
-    "Programming Language :: Python",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Software Development :: Localization",
     "Topic :: Text Processing :: Markup :: HTML",

@@ -208,61 +208,58 @@ class Degrotesque():
   def _mark(self, html):
     """Returns a string where all HTML-elements are denoted as '1' and plain text as '0'.
        :param html The html document (contents) to process"""
-    opened = 0
     # mark HTML elements, first
     ret = ""
-    for i in range(0, len(html)):
-      if opened==0:
-        ret = ret + "0"
-      else:
-        ret = ret + "1"
-      if html[i]=='<':
-        opened += 1   
-        ret = ret[:-1] + "1"
-      if html[i]=='>':
-        opened -= 1
-    # mark code parts
     i = 0
     while i<len(html):
+      #print (html)
+      #print (ret)
+      #print ("%s %s %s" % (i, -1, len(html)))
+      opened = False
       if html[i]=='<':
-        tb = self._getTagName(html[i+1:])
-        if tb not in self._elementsToSkip:
-          i = i + len(tb)
-          continue
-        if tb=="?" or tb=="?php":
-          ib = i
-          ie = html.index("?>", ib)
-        elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
-          ib = i
-          ie = html.index("%>", ib)
-        elif tb=="!--":
-          ib = i
-          ie = html.index("-->", ib)
+        ret = ret + "1"
+        opened = True
+      elif html[i]=='>':
+        ret = ret + "1"
+        i += 1
+        continue
+      else:
+        ret = ret + "0"
+        i += 1
+        continue
+      # process elements to skip contents of
+      i += 1
+      tb = self._getTagName(html[i:])
+      ret += "1"*(len(tb))
+      i = i + len(tb)
+      if tb not in self._elementsToSkip:
+        ie = html.find(">", i)
+        ret += "1"*(ie-i+1)
+        i = ie + 1
+        continue
+      ib = i
+      if tb=="?" or tb=="?php":
+        ie = html.index("?>", ib)
+      elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
+        ie = html.index("%>", ib)
+      elif tb=="!--":
+        ie = html.index("-->", ib)
+      else:
+        closing = -1
+        while i<len(html):
+          if html[i]=='>':
+            break
+          if html[i]=='/':
+            closing == i
+          i += 1
+        if closing>0 and closing==i-1:
+          ie = i
         else:
-          ie = -1
-          i = html.find(">", i)
-          ib = i
-          while i<len(html) and ib<=i:
-            n = html.find("/"+tb, i)
-            if n<0:
-              print ("unclosed element")
-              print (tb)
-              exit()
-            if n<ib:
-              print ("false")
-              break
-            te = self._getTagName(html[n:])
-            if tb==te:
-              ie = html.index(">", n+len(te))
-              break
-            print ("Nope")
-        assert(len(ret)==len(html))
-        if ib>=0 and ie>=0:
-          ret = ret[:ib] + "1"*(ie-ib) + ret[ie:]
-        assert(len(ret)==len(html))
-        i = ie - 1
-      i = i + 1
-      assert(len(ret)==len(html))
+          ie = html.find("/"+tb, i)
+          ie += len(tb)+1
+      ret += "1"*(ie-ib)
+      i = ie
+    assert(len(ret)==len(html))
     return ret      
 
 
@@ -313,6 +310,7 @@ class Degrotesque():
         i = i + opening.end() - 1
         break
       i = i + 1
+    #print (html)
     return html
 
 
@@ -413,7 +411,7 @@ def main(args):
       fd = io.open(f, mode="r", encoding=options.encoding)
       html = fd.read()
       fd.close()
-      assert(isinstance(html, unicode))
+      #html = " <script> if(i<0) echo \"a\"</script> \"Hello World\" "
       # apply the beautifications
       html = degrotesque.prettify(html)
       # build a backup
