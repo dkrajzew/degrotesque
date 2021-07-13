@@ -116,6 +116,14 @@ Examples / Users
 
 * my own pages (http://www.krajzewicz.de/).
 
+ChangeLog
+=========
+
+version1.4
+----------
+
+* debugged the parser, had issues with script-sections at least
+
 Summary
 =======
 
