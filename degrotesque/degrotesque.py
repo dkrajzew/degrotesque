@@ -3,7 +3,7 @@ from __future__ import print_function
 
 A tiny web type setter.
 
-(c) Daniel Krajzewicz 2020
+(c) Daniel Krajzewicz 2020-2021
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
@@ -16,7 +16,7 @@ Available under LGPL 3.0 or later, all rights reserved
 # --- imports -------------------------------------------------------
 import sys, glob, os, io, shutil, re
 from optparse import OptionParser
-
+from html.parser import HTMLParser
 
 # --- variables and constants ---------------------------------------
 """A database of actions"""
@@ -212,9 +212,6 @@ class Degrotesque():
     ret = ""
     i = 0
     while i<len(html):
-      #print (html)
-      #print (ret)
-      #print ("%s %s %s" % (i, -1, len(html)))
       opened = False
       if html[i]=='<':
         ret = ret + "1"
@@ -239,24 +236,47 @@ class Degrotesque():
         continue
       ib = i
       if tb=="?" or tb=="?php":
+        # assumption: php stuff is always closed by ?>
         ie = html.index("?>", ib)
       elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
+        # assumption: jsp/asp stuff is always closed by ?>
         ie = html.index("%>", ib)
       elif tb=="!--":
+        # comments are always closed by a -->
         ie = html.index("-->", ib)
+      elif tb=="!DOCTYPE":
+        # DOCTYPE: find matching >
+        ie = ib+1
+        num = 1
+        while ie<len(html):
+          if html[ie]=="<": num = num + 1
+          elif html[ie]==">": num = num + 1
+          if num==0: break
+          ie = ie + 1
       else:
-        closing = -1
-        while i<len(html):
-          if html[i]=='>':
+        # everything else (code, script, etc. that may contain < or >) should
+        # be parsed until a closing tag
+        # but: you may find <code> in <code>!?
+        num = 1
+        ie = i + 1
+        # print (html[ie:ie+20])
+        while True:
+          ie1 = html.find("</"+tb, ie)
+          ie2 = html.find("<"+tb, ie)
+          if ie1<0 and ie2<0:
+            # print ("Unclosed tag occured (%s, %s)" % (tb, ie))
+            ie = len(html)
             break
-          if html[i]=='/':
-            closing == i
-          i += 1
-        if closing>0 and closing==i-1:
-          ie = i
-        else:
-          ie = html.find("/"+tb, i)
-          ie += len(tb)+1
+          # print ("c %s %s %s" % (ie, ie1, ie2))
+          if ie1>=0 and (ie1<ie2 or ie2<0):
+            # print ("c1 %s %s" % (ie, ie1))
+            num = num - 1
+            ie = ie1 + len("</"+tb)
+          if ie2>=0 and (ie2<ie1 or ie1<0):
+            # print ("c2 %s %s" % (ie, ie2))
+            num = num + 1
+            ie = ie2 + len("<"+tb)
+          if num==0: break
       ret += "1"*(ie-ib)
       i = ie
     assert(len(ret)==len(html))

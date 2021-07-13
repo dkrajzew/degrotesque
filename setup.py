@@ -22,7 +22,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name="degrotesque",
-  version="1.2",
+  version="1.4",
   author="dkrajzew",
   author_email="d.krajzewicz@gmail.com",
   description="A tiny web type setter",

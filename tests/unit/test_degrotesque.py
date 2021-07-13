@@ -2,7 +2,7 @@
 
 Unittests for degrotesque, a tiny web type setter.
 
-(c) Daniel Krajzewicz 2020
+(c) Daniel Krajzewicz 2020-2021
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
@@ -141,6 +141,30 @@ class TestDegrotesquePrettify(unittest.TestCase):
         """Testing whether skipping code works"""
         self._degrotesque.setActions("quotes.english")
         assert(self._degrotesque.prettify("\"<a href=\"test.html\">Hello World\"</a>\"")=="&ldquo;<a href=\"test.html\">Hello World&rdquo;</a>\"")
+
+
+    def test_real1(self):
+        self._degrotesque.restoreDefaultActions()
+        text = """<p>The rendering of .css-tables can be altered as well. The parameter
+    <code class="option">--css.attribute <em class="replaceable"><code>&lt;NAME&gt;</code></em></code>
+    sets the name of the written attribute, e.g. "font-color". The default is
+    "<code class="constant">background-color</code>". The parameter <code class="option">--css.name
+    <em class="replaceable"><code>&lt;FORMAT_STRING&gt;</code></em></code> defines how the
+    name of the entry is rendered. The parameter is a format string as
+    described in detail below. The default is
+    "<code class="constant">.pal_%n_%i</code>" - %n is replaced by the palette's name,
+    &amp;i is replaced by the entry's index.</p>"""
+        ctext = """<p>The rendering of .css-tables can be altered as well. The parameter
+    <code class="option">--css.attribute <em class="replaceable"><code>&lt;NAME&gt;</code></em></code>
+    sets the name of the written attribute, e.g. &ldquo;font-color&rdquo;. The default is
+    &ldquo;<code class="constant">background-color</code>&rdquo;. The parameter <code class="option">--css.name
+    <em class="replaceable"><code>&lt;FORMAT_STRING&gt;</code></em></code> defines how the
+    name of the entry is rendered. The parameter is a format string as
+    described in detail below. The default is
+    &ldquo;<code class="constant">.pal_%n_%i</code>&rdquo; &mdash; %n is replaced by the palette&apos;s name,
+    &amp;i is replaced by the entry&apos;s index.</p>"""
+        assert(self._degrotesque.prettify(text)==ctext)
+
 
 
 
