@@ -33,7 +33,7 @@ You may download a copy or fork the code at the [degrotesque&apos;s github page]
 
 Besides, you may download the current release [degrotesque-1.4](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.4) here:
 * [degrotesque-1.4.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.4.zip)
-* [degrotesque-1.5.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.4.tar.gz)
+* [degrotesque-1.4.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.4.tar.gz)
 
 Licence
 =======
