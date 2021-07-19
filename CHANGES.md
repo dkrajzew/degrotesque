@@ -1,7 +1,7 @@
 ChangeLog for degrotesque
 =========================
 
-&copy; Daniel Krajzewicz 2020-2021
+&copy; Daniel Krajzewicz 2020&ndash;2021
 
 https://github.com/dkrajzew/degrotesque
 
