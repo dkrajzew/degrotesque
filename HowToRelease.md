@@ -9,5 +9,6 @@ Release Steps
   * the scripts and tests
 * run the tests (run build_docs.bat)
 * build the pydoc documentation, copy it to the web pages
-* build the github release
+* commit changes
+* build the github release (tag: degrotesque-&lt;VERSION&gt;, name: degrotesque-&lt;VERSION&gt;)
 * build the PyPI release (run build_release.bat)
