@@ -1,15 +1,20 @@
 ChangeLog for degrotesque
 =========================
 
-&copy; Daniel Krajzewicz 2020
+&copy; Daniel Krajzewicz 2020&ndash;2021
 
 https://github.com/dkrajzew/degrotesque
 
 http://www.krajzewicz.de/blog/degrotesque.php
 
 
-to come(?): degrotesque-1.4
+to come(?): degrotesque-1.6
 ---------------------------
+* nothing, yet
+
+degrotesque-1.4 (19.07.2021)
+----------------------------
+* debugged the parser - could not parse code-in-code tags (weird it's even allowed, xsltproc generates this)
 * added a HowToRelease file (https://github.com/dkrajzew/degrotesque/blob/master/HowToRelease.md)
 
 degrotesque-1.2 (30.05.2020)
