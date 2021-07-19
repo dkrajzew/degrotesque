@@ -21,7 +21,7 @@ will become:
 
 Download and Installation
 =========================
-The current version is [degrotesque-1.4](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.4).
+The current version is [degrotesque-1.4](https://github.com/dkrajzew/degrotesque/releases/tag/1.4).
 
 You may install __degrotesque__ using
 
@@ -31,9 +31,9 @@ python -m pip install degrotesque
 
 You may download a copy or fork the code at the [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque).
 
-Besides, you may download the current release [degrotesque-1.4](https://github.com/dkrajzew/degrotesque/releases/tag/degrotesque-1.4) here:
-* [degrotesque-1.4.zip](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.4.zip)
-* [degrotesque-1.4.tar.gz](https://github.com/dkrajzew/degrotesque/archive/degrotesque-1.4.tar.gz)
+Besides, you may download the current release [degrotesque-1.4](https://github.com/dkrajzew/degrotesque/releases/tag/1.4) here:
+* [degrotesque-1.4.zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.4.zip)
+* [degrotesque-1.4.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.4.tar.gz)
 
 Licence
 =======
