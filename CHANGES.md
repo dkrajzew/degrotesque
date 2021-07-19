@@ -10,6 +10,7 @@ http://www.krajzewicz.de/blog/degrotesque.php
 
 to come(?): degrotesque-1.4
 ---------------------------
+* debugged the parser - could not parse code-in-code tags (weird it's even allowed, xsltproc generates this)
 * added a HowToRelease file (https://github.com/dkrajzew/degrotesque/blob/master/HowToRelease.md)
 
 degrotesque-1.2 (30.05.2020)
