@@ -40,6 +40,8 @@ Licence
 
 __degrotesque__ is licensed under the [EPL 2.0](LICENSE).
 
+Please note that __degrotesque__ was licensed under GPL 3.0 until the 23<sup>rd</sup> of June 2022. The last release with this licence was 1.4.
+
 Documentation
 =============
 
