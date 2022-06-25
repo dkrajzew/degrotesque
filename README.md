@@ -1,4 +1,4 @@
-[![License: ELP2.0](https://img.shields.io/badge/License-LGPL3-yellow.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE.txt) 
+[![License: ELP2.0](https://img.shields.io/badge/License-LGPL3-yellow.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE) 
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
 [![Travis CI](https://travis-ci.com/dkrajzew/degrotesque.svg?branch=master)](https://travis-ci.com/dkrajzew/degrotesque)
 
@@ -129,7 +129,7 @@ trunk
 older versions
 --------------
 
-* see [ChangeLog](ChangeLog)
+* see [ChangeLog](ChangeLog.md)
 
 Summary
 =======
