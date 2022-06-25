@@ -126,10 +126,10 @@ trunk
 
 * changed licence to [EPL 2.0](LICENSE)
 
-version1.4
-----------
+older versions
+--------------
 
-* debugged the parser, had issues with script-sections at least
+* see [ChangeLog]
 
 Summary
 =======
