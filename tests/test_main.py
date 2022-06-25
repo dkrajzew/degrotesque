@@ -3,7 +3,9 @@ from __future__ import print_function
 
 A tiny web type setter.
 
-(c) Daniel Krajzewicz 2020-2021
+Tests for degrotesque's main method.
+
+(c) Daniel Krajzewicz 2020-2022
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque

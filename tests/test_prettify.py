@@ -1,8 +1,10 @@
-"""test_degrotesque.py
+"""degrotesque.py
 
-Unittests for degrotesque, a tiny web type setter.
+A tiny web type setter.
 
-(c) Daniel Krajzewicz 2020-2021
+Tests for the prettify method.
+
+(c) Daniel Krajzewicz 2020-2022
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
