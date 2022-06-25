@@ -129,7 +129,7 @@ trunk
 older versions
 --------------
 
-* see [ChangeLog](ChangeLog.md)
+* see [ChangeLog](CHANGES.md)
 
 Summary
 =======
