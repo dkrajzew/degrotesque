@@ -9,7 +9,7 @@ http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
-Available under LGPL 3.0 or later, all rights reserved
+Available under EPL 2.0 or later, all rights reserved
 """
 
 
@@ -17,6 +17,8 @@ Available under LGPL 3.0 or later, all rights reserved
 import sys, glob, os, io, shutil, re
 from optparse import OptionParser
 from html.parser import HTMLParser
+
+
 
 # --- variables and constants ---------------------------------------
 """A database of actions"""
@@ -132,6 +134,7 @@ class Degrotesque():
      and elements to skip.
      Some internal methods exist for determining which parts of the document 
      shall processed and which ones are to skip."""
+     
   # --- init
   def __init__(self):
      """Sets defaults for the elements which contents shall not be processed.
@@ -344,7 +347,8 @@ def getExtensions(extNames):
      extensions are used.
      Otherwise, the given string is split and returned as a list.
      :param extNames The names of extensions to process (or None if default 
-                     extensions shall be used)"""
+                     extensions shall be used)
+     :todo What about removing dots?"""
   if extNames==None or len(extNames)==0:
     return extensionsDB
   return [x.strip() for x in extNames.split(',')] 
@@ -403,7 +407,7 @@ def main(args):
   file with the appendix ".orig".
   """
   # parse options
-  optParser = OptionParser(usage="usage:\n  %prog [options]", version="%prog 0.6")
+  optParser = OptionParser(usage="usage:\n  degrotesque.py [options]", version="degrotesque.py 0.6")
   optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
   optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8'")
   optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
@@ -414,8 +418,9 @@ def main(args):
   options, remaining_args = optParser.parse_args(args=args)
   # check options
   if options.input==None:
-    optParser.error("no input file(s) given...")
-    sys.exit()
+    print ("Error: no input file(s) given...", file=sys.stderr)
+    print ("Usage: degrotesque.py [options]+ -i <FILE>[,<FILE>]*", file=sys.stderr)
+    sys.exit(2)
   # setup degrotesque
   degrotesque = Degrotesque()
   degrotesque.setActions(options.actions)
@@ -431,7 +436,6 @@ def main(args):
       fd = io.open(f, mode="r", encoding=options.encoding)
       html = fd.read()
       fd.close()
-      #html = " <script> if(i<0) echo \"a\"</script> \"Hello World\" "
       # apply the beautifications
       html = degrotesque.prettify(html)
       # build a backup
