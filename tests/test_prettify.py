@@ -16,7 +16,6 @@ Available under EPL 2.0 or later, all rights reserved
 
 # --- imports -------------------------------------------------------
 import unittest
-import degrotesque
 from degrotesque import degrotesque
 
 
@@ -30,17 +29,17 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def test_example(self):
         """The plain example test"""
-        self._degrotesque.restoreDefaultActions()
+        self._degrotesque._restoreDefaultActions()
         assert(self._degrotesque.prettify("\"Well - that's not what I had expected.\"")=="&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;")
     
     def test_example_between_elements(self):
         """Example embedded in a tag"""
-        self._degrotesque.restoreDefaultActions()
+        self._degrotesque._restoreDefaultActions()
         assert(self._degrotesque.prettify("<b>\"Well - that's not what I had expected.\"</b>")=="<b>&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;</b>")
     
     def test_example_in_pre(self):
         """Example in masked tag (pre)"""
-        self._degrotesque.restoreDefaultActions()
+        self._degrotesque._restoreDefaultActions()
         assert(self._degrotesque.prettify("<pre>\"Well - that's not what I had expected.\"</pre>")=="<pre>\"Well - that's not what I had expected.\"</pre>")
 
     def test_action_quotes_english(self):
@@ -146,7 +145,7 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
 
     def test_real1(self):
-        self._degrotesque.restoreDefaultActions()
+        self._degrotesque._restoreDefaultActions()
         text = """<p>The rendering of .css-tables can be altered as well. The parameter
     <code class="option">--css.attribute <em class="replaceable"><code>&lt;NAME&gt;</code></em></code>
     sets the name of the written attribute, e.g. "font-color". The default is
@@ -168,10 +167,10 @@ class TestDegrotesquePrettify(unittest.TestCase):
         assert(self._degrotesque.prettify(text)==ctext)
 
 
+    def test_prettify_toSkip_oddity(self):
+        """Oddity#1"""
+        self._degrotesque._restoreDefaultActions()
+        self._degrotesque.setToSkip("(tm)")
+        assert(self._degrotesque.prettify(" <(tm)>a</(tm)> ")==" <(tm)>a</(tm)> ")
 
-
-# --- methods -------------------------------------------------------
-# -- main check
-if __name__ == '__main__':
-    unittest.main()
 

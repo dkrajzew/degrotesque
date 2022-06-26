@@ -3,7 +3,7 @@ from __future__ import print_function
 
 A tiny web type setter.
 
-Tests for functions in degrotesque.
+Tests teh getExtensions function.
 
 (c) Daniel Krajzewicz 2020-2022
 daniel@krajzewicz.de
@@ -46,6 +46,3 @@ def test_getExtensions_strip():
     from degrotesque import degrotesque
     assert degrotesque.getExtensions(" foo, bar ") == ["foo", "bar"]
 
-
-# ------ getExtensions ----------------------------------------------
-    

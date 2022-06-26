@@ -134,28 +134,24 @@ class Degrotesque():
      
   # --- init
   def __init__(self):
-     """Sets defaults for the elements which contents shall not be processed.
-        Sets defaults for actions to perform."""
-     # list of elements which contents shall not be processed
-     self._elementsToSkip = [
-       u"script", u"code", u"style", u"pre", u"?", u"?php", 
-       u"%", u"%=", u"%@", u"%--", u"%!",
-       u"!--"
-     ]
-     # the actions to apply
-     self.restoreDefaultActions()
+    """Sets defaults for the elements which contents shall not be processed.
+       Sets defaults for actions to perform."""
+    # the elements to skip
+    self._restoreDefaultElementsToSkip()
+    # the actions to apply
+    self._restoreDefaultActions()
      
      
   # --- restoreDefaultActions
-  def restoreDefaultActions(self):
-     """Instantiates default actions"""     
-     self._actions = []
-     self._actions.extend(actionsDB["masks"])
-     self._actions.extend(actionsDB["quotes.english"])
-     self._actions.extend(actionsDB["dashes"])
-     self._actions.extend(actionsDB["ellipsis"])
-     self._actions.extend(actionsDB["math"])
-     self._actions.extend(actionsDB["apostrophe"])
+  def _restoreDefaultActions(self):
+    """Instantiates default actions"""     
+    self._actions = []
+    self._actions.extend(actionsDB["masks"])
+    self._actions.extend(actionsDB["quotes.english"])
+    self._actions.extend(actionsDB["dashes"])
+    self._actions.extend(actionsDB["ellipsis"])
+    self._actions.extend(actionsDB["math"])
+    self._actions.extend(actionsDB["apostrophe"])
   
     
   # --- setActions
@@ -178,13 +174,26 @@ class Degrotesque():
         raise ValueError("Action '%s' is not known." % (an))
 
 
+  # --- restoreDefaultActions
+  def _restoreDefaultElementsToSkip(self):
+    """Instantiates default elements to skip"""
+    # list of elements which contents shall not be processed
+    self._elementsToSkip = [
+      u"script", u"code", u"style", u"pre", u"?", u"?php", 
+      u"%", u"%=", u"%@", u"%--", u"%!",
+      u"!--", "!DOCTYPE"
+    ]
+
+
   # --- setToSkip
   def setToSkip(self, toSkipNames):
     """Returns the elements which contents shall not be changed.
        If the given names of elements are None or empty, the default elements 
        to skip are used.
        Otherwise, a list with the elements to skip is built.
-       :param toSkipNames The names of elements which shall not be changed"""
+       :param toSkipNames The names of elements which shall not be changed
+       :todo Warn user if a non-XML-character occurs?
+       """
     if toSkipNames==None or len(toSkipNames)==0:
       return 
     self._elementsToSkip = [x.strip() for x in toSkipNames.split(',')] 
@@ -407,14 +416,15 @@ def main(args):
   given, a backup of the original files is generated named as the original
   file with the appendix ".orig".
   """
+  sys.tracebacklimit = 0
   # parse options
-  optParser = OptionParser(usage="usage:\n  degrotesque.py [options]", version="degrotesque.py 0.6")
+  optParser = OptionParser(usage="usage:\n  degrotesque.py [options]", version="degrotesque.py 1.6")
   optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
-  optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8'")
   optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
   optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
   optParser.add_option("-u", "--unicode", dest="unicode", action="store_true", default=False, help="Use unicode characters instead of HTML entities")
   optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
+  optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8')")
   optParser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
   optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
   options, remaining_args = optParser.parse_args(args=args)
