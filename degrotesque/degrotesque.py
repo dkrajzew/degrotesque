@@ -237,13 +237,19 @@ class Degrotesque():
       ib = i
       if tb=="?" or tb=="?php":
         # assumption: php stuff is always closed by ?>
-        ie = html.index("?>", ib)
+        ie = html.find("?>", ib)
+        if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+        ie += 1
       elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
-        # assumption: jsp/asp stuff is always closed by ?>
-        ie = html.index("%>", ib)
+        # assumption: jsp/asp stuff is always closed by %>
+        ie = html.find("%>", ib)
+        if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+        ie += 1
       elif tb=="!--":
-        # comments are always closed by a -->
-        ie = html.index("-->", ib)
+        # comments are always closed by -->
+        ie = html.find("-->", ib)
+        if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+        ie += 2
       elif tb=="!DOCTYPE":
         # DOCTYPE: find matching >
         ie = ib+1
@@ -253,27 +259,24 @@ class Degrotesque():
           elif html[ie]==">": num = num + 1
           if num==0: break
           ie = ie + 1
+        ie -= 1
       else:
         # everything else (code, script, etc. that may contain < or >) should
         # be parsed until a closing tag
         # but: you may find <code> in <code>!?
         num = 1
         ie = i + 1
-        # print (html[ie:ie+20])
         while True:
           ie1 = html.find("</"+tb, ie)
           ie2 = html.find("<"+tb, ie)
           if ie1<0 and ie2<0:
-            # print ("Unclosed tag occured (%s, %s)" % (tb, ie))
+            if ie1<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
             ie = len(html)
             break
-          # print ("c %s %s %s" % (ie, ie1, ie2))
           if ie1>=0 and (ie1<ie2 or ie2<0):
-            # print ("c1 %s %s" % (ie, ie1))
             num = num - 1
             ie = ie1 + len("</"+tb)
           if ie2>=0 and (ie2<ie1 or ie1<0):
-            # print ("c2 %s %s" % (ie, ie2))
             num = num + 1
             ie = ie2 + len("<"+tb)
           if num==0: break
@@ -332,7 +335,6 @@ class Degrotesque():
         i = i + opening.end() - 1
         break
       i = i + 1
-    #print (html)
     return html
 
 
@@ -446,7 +448,7 @@ def main(args):
       fd.write(html)
       fd.close()
     except ValueError as err:
-      print(str(err))
+      print (str(err))
       continue
 
 
