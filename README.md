@@ -1,4 +1,4 @@
-[![License: LGPL3](https://img.shields.io/badge/License-LGPL3-yellow.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE.txt) 
+[![License: ELP2.0](https://img.shields.io/badge/License-LGPL3-yellow.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE) 
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
 [![Travis CI](https://travis-ci.com/dkrajzew/degrotesque.svg?branch=master)](https://travis-ci.com/dkrajzew/degrotesque)
 
@@ -126,10 +126,10 @@ trunk
 
 * changed licence to [EPL 2.0](LICENSE)
 
-version1.4
-----------
+older versions
+--------------
 
-* debugged the parser, had issues with script-sections at least
+* see [ChangeLog](CHANGES.md)
 
 Summary
 =======
@@ -220,4 +220,5 @@ The &ldquo;masks&rdquo; action set is masking some patterns to avoid replacement
 * &lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;{1}&lt;NO_NUMBER&gt;: avoid ISBN replacement
 * ISSN &lt;NUMBER&gt;{4}-&lt;NUMBER&gt;{4}: avoid ISSN replacement
 
+&copy; Daniel Krajzewicz 2020&ndash;2022
 
