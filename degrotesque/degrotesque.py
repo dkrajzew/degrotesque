@@ -25,89 +25,86 @@ from html.parser import HTMLParser
 actionsDB = {
  # english quotes
  "quotes.english": [
-   [[u"(\\s+)'", u"'"], [u"\\1&lsquo;", u"&rsquo;"]],
-   [[u"\"", u"\""], [u"&ldquo;", u"&rdquo;"]]
+   [[u"(\\s+)'", u"'"],             [u"\\1&lsquo;", u"&rsquo;"],    [u"\\1&#8216;", u"&#8217;"]],
+   [[u"\"", u"\""],                 [u"&ldquo;", u"&rdquo;"],       [u"&#8220;", u"&#8221;"]]
   ],
 
  # french quotes
  "quotes.french": [
-   [[u"&lt;&lt;", u"&gt;&gt;"], [u"&laquo;", u"&raquo;"]],
-   [[u"&lt;", u"&gt;"], [u"&lsaquo;", u"&rsaquo;"]]
+   [[u"&lt;&lt;", u"&gt;&gt;"],     [u"&laquo;", u"&raquo;"],       [u"&#x00AB;", u"&#x00BB;"]],
+   [[u"&lt;", u"&gt;"],             [u"&lsaquo;", u"&rsaquo;"],     [u"&#x2039;", u"&#x203A;"]]
   ],
   
  # german quotes
  "quotes.german": [
-   [[u"(\\s+)'", u"'"], [u"\\1&sbquo;", u"&rsquo;"]],
-   [[u"\"", u"\""], [u"&bdquo;", u"&rdquo;"]]
+   [[u"(\\s+)'", u"'"],             [u"\\1&sbquo;", u"&rsquo;"],    [u"\\1&#x201A;", u"&#x2019;"]],
+   [[u"\"", u"\""],                 [u"&bdquo;", u"&rdquo;"],       [u"&#x201E;", u"&#x201D;"]]
   ],
   
  # conversion to HTML quotes (<q>)
  "to_quotes": [
-   [[u"(\\s+)'", u"'"], [u"\\1<q>", u"</q>"]],
-   [[u"\"", u"\""], [u"<q>", u"</q>"]],
-   [[u"&lt;&lt;", u"&gt;&gt;"], [u"<q>", u"</q>"]],
-   [[u"&lt;", u"&gt;"], [u"<q>", u"</q>"]]
+   [[u"(\\s+)'", u"'"],             [u"\\1<q>", u"</q>"],           [u"\\1<q>", u"</q>"]],
+   [[u"\"", u"\""],                 [u"<q>", u"</q>"],              [u"<q>", u"</q>"]],
+   [[u"&lt;&lt;", u"&gt;&gt;"],     [u"<q>", u"</q>"],              [u"<q>", u"</q>"]],
+   [[u"&lt;", u"&gt;"],             [u"<q>", u"</q>"],              [u"<q>", u"</q>"]]
   ],
   
  # commercial signs
  "commercial": [
-   [[u"\\([c|C]\\)", None], [u"&copy;", None]],
-   [[u"\\([r|R]\\)", None], [u"&reg;", None]],
-   [[u"\\([t|T][m|M]\\)", None], [u"&trade;", None]]
+   [[u"\\([c|C]\\)", None],         [u"&copy;", None],              [u"&#169;", None]],
+   [[u"\\([r|R]\\)", None],         [u"&reg;", None],               [u"&#174;", None]],
+   [[u"\\([t|T][m|M]\\)", None],    [u"&trade;", None],             [u"&#8482;", None]]
   ],
   
  # dashes
  "dashes": [
    # missing: ndash for number ranges 
-   [[u"(\\s+)-(\\s+)", None], [u"\\1&mdash;\\2", None]],
-   [[u"([\\d]+)-([\\d]+)", None], [u"\\1&ndash;\\2", None]]
-   #[[u"\\W-([\\d]+)", None], [u"&ndash;\\1", None]],
-   #[[u"([\\d]+)-\\W", None], [u"\\1&ndash;", None]],
+   [[u"(\\s+)-(\\s+)", None],       [u"\\1&mdash;\\2", None],       [u"\\1&#8212;\\2", None]],
+   [[u"([\\d]+)-([\\d]+)", None],   [u"\\1&ndash;\\2", None],       [u"\\1&#8211;\\2", None]]
   ],
 
  # bullets
  "bullets": [
-   [[u"\\*", None], [u"&bull;", None]]
+   [[u"\\*", None],                 [u"&bull;", None],              [u"&#8226;", None]]
   ],
     
  # ellipsis
  "ellipsis": [
-   [[u"\\.\\.\\.", None], [u"&hellip;", None]]
+   [[u"\\.\\.\\.", None],           [u"&hellip;", None],            [u"&#8230;", None]]
   ],
     
  # apostrophe
  "apostrophe": [
-   [[u"'", None], [u"&apos;", None]]
+   [[u"'", None],                   [u"&apos;", None],              [u"&#39;", None]]
   ],
     
  # math signs
  "math": [
-   # [[""], ["", "&deg;", ""]],
-   [[u"\\+/-", None], [u"&plusmn;", None]],
-   [[u"1/2", None], [u"&frac12;", None]],
-   [[u"1/4", None], [u"&frac14;", None]],
-   [[u"3/4", None], [u"&frac34;", None]],
-   [[u"\\~", None], [u"&asymp;", None]],
-   [[u"\\!=", None], [u"&ne;", None]],
-   [[u"&lt;=", None], [u"&le;", None]],
-   [[u"&gt;=", None], [u"&ge;", None]],
-   [[u"([\\d]+)(\\s*)\*(\\s*)([\\d]+)", None], [u"\\1\\2&times;\\3\\4", None]],
-   [[u"([\\d]+)(\\s*)x(\\s*)([\\d]+)", None], [u"\\1\\2&times;\\3\\4", None]],
-   [[u"([\\d]+)(\\s*)/(\\s*)([\\d]+)", None], [u"\\1\\2&divide;\\3\\4", None]]
+   [[u"\\+/-", None],               [u"&plusmn;", None],            [u"&#177;", None]],
+   [[u"1/2", None],                 [u"&frac12;", None],            [u"&#189;", None]],
+   [[u"1/4", None],                 [u"&frac14;", None],            [u"&#188;", None]],
+   [[u"3/4", None],                 [u"&frac34;", None],            [u"&#190;", None]],
+   [[u"\\~", None],                 [u"&asymp;", None],             [u"&#8776;", None]],
+   [[u"\\!=", None],                [u"&ne;", None],                [u"&#8800;", None]],
+   [[u"&lt;=", None],               [u"&le;", None],                [u"&#8804;", None]],
+   [[u"&gt;=", None],               [u"&ge;", None],                [u"&#8805;", None]],
+   [[u"([\\d]+)(\\s*)\*(\\s*)([\\d]+)", None],  [u"\\1\\2&times;\\3\\4", None],     [u"\\1\\2&#215;\\3\\4", None]],
+   [[u"([\\d]+)(\\s*)x(\\s*)([\\d]+)", None],   [u"\\1\\2&times;\\3\\4", None],     [u"\\1\\2&#215;\\3\\4", None]],
+   [[u"([\\d]+)(\\s*)/(\\s*)([\\d]+)", None],   [u"\\1\\2&divide;\\3\\4", None],    [u"\\1\\2&#247;\\3\\4", None]]
   ],
     
  # dagger
  "dagger": [
-   [[u"\\*\\*", None], [u"&Dagger;", None]],
-   [[u"\\*", None], [u"&dagger;", None]]
+   [[u"\\*\\*", None],              [u"&Dagger;", None],            [u"&#8225;", None]],
+   [[u"\\*", None],                 [u"&dagger;", None],            [u"&#8224;", None]]
   ],    
 
  # masks
  "masks": [
-   [[u"978-([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"978-\\1-\\2-\\3-\\4\\5", None]],
-   [[u"979-([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"979-\\1-\\2-\\3-\\4\\5", None]],
-   [[u"([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"\\1-\\2-\\3-\\4\\5", None]],
-   [[u"ISSN (\\d{4})-(\\d{4})(\\D)", None], [u"ISSN \\1-\\2\\3", None]]
+   [[u"978-([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"978-\\1-\\2-\\3-\\4\\5", None],  [u"978-\\1-\\2-\\3-\\4\\5", None]],
+   [[u"979-([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"979-\\1-\\2-\\3-\\4\\5", None],  [u"979-\\1-\\2-\\3-\\4\\5", None]],
+   [[u"([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None],     [u"\\1-\\2-\\3-\\4\\5", None],      [u"\\1-\\2-\\3-\\4\\5", None]],
+   [[u"ISSN (\\d{4})-(\\d{4})(\\D)", None],                 [u"ISSN \\1-\\2\\3", None],         [u"ISSN \\1-\\2\\3", None]]
   ]    
 }
 
@@ -287,7 +284,7 @@ class Degrotesque():
 
 
   # --- prettify
-  def prettify(self, html):
+  def prettify(self, html, useUnicode=False):
     """Prettifies (degrotesques) the given HTML snipplet using the given actions.
        It is assumed that the input is given in utf-8.
        The result is returned in utf-8 as well.
@@ -320,12 +317,14 @@ class Degrotesque():
         if a[0][1]!=None and closing==None:
           continue
         if closing!=None:
-          tmp = re.sub(a[0][1], a[1][1], html[ib:], 1)
+          if useUnicode: tmp = re.sub(a[0][1], a[2][1], html[ib:], 1)
+          else: tmp = re.sub(a[0][1], a[1][1], html[ib:], 1)
           l = closing.end() - closing.start() + len(tmp) - len(html[ib:]) 
           html = html[:ib] + tmp
           marks = marks[:ib+closing.start()] + "0"*l + marks[ib+closing.end():]
           assert(len(html)==len(marks))
-        tmp = re.sub(a[0][0], a[1][0], html[i:], 1)
+        if useUnicode: tmp = re.sub(a[0][0], a[2][0], html[i:], 1)
+        else: tmp = re.sub(a[0][0], a[1][0], html[i:], 1)
         l = opening.end() - 0 + len(tmp) - len(html[i:])
         html = html[:i] + tmp
         marks = marks[:i] + "0"*l + marks[i+opening.end():]
@@ -412,6 +411,7 @@ def main(args):
   optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8'")
   optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
   optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
+  optParser.add_option("-u", "--unicode", dest="unicode", action="store_true", default=False, help="Use unicode characters instead of HTML entities")
   optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
   optParser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
   optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
@@ -437,7 +437,7 @@ def main(args):
       html = fd.read()
       fd.close()
       # apply the beautifications
-      html = degrotesque.prettify(html)
+      html = degrotesque.prettify(html, options.unicode)
       # build a backup
       if not options.no_backup:
         shutil.copy(f, f+".orig")
