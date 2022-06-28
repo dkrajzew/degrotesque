@@ -9,7 +9,7 @@ http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
-Available under EPL 2.0 or later, all rights reserved
+Available under LGPL 3 or later, all rights reserved
 """
 
 
@@ -78,6 +78,12 @@ actionsDB = {
    [[u"'", None],                   [u"&apos;", None],              [u"&#39;", None]]
   ],
     
+ # dagger
+ "dagger": [
+   [[u"\\*\\*", None],              [u"&Dagger;", None],            [u"&#8225;", None]],
+   [[u"\\*", None],                 [u"&dagger;", None],            [u"&#8224;", None]]
+  ],    
+
  # math signs
  "math": [
    [[u"\\+/-", None],               [u"&plusmn;", None],            [u"&#177;", None]],
@@ -93,12 +99,11 @@ actionsDB = {
    [[u"([\\d]+)(\\s*)/(\\s*)([\\d]+)", None],   [u"\\1\\2&divide;\\3\\4", None],    [u"\\1\\2&#247;\\3\\4", None]]
   ],
     
- # dagger
- "dagger": [
-   [[u"\\*\\*", None],              [u"&Dagger;", None],            [u"&#8225;", None]],
-   [[u"\\*", None],                 [u"&dagger;", None],            [u"&#8224;", None]]
-  ],    
-
+ # chem
+ "chem": [
+   [[u"(\\w+)(\\d+)", None],        [u"\\1<sup>\\2</sup>", None],   [u"\\1<sup>\\2</sup>", None]]
+  ],
+    
  # masks
  "masks": [
    [[u"978-([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"978-\\1-\\2-\\3-\\4\\5", None],  [u"978-\\1-\\2-\\3-\\4\\5", None]],
@@ -152,6 +157,7 @@ class Degrotesque():
     self._actions.extend(actionsDB["ellipsis"])
     self._actions.extend(actionsDB["math"])
     self._actions.extend(actionsDB["apostrophe"])
+    #self._actions.extend(actionsDB["chem"])
   
     
   # --- setActions
@@ -337,7 +343,7 @@ class Degrotesque():
           assert(len(html)==len(marks))
         if useUnicode: tmp = re.sub(a[0][0], a[2][0], html[i:], 1)
         else: tmp = re.sub(a[0][0], a[1][0], html[i:], 1)
-        l = opening.end() - 0 + len(tmp) - len(html[i:])
+        l = opening.end() + len(tmp) - len(html[i:])
         html = html[:i] + tmp
         marks = marks[:i] + "0"*l + marks[i+opening.end():]
         assert(len(html)==len(marks))
