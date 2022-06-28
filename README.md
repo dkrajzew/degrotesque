@@ -124,7 +124,7 @@ ChangeLog
 trunk
 -----
 
-* changed licence to [EPL 2.0](LICENSE)
+* added the -u/--unicode option which forces to use unicode codes insteas of HTML entities
 
 older versions
 --------------
