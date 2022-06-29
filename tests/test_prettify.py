@@ -133,6 +133,12 @@ class TestDegrotesquePrettify(unittest.TestCase):
         assert(self._degrotesque.prettify(" ISBN 979-3-86680-192-9 ")==" ISBN 979-3-86680-192-9 ")
         assert(self._degrotesque.prettify(" ISBN 978-3-86680-192 ")==" ISBN 978&ndash;3&ndash;86680&ndash;192 ")
 
+    def test_action_chem(self):
+        """Testing 'dagger' action"""
+        self._degrotesque.setActions("chem")
+        assert(self._degrotesque.prettify("CO2")=="CO<sub>2</sub>")
+        assert(self._degrotesque.prettify("C20H25N3O")=="C<sub>20</sub>H<sub>25</sub>N<sub>3</sub>O")
+
     def test_skip(self):
         """Testing whether skipping code works"""
         self._degrotesque.setActions("quotes.english")

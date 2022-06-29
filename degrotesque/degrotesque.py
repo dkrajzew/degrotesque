@@ -101,7 +101,7 @@ actionsDB = {
     
  # chem
  "chem": [
-   [[u"(\\w+)(\\d+)", None],        [u"\\1<sup>\\2</sup>", None],   [u"\\1<sup>\\2</sup>", None]]
+   [[u"([a-zA-Z]+)([\\d]+)", None],        [u"\\1<sub>\\2</sub>", None],   [u"\\1<sub>\\2</sub>", None]]
   ],
     
  # masks
@@ -157,7 +157,7 @@ class Degrotesque():
     self._actions.extend(actionsDB["ellipsis"])
     self._actions.extend(actionsDB["math"])
     self._actions.extend(actionsDB["apostrophe"])
-    #self._actions.extend(actionsDB["chem"])
+    self._actions.extend(actionsDB["chem"])
   
     
   # --- setActions
