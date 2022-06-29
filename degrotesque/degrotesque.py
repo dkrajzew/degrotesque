@@ -339,15 +339,15 @@ class Degrotesque():
           else: tmp = re.sub(a[0][1], a[1][1], html[ib:], 1)
           l = closing.end() - closing.start() + len(tmp) - len(html[ib:]) 
           html = html[:ib] + tmp
-          marks = marks[:ib+closing.start()] + "0"*l + marks[ib+closing.end():]
+          marks = marks[:ib+closing.start()] + "1"*l + marks[ib+closing.end():]
           assert(len(html)==len(marks))
         if useUnicode: tmp = re.sub(a[0][0], a[2][0], html[i:], 1)
         else: tmp = re.sub(a[0][0], a[1][0], html[i:], 1)
         l = opening.end() + len(tmp) - len(html[i:])
         html = html[:i] + tmp
-        marks = marks[:i] + "0"*l + marks[i+opening.end():]
+        marks = marks[:i] + "1"*l + marks[i+opening.end():]
         assert(len(html)==len(marks))
-        i = i + opening.end() - 1
+        i = i + l - 1
         break
       i = i + 1
     return html
