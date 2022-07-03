@@ -127,7 +127,7 @@ ChangeLog
 trunk
 -----
 
-* added the -u/--unicode option which forces to use unicode codes insteas of HTML entities
+* added the -u/--unicode option which forces to use unicode codes instead of HTML entities
 
 older versions
 --------------
