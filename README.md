@@ -2,7 +2,7 @@
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
 [![Travis CI](https://travis-ci.com/dkrajzew/degrotesque.svg?branch=master)](https://travis-ci.com/dkrajzew/degrotesque)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
-[![Coverage](https://img.shields.io/badge/coverage-98-success)](https://img.shields.io/badge/coverage-98-success)
+[![Coverage]([https://img.shields.io/badge/coverage-98-success](https://img.shields.io/badge/coverage-98-success)
 
 
 degrotesque &mdash; A tiny web type setter.
