@@ -70,7 +70,7 @@ The script has the following options:
 * __--input/-i _&lt;PATH&gt;___: the file or the folder to process
 * __--recursive/-r__: Set if the folder &mdash; if given &mdash; shall be processed recursively
 * __--no-backup/-B__: Set if no backup files shall be generated
-* __--unicode/-u__: WHen set, unicode characters instead of HTML-entities are used
+* __--unicode/-u__: When set, unicode characters instead of HTML-entities are used
 * __--extensions/-e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___: The extensions of files that shall be processed
 * __--encoding/-E _&lt;ENCODING&gt;___: The assumed encoding of the files
 * __--skip/-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___: Elements which contents shall not be changed
