@@ -57,7 +57,7 @@ The files are read one by one and the replacement of plain ASCII-chars by some n
 
 The files are assumed to be encoded as &ldquo;UTF-8&ldquo; per default. You may change the encoding using the option __-E _&lt;ENCODING&gt;___ / __--encoding _&lt;ENCODING&gt;___.
 
-The script does not change the quotation marks of HTML elements, of course. As well, the contents of several elements, given in Appendix C are skipped. You may change the list of elements which contents shall not be processed using the option __-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___ / __--skip _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___. The default elements which contents are not processed are given in Appendix C.
+The script does not change the quotation marks of HTML elements, of course. As well, the contents of several elements, given in Appendix C, such as &lt;code&gt; or &lt;pre&gt;, are skipped. You may change the list of elements which contents shall not be processed using the option __-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___ / __--skip _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___. The default elements which contents are not processed are given in Appendix C.
 
 After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
