@@ -61,7 +61,7 @@ The script does not change the quotation marks of HTML elements, of course. As w
 
 After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
-The default actions are: masks, quotes.english, dashes, ellipsis, math, apostroph. __Changes in version 1.2__: Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks actions set is given in Appendix D.
+Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks actions set is given in Appendix D.
 
 Options
 -------
