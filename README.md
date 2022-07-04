@@ -95,7 +95,8 @@ The default values can be replaced using some of the class&apos; interfaces (met
 # here: apply french quotes and math symbols
 degrotesque.setActions("quotes.french,math")
 # change the elements which contents shall be skipped
-# here: skip the contents of "code", "script", and "style" elements
+# here: skip the contents of "code", 
+#  "script", and "style" elements
 degrotesque.setToSkip("code,script,style")
 ```
 
