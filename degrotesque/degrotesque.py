@@ -2,6 +2,7 @@ from __future__ import print_function
 """degrotesque.py
 
 A tiny web type setter.
+Version 1.6
 
 (c) Daniel Krajzewicz 2020-2022
 daniel@krajzewicz.de
