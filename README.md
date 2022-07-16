@@ -142,8 +142,8 @@ Examples / Users
 Change Log
 ==========
 
-trunk
------
+Version 1.6
+-----------
 
 * reworked tests, now using pytest and unittest
 * [issue #10](https://github.com/dkrajzew/degrotesque/issues/10): will not use TextTest here; using pytest instead 
