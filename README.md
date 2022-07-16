@@ -120,10 +120,10 @@ Implementation Notes
 Examples / Users
 ================
 
-* my own pages (http://www.krajzewicz.de/).
+* My own pages (http://www.krajzewicz.de/).
 
-ChangeLog
-=========
+Change Log
+==========
 
 trunk
 -----
@@ -131,9 +131,9 @@ trunk
 * reworked tests, now using pytest and unittest
 * [issue #10](https://github.com/dkrajzew/degrotesque/issues/10): will not use TextTest here; using pytest instead 
 * [issue #11](https://github.com/dkrajzew/degrotesque/issues/11): using coverage.py instead of coveralls
-* added the -u/--unicode option which forces to use unicode codes instead of HTML entities
+* added the __-u__/__--unicode__ option which forces to use unicode codes instead of HTML entities
 
-older versions
+Older Versions
 --------------
 
 * see [ChangeLog](CHANGES.md)
