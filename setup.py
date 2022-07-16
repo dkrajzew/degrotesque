@@ -4,7 +4,7 @@ This is the setup file for
 
  degrotesque - A tiny web type setter.
 
-(c) Daniel Krajzewicz 2020-2021
+(c) Daniel Krajzewicz 2020-2022
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 http://www.krajzewicz.de/blog/degrotesque.php
@@ -22,7 +22,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name="degrotesque",
-  version="1.4",
+  version="1.6",
   author="dkrajzew",
   author_email="d.krajzewicz@gmail.com",
   description="A tiny web type setter",
