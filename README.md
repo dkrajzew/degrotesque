@@ -2,6 +2,8 @@
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
 [![Travis CI](https://travis-ci.com/dkrajzew/degrotesque.svg?branch=master)](https://travis-ci.com/dkrajzew/degrotesque)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
+[![Coverage](https://img.shields.io/badge/coverage-98%25-success)](https://img.shields.io/badge/coverage-98%25-success)
+
 
 degrotesque &mdash; A tiny web type setter.
 
@@ -36,7 +38,7 @@ Besides, you may download the current release [degrotesque-1.4](https://github.c
 * [degrotesque-1.4.zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.4.zip)
 * [degrotesque-1.4.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.4.tar.gz)
 
-Licence
+License
 =======
 
 __degrotesque__ is licensed under [LGPL 3.0](LICENSE).
@@ -47,19 +49,19 @@ Documentation
 Usage
 -----
 
-__degrotesque__ is currently implemented in Python. It is started on the command line. The option __-i _&lt;PATH&gt;___ / __--input _&lt;PATH&gt;___ tells the script which file(s) shall be read — you may name a file or a folder, here. If the option __-r__ / __--recursive__ is set, the given folder will be processed recursively.
+__degrotesque__ is implemented in Python. It is started on the command line. The option __-i _&lt;PATH&gt;___ / __--input _&lt;PATH&gt;___ tells the script which file(s) shall be read — you may name a file or a folder, here. If the option __-r__ / __--recursive__ is set, the given folder will be processed recursively.
 
 The tool processes only HTML-files and its derivatives. The extensions of those file types that are processed are given in Appendix A. But you may name the extensions of files to process using the __-e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___ / __--extensions _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___ option.
 
-The files are read one by one and the replacement of plain ASCII-chars by some nicer ones is based upon a chosen set of &ldquo;actions&rdquo;. Known and default actions are given in Appendix B. You may select the actions to apply using the __-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ / __--actions _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ option.
+The files are read one by one and the replacement of plain ASCII-chars by some nicer ones is based upon a chosen set of &ldquo;actions&rdquo;. Known and default actions are given in Appendix B. You may select the actions to apply using the __-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ / __--actions _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ option. The default actions are ___masks___, ___quotes.english___, ___dashes___, ___ellipsis___, ___math___, and ___apostrophe___. Per default, HTML entities are inserted. If you rather wish to have unicode values, use the option __-u__ / __--unicode__.
 
 The files are assumed to be encoded as &ldquo;UTF-8&ldquo; per default. You may change the encoding using the option __-E _&lt;ENCODING&gt;___ / __--encoding _&lt;ENCODING&gt;___.
 
-The script does not change the quotation marks of HTML elements, of course. As well, the contents of several elements, given in Appendix C are skipped. You may change the list of elements which contents shall not be processed using the option __-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___ / __--skip _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___. The default elements which contents are not processed are given in Appendix C.
+The script does not change the quotation marks of HTML elements, of course. As well, the contents of several elements, such as &lt;code&gt; or &lt;pre&gt;, are skipped. You may change the list of elements which contents shall not be processed using the option __-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___ / __--skip _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___. The list of the elements that are skipped per default are given in Appendix C.
 
 After the actions have been applied to its contents, the file is saved. By default, the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
-The default actions are: masks, quotes.english, dashes, ellipsis, math, apostroph. __Changes in version 1.2__: Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks actions set is given in Appendix D.
+Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks actions set is given in Appendix D.
 
 Options
 -------
@@ -68,7 +70,7 @@ The script has the following options:
 * __--input/-i _&lt;PATH&gt;___: the file or the folder to process
 * __--recursive/-r__: Set if the folder &mdash; if given &mdash; shall be processed recursively
 * __--no-backup/-B__: Set if no backup files shall be generated
-* __--unicode/-u__: WHen set, unicode characters instead of HTML-entities are used
+* __--unicode/-u__: When set, unicode characters instead of HTML-entities are used
 * __--extensions/-e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___: The extensions of files that shall be processed
 * __--encoding/-E _&lt;ENCODING&gt;___: The assumed encoding of the files
 * __--skip/-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___: Elements which contents shall not be changed
@@ -93,7 +95,8 @@ The default values can be replaced using some of the class&apos; interfaces (met
 # here: apply french quotes and math symbols
 degrotesque.setActions("quotes.french,math")
 # change the elements which contents shall be skipped
-# here: skip the contents of "code", "script", and "style" elements
+# here: skip the contents of "code", 
+#  "script", and "style" elements
 degrotesque.setToSkip("code,script,style")
 ```
 
@@ -125,7 +128,10 @@ ChangeLog
 trunk
 -----
 
-* added the -u/--unicode option which forces to use unicode codes insteas of HTML entities
+* reworked tests, now using pytest and unittest
+* [issue #10](https://github.com/dkrajzew/degrotesque/issues/10): will not use TextTest here; using pytest instead 
+* [issue #11](https://github.com/dkrajzew/degrotesque/issues/11): using coverage.py instead of coveralls
+* added the -u/--unicode option which forces to use unicode codes instead of HTML entities
 
 older versions
 --------------
@@ -158,7 +164,7 @@ Appendix B: Named Actions
 
 The following action sets are currently implemented.
 
-Please note that the actions are realised using regular expressions. I decided not to show them in the following for a better readability and show the visible changes only.
+Please note that the actions are realized using regular expressions. I decided not to show them in the following for a better readability and show the visible changes only.
 
 | Action Name | From Opening String | From Closing String | To Opening String | To Closing String |
 | ---- | ---- | ---- | ---- | ---- |

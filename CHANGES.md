@@ -13,6 +13,7 @@ to come(?): degrotesque-1.6
 * reworked tests, now using pytest and unittest
 * [issue #10](https://github.com/dkrajzew/degrotesque/issues/10): will not use TextTest here; using pytest instead 
 * [issue #11](https://github.com/dkrajzew/degrotesque/issues/11): using coverage.py instead of coveralls
+* added the -u/--unicode option which forces to use unicode codes instead of HTML entities
 
 degrotesque-1.4 (19.07.2021)
 ----------------------------
