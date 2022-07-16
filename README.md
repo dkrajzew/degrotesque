@@ -79,6 +79,19 @@ The script has the following options:
 * __--actions/-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___: Name the actions that shall be applied
 * __--help__: Prints the help screen
 
+Examples
+--------
+
+```console
+degrotesque -i my_page.html -a quotes.german```
+
+Replaces single and double quotes within the file "my_page.html" by their typographic German counterparts.
+
+```console
+degrotesque -i my_folder -r --no-backup```
+
+Applies the default actions to all files that match the extension in the folder "my_folder" and all subfolders. No backup files are generated.
+
 Application Programming Interface - API
 ---------------------------------------
 
