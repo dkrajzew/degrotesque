@@ -8,8 +8,8 @@ https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
 
-to come(?): degrotesque-1.6
----------------------------
+degrotesque-1.6 (16.07.2022)
+----------------------------
 * reworked tests, now using pytest and unittest
 * [issue #10](https://github.com/dkrajzew/degrotesque/issues/10): will not use TextTest here; using pytest instead 
 * [issue #11](https://github.com/dkrajzew/degrotesque/issues/11): using coverage.py instead of coveralls
