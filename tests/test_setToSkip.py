@@ -1,4 +1,4 @@
-"""degrotesque.py
+﻿"""degrotesque.py
 
 A tiny web type setter.
 

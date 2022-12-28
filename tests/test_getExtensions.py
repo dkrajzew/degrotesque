@@ -1,4 +1,4 @@
-from __future__ import print_function
+﻿from __future__ import print_function
 """degrotesque.py
 
 A tiny web type setter.
