@@ -409,10 +409,11 @@ def main(args):
 
   :param --recursive/-r: Set if the folder - if given - shall be processed recursively
   :param --no-backup/-B: Set if no backup files shall be generated
-  :param --actions/-a: Name the actions that shall be applied
+  :param --unicode/-u: Set if unicode values shall be used instead of HTML entities
   :param --extensions/-e: The extensions of files that shall be processed
   :param --encoding/-E: File encoding (default: 'utf-8'")
   :param --skip/-s: Elements which contents shall not be changed
+  :param --actions/-a: Name the actions that shall be applied
 
   The application reads the given file or the files from the folder (optionally 
   recursive) defined by the -i/--input option that match either the default or
@@ -420,7 +421,8 @@ def main(args):
   or the actions named using the -a/--actions option to the contents and
   save the files under their original name. If the option -B/--no-backup is not
   given, a backup of the original files is generated named as the original
-  file with the appendix ".orig".
+  file with the appendix ".orig". When -u/--unicode is set, the replacement
+  will use unicode numbers, otherwise HTML entities are used.
   """
   sys.tracebacklimit = 0
   # parse options
@@ -437,7 +439,7 @@ def main(args):
   # check options
   if options.input==None:
     print ("Error: no input file(s) given...", file=sys.stderr)
-    print ("Usage: degrotesque.py [options]+ -i <FILE>[,<FILE>]*", file=sys.stderr)
+    print ("Usage: degrotesque.py -i <FILE>[,<FILE>]* [options]+", file=sys.stderr)
     sys.exit(2)
   # setup degrotesque
   degrotesque = Degrotesque()
