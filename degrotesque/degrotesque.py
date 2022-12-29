@@ -158,6 +158,7 @@ class Degrotesque():
     self._actions.extend(actionsDB["ellipsis"])
     self._actions.extend(actionsDB["math"])
     self._actions.extend(actionsDB["apostrophe"])
+    self._actions.extend(actionsDB["commercial"])
   
     
   # --- setActions
