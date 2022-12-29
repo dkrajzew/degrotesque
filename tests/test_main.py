@@ -26,7 +26,7 @@ def test_main_empty(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert captured.err.replace("__main__.py", "degrotesque.py") == "Error: no input file(s) given...\nUsage: degrotesque.py [options]+ -i <FILE>[,<FILE>]*\n"
+    assert captured.err.replace("__main__.py", "degrotesque.py") == "Error: no input file(s) given...\nUsage: degrotesque.py -i <FILE>[,<FILE>]* [options]+\n"
     assert captured.out == ""
     
 
