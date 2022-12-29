@@ -17,7 +17,6 @@ Available under LGPL 3 or later, all rights reserved
 # --- imports -------------------------------------------------------
 import sys, glob, os, io, shutil, re
 from optparse import OptionParser
-from html.parser import HTMLParser
 
 
 
