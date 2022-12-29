@@ -313,43 +313,68 @@ class Degrotesque():
     lowerHTML = html.lower()
     marks = self._mark(lowerHTML)
     assert(len(html)==len(marks))
-    while i<len(html):
-      if marks[i]=="1":
-        i = i + 1
-        continue
-      for a in self._actions:
-        opening = re.match(a[0][0], html[i:])
-        if not opening or marks[i+opening.start():i+opening.end()].find("1")>=0:
-          continue 
-        ib = i + opening.end()
+    # build a copy of actions to use (not found will be removed from it)
+    actions = list(self._actions)
+    for a in actions:
+      # add placeholder for opening / closing regexp
+      a.append(None)
+      a.append(None)
+    # start processing
+    pos = 0
+    while pos<len(html) and len(actions)>0:
+      nactions = []
+      # go through actions, find next occurrence of each
+      # (both - opening and closing regexp must be found, if a closing exists)
+      for a in actions:
+        bpos = pos
+        opening = re.search(a[0][0], html[bpos:])
+        while opening and marks[bpos+opening.start():bpos+opening.end()].find("1")>=0:
+          bpos = bpos + opening.start() + 1
+          opening = re.search(a[0][0], html[bpos:])
+        if not opening:
+          continue
+        bpos = bpos + opening.start()
+        
+        epos = bpos + opening.end() - opening.start()
         closing = None
         if a[0][1]!=None:
-          while True:
-            closing = re.search(a[0][1], html[ib:])
-            if not closing:
-              break
-            if marks[ib+closing.start():ib+closing.end()].find("1")<0:
-              break
-            ib = ib + closing.end() 
-            closing = None
-        if a[0][1]!=None and closing==None:
-          continue
-        if closing!=None:
-          if useUnicode: tmp = re.sub(a[0][1], a[2][1], html[ib:], 1)
-          else: tmp = re.sub(a[0][1], a[1][1], html[ib:], 1)
-          l = closing.end() - closing.start() + len(tmp) - len(html[ib:]) 
-          html = html[:ib] + tmp
-          marks = marks[:ib+closing.start()] + "1"*l + marks[ib+closing.end():]
-          assert(len(html)==len(marks))
-        if useUnicode: tmp = re.sub(a[0][0], a[2][0], html[i:], 1)
-        else: tmp = re.sub(a[0][0], a[1][0], html[i:], 1)
-        l = opening.end() + len(tmp) - len(html[i:])
-        html = html[:i] + tmp
-        marks = marks[:i] + "1"*l + marks[i+opening.end():]
-        assert(len(html)==len(marks))
-        i = i + l - 1
+          closing = re.search(a[0][1], html[epos:])
+          while closing and marks[epos+closing.start():epos+closing.end()].find("1")>=0:
+            epos = epos + closing.start() + 1
+            closing = re.search(a[0][0], html[epos:])
+          if not closing:
+            continue
+          epos = epos + closing.start()
+        a[-2] = [opening, bpos]
+        a[-1] = [closing, epos]
+        nactions.append(a)
+      # no actions found - break
+      if len(nactions)==0:
         break
-      i = i + 1
+      # get the next one        
+      nactions.sort(key=lambda t: t[-2][1])
+      a = nactions[0]
+      opening, bpos = a[-2]
+      closing, epos = a[-1]
+      # perform replacement
+      if closing!=None:
+        closing = re.match(a[0][1], html[epos:])
+        if useUnicode: tmp = re.sub(a[0][1], a[2][1], html[epos:], 1)
+        else: tmp = re.sub(a[0][1], a[1][1], html[epos:], 1)
+        l = closing.end() - closing.start() + len(tmp) - len(html[epos:]) 
+        html = html[:epos] + tmp
+        marks = marks[:epos+closing.start()] + "1"*l + marks[epos+closing.end():]
+        assert(len(html)==len(marks))
+      opening = re.match(a[0][0], html[bpos:])
+      if useUnicode: tmp = re.sub(a[0][0], a[2][0], html[bpos:], 1)
+      else: tmp = re.sub(a[0][0], a[1][0], html[bpos:], 1)
+      l = opening.end() + len(tmp) - len(html[bpos:])
+      html = html[:bpos] + tmp
+      marks = marks[:bpos] + "1"*l + marks[bpos+opening.end():]
+      assert(len(html)==len(marks))
+      # move in document, adapt actions list (found only)
+      pos = bpos + opening.end() + 1
+      actions = nactions
     return html
 
 
