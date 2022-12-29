@@ -296,8 +296,8 @@ class Degrotesque():
                         num = num + 1
                         ie = ie2 + len("<"+tb)
                     if num==0: break
-                ret += "1"*(ie-ib)
-                i = ie
+            ret += "1"*(ie-ib)
+            i = ie
         assert(len(ret)==len(html))
         return ret      
 
@@ -345,7 +345,7 @@ class Degrotesque():
                         closing = re.search(a[0][0], html[epos:])
                     if not closing:
                         continue
-                epos = epos + closing.start()
+                    epos = epos + closing.start()
                 a[-2] = [opening, bpos]
                 a[-1] = [closing, epos]
                 nactions.append(a)
