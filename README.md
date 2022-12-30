@@ -1,6 +1,6 @@
 [![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE) 
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
-[![Travis CI](https://travis-ci.com/dkrajzew/degrotesque.svg?branch=master)](https://travis-ci.com/dkrajzew/degrotesque)
+[![test](https://github.com/github/docs/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
 [![Coverage](https://img.shields.io/badge/coverage-98%25-success)](https://img.shields.io/badge/coverage-98%25-success)
 
