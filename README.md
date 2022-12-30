@@ -137,7 +137,8 @@ Implementation Notes
 Examples / Users
 ================
 
-* My own pages (http://www.krajzewicz.de/).
+* My own pages (https://www.krajzewicz.de/).
+* [PaletteWB](https://www.palettewb.com/) &mdash; a sophisticated palette editor for MS Windows.
 
 Change Log
 ==========
