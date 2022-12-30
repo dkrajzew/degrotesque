@@ -41,7 +41,7 @@ Besides, you may download the current release [degrotesque-1.6](https://github.c
 License
 =======
 
-__degrotesque__ is licensed under [BSD 3-clause license](LICENSE).
+__degrotesque__ is licensed under [BSD license](LICENSE).
 
 Documentation
 =============
