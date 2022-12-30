@@ -5,11 +5,12 @@ This is the setup file for
  degrotesque - A tiny web type setter.
 
 (c) Daniel Krajzewicz 2020-2022
-daniel@krajzewicz.de
-http://www.krajzewicz.de
-http://www.krajzewicz.de/blog/degrotesque.php
 
-Available under LGPL 3.0 or later, all rights reserved
+- http://www.krajzewicz.de
+- http://www.krajzewicz.de/blog/degrotesque.php
+
+
+Available under the BSD license.
 """
 
 # --- imports -------------------------------------------------------
@@ -37,9 +38,12 @@ setuptools.setup(
     "Programming Language :: Python",
     "Programming Language :: Python :: 2.7",
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
+    "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
     "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Telecommunications Industry",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Software Development :: Localization",
     "Topic :: Text Processing :: Markup :: HTML",
