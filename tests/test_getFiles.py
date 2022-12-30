@@ -11,7 +11,7 @@ http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
-Available under LGPL 3 or later, all rights reserved
+Available under the BSD license.
 """
 
 
@@ -29,7 +29,7 @@ def checkFiles(wanted, got, path):
 
 def test_getFiles_one(tmp_path):
     """Test getExtensions behaviour if no arguments are given (None)"""
-    from degrotesque import degrotesque
+    import degrotesque
     p = tmp_path / "hello.html"
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.getFiles(tmp_path / "hello.html", False, ["html"])
@@ -37,7 +37,7 @@ def test_getFiles_one(tmp_path):
     
 def test_getFiles_multiple1(tmp_path):
     """Test getExtensions behaviour if no arguments are given (None)"""
-    from degrotesque import degrotesque
+    import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.html"
@@ -47,7 +47,7 @@ def test_getFiles_multiple1(tmp_path):
     
 def test_getFiles_multiple2(tmp_path):
     """Test getExtensions behaviour if no arguments are given (None)"""
-    from degrotesque import degrotesque
+    import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.txt"
@@ -57,7 +57,7 @@ def test_getFiles_multiple2(tmp_path):
  
 def test_getFiles_multiple_recursive1(tmp_path):
     """Test getExtensions behaviour if no arguments are given (None)"""
-    from degrotesque import degrotesque
+    import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"
@@ -69,7 +69,7 @@ def test_getFiles_multiple_recursive1(tmp_path):
     
 def test_getFiles_multiple_recursive2(tmp_path):
     """Test getExtensions behaviour if no arguments are given (None)"""
-    from degrotesque import degrotesque
+    import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"

@@ -10,13 +10,13 @@ http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
-Available under LGPL 3 or later, all rights reserved
+Available under the BSD license.
 """
 
 
 # --- imports -------------------------------------------------------
 import unittest
-from degrotesque import degrotesque
+import degrotesque
 
 
 

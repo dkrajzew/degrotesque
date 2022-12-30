@@ -11,14 +11,14 @@ http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
 http://www.krajzewicz.de/blog/degrotesque.php
 
-Available under LGPL 3 or later, all rights reserved
+Available under the BSD license.
 """
 
 
 # --- test functions ------------------------------------------------
 def test_main_empty(capsys):
     """Test behaviour if no arguments are given"""
-    from degrotesque import degrotesque
+    import degrotesque
     try:
         degrotesque.main([])
         assert False
@@ -32,7 +32,7 @@ def test_main_empty(capsys):
 
 def test_main_help(capsys):
     """Test behaviour when help is wished"""
-    from degrotesque import degrotesque
+    import degrotesque
     try:
         degrotesque.main(["--help"])
         assert False
@@ -65,7 +65,7 @@ Options:
 
 def test_main_run1(capsys, tmp_path):
     """Test behaviour on plain usage"""
-    from degrotesque import degrotesque
+    import degrotesque
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -76,7 +76,7 @@ def test_main_run1(capsys, tmp_path):
 
 def test_main_run2(capsys, tmp_path):
     """Test behaviour on plain usage"""
-    from degrotesque import degrotesque
+    import degrotesque
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
