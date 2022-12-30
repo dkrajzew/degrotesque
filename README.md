@@ -153,7 +153,7 @@ Version 1.6 (16.07.2022)
 Older Versions
 --------------
 
-* see [ChangeLog](CHANGES.md)
+* see [ChangeLog](docs/CHANGES.md)
 
 Summary
 =======
