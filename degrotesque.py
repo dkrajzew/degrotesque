@@ -419,6 +419,8 @@ def getFiles(name, recursive, extensions):
         files.append(name)  
     else:  
         raise ValueError("Can not process '%s'" % name)
+    files.sort()
+    files.sort(key=lambda v: str(v).replace("\\", "/").count('/'))
     return files
 
 
