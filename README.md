@@ -1,6 +1,6 @@
 [![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE) 
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
-[![Travis CI](https://travis-ci.com/dkrajzew/degrotesque.svg?branch=master)](https://travis-ci.com/dkrajzew/degrotesque)
+![test](https://github.com/dkrajzew/degrotesque/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
 [![Coverage](https://img.shields.io/badge/coverage-98%25-success)](https://img.shields.io/badge/coverage-98%25-success)
 
@@ -137,18 +137,18 @@ Implementation Notes
 Examples / Users
 ================
 
-* My own pages (http://www.krajzewicz.de/).
+* My own pages (https://www.krajzewicz.de/).
+* [PaletteWB](https://www.palettewb.com/) &mdash; a sophisticated palette editor for MS Windows.
 
 Change Log
 ==========
 
-Version 1.6 (16.07.2022)
+Version 2.0 (to come)
 ------------------------
 
-* reworked tests, now using pytest and unittest
-* [issue #10](https://github.com/dkrajzew/degrotesque/issues/10): will not use TextTest here; using pytest instead 
-* [issue #11](https://github.com/dkrajzew/degrotesque/issues/11): using coverage.py instead of coveralls
-* added the __-u__/__--unicode__ option which forces to use unicode codes instead of HTML entities
+* Changed the license to [BSD](LICENSE).
+* Using github actions for testing on push instead of Travis CI
+* Cleaned up project tree
 
 Older Versions
 --------------
@@ -158,7 +158,7 @@ Older Versions
 Summary
 =======
 
-Well, have fun. If you have any comments / ideas / issues, please submit them to [degrotesque's issue tracker](https://github.com/dkrajzew/degrotesque/issues) on github.
+Well, have fun. If you have any comments / ideas / issues, please submit them to [degrotesque's issue tracker](https://github.com/dkrajzew/degrotesque/issues) on github or drop me a mail.
 
 Appendices
 ==========
