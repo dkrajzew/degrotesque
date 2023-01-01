@@ -1,10 +1,10 @@
-"""degrotesque.py
+"""test_setToSkip.py
 
-A tiny web type setter.
+degrotesque - A tiny web type setter, version 2.0.
 
 Tests for the setToSkip method.
 
-(c) Daniel Krajzewicz 2020-2022
+(c) Daniel Krajzewicz 2020-2023
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
@@ -36,7 +36,7 @@ class TestDegrotesqueSetToSkip(unittest.TestCase):
     def test_setToSkip_empty2(self):
         """Setting elements to skip to "" - should be the defaults"""
         toSkip = self._degrotesque._elementsToSkip
-        self._degrotesque.setToSkip(None)
+        self._degrotesque.setToSkip("")
         assert(self._degrotesque._elementsToSkip==toSkip)
     
     def test_setToSkip_single(self):

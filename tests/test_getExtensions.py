@@ -1,11 +1,11 @@
 from __future__ import print_function
-"""degrotesque.py
+"""test_getExtensions.py
 
-A tiny web type setter.
+degrotesque - A tiny web type setter, version 2.0.
 
 Tests the getExtensions function.
 
-(c) Daniel Krajzewicz 2020-2022
+(c) Daniel Krajzewicz 2020-2023
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque

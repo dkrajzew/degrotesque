@@ -1,10 +1,10 @@
-"""degrotesque.py
+"""test_mark.py
 
-A tiny web type setter.
+degrotesque - A tiny web type setter, version 2.0.
 
 Tests for the _mark method.
 
-(c) Daniel Krajzewicz 2020-2022
+(c) Daniel Krajzewicz 2020-2023
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque

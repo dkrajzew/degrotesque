@@ -1,11 +1,11 @@
 from __future__ import print_function
-"""degrotesque.py
+"""test_main.py
 
-A tiny web type setter.
+degrotesque - A tiny web type setter, version 2.0.
 
 Tests for degrotesque's main method.
 
-(c) Daniel Krajzewicz 2020-2022
+(c) Daniel Krajzewicz 2020-2023
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
@@ -73,6 +73,7 @@ def test_main_run1(capsys, tmp_path):
     degrotesque.main(["-i", tmp_path])
     assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
     assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
+
 
 def test_main_run2(capsys, tmp_path):
     """Test behaviour on plain usage"""

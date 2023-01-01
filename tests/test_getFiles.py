@@ -1,11 +1,11 @@
 ﻿from __future__ import print_function
-"""degrotesque.py
+"""test_getFiles.py
 
-A tiny web type setter.
+degrotesque - A tiny web type setter, version 2.0.
 
 Tests for the getFiles function.
 
-(c) Daniel Krajzewicz 2020-2022
+(c) Daniel Krajzewicz 2020-2023
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
@@ -28,7 +28,7 @@ def checkFiles(wanted, got, path):
     assert wanted==got2        
 
 def test_getFiles_one(tmp_path):
-    """Test getExtensions behaviour if no arguments are given (None)"""
+    """Test getFiles behaviour if one file is given"""
     import degrotesque
     p = tmp_path / "hello.html"
     p.write_text("Hallo <b>Mama</b>")
@@ -36,7 +36,7 @@ def test_getFiles_one(tmp_path):
     checkFiles(["hello.html"], files, tmp_path) 
     
 def test_getFiles_multiple1(tmp_path):
-    """Test getExtensions behaviour if no arguments are given (None)"""
+    """Test getFiles behaviour if two files is given"""
     import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
@@ -46,7 +46,7 @@ def test_getFiles_multiple1(tmp_path):
     checkFiles(["hello1.html", "hello2.html"], files, tmp_path)
     
 def test_getFiles_multiple2(tmp_path):
-    """Test getExtensions behaviour if no arguments are given (None)"""
+    """Test getFiles behaviour if two files exist but only .html-files shall be processed"""
     import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
@@ -56,7 +56,7 @@ def test_getFiles_multiple2(tmp_path):
     checkFiles(["hello1.html"], files, tmp_path)
  
 def test_getFiles_multiple_recursive1(tmp_path):
-    """Test getExtensions behaviour if no arguments are given (None)"""
+    """Tests recusrsive folder structure with recursion disabled"""
     import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
@@ -68,7 +68,7 @@ def test_getFiles_multiple_recursive1(tmp_path):
     checkFiles(["hello1.html"], files, tmp_path)
     
 def test_getFiles_multiple_recursive2(tmp_path):
-    """Test getExtensions behaviour if no arguments are given (None)"""
+    """Tests recusrsive folder structure with recursion enabled"""
     import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")

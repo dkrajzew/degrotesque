@@ -1,10 +1,10 @@
-"""degrotesque.py
+"""test_prettify.py
 
-A tiny web type setter.
+degrotesque - A tiny web type setter, version 2.0.
 
 Tests for the prettify method.
 
-(c) Daniel Krajzewicz 2020-2022
+(c) Daniel Krajzewicz 2020-2023
 daniel@krajzewicz.de
 http://www.krajzewicz.de
 https://github.com/dkrajzew/degrotesque
@@ -126,7 +126,7 @@ class TestDegrotesquePrettify(unittest.TestCase):
         assert(self._degrotesque.prettify(" * ")==" &dagger; ")
 
     def test_masks(self):
-        """Testing 'dagger' action
+        """Testing masks
         todo: Think about minusses and dealing with numbers"""
         self._degrotesque.setActions("masks,dashes")
         assert(self._degrotesque.prettify(" ISSN 1001-1001 ")==" ISSN 1001-1001 ")
@@ -135,7 +135,7 @@ class TestDegrotesquePrettify(unittest.TestCase):
         #assert(self._degrotesque.prettify(" ISBN 978-3-86680-192 ")==" ISBN 978&ndash;3&ndash;86680&ndash;192 ")
 
     def test_action_chem(self):
-        """Testing 'dagger' action"""
+        """Testing 'chem' action"""
         self._degrotesque.setActions("chem")
         assert(self._degrotesque.prettify("CO2")=="CO<sub>2</sub>")
         assert(self._degrotesque.prettify("C20H25N3O")=="C<sub>20</sub>H<sub>25</sub>N<sub>3</sub>O")
@@ -152,6 +152,7 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
 
     def test_real1(self):
+        """A previously failing real-life example"""
         self._degrotesque._restoreDefaultActions()
         text = """<p>The rendering of .css-tables can be altered as well. The parameter
     <code class="option">--css.attribute <em class="replaceable"><code>&lt;NAME&gt;</code></em></code>
