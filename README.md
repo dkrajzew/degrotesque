@@ -38,7 +38,7 @@ I think it's a pity that major Desktop Publishing applications do this on the fl
 
 **degrotesque** does the job pretty fine. After writing / building my pages, the tool converts them to a prettier and typographically more correct form. The structure and format of the pages is completely remained. And as said, it works reliable.
 
-If you need any consultations, let me know. If you know better, too.
+If you need any consultations, please let me know. If you know better, too.
 
 
 Download and Installation
