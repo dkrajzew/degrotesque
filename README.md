@@ -120,7 +120,7 @@ import degrotesque
 # build the degrotesque instance with default values
 degrotesque = degrotesque.Degrotesque()
 # apply degroteque
-prettyString = degrotesque.prettify(uglyString)
+prettyHTML = degrotesque.prettify(plainHTML)
 ```
 
 The default values can be replaced using some of the class&apos; interfaces (methods):
