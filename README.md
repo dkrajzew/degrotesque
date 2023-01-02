@@ -260,5 +260,5 @@ The &ldquo;masks&rdquo; action set is masking some patterns to avoid replacement
 * &lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;{1}&lt;NO_NUMBER&gt;: avoid ISBN replacement
 * ISSN &lt;NUMBER&gt;{4}-&lt;NUMBER&gt;{4}: avoid ISSN replacement
 
-&copy; Daniel Krajzewicz 2020&ndash;2022
+&copy; Daniel Krajzewicz 2020&ndash;2023
 
