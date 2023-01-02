@@ -10,7 +10,7 @@ degrotesque &mdash; A tiny web type setter.
 Introduction
 ============
 
-The script loads an HTML page &mdash; or several in batch, one after the other &mdash; and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representant for improving the pages&apos; appearance.  
+The script loads an HTML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representant for improving the pages&apos; appearance.  
 
 E.g.:
 
@@ -20,23 +20,40 @@ will become:
 
  &ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;
 
-(Uhm, uhm, for those who don't see it, the starting and ending quotes have been replaced by &amp;ldquo; and &amp;rdquo;, respectively, the ' by &amp;apos; and the - by an &amp;mdash;.)
+I think, it looks __much__ better.
+
+The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively, the ' by &apos; and the - by an &mdash;. Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character. 
+
+It is meant to be a relatively reliable post-processing step for web pages before releasing them.
+
+
+Background
+==========
+
+I often write my texts and web pages using a plain editor. As such, the character " is always used for quotes, a dash is always a minus, etc.
+
+I wanted to have a tool that automatically recognizes which characters should be replaced by their more typographic counterpart and applies the according rules. 
+
+I think it's a pity that major Desktop Publishing applications do this on the fly but many and even major web sites still show us plain ASCII characters.
+
+**degrotesque** does the job pretty fine. After writing / building my pages, the tool converts them to a prettier and typographically more correct form. The structure and format of the pages is completely remained. And as said, it works reliable.
+
+If you need any consultations, let me know. If you know better, too.
+
 
 Download and Installation
 =========================
-The current version is [degrotesque-1.6](https://github.com/dkrajzew/degrotesque/releases/tag/1.6).
-
-You may install __degrotesque__ using
+The __current version__ is [degrotesque-1.6](https://github.com/dkrajzew/degrotesque/releases/tag/1.6). You may __install degrotesque__ using
 
 ```console
 python -m pip install degrotesque
 ```
 
-You may download a copy or fork the code at [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque).
+You may __download a copy or fork the code__ at [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque). Besides, you may __download the current release__ here:
 
-Besides, you may download the current release [degrotesque-1.6](https://github.com/dkrajzew/degrotesque/releases/tag/1.6) here:
 * [degrotesque-1.6.zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.6.zip)
 * [degrotesque-1.6.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.6.tar.gz)
+
 
 License
 =======
@@ -79,8 +96,8 @@ The script has the following options:
 * __--actions/-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___: Name the actions that shall be applied
 * __--help__: Prints the help screen
 
-Examples
---------
+Usage Examples
+--------------
 
 ```console
 degrotesque -i my_page.html -a quotes.german
@@ -243,5 +260,5 @@ The &ldquo;masks&rdquo; action set is masking some patterns to avoid replacement
 * &lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;-&lt;NUMBER&gt;{1}&lt;NO_NUMBER&gt;: avoid ISBN replacement
 * ISSN &lt;NUMBER&gt;{4}-&lt;NUMBER&gt;{4}: avoid ISSN replacement
 
-&copy; Daniel Krajzewicz 2020&ndash;2022
+&copy; Daniel Krajzewicz 2020&ndash;2023
 
