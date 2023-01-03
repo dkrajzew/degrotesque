@@ -5,7 +5,7 @@
 [![Coverage](https://img.shields.io/badge/coverage-98%25-success)](https://img.shields.io/badge/coverage-98%25-success)
 
 
-degrotesque &mdash; A tiny web type setter.
+degrotesque &mdash; A web type setter.
 
 Introduction
 ============
