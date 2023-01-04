@@ -1,18 +1,18 @@
 from __future__ import print_function
-"""test_main.py
-
-degrotesque - A web type setter, version 2.0.
-
-Tests for degrotesque's main method.
-
-(c) Daniel Krajzewicz 2020-2023
-daniel@krajzewicz.de
-http://www.krajzewicz.de
-https://github.com/dkrajzew/degrotesque
-http://www.krajzewicz.de/blog/degrotesque.php
-
-Available under the BSD license.
-"""
+# ======================================
+# degrotesque - A web type setter.
+# Version 2.0.
+#
+# Tests for the main method
+#
+# (c) Daniel Krajzewicz 2020-2023
+# - daniel@krajzewicz.de
+# - http://www.krajzewicz.de
+# - https://github.com/dkrajzew/degrotesque
+# - http://www.krajzewicz.de/blog/degrotesque.php
+# 
+# Available under the BSD license.
+# ======================================
 
 
 # --- test functions ------------------------------------------------

@@ -1,23 +1,22 @@
-"""test_mark.py
-
-degrotesque - A web type setter, version 2.0.
-
-Tests for the _mark method.
-
-(c) Daniel Krajzewicz 2020-2023
-daniel@krajzewicz.de
-http://www.krajzewicz.de
-https://github.com/dkrajzew/degrotesque
-http://www.krajzewicz.de/blog/degrotesque.php
-
-Available under the BSD license.
-"""
+# ======================================
+# degrotesque - A web type setter.
+# Version 2.0.
+#
+# Tests for the mark method
+#
+# (c) Daniel Krajzewicz 2020-2023
+# - daniel@krajzewicz.de
+# - http://www.krajzewicz.de
+# - https://github.com/dkrajzew/degrotesque
+# - http://www.krajzewicz.de/blog/degrotesque.php
+# 
+# Available under the BSD license.
+# ======================================
 
 
 # --- imports -------------------------------------------------------
 import unittest
 import degrotesque
-
 
 
 # --- classes -------------------------------------------------------
