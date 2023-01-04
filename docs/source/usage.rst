@@ -25,13 +25,13 @@ Using as a standalone script
 
 The option **-i <PATH>** / **\-\-input <PATH>** tells the script which file(s) shall be read - you may name a file or a folder, here. If the option **-r** / **\-\-recursive** is set, the given folder will be processed recursively.
 
-The tool processes HTML files, XML files, and their derivatives. The extensions of file types that are processed are given in :ref:`appendix-a`. You may change the extensions of files to process using the **-e <EXTENSION>[,<EXTENSION>]** / **\-\-extensions <EXTENSION>[,<EXTENSION>]** option.
+The tool processes HTML files, XML files, and their derivatives. The extensions of file types that are processed are given in :ref:`appendix-a`. You may change the extensions of files to process using the **-e <EXTENSION>[,<EXTENSION>]\*** / **\-\-extensions <EXTENSION>[,<EXTENSION>]\*** option.
 
-The files are read one by one and the replacement of plain ASCII chars by some nicer ones is based upon a chosen set of "actions". Known and default actions are given in :ref:`appendix-b`. You may select the actions to apply using the **-a <ACTION_NAME>[,<ACTION_NAME>]** / **\-\-actions <ACTION_NAME>[,<ACTION_NAME>]** option. The default actions are **masks**, **quotes.english**, **dashes**, **ellipsis**, **math**, and **apostrophe**. Per default, HTML entities are inserted. If you rather wish to have unicode values, use the option **-u** / **\-\-unicode**.
+The files are read one by one and the replacement of plain ASCII chars by some nicer ones is based upon a chosen set of "actions". Known and default actions are given in :ref:`appendix-b`. You may select the actions to apply using the **-a <ACTION_NAME>[,<ACTION_NAME>]\*** / **\-\-actions <ACTION_NAME>[,<ACTION_NAME>]\*** option. The default actions are **masks**, **quotes.english**, **dashes**, **ellipsis**, **math**, and **apostrophe**. Per default, HTML entities are inserted. If you rather wish to have unicode values, use the option **-u** / **\-\-unicode**.
 
 The files are assumed to be encoded using UTF-8 per default. You may change the encoding using the option **-E <ENCODING>** / **\-\-encoding <ENCODING>**.
 
-The script does not change the quotation marks of HTML elements, of course. As well, the contents of several elements, such as <code> or <pre>, are skipped. You may change the list of elements which contents shall not be processed using the option **-s <ELEMENT_NAME>[,<ELEMENT_NAME>]** / **\-\-skip <ELEMENT_NAME>[,<ELEMENT_NAME>]**. The list of elements that are skipped per default is given in :ref:`appendix-c`.
+The script does not change the quotation marks of HTML elements, of course. As well, the contents of several elements, such as <code> or <pre>, are skipped. You may change the list of elements which contents shall not be processed using the option **-s <ELEMENT_NAME>[,<ELEMENT_NAME>]\*** / **\-\-skip <ELEMENT_NAME>[,<ELEMENT_NAME>]\***. The list of elements that are skipped per default is given in :ref:`appendix-c`.
 
 After the actions have been applied to its contents, the file is saved. By default, a backup of the original file is saved under the same name, with the appendix ".orig". You may omit the creation of these backup files using the option **-B / \-\-no-backup**.
 
@@ -46,10 +46,10 @@ The script has the following options:
 - **\-\-recursive/-r**: Set if the folder &mdash; if given &mdash; shall be processed recursively
 - **\-\-no-backup/-B**: Set if no backup files shall be generated
 - **\-\-unicode/-u**: When set, unicode characters instead of HTML-entities are used
-- **\-\-extensions/-e <EXTENSION>[,<EXTENSION>]**: The extensions of files that shall be processed
+- **\-\-extensions/-e <EXTENSION>[,<EXTENSION>]\***: The extensions of files that shall be processed
 - **\-\-encoding/-E <ENCODING>**: The assumed encoding of the files
-- **\-\-skip/-s <ELEMENT_NAME>[,<ELEMENT_NAME>]**: Elements which contents shall not be changed
-- **\-\-actions/-a <ACTION_NAME>[,<ACTION_NAME>]**: Name the actions that shall be applied
+- **\-\-skip/-s <ELEMENT_NAME>[,<ELEMENT_NAME>]\***: Elements which contents shall not be changed
+- **\-\-actions/-a <ACTION_NAME>[,<ACTION_NAME>]\***: Name the actions that shall be applied
 - **\-\-help**: Prints the help screen
 
 

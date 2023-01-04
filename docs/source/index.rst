@@ -62,6 +62,7 @@ Contents
    usage
    changes
    api
+   links
    appendices
    notes
    legal
