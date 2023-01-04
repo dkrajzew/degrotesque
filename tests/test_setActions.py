@@ -1,6 +1,6 @@
 """test_setActions.py
 
-degrotesque - A tiny web type setter, version 2.0.
+degrotesque - A web type setter, version 2.0.
 
 Tests for the setActions method.
 

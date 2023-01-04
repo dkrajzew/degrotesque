@@ -1,6 +1,6 @@
 """__init__.py
 
-degrotesque - A tiny web type setter, version 2.0.
+degrotesque - A web type setter, version 2.0.
 
 Test init module
 

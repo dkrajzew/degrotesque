@@ -1,7 +1,7 @@
 from __future__ import print_function
 """test_main.py
 
-degrotesque - A tiny web type setter, version 2.0.
+degrotesque - A web type setter, version 2.0.
 
 Tests for degrotesque's main method.
 
