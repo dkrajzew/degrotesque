@@ -1,7 +1,7 @@
 from __future__ import print_function
 """degrotesque.py
 
-degrotesque - A tiny web type setter, version 2.0.
+degrotesque - A web type setter, version 2.0.
 
 (c) Daniel Krajzewicz 2020-2023
 daniel@krajzewicz.de
@@ -136,12 +136,12 @@ class Degrotesque():
     The main method "prettify" uses the list of actions to change the 
     contents of the given HTML page.
     
-    Elements are skipped as well as the contents of some specific elements.
-    Additional method support parsing and setting of new values for actions
+    XML-elements are skipped as well as the contents of specific elements.
+    Additional methods support parsing and setting new values for actions
     and elements to skip.
     
     Some internal methods exist for determining which parts of the document
-    shall processed and which ones are to skip.
+    shall processed and which ones shall be skipped.
     """
 
     # --- init
@@ -237,7 +237,8 @@ class Degrotesque():
 
     # --- _mark
     def _mark(self, html):
-        """Returns a string where all HTML-elements are denoted as '1' and plain text as '0'.
+        """Returns a string where all HTML-elements are denoted as '1' and 
+        plain content as '0'.
         
         :param html: The html document (contents) to process"""
         # mark HTML elements, first
@@ -318,7 +319,7 @@ class Degrotesque():
 
     # --- prettify
     def prettify(self, html, useUnicode=False):
-        """Prettifies (degrotesques) the given HTML snippet using the given actions.
+        """Prettifies (degrotesques) the given HTML snippet.
         
         It is assumed that the input is given in utf-8.
         
@@ -401,7 +402,7 @@ class Degrotesque():
 # --- methods -------------------------------------------------------
 # --- getExtensions
 def getExtensions(extNames):
-    """Returns the list of extensions of files to process
+    """Returns the list of extensions of files to process.
     
     If the given names of extensions are None or empty, the default
     extensions are used.
@@ -424,7 +425,7 @@ def getFiles(name, recursive, extensions):
     If a file name is given, a list with only this filename is returned.
     
     If a folder name is given, the files to process are determined by walking
-    throgh the folder - recursively if wished - and collecting all files
+    through the folder — recursively if wished — and collecting all files
     that match the extensions. Returned is the list of collected files.
     
     :param name: The name of the file/folder
@@ -459,7 +460,7 @@ def main(args):
 
     The following options are optional:
 
-    :param --recursive/-r: Set if the folder - if given - shall be processed recursively
+    :param --recursive/-r: Set if the folder — if given — shall be processed recursively
     :param --no-backup/-B: Set if no backup files shall be generated
     :param --unicode/-u: Set if unicode values shall be used instead of HTML entities
     :param --extensions/-e: The extensions of files that shall be processed
@@ -468,12 +469,13 @@ def main(args):
     :param --actions/-a: Name the actions that shall be applied
 
     The application reads the given file or the files from the folder (optionally
-    recursive) defined by the -i/--input option that match either the default or
-    the extensions given using the -e/--extension option, applies the default
-    or the actions named using the -a/--actions option to the contents and
-    save the files under their original name. If the option -B/--no-backup is not
+    recursive) defined by the -i/\-\-input option that match either the default or
+    the extensions given using the -e/\-\-extension option, applies the default
+    or the actions named using the -a/\-\-actions option to the contents skipping
+    the contents of default elements to skip or those defined using -s/\-\-skip and
+    save the files under their original name. If the option -B/\-\-no-backup is not
     given, a backup of the original files is generated named as the original
-    file with the appendix ".orig". When -u/--unicode is set, the replacement
+    file with the appendix ".orig". When -u/\-\-unicode is set, the replacement
     will use unicode numbers, otherwise HTML entities are used.
     """
     sys.tracebacklimit = 0
