@@ -1,5 +1,5 @@
 from __future__ import print_function
-# ======================================
+# ===================================================================
 # degrotesque - A web type setter.
 # Version 2.0.
 #
@@ -12,7 +12,7 @@ from __future__ import print_function
 # - http://www.krajzewicz.de/blog/degrotesque.php
 # 
 # Available under the BSD license.
-# ======================================
+# ===================================================================
 
 
 # --- imports -------------------------------------------------------
@@ -401,7 +401,7 @@ class Degrotesque():
 
 
 
-# --- methods -------------------------------------------------------
+# --- functions -----------------------------------------------------
 # --- getExtensions
 def getExtensions(extNames):
     """Returns the list of extensions of files to process.
@@ -482,7 +482,7 @@ def main(args):
     """
     sys.tracebacklimit = 0
     # parse options
-    optParser = OptionParser(usage="usage:\n  degrotesque.py [options]", version="degrotesque.py 1.6")
+    optParser = OptionParser(usage="usage:\n  degrotesque.py [options]", version="degrotesque.py 2.0")
     optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
     optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
     optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")

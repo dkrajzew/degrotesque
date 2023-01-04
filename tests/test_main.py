@@ -1,5 +1,5 @@
 from __future__ import print_function
-# ======================================
+# ===================================================================
 # degrotesque - A web type setter.
 # Version 2.0.
 #
@@ -12,7 +12,7 @@ from __future__ import print_function
 # - http://www.krajzewicz.de/blog/degrotesque.php
 # 
 # Available under the BSD license.
-# ======================================
+# ===================================================================
 
 
 # --- test functions ------------------------------------------------
