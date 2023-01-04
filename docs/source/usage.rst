@@ -8,14 +8,14 @@ Usage
 Download and Installation
 -------------------------
 
-The **current version** is `degrotesque-1.6 <https://github.com/dkrajzew/degrotesque/releases/tag/1.6>`_. You may **install degrotesque** using
+The **current version** is `degrotesque-2.0 <https://github.com/dkrajzew/degrotesque/releases/tag/2.0>`_. You may **install degrotesque** using
 
 ``python -m pip install degrotesque``
 
 You may **download a copy or fork the code** at `degrotesque's github page <https://github.com/dkrajzew/degrotesque>`_. Besides, you may **download the current release** here:
 
-- `degrotesque-1.6.zip <https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.6.zip>`_
-- `degrotesque-1.6.tar.gz <https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.6.tar.gz>`_
+- `degrotesque-2.0.zip <https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.zip>`_
+- `degrotesque-2.0.tar.gz <https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.tar.gz>`_
 
 
 Using as a standalone script

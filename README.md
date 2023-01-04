@@ -43,7 +43,7 @@ If you need any consultations, please let me know. If you know better, too.
 
 Download and Installation
 =========================
-The __current version__ is [degrotesque-1.6](https://github.com/dkrajzew/degrotesque/releases/tag/1.6). You may __install degrotesque__ using
+The __current version__ is [degrotesque-2.0](https://github.com/dkrajzew/degrotesque/releases/tag/2.0). You may __install degrotesque__ using
 
 ```console
 python -m pip install degrotesque
@@ -51,8 +51,8 @@ python -m pip install degrotesque
 
 You may __download a copy or fork the code__ at [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque). Besides, you may __download the current release__ here:
 
-* [degrotesque-1.6.zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.6.zip)
-* [degrotesque-1.6.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/1.6.tar.gz)
+* [degrotesque-2.0.zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.zip)
+* [degrotesque-2.0.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.tar.gz)
 
 
 License
@@ -163,13 +163,14 @@ Version 2.0 (to come)
 ------------------------
 
 * Changed the license to [BSD](LICENSE).
-* Using github actions for testing on push instead of Travis CI
+* Using github actions for testing on push instead of using Travis CI
 * Cleaned up project tree
 
 Older Versions
 --------------
 
 * see [ChangeLog](docs/CHANGES.md)
+
 
 Summary
 =======

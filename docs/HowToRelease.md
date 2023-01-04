@@ -7,8 +7,8 @@ Release Steps
   * the blog pages
   * the [setup.py](https://github.com/dkrajzew/degrotesque/blob/master/setup.py) file
   * the scripts and tests
-* run the tests (run build_docs.bat)
+* run the tests (run tests/run_tests.bat)
 * build the pydoc documentation, copy it to the web pages
 * commit changes
 * build the github release (tag: &lt;VERSION&gt;, name: degrotesque-&lt;VERSION&gt;)
-* build the PyPI release (run build_release.bat)
+  * the PyPI release should be built automatically using a github action, if not run build_release.bat

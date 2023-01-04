@@ -1,11 +1,12 @@
 ChangeLog for degrotesque
 =========================
 
-&copy; Daniel Krajzewicz 2020&ndash;2023
+degrotesque-2.0 (16.07.2022)
+----------------------------
 
-https://github.com/dkrajzew/degrotesque
-
-http://www.krajzewicz.de/blog/degrotesque.php
+* Changed the license to [BSD](https://github.com/dkrajzew/degrotesque/LICENSE).
+* Using github actions for testing on push instead of using Travis CI
+* Cleaned up project tree
 
 
 degrotesque-1.6 (16.07.2022)
@@ -15,10 +16,12 @@ degrotesque-1.6 (16.07.2022)
 * [issue #11](https://github.com/dkrajzew/degrotesque/issues/11): using coverage.py instead of coveralls
 * added the -u/--unicode option which forces to use unicode codes instead of HTML entities
 
+
 degrotesque-1.4 (19.07.2021)
 ----------------------------
 * debugged the parser - could not parse code-in-code tags (weird it's even allowed, xsltproc generates this)
 * added a HowToRelease file (https://github.com/dkrajzew/degrotesque/blob/master/HowToRelease.md)
+
 
 degrotesque-1.2 (30.05.2020)
 ----------------------------
@@ -27,6 +30,7 @@ degrotesque-1.2 (30.05.2020)
 * [issue #9](https://github.com/dkrajzew/degrotesque/issues/9): change LICENCE to LGPL
 * [issue #7](https://github.com/dkrajzew/degrotesque/issues/7): add an API description
 * Added a masking function for not replacing minusses in ISBN and ISSN
+
 
 degrotesque-1.0 (13.05.2020)
 ----------------------------
