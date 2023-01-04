@@ -23,7 +23,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name="degrotesque",
-  version="1.6",
+  version="2.0",
   author="dkrajzew",
   author_email="d.krajzewicz@gmail.com",
   description="A tiny web type setter",
@@ -31,6 +31,11 @@ setuptools.setup(
   long_description_content_type="text/markdown",
   url="https://github.com/dkrajzew/degrotesque",
   packages=setuptools.find_packages(),
+  entry_points = {
+        'console_scripts': [
+            'degrotesque = degrotesque:main'
+        ]
+    },
   # see https://pypi.org/classifiers/
   classifiers=[
     "Development Status :: 5 - Production/Stable",
