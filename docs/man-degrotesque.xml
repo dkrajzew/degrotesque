@@ -7,13 +7,13 @@
 
     <manvolnum>1</manvolnum>
 
-    <refmiscinfo>degrotesque 1.6</refmiscinfo>
+    <refmiscinfo>degrotesque 2.0</refmiscinfo>
   </refmeta>
 
   <refnamediv>
     <refname><application>degrotesque</application></refname>
 
-    <refpurpose>A tiny web type setter.</refpurpose>
+    <refpurpose>A web type setter.</refpurpose>
   </refnamediv>
 
   <refsynopsisdiv>
@@ -145,8 +145,8 @@
 
         <listitem>
           <para>Defines the actions to perform. <remark>Optional, default:
-          masks, quotes.english, dashes, ellipsis, math,
-          apostrophe</remark></para>
+          masks, quotes.english, dashes, ellipsis, math, apostrophe,
+          commercial</remark></para>
         </listitem>
       </varlistentry>
 
@@ -294,11 +294,7 @@
   <refsect1>
     <title>CAVEATS</title>
 
-    <para>You may combine php- and html-code in a way that the parser replaces
-    wrong elements - especially quotes. The tool also fails if you embed
-    HTML-elements within other HTML-elements.</para>
-
-    <para>You should thereby verify the results.</para>
+    <para>Nothing is known. You should though verify the results.</para>
   </refsect1>
 
   <refsect1>
@@ -310,8 +306,7 @@
   <refsect1>
     <title>BUGS</title>
 
-    <para>Nothing is known besides the named caveats, yet. Please report bugs
-    to daniel@krajzewicz.de.</para>
+    <para>Please report bugs to daniel@krajzewicz.de.</para>
   </refsect1>
 
   <refsect1>
@@ -327,9 +322,6 @@
   <refsect1>
     <title>COPYRIGHT</title>
 
-    <para>(c) 2020-2022 Daniel Krajzewicz</para>
-
-    <para><ulink
-    url="http://www.krajzewicz.de/blog/degrotesque.php">http://www.krajzewicz.de/blog/degrotesque.php</ulink></para>
+    <para>(c) 2020-2023 Daniel Krajzewicz</para>
   </refsect1>
 </refentry>
