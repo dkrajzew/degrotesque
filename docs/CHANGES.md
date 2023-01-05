@@ -7,6 +7,7 @@ degrotesque-2.0 (16.07.2022)
 * Changed the license to [BSD](https://github.com/dkrajzew/degrotesque/LICENSE).
 * Using github actions for testing on push instead of using Travis CI
 * Cleaned up project tree
+* Adding an [mkdocs](https://www.mkdocs.org/) documentation
 
 
 degrotesque-1.6 (16.07.2022)
