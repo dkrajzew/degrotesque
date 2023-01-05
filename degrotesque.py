@@ -10,7 +10,7 @@ from __future__ import print_function
 # - http://www.krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/blog/degrotesque.php
-# 
+#
 # Available under the BSD license.
 # ===================================================================
 
@@ -26,8 +26,8 @@ from optparse import OptionParser
 
 
 # --- variables and constants ---------------------------------------
-"""A database of actions"""
 actionsDB = {
+    """A database of actions"""
     # english quotes
     "quotes.english": [
         [[u"(\\s+)'", u"'"],             [u"\\1&lsquo;", u"&rsquo;"],    [u"\\1&#8216;", u"&#8217;"]],
@@ -119,8 +119,8 @@ actionsDB = {
 }
 
 
-"""A database of extensions of files to process"""
 extensionsDB = [
+    """A database of extensions of files to process"""
     "html", "htm", "xhtml",
     "php", "phtml", "phtm", "php2", "php3", "php4", "php5",
     "asp",
@@ -134,24 +134,25 @@ extensionsDB = [
 # --- class ---------------------------------------------------------
 class Degrotesque():
     """A tiny web type setter.
-    
-    The main method "prettify" uses the list of actions to change the 
+
+    The main method "prettify" uses the list of actions to change the
     contents of the given HTML page.
-    
+
     XML-elements are skipped as well as the contents of specific elements.
     Additional methods support parsing and setting new values for actions
     and elements to skip.
-    
+
     Some internal methods exist for determining which parts of the document
     shall processed and which ones shall be skipped.
     """
 
     # --- init
     def __init__(self):
-        """Sets defaults for the elements which contents shall not be 
+        """Sets defaults for the elements which contents shall not be
         processed.
-        
-        Sets defaults for actions to perform."""
+
+        Sets defaults for actions to perform.
+        """
         # the elements to skip
         self._restoreDefaultElementsToSkip()
         # the actions to apply
@@ -174,15 +175,16 @@ class Degrotesque():
     # --- setActions
     def setActions(self, actNames):
         """Sets the actions to apply.
-        
+
         If the given names of actions are None or empty, the default actions
         are used.
-        
+
         Otherwise, the actions matching the given names are retrieved from the
         internal database and their list is returned.
-        
-        :param actNames: The names of the actions to use (or None if default
-            actions shall be used)"""
+
+        Args:
+            actNames (string array): The names of the actions to use (or None if default actions shall be used)
+        """
         if actNames is None or len(actNames)==0:
             return
         actNames = actNames.split(",")
@@ -208,14 +210,16 @@ class Degrotesque():
     # --- setToSkip
     def setToSkip(self, toSkipNames):
         """Sets the elements which contents shall not be changed.
-        
+
         If the given names of elements are None or empty, the default elements
         to skip are used.
-        
+
         Otherwise, a list with the elements to skip is built.
-        
-        :param toSkipNames: The names of elements which shall not be changed
-        :todo: Warn user if a non-XML-character occurs?
+
+        Args:
+            toSkipNames (string array): The names of elements which shall not be changed
+
+        todo: Warn user if a non-XML-character occurs?
         """
         if toSkipNames is None or len(toSkipNames)==0:
             return
@@ -225,8 +229,13 @@ class Degrotesque():
     # --- _getTagName
     def _getTagName(self, html):
         """Returns the name of the tag that starts at the begin of the given string.
-        
-        :param html: The HTML-subpart"""
+
+        Args:
+            html (string): The HTML-subpart
+
+        Returns:
+            string: The name of the tag
+        """
         i = 0
         while i<len(html) and (ord(html[i])<=32 or html[i]=="/"):
             i = i + 1
@@ -239,10 +248,15 @@ class Degrotesque():
 
     # --- _mark
     def _mark(self, html):
-        """Returns a string where all HTML-elements are denoted as '1' and 
+        """Returns a string where all HTML-elements are denoted as '1' and
         plain content as '0'.
-        
-        :param html: The html document (contents) to process"""
+
+        Args:
+            html (string): The HTML document (contents) to process
+
+        Returns:
+            string: Annotation of the HTML document
+        """
         # mark HTML elements, first
         ret = ""
         i = 0
@@ -322,13 +336,17 @@ class Degrotesque():
     # --- prettify
     def prettify(self, html, useUnicode=False):
         """Prettifies (degrotesques) the given HTML snippet.
-        
+
         It is assumed that the input is given in utf-8.
-        
+
         The result is returned in utf-8 as well.
-        
-        :param html: The html document (contents) to process
-        :param actions: The actions to apply
+
+        Args:
+            html (string): The html document (contents) to process.
+            useUnicode (bool): Whether unicode numbers instead of HTML entities shall be used.
+
+        Returns:
+            string: The processed (prettified / degrotesqued) html.
         """
         # extract text parts
         lowerHTML = html.lower()
@@ -405,16 +423,20 @@ class Degrotesque():
 # --- getExtensions
 def getExtensions(extNames):
     """Returns the list of extensions of files to process.
-    
+
     If the given names of extensions are None or empty, the default
     extensions are used.
-    
+
     Otherwise, the given string is split and returned as a list.
-    
-    :param extNames: The names of extensions to process (or None if default
-                extensions shall be used)
-                
-    :todo: What about removing dots?"""
+
+    Args:
+        extNames (string array): The names of extensions to process (or None if default extensions shall be used)
+
+    Returns:
+        string array: The list of extensions to use.
+
+    todo: What about removing dots?
+    """
     if extNames is None or len(extNames)==0:
         return extensionsDB
     return [x.strip() for x in extNames.split(',')]
@@ -423,16 +445,23 @@ def getExtensions(extNames):
 # --- getFiles
 def getFiles(name, recursive, extensions):
     """Returns the files to process.
-    
-    If a file name is given, a list with only this filename is returned.
-    
+
+    If a file name is given, a list with only this file name is returned.
+
     If a folder name is given, the files to process are determined by walking
     through the folder — recursively if wished — and collecting all files
-    that match the extensions. Returned is the list of collected files.
-    
-    :param name: The name of the file/folder
-    :param recursive: Whether the folder (if given) shall be processed recursively
-    :param extensions: The extensions of the files to process"""
+    that match the extensions.
+
+    The list of collected files is returned.
+
+    Args:
+        name (string): The name of the file/folder
+        recursive (bool): Whether the folder (if given) shall be processed recursively
+        extensions (string array): The extensions of the files to process
+
+    Returns:
+        string array: The list of collected files.
+    """
     files = []
     if os.path.isdir(name):
         for root, dirs, dfiles in os.walk(name):
@@ -453,32 +482,53 @@ def getFiles(name, recursive, extensions):
 
 
 # --- main
-def main(args):
-    """The main method
+def main(arguments):
+    """The main method using parameter from the command line.
+
+    The application reads the given file or the files from the folder (optionally
+    recursive) defined by the -i/--input option that match either the default or
+    the extensions given using the -e/--extension option, applies the default
+    or the actions named using the -a/--actions option to the contents skipping
+    the contents of default elements to skip or those defined using -s/--skip and
+    save the files under their original name. If the option -B/--no-backup is not
+    given, a backup of the original files is generated named as the original
+    file with the appendix ".orig". When -u/--unicode is set, the replacement
+    will use unicode numbers, otherwise HTML entities are used.
+
+    Args:
+        arguments (string array): The command line arguments, parsed as options using OptionParser.
+
+    Options
+    -------
 
     The following options must be set:
 
-    :param --input/-i: the file or the folder to process
+    --input / -i _&lt;FILE or FOLDER NAME&gt;_:
+        the file or the folder to process
 
     The following options are optional:
 
-    :param --recursive/-r: Set if the folder — if given — shall be processed recursively
-    :param --no-backup/-B: Set if no backup files shall be generated
-    :param --unicode/-u: Set if unicode values shall be used instead of HTML entities
-    :param --extensions/-e: The extensions of files that shall be processed
-    :param --encoding/-E: File encoding (default: 'utf-8')
-    :param --skip/-s: Elements which contents shall not be changed
-    :param --actions/-a: Name the actions that shall be applied
+    --recursive / -r:
+        Set if the folder — if given — shall be processed recursively
 
-    The application reads the given file or the files from the folder (optionally
-    recursive) defined by the -i/\-\-input option that match either the default or
-    the extensions given using the -e/\-\-extension option, applies the default
-    or the actions named using the -a/\-\-actions option to the contents skipping
-    the contents of default elements to skip or those defined using -s/\-\-skip and
-    save the files under their original name. If the option -B/\-\-no-backup is not
-    given, a backup of the original files is generated named as the original
-    file with the appendix ".orig". When -u/\-\-unicode is set, the replacement
-    will use unicode numbers, otherwise HTML entities are used.
+    --no-backup / -B:
+        Set if no backup files shall be generated
+
+    --unicode / -u:
+        Set if unicode values shall be used instead of HTML entities
+
+    --extensions / -e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]\*_:
+        The extensions of files that shall be processed
+
+    --encoding / -E _&lt;ENCODING&gt;_:
+        File encoding (default: 'utf-8')
+
+    --skip / -s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]\*_:
+        Elements which contents shall not be changed
+
+    --actions / -a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]\*_:
+        Name the actions that shall be applied
+
     """
     sys.tracebacklimit = 0
     # parse options
