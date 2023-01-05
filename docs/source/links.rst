@@ -8,6 +8,6 @@ Further Links
 - The issue tracker is located at: https://github.com/dkrajzew/degrotesque/issues
 - The PyPI page is located at: https://pypi.org/project/degrotesque/
 - The code documentation (pydoc) is located at: http://www.krajzewicz.de/blog/degrotesque.html
-- The web page is located at: http://www.krajzewicz.de/blog/degrotesque.php
+- A web page is located at: http://www.krajzewicz.de/blog/degrotesque.php
 
 
