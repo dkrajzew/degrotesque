@@ -26,8 +26,8 @@ from optparse import OptionParser
 
 
 # --- variables and constants ---------------------------------------
+# A database of actions
 actionsDB = {
-    """A database of actions"""
     # english quotes
     "quotes.english": [
         [[u"(\\s+)'", u"'"],             [u"\\1&lsquo;", u"&rsquo;"],    [u"\\1&#8216;", u"&#8217;"]],
@@ -119,8 +119,8 @@ actionsDB = {
 }
 
 
+# A database of extensions of files to process
 extensionsDB = [
-    """A database of extensions of files to process"""
     "html", "htm", "xhtml",
     "php", "phtml", "phtm", "php2", "php3", "php4", "php5",
     "asp",
@@ -541,7 +541,7 @@ def main(arguments):
     optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8')")
     optParser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
     optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
-    options, remaining_args = optParser.parse_args(args=args)
+    options, remaining_args = optParser.parse_args(args=arguments)
     # check options
     if options.input is None:
         print("Error: no input file(s) given...", file=sys.stderr)
