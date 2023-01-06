@@ -9,6 +9,6 @@
 # - http://www.krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/blog/degrotesque.php
-# 
+#
 # Available under the BSD license.
 # ===================================================================

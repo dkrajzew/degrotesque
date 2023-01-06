@@ -9,7 +9,7 @@
 # - http://www.krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/blog/degrotesque.php
-# 
+#
 # Available under the BSD license.
 # ===================================================================
 
@@ -30,12 +30,12 @@ class TestDegrotesquePrettify(unittest.TestCase):
         """The plain example test"""
         self._degrotesque._restoreDefaultActions()
         assert(self._degrotesque.prettify("\"Well - that's not what I had expected.\"")=="&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;")
-    
+
     def test_example_between_elements(self):
         """Example embedded in a tag"""
         self._degrotesque._restoreDefaultActions()
         assert(self._degrotesque.prettify("<b>\"Well - that's not what I had expected.\"</b>")=="<b>&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;</b>")
-    
+
     def test_example_in_pre(self):
         """Example in masked tag (pre)"""
         self._degrotesque._restoreDefaultActions()

@@ -20,7 +20,7 @@ degrotesque-1.6 (16.07.2022)
 
 degrotesque-1.4 (19.07.2021)
 ----------------------------
-* debugged the parser - could not parse code-in-code tags (weird it's even allowed, xsltproc generates this)
+* debugged the parser &mdash; could not parse code-in-code tags (weird it&apos;s even allowed, xsltproc generates this)
 * added a HowToRelease file (https://github.com/dkrajzew/degrotesque/blob/master/HowToRelease.md)
 
 

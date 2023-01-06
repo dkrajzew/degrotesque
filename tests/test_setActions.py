@@ -9,7 +9,7 @@
 # - http://www.krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/blog/degrotesque.php
-# 
+#
 # Available under the BSD license.
 # ===================================================================
 
@@ -32,14 +32,14 @@ class TestDegrotesqueSetActions(unittest.TestCase):
         actions = self._degrotesque._actions
         self._degrotesque.setActions(None)
         assert(self._degrotesque._actions==actions)
-    
+
     def test_setActions_empty2(self):
         """Setting actions to "" - should be the defaults"""
         self._degrotesque._restoreDefaultActions()
         actions = self._degrotesque._actions
         self._degrotesque.setActions("")
         assert(self._degrotesque._actions==actions)
-    
+
     def test_setActions_fromDB_single(self):
         """Setting single actions from the DB"""
         self._degrotesque._restoreDefaultActions()
@@ -67,7 +67,7 @@ class TestDegrotesqueSetActions(unittest.TestCase):
         assert(self._degrotesque._actions==degrotesque.actionsDB["dagger"])
         self._degrotesque.setActions("masks")
         assert(self._degrotesque._actions==degrotesque.actionsDB["masks"])
-    
+
     def test_setActions_fromDB_multiple(self):
         """Setting multiple actions from the DB"""
         self._degrotesque._restoreDefaultActions()

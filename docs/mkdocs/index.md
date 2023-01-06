@@ -36,7 +36,7 @@ I often write my texts and web pages using a plain editor. As such, the characte
 
 I wanted to have a tool that automatically recognizes which characters should be replaced by their more typographic counterpart and applies the according rules.
 
-I think it's a pity that major Desktop Publishing applications do this on the fly but many and even major web sites still show us plain ASCII characters.
+I think it&rsquo;s a pity that major Desktop Publishing applications do this on the fly but many and even major web sites still show us plain ASCII characters.
 
 **degrotesque** does the job pretty fine. After writing / building my pages, the tool converts them to a prettier and typographically more correct form. The structure and format of the pages is completely remained. And as said, it works reliable.
 

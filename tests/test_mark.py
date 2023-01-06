@@ -9,7 +9,7 @@
 # - http://www.krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/blog/degrotesque.php
-# 
+#
 # Available under the BSD license.
 # ===================================================================
 
@@ -76,13 +76,13 @@ class TestDegrotesque_mark(unittest.TestCase):
     def test__mark_php_unclosed(self):
         """Parsing php"""
         self._degrotesque._restoreDefaultElementsToSkip()
-        try: 
+        try:
             self._degrotesque._mark("Hallo <? a")
             assert False
         except ValueError as e:
             assert (type(e)==type(ValueError()))
             assert (str(e)=="Unclosed '<?' element at position 8.")
-        
+
 
     def test__mark_default1(self):
         """Parsing to skip"""

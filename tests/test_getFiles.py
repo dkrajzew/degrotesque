@@ -10,7 +10,7 @@
 # - http://www.krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/blog/degrotesque.php
-# 
+#
 # Available under the BSD license.
 # ===================================================================
 
@@ -25,7 +25,7 @@ def checkFiles(wanted, got, path):
         if f[0]=='/':
             f = f[1:]
         got2.append(f)
-    assert wanted==got2        
+    assert wanted==got2
 
 def test_getFiles_one(tmp_path):
     """Test getFiles behaviour if one file is given"""
@@ -33,8 +33,8 @@ def test_getFiles_one(tmp_path):
     p = tmp_path / "hello.html"
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.getFiles(tmp_path / "hello.html", False, ["html"])
-    checkFiles(["hello.html"], files, tmp_path) 
-    
+    checkFiles(["hello.html"], files, tmp_path)
+
 def test_getFiles_multiple1(tmp_path):
     """Test getFiles behaviour if two files is given"""
     import degrotesque
@@ -44,7 +44,7 @@ def test_getFiles_multiple1(tmp_path):
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.getFiles(tmp_path, False, ["html"])
     checkFiles(["hello1.html", "hello2.html"], files, tmp_path)
-    
+
 def test_getFiles_multiple2(tmp_path):
     """Test getFiles behaviour if two files exist but only .html-files shall be processed"""
     import degrotesque
@@ -54,7 +54,7 @@ def test_getFiles_multiple2(tmp_path):
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.getFiles(tmp_path, False, ["html"])
     checkFiles(["hello1.html"], files, tmp_path)
- 
+
 def test_getFiles_multiple_recursive1(tmp_path):
     """Tests recusrsive folder structure with recursion disabled"""
     import degrotesque
@@ -66,7 +66,7 @@ def test_getFiles_multiple_recursive1(tmp_path):
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.getFiles(tmp_path, False, ["html"])
     checkFiles(["hello1.html"], files, tmp_path)
-    
+
 def test_getFiles_multiple_recursive2(tmp_path):
     """Tests recusrsive folder structure with recursion enabled"""
     import degrotesque
@@ -78,5 +78,5 @@ def test_getFiles_multiple_recursive2(tmp_path):
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.getFiles(tmp_path, True, ["html"])
     checkFiles(["hello1.html", "sub/hello2.html"], files, tmp_path)
-    
+
 

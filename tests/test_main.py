@@ -10,7 +10,7 @@ from __future__ import print_function
 # - http://www.krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/blog/degrotesque.php
-# 
+#
 # Available under the BSD license.
 # ===================================================================
 
@@ -28,7 +28,7 @@ def test_main_empty(capsys):
     captured = capsys.readouterr()
     assert captured.err.replace("__main__.py", "degrotesque.py") == "Error: no input file(s) given...\nUsage: degrotesque.py -i <FILE>[,<FILE>]* [options]+\n"
     assert captured.out == ""
-    
+
 
 def test_main_help(capsys):
     """Test behaviour when help is wished"""
@@ -61,7 +61,7 @@ Options:
                         Defines the actions to perform
 """
     assert captured.err == ""
-    
+
 
 def test_main_run1(capsys, tmp_path):
     """Test behaviour on plain usage"""
@@ -85,4 +85,3 @@ def test_main_run2(capsys, tmp_path):
     degrotesque.main(["-i", tmp_path, "-u"])
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
-    

@@ -9,7 +9,7 @@
 # - http://www.krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/blog/degrotesque.php
-# 
+#
 # Available under the BSD license.
 # ===================================================================
 
@@ -31,13 +31,13 @@ class TestDegrotesqueSetToSkip(unittest.TestCase):
         toSkip = self._degrotesque._elementsToSkip
         self._degrotesque.setToSkip(None)
         assert(self._degrotesque._elementsToSkip==toSkip)
-    
+
     def test_setToSkip_empty2(self):
         """Setting elements to skip to "" - should be the defaults"""
         toSkip = self._degrotesque._elementsToSkip
         self._degrotesque.setToSkip("")
         assert(self._degrotesque._elementsToSkip==toSkip)
-    
+
     def test_setToSkip_single(self):
         """Setting a single element to skip"""
         self._degrotesque.setToSkip("code")

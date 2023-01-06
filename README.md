@@ -1,4 +1,4 @@
-[![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE) 
+[![License: BSD](https://img.shields.io/badge/License-BSD-green.svg)](https://github.com/dkrajzew/degrotesque/blob/master/LICENSE)
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
 ![test](https://github.com/dkrajzew/degrotesque/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
@@ -12,7 +12,7 @@ Introduction
 
 _degrotesque beautifies the web._
 
-__degrotesque__ is a [Python](https://www.python.org/) script. It loads an HTML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representant for improving the pages&apos; appearance.  
+__degrotesque__ is a [Python](https://www.python.org/) script. It loads an HTML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representant for improving the pages&apos; appearance.
 
 E.g.:
 
@@ -24,7 +24,7 @@ will become:
 
 I think, it looks __much__ better.
 
-The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively, the ' by &apos; and the - by an &mdash;. Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character. 
+The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively, the ' by &apos; and the - by an &mdash;. Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
 
 It is meant to be a relatively reliable post-processing step for web pages before releasing them.
 
@@ -34,9 +34,9 @@ Background
 
 I often write my texts and web pages using a plain editor. As such, the character " is always used for quotes, a dash is always a minus, etc.
 
-I wanted to have a tool that automatically recognizes which characters should be replaced by their more typographic counterpart and applies the according rules. 
+I wanted to have a tool that automatically recognizes which characters should be replaced by their more typographic counterpart and applies the according rules.
 
-I think it's a pity that major Desktop Publishing applications do this on the fly but many and even major web sites still show us plain ASCII characters.
+I think it&rsquo;s a pity that major Desktop Publishing applications do this on the fly but many and even major web sites still show us plain ASCII characters.
 
 **degrotesque** does the job pretty fine. After writing / building my pages, the tool converts them to a prettier and typographically more correct form. The structure and format of the pages is completely remained. And as said, it works reliable.
 
@@ -105,16 +105,16 @@ Usage Examples
 degrotesque -i my_page.html -a quotes.german
 ```
 
-Replaces single and double quotes within the file "my_page.html" by their typographic German counterparts.
+Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by their typographic German counterparts.
 
 ```console
 degrotesque -i my_folder -r --no-backup
 ```
 
-Applies the default actions to all files that match the extension in the folder "my_folder" and all subfolders. No backup files are generated.
+Applies the default actions to all files that match the extension in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.
 
-Application Programming Interface - API
----------------------------------------
+Application Programming Interface &mdash; API
+---------------------------------------------
 
 You may as well embedd __degrotesque__ within your own applications. The usage is very straightforward:
 ```console
@@ -131,7 +131,7 @@ The default values can be replaced using some of the class&apos; interfaces (met
 # here: apply french quotes and math symbols
 degrotesque.setActions("quotes.french,math")
 # change the elements which contents shall be skipped
-# here: skip the contents of "code", 
+# here: skip the contents of "code",
 #  "script", and "style" elements
 degrotesque.setToSkip("code,script,style")
 ```
@@ -177,7 +177,7 @@ Older Versions
 Summary
 =======
 
-Well, have fun. If you have any comments / ideas / issues, please submit them to [degrotesque's issue tracker](https://github.com/dkrajzew/degrotesque/issues) on github or drop me a mail.
+Well, have fun. If you have any comments / ideas / issues, please submit them to [degrotesque&apos;s issue tracker](https://github.com/dkrajzew/degrotesque/issues) on github or drop me a mail.
 
 Appendices
 ==========
