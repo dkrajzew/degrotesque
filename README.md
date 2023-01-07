@@ -84,6 +84,7 @@ After the actions have been applied to its contents, the file is saved. By defau
 
 Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks action set is given in Appendix D.
 
+
 Options
 -------
 
@@ -161,17 +162,18 @@ Examples / Users
 Change Log
 ==========
 
-Version 2.0 (to come)
-------------------------
+degrotesque-2.0 (05.01.2023)
+----------------------------
 
-* Changed the license to [BSD](LICENSE).
+* Changed the license to [BSD](https://github.com/dkrajzew/degrotesque/LICENSE).
 * Using github actions for testing on push instead of using Travis CI
 * Cleaned up project tree
+* Adding an [mkdocs](https://www.mkdocs.org/) documentation
 
 Older Versions
 --------------
 
-* see [ChangeLog](docs/CHANGES.md)
+* see [ChangeLog](docs/mkdocs/changes.md)
 
 
 Summary
