@@ -23,7 +23,7 @@ nav:
         - Embedded: embed.md
     - ChangeLog: changes.md
     - Legal: legal.md
-    - License (BSD): https://github.com/dkrajzew/degrotesque/blob/master/LICENSE
+    - License (BSD): license.md
     - Links: links.md
     - Appendices:
         - AppendixA: appendixA.md
