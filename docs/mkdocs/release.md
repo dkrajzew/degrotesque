@@ -3,12 +3,12 @@ Release Steps
 
 * check the [ChangeLog](https://github.com/dkrajzew/degrotesque/blob/master/CHANGES.md)
 * patch the release number and the copyright information in
-  * the [README.md](https://github.com/dkrajzew/degrotesque/blob/master/README.md) file
-  * the blog pages
-  * the [setup.py](https://github.com/dkrajzew/degrotesque/blob/master/setup.py) file
-  * the scripts and tests
+    * the [README.md](https://github.com/dkrajzew/degrotesque/blob/master/README.md) file
+    * the blog pages
+    * the [setup.py](https://github.com/dkrajzew/degrotesque/blob/master/setup.py) file
+    * the scripts and tests
 * run the tests (run tests/run_tests.bat)
 * build the pydoc documentation, copy it to the web pages
 * commit changes
 * build the github release (tag: &lt;VERSION&gt;, name: degrotesque-&lt;VERSION&gt;)
-  * the PyPI release should be built automatically using a github action, if not run build_release.bat
+* build the PyPI release (see docs/build_release.bat)

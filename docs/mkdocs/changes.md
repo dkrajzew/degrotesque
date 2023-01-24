@@ -4,7 +4,7 @@ ChangeLog for degrotesque
 degrotesque-2.0 (05.01.2023)
 ----------------------------
 
-* Changed the license to [BSD](https://github.com/dkrajzew/degrotesque/LICENSE).
+* Changed the license to [BSD](license.md).
 * Using github actions for testing on push instead of using Travis CI
 * Cleaned up project tree
 * Adding an [mkdocs](https://www.mkdocs.org/) documentation

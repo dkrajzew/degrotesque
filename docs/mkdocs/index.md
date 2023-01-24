@@ -46,4 +46,4 @@ If you need any consultations, please let me know. If you know better, too.
 License
 =======
 
-__degrotesque__ is licensed under the [BSD license](LICENSE).
+__degrotesque__ is licensed under the [BSD license](license.md).
