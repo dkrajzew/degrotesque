@@ -30,8 +30,10 @@ nav:
         - AppendixB: appendixB.md
         - AppendixC: appendixC.md
         - AppendixD: appendixD.md
+    - Developer Docs:
+        - Notes: notes.md
+        - How To Release: release.md
     - API: api.md
-    - Implementation Notes: notes.md
 
 markdown_extensions:
     - admonition
