@@ -4,22 +4,6 @@ Running on the Command Line
 __degrotesque__ is implemented in [Python](https://www.python.org/). It is started on the command line.
 
 
-Examples
---------
-
-```console
-python degrotesque -i my_page.html -a quotes.german
-```
-
-Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by their typographic German counterparts.
-
-```console
-python degrotesque -i my_folder -r --no-backup
-```
-
-Applies the default actions to all files that match the extension in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.
-
-
 Description
 -----------
 
@@ -36,6 +20,22 @@ The script does not change the quotation marks of HTML elements, of course. As w
 After the actions have been applied to its contents, the file is saved. By default, a backup of the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
 Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks action set is given in [Appendix D](appendixD.md).
+
+Examples
+--------
+
+```console
+python degrotesque -i my_page.html -a quotes.german
+```
+
+Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by their typographic German counterparts.
+
+```console
+python degrotesque -i my_folder -r --no-backup
+```
+
+Applies the default actions to all files that match the extension in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.
+
 
 Options
 -------
