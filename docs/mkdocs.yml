@@ -21,19 +21,19 @@ nav:
     - Usage: 
         - Command Line: cmd.md
         - Embedded: embed.md
-    - ChangeLog: changes.md
-    - Legal: legal.md
-    - License (BSD): license.md
     - Links: links.md
+    - API: api.md
+    - Developer Docs:
+        - Notes: notes.md
+        - How To Release: release.md
+    - ChangeLog: changes.md
+    - License (BSD): license.md
+    - Legal: legal.md
     - Appendices:
         - AppendixA: appendixA.md
         - AppendixB: appendixB.md
         - AppendixC: appendixC.md
         - AppendixD: appendixD.md
-    - Developer Docs:
-        - Notes: notes.md
-        - How To Release: release.md
-    - API: api.md
 
 markdown_extensions:
     - admonition
