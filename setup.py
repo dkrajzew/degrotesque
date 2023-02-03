@@ -9,7 +9,7 @@
 # - http://www.krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/blog/degrotesque.php
-# 
+#
 # Available under the BSD license.
 # ===================================================================
 
@@ -20,7 +20,7 @@ import setuptools
 
 
 # --- definitions ---------------------------------------------------
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
   long_description = fh.read()
 
 setuptools.setup(
