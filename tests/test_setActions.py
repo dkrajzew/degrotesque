@@ -1,6 +1,5 @@
 # ===================================================================
 # degrotesque - A web type setter.
-# Version 2.0.
 #
 # Tests for the setActions method
 #

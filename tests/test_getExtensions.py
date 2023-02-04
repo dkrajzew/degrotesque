@@ -1,7 +1,6 @@
 from __future__ import print_function
 # ===================================================================
 # degrotesque - A web type setter.
-# Version 2.0.
 #
 # Tests for the getExtensions function
 #
