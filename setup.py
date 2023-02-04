@@ -1,6 +1,6 @@
 # ===================================================================
 # degrotesque - A web type setter.
-# Version 2.0.
+# Version 2.0.2.
 #
 # Main module
 #
@@ -25,14 +25,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
   name="degrotesque",
-  version="2.0",
+  version="2.0.2",
   author="dkrajzew",
   author_email="d.krajzewicz@gmail.com",
   description="A tiny web type setter",
   long_description=long_description,
   long_description_content_type="text/markdown",
   url="https://github.com/dkrajzew/degrotesque",
-  packages=setuptools.find_packages(),
+  py_modules = ['degrotesque'],
   entry_points = {
         'console_scripts': [
             'degrotesque = degrotesque:main'
