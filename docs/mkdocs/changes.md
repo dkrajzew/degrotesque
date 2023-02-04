@@ -1,6 +1,12 @@
 ChangeLog for degrotesque
 =========================
 
+degrotesque-2.0.2 (04.02.2023)
+------------------------------
+
+* Corrected installation and execution as a console script
+
+
 degrotesque-2.0 (05.01.2023)
 ----------------------------
 

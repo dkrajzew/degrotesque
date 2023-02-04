@@ -25,13 +25,13 @@ Examples
 --------
 
 ```console
-python degrotesque -i my_page.html -a quotes.german
+degrotesque -i my_page.html -a quotes.german
 ```
 
 Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by their typographic German counterparts.
 
 ```console
-python degrotesque -i my_folder -r --no-backup
+degrotesque -i my_folder -r --no-backup
 ```
 
 Applies the default actions to all files that match the extension in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.

@@ -6,7 +6,7 @@ Release Steps
     * the [README.md](https://github.com/dkrajzew/degrotesque/blob/master/README.md) file
     * the blog pages
     * the [setup.py](https://github.com/dkrajzew/degrotesque/blob/master/setup.py) file
-    * the scripts and tests
+    * [degrotesque.py](https://github.com/dkrajzew/degrotesque/blob/master/degrotesque.py)
 * run the tests (run tests/run_tests.bat)
 * build the pydoc documentation, copy it to the web pages
 * commit changes
