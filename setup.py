@@ -2,7 +2,7 @@
 # degrotesque - A web type setter.
 # Version 2.0.2.
 #
-# Main module
+# Setup module
 #
 # (c) Daniel Krajzewicz 2020-2023
 # - daniel@krajzewicz.de
