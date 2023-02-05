@@ -5,6 +5,7 @@ degrotesque-2.0.4 (05.02.2023)
 ------------------------------
 
 * Patched documentation (return types)
+* Set proper formatting for [readthedocs](https://degrotesque.readthedocs.io/en/2.0.4/)
 
 
 degrotesque-2.0.2 (04.02.2023)
