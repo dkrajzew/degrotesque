@@ -1,0 +1,26 @@
+INHERIT: mkdocs.yml
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - yaml
+
+nav:
+    - Home: index.md
+    - Installation: install.md
+    - Command Line Usage: cmd.md
+    - Embedded Usage: embed.md
+    - Links: links.md
+    - ChangeLog: changes.md
+    - License (BSD): license.md
+    - Legal: legal.md
+    - API: api.md
+    - Appendices:
+        - AppendixA: appendixA.md
+        - AppendixB: appendixB.md
+        - AppendixC: appendixC.md
+        - AppendixD: appendixD.md
+    - Developer Docs:
+        - Notes: notes.md
+        - How To Release: release.md
+        
