@@ -346,7 +346,7 @@ class Degrotesque():
             useUnicode (bool): Whether unicode numbers instead of HTML entities shall be used.
 
         Returns:
-            str: The processed (prettified / degrotesqued) html.
+            (str): The processed (prettified / degrotesqued) html.
         """
         # extract text parts
         lowerHTML = html.lower()
@@ -433,7 +433,7 @@ def getExtensions(extNames):
         extNames (List[str]): The names of extensions to process (or None if default extensions shall be used)
 
     Returns:
-        List[str]: The list of extensions to use.
+        (List[str]): The list of extensions to use.
 
     todo: What about removing dots?
     """
@@ -460,7 +460,7 @@ def getFiles(name, recursive, extensions):
         extensions (List[str]): The extensions of the files to process
 
     Returns:
-        List[str]: The list of collected files.
+        (List[str]): The list of collected files.
     """
     files = []
     if os.path.isdir(name):
