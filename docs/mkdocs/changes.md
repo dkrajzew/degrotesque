@@ -1,11 +1,12 @@
 ChangeLog for degrotesque
 =========================
 
-degrotesque-2.0.4 (05.02.2023)
+degrotesque-2.0.6 (05.02.2023)
 ------------------------------
 
 * Patched documentation (return types)
-* Set proper formatting for [readthedocs](https://degrotesque.readthedocs.io/en/2.0.4/)
+* Set proper formatting for [readthedocs](https://degrotesque.readthedocs.io/en/2.0.6/)
+* It&apos;s not 2.0.4 due to caching by readthedocs
 
 
 degrotesque-2.0.2 (04.02.2023)

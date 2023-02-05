@@ -45,7 +45,7 @@ If you need any consultations, please let me know. If you know better, too.
 
 Download and Installation
 =========================
-The __current version__ is [degrotesque-2.0.4](https://github.com/dkrajzew/degrotesque/releases/tag/2.0.4). You may __install degrotesque__ using
+The __current version__ is [degrotesque-2.0.6](https://github.com/dkrajzew/degrotesque/releases/tag/2.0.6). You may __install degrotesque__ using
 
 ```console
 python -m pip install degrotesque
@@ -53,8 +53,8 @@ python -m pip install degrotesque
 
 You may __download a copy or fork the code__ at [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque). Besides, you may __download the current release__ here:
 
-* [degrotesque-2.0.4.zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.4.zip)
-* [degrotesque-2.0.4.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.4.tar.gz)
+* [degrotesque-2.0.6.zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.6.zip)
+* [degrotesque-2.0.6.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.6.tar.gz)
 
 
 License
@@ -162,11 +162,12 @@ Examples / Users
 Change Log
 ==========
 
-degrotesque-2.0.4 (05.02.2023)
+degrotesque-2.0.6 (05.02.2023)
 ------------------------------
 
 * Patched documentation (return types)
-* Set proper formatting for [readthedocs](https://degrotesque.readthedocs.io/en/2.0.4/)
+* Set proper formatting for [readthedocs](https://degrotesque.readthedocs.io/en/2.0.6/)
+* It&apos;s not 2.0.4 due to caching by readthedocs
 
 
 degrotesque-2.0.2 (04.02.2023)

@@ -1,7 +1,7 @@
 from __future__ import print_function
 # ===================================================================
 # degrotesque - A web type setter.
-# Version 2.0.4
+# Version 2.0.6
 #
 # Main module
 #
@@ -532,7 +532,7 @@ def main(arguments=None):
     """
     sys.tracebacklimit = 0
     # parse options
-    optParser = OptionParser(usage="usage:\n  degrotesque.py [options]", version="degrotesque.py 2.0.4")
+    optParser = OptionParser(usage="usage:\n  degrotesque.py [options]", version="degrotesque.py 2.0.6")
     optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
     optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
     optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
