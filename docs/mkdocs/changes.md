@@ -1,6 +1,12 @@
 ChangeLog for degrotesque
 =========================
 
+degrotesque-2.0.4 (05.02.2023)
+------------------------------
+
+* Patched documentation (return types)
+
+
 degrotesque-2.0.2 (04.02.2023)
 ------------------------------
 

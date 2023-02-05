@@ -183,7 +183,7 @@ class Degrotesque():
         internal database and their list is returned.
 
         Args:
-            actNames (string array): The names of the actions to use (or None if default actions shall be used)
+            actNames (List[str]): The names of the actions to use (or None if default actions shall be used)
         """
         if actNames is None or len(actNames)==0:
             return
@@ -217,9 +217,9 @@ class Degrotesque():
         Otherwise, a list with the elements to skip is built.
 
         Args:
-            toSkipNames (string array): The names of elements which shall not be changed
+            toSkipNames (List[str]): The names of elements which shall not be changed
 
-        todo: Warn user if a non-XML-character occurs?
+        Todo: Warn user if a non-XML-character occurs?
         """
         if toSkipNames is None or len(toSkipNames)==0:
             return
@@ -231,10 +231,10 @@ class Degrotesque():
         """Returns the name of the tag that starts at the begin of the given string.
 
         Args:
-            html (string): The HTML-subpart
+            html (str): The HTML-subpart
 
         Returns:
-            string: The name of the tag
+            (str): The name of the tag
         """
         i = 0
         while i<len(html) and (ord(html[i])<=32 or html[i]=="/"):
@@ -252,10 +252,10 @@ class Degrotesque():
         plain content as '0'.
 
         Args:
-            html (string): The HTML document (contents) to process
+            html (str): The HTML document (contents) to process
 
         Returns:
-            string: Annotation of the HTML document
+            (str): Annotation of the HTML document.
         """
         # mark HTML elements, first
         ret = ""
@@ -342,11 +342,11 @@ class Degrotesque():
         The result is returned in utf-8 as well.
 
         Args:
-            html (string): The html document (contents) to process.
+            html (str): The html document (contents) to process.
             useUnicode (bool): Whether unicode numbers instead of HTML entities shall be used.
 
         Returns:
-            string: The processed (prettified / degrotesqued) html.
+            str: The processed (prettified / degrotesqued) html.
         """
         # extract text parts
         lowerHTML = html.lower()
@@ -430,10 +430,10 @@ def getExtensions(extNames):
     Otherwise, the given string is split and returned as a list.
 
     Args:
-        extNames (string array): The names of extensions to process (or None if default extensions shall be used)
+        extNames (List[str]): The names of extensions to process (or None if default extensions shall be used)
 
     Returns:
-        string array: The list of extensions to use.
+        List[str]: The list of extensions to use.
 
     todo: What about removing dots?
     """
@@ -455,12 +455,12 @@ def getFiles(name, recursive, extensions):
     The list of collected files is returned.
 
     Args:
-        name (string): The name of the file/folder
+        name (str): The name of the file/folder
         recursive (bool): Whether the folder (if given) shall be processed recursively
-        extensions (string array): The extensions of the files to process
+        extensions (List[str]): The extensions of the files to process
 
     Returns:
-        string array: The list of collected files.
+        List[str]: The list of collected files.
     """
     files = []
     if os.path.isdir(name):
@@ -496,7 +496,7 @@ def main(arguments=None):
     will use unicode numbers, otherwise HTML entities are used.
 
     Args:
-        arguments (string array): The command line arguments, parsed as options using OptionParser.
+        arguments (List[str]): The command line arguments, parsed as options using OptionParser.
 
     Options
     -------
