@@ -3,7 +3,7 @@
 ![test](https://github.com/dkrajzew/degrotesque/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
 [![Coverage](https://img.shields.io/badge/coverage-98%25-success)](https://img.shields.io/badge/coverage-98%25-success)
-
+[![Documentation Status](https://readthedocs.org/projects/degrotesque/badge/?version=latest)](https://degrotesque.readthedocs.io/en/latest/?badge=latest)
 
 degrotesque &mdash; A web type setter.
 
@@ -45,7 +45,7 @@ If you need any consultations, please let me know. If you know better, too.
 
 Download and Installation
 =========================
-The __current version__ is [degrotesque-2.0.2](https://github.com/dkrajzew/degrotesque/releases/tag/2.0.2). You may __install degrotesque__ using
+The __current version__ is [degrotesque-2.0.4](https://github.com/dkrajzew/degrotesque/releases/tag/2.0.4). You may __install degrotesque__ using
 
 ```console
 python -m pip install degrotesque
@@ -53,8 +53,8 @@ python -m pip install degrotesque
 
 You may __download a copy or fork the code__ at [degrotesque&apos;s github page](https://github.com/dkrajzew/degrotesque). Besides, you may __download the current release__ here:
 
-* [degrotesque-2.0.2.zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.2.zip)
-* [degrotesque-2.0.2.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.2.tar.gz)
+* [degrotesque-2.0.4.zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.4.zip)
+* [degrotesque-2.0.4.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.4.tar.gz)
 
 
 License
@@ -161,6 +161,13 @@ Examples / Users
 
 Change Log
 ==========
+
+degrotesque-2.0.4 (05.02.2023)
+------------------------------
+
+* Patched documentation (return types)
+* Set proper formatting for [readthedocs](https://degrotesque.readthedocs.io/en/2.0.4/)
+
 
 degrotesque-2.0.2 (04.02.2023)
 ------------------------------

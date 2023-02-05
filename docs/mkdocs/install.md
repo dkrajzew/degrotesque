@@ -1,6 +1,6 @@
 Download and Installation
 =========================
-The __current version__ is [degrotesque-2.0.2](https://github.com/dkrajzew/degrotesque/releases/tag/2.0.2).
+The __current version__ is [degrotesque-2.0.4](https://github.com/dkrajzew/degrotesque/releases/tag/2.0.4).
 
 You may __install degrotesque__ using
 
@@ -12,6 +12,6 @@ You may __download a copy or fork the code__ at [degrotesque&apos;s github page]
 
 Besides, you may __download the current release__ here:
 
-* [degrotesque-2.0.2zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.2.zip)
-* [degrotesque-2.0.2.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.2.tar.gz)
+* [degrotesque-2.0.4zip](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.4.zip)
+* [degrotesque-2.0.4.tar.gz](https://github.com/dkrajzew/degrotesque/archive/refs/tags/2.0.4.tar.gz)
 
