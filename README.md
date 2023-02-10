@@ -142,7 +142,7 @@ You may as well consult the [degrotesque pydoc code documentation](http://www.kr
 Further Documentation
 ---------------------
 
-* A (maybe even more) complete documentation is located at:
+* The complete documentation is located at:
    * <https://degrotesque.readthedocs.io/en/latest/> and
    * <https://krajzewicz.de/docs/degrotesque/index.html>
 * Discussions are open at <https://github.com/dkrajzew/degrotesque/discussions>
