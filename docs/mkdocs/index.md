@@ -5,6 +5,10 @@
 [![Coverage](https://img.shields.io/badge/coverage-98%25-success)](https://img.shields.io/badge/coverage-98%25-success)
 [![Documentation Status](https://readthedocs.org/projects/degrotesque/badge/?version=latest)](https://degrotesque.readthedocs.io/en/latest/?badge=latest)
 
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
+
+
+
 degrotesque &mdash; A web type setter.
 
 Introduction
@@ -28,6 +32,21 @@ The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respec
 
 It is meant to be a relatively **reliable post-processing step for web pages before releasing them**.
 
+
+Examples
+--------
+
+```console
+degrotesque -i my_page.html -a quotes.german
+```
+
+Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by their typographic German counterparts.
+
+```console
+degrotesque -i my_folder -r --no-backup
+```
+
+Applies the default actions to all files that match the extension in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.
 
 
 Background
