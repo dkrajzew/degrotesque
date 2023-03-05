@@ -1,7 +1,7 @@
 Appendix A: Default Extensions
 ==============================
 
-Files with the following extensions are parsed per default:
+Files with the following extensions are parsed as HTML / XML per default:
 
 * html, htm, xhtml,
 * php, phtml, phtm, php2, php3, php4, php5,
@@ -11,3 +11,5 @@ Files with the following extensions are parsed per default:
 * vbhtml,
 * ppthtml,
 * ssp, jhtml
+* xml
+* osm

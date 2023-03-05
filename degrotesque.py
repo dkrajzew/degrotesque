@@ -120,13 +120,14 @@ actionsDB = {
 
 
 # A database of extensions of files to process
-extensionsDB = [
+htmlExtensions = [
     "html", "htm", "xhtml",
     "php", "phtml", "phtm", "php2", "php3", "php4", "php5",
     "asp",
     "jsp", "jspx",
     "shtml", "shtm", "sht", "stm",
-    "vbhtml", "ppthtml", "ssp", "jhtml"
+    "vbhtml", "ppthtml", "ssp", "jhtml",
+    "xml", "osm"
 ]
 
 
@@ -170,27 +171,43 @@ encodingMap = {
 
 # --- _replFunc_keep
 def _replFunc_KEEP(matchobj):
-    """
+    """Unicode numbers conversion to itself
+
+    Args:
+        matchobj (Match): The match object to get a new representation for
+    
+    Returns:
+        (str): The converted string (here: as Unicode number)
     """
     return matchobj.group(0)
 
 
 def _replFunc_HTML(matchobj):
-    """
+    """Unicode numbers conversion to HTML entities
+
+    Args:
+        matchobj (Match): The match object to get a new representation for
+    
+    Returns:
+        (str): The converted string (here: as HTML entity)
     """
     return encodingMap[matchobj.group(0)][0]
 
 
 def _replFunc_UNICODE(matchobj):
-    """
-    """
-    return chr(int(matchobj.group(0)[1:-1]))
+    """Unicode numbers conversion to Unicode characters
 
+    Args:
+        matchobj (Match): The match object to get a new representation for
+    
+    Returns:
+        (str): The converted string (here: as Unicode character)
+    """
+    c = matchobj.group(0)[2] 
+    if c=='x' or c=='X':
+        return chr(int("0" + matchobj.group(0)[2:-1], 16))
+    return chr(int(matchobj.group(0)[2:-1]))
 
-def _replFunc_LATEX(matchobj):
-    """
-    """
-    return None
 
 
 # --- class ---------------------------------------------------------
@@ -293,7 +310,10 @@ class Degrotesque():
 
     # --- setFormat
     def setFormat(self, formatS):
-        """
+        """Sets the target character representation
+        
+        Args:
+            formatS (str): The format to use, one of "html", "unicode", "text"
         """
         if formatS=="html":
             self._replFunc = _replFunc_HTML
@@ -301,8 +321,6 @@ class Degrotesque():
             self._replFunc = _replFunc_KEEP
         elif formatS=="text":
             self._replFunc = _replFunc_UNICODE
-        elif formatS=="latex":
-            self._replFunc = _replFunc_LATEX
         else:
             raise ValueError("Unknown target format '%s'" % formatS)
 
@@ -359,6 +377,8 @@ class Degrotesque():
             i = i + len(tb)
             if tb not in self._elementsToSkip:
                 ie = html.find(">", i)
+                if ie<0:
+                    raise ValueError("Unclosed element at %s" % (i-len(tb)))
                 ret += "1"*(ie-i+1)
                 i = ie + 1
                 continue
@@ -398,9 +418,7 @@ class Degrotesque():
                     ie1 = html.find("</"+tb, ie)
                     ie2 = html.find("<"+tb, ie)
                     if ie1<0 and ie2<0:
-                        if ie1<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
-                        ie = len(html)
-                        break
+                        raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
                     if ie1>=0 and (ie1<ie2 or ie2<0):
                         num = num - 1
                         ie = ie1 + len("</"+tb)
@@ -415,7 +433,7 @@ class Degrotesque():
 
 
     # --- prettify
-    def prettify(self, document):
+    def prettify(self, document, isHTML):
         """Prettifies (degrotesques) the given document.
 
         It is assumed that the input is given in utf-8.
@@ -430,7 +448,7 @@ class Degrotesque():
             (str): The processed (prettified / degrotesqued) document.
         """
         # extract text parts
-        if True:
+        if isHTML:
             lowerHTML = document.lower()
             marks = self._mark(lowerHTML)
         else:
@@ -523,8 +541,11 @@ def getExtensions(extNames):
         What about removing dots?
     """
     if extNames is None or len(extNames)==0:
-        return extensionsDB
-    return [x.strip() for x in extNames.split(',')]
+        return None
+    exts = [x.strip() for x in extNames.split(',')]
+    if "*" in exts:
+        return None
+    return exts
 
 
 # --- getFiles
@@ -552,7 +573,7 @@ def getFiles(name, recursive, extensions):
         for root, dirs, dfiles in os.walk(name):
             for f in dfiles:
                 n, e = os.path.splitext(os.path.join(root, f))
-                if len(extensions)!=0 and e[1:] not in extensions:
+                if extensions is not None and len(extensions)!=0 and e[1:] not in extensions:
                     continue
                 files.append(os.path.join(root, f))
             if not recursive:
@@ -596,23 +617,35 @@ def main(arguments=None):
     --recursive / -r:
         Set if the folder — if given — shall be processed recursively
 
-    --no-backup / -B:
-        Set if no backup files shall be generated
-
-    --unicode / -u:
-        Set if unicode values shall be used instead of HTML entities
-
     --extensions / -e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]\*_:
         The extensions of files that shall be processed
 
     --encoding / -E _&lt;ENCODING&gt;_:
         File encoding (default: 'utf-8')
 
+    --html / -H:
+        Files are HTML/XML-derivatives
+
+    --text / -T:
+        Files are plain text files
+
+    --format / -f _&lt;FORMAT&gt;_:
+        Define the format of the replacements ['html', 'unicode', 'text']
+
+    --no-backup / -B:
+        Set if no backup files shall be generated
+
     --skip / -s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]\*_:
         Elements which contents shall not be changed
 
     --actions / -a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]\*_:
         Name the actions that shall be applied
+
+    --help / -h:
+        Prints the help screen
+
+    --version / -v:
+        Prints the version
 
     """
     sys.tracebacklimit = 0
@@ -623,9 +656,9 @@ def main(arguments=None):
     optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
     optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8')")
     optParser.add_option("-H", "--html", dest="html", action="store_true", default=False, help="Files are HTML/XML-derivatives")
-    optParser.add_option("-T", "--text", dest="text", action="store_true", default=False, help="Files are text files")
+    optParser.add_option("-T", "--text", dest="text", action="store_true", default=False, help="Files are plain text files")
     optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
-    optParser.add_option("-f", "--format", dest="format", default="unicode", help="Define the format of the replacements ['html', 'unicode', 'text']")
+    optParser.add_option("-f", "--format", dest="format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
     optParser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
     optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
     options, remaining_args = optParser.parse_args(args=arguments)
@@ -654,9 +687,12 @@ def main(arguments=None):
             with io.open(f, mode="r", encoding=options.encoding) as fd:
                 document = fd.read()
             # determine file contents (html/text)
-            
+            n, e = os.path.splitext(f)
+            isHTML = options.html or e[1:] in htmlExtensions
+            if not options.text and not isHTML and re.search("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>", document) is not None:
+                isHTML = True
             # apply the beautifications
-            document = degrotesque.prettify(document)
+            document = degrotesque.prettify(document, isHTML)
             # build a backup
             if not options.no_backup:
                 shutil.copy(f, f+".orig")
@@ -665,7 +701,7 @@ def main(arguments=None):
                 fd.write(document)
         except ValueError as err:
             print(str(err))
-            sys.exit(3)
+            sys.exit(4)
 
 
 # -- main check

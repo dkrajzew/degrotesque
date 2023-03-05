@@ -19,13 +19,13 @@ from __future__ import print_function
 def test_getExtensions_empty1():
     """Test getExtensions behaviour if no arguments are given (None)"""
     import degrotesque
-    assert degrotesque.getExtensions(None) == degrotesque.extensionsDB
+    assert degrotesque.getExtensions(None) == None
 
 
 def test_getExtensions_empty2():
     """Test getExtensions behaviour if no arguments are given (empty string)"""
     import degrotesque
-    assert degrotesque.getExtensions("") == degrotesque.extensionsDB
+    assert degrotesque.getExtensions("") == None
 
 
 def test_getExtensions_one():
@@ -44,4 +44,10 @@ def test_getExtensions_strip():
     """Test getExtensions behaviour if two arguments with spaces are given"""
     import degrotesque
     assert degrotesque.getExtensions(" foo, bar ") == ["foo", "bar"]
+
+
+def test_getExtensions_asterisk():
+    """Test getExtensions behaviour if one of the given items is an asterisk"""
+    import degrotesque
+    assert degrotesque.getExtensions(" foo, * ") == None
 

@@ -53,10 +53,10 @@ Options:
   -E ENCODING, --encoding=ENCODING
                         File encoding (default: 'utf-8')
   -H, --html            Files are HTML/XML-derivatives
-  -T, --text            Files are text files
+  -T, --text            Files are plain text files
   -B, --no-backup       Whether no backup shall be generated
   -f FORMAT, --format=FORMAT
-                        Define the format of the replacements ['html',
+                        Defines the format of the replacements ['html',
                         'unicode', 'text']
   -s SKIP, --skip=SKIP  Defines the elements which contents shall not be
                         changed

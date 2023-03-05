@@ -16,7 +16,7 @@ Introduction
 
 *degrotesque beautifies the web.*
 
-**degrotesque** is a [Python](https://www.python.org/) script. It loads an HTML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
+**degrotesque** is a [Python](https://www.python.org/) script. It loads a text/HTML/XML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
 
 E.g.:
 
@@ -46,7 +46,7 @@ Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by 
 degrotesque -i my_folder -r --no-backup
 ```
 
-Applies the default actions to all files that match the extension in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.
+Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.
 
 
 Background
