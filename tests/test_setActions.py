@@ -81,7 +81,7 @@ class TestDegrotesqueSetActions(unittest.TestCase):
         self._degrotesque._restoreDefaultActions()
         try:
             self._degrotesque.setActions("xxx")
-            assert False
+            assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
             assert (str(e)=="Action 'xxx' is not known.")
@@ -91,7 +91,7 @@ class TestDegrotesqueSetActions(unittest.TestCase):
         self._degrotesque._restoreDefaultActions()
         try:
             self._degrotesque.setActions("quotes.english;to_quotes")
-            assert False
+            assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
             assert (str(e)=="Action 'quotes.english;to_quotes' is not known.")

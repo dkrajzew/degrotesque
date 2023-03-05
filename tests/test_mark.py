@@ -77,7 +77,7 @@ class TestDegrotesque_mark(unittest.TestCase):
         self._degrotesque._restoreDefaultElementsToSkip()
         try:
             self._degrotesque._mark("Hallo <? a")
-            assert False
+            assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
             assert (str(e)=="Unclosed '<?' element at position 8.")
@@ -93,7 +93,7 @@ class TestDegrotesque_mark(unittest.TestCase):
         self._degrotesque._restoreDefaultElementsToSkip()
         try:
             self._degrotesque._mark("Hallo <code>")
-            assert False
+            assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
             assert (str(e)=="Unclosed '<code' element at position 11.")

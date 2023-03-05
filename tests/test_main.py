@@ -20,7 +20,7 @@ def test_main_empty(capsys):
     import degrotesque
     try:
         degrotesque.main([])
-        assert False
+        assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==2
@@ -34,7 +34,7 @@ def test_main_help(capsys):
     import degrotesque
     try:
         degrotesque.main(["--help"])
-        assert False
+        assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==0
