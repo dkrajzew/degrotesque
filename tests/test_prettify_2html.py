@@ -24,6 +24,7 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def setUp(self):
         self._degrotesque = degrotesque.Degrotesque()
+        self._degrotesque.setFormat("html")
 
     def test_example(self):
         """The plain example test"""
