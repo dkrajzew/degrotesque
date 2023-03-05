@@ -39,7 +39,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "degrotesque.py") == """Usage: usage:
+    assert captured.out.replace("__main__.py", "degrotesque.py") == """Usage: 
   degrotesque.py [options]
 
 Options:
@@ -58,6 +58,21 @@ Options:
                         changed
   -a ACTIONS, --actions=ACTIONS
                         Defines the actions to perform
+"""
+    assert captured.err == ""
+
+
+def test_main_version(capsys):
+    """Test behaviour when version information is wished"""
+    import degrotesque
+    try:
+        degrotesque.main(["--version"])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==0
+    captured = capsys.readouterr()
+    assert captured.out.replace("__main__.py", "degrotesque.py") == """degrotesque.py 2.0.6
 """
     assert captured.err == ""
 
