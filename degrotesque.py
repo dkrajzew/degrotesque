@@ -689,6 +689,7 @@ def main(arguments=None):
             # determine file contents (html/text)
             n, e = os.path.splitext(f)
             isHTML = options.html or e[1:] in htmlExtensions
+            # https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454
             if not options.text and not isHTML and re.search("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>", document) is not None:
                 isHTML = True
             # apply the beautifications
