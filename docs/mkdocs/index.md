@@ -12,7 +12,7 @@ Introduction
 
 *degrotesque beautifies the web.*
 
-**degrotesque** is a [Python](https://www.python.org/) script. It loads an HTML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representant for improving the pages&apos; appearance.
+**degrotesque** is a [Python](https://www.python.org/) script. It loads an HTML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
 
 E.g.:
 
@@ -22,15 +22,16 @@ will become:
 
  &ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;
 
-I think, it looks __much__ better.
+I think it looks __much__ better.
 
 The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively, the ' by &apos; and the - by an &mdash;. Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
 
 It is meant to be a relatively **reliable post-processing step for web pages before releasing them**.
 
 
+
 Background
-==========
+----------
 
 I often write my texts and web pages using a plain editor. As such, the character " is always used for quotes, a dash is always a minus, etc.
 

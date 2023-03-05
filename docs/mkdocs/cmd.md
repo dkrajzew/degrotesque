@@ -37,10 +37,10 @@ degrotesque -i my_folder -r --no-backup
 Applies the default actions to all files that match the extension in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.
 
 
-Options
--------
+Command line arguments
+----------------------
 
-The script has the following options:
+The script can be started on the command line with the following options:
 
 * __--input/-i _&lt;PATH&gt;___: the file or the folder to process
 * __--recursive/-r__: Set if the folder &mdash; if given &mdash; shall be processed recursively
