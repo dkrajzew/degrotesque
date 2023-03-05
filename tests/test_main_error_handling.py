@@ -1,0 +1,85 @@
+from __future__ import print_function
+# ===================================================================
+# degrotesque - A web type setter.
+#
+# Tests for the main method
+#
+# (c) Daniel Krajzewicz 2020-2023
+# - daniel@krajzewicz.de
+# - http://www.krajzewicz.de
+# - https://github.com/dkrajzew/degrotesque
+# - http://www.krajzewicz.de/blog/degrotesque.php
+#
+# Available under the BSD license.
+# ===================================================================
+
+
+# --- test functions ------------------------------------------------
+def test_main__unknown_option_bool(capsys, tmp_path):
+    """An unknown option is given as a bool"""
+    import degrotesque
+    p1 = tmp_path / "hello1.html"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.html"
+    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
+    try:
+        degrotesque.main(["-i", tmp_path, "-u"])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==2
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Usage: 
+  degrotesque.py [options]
+
+degrotesque.py: error: no such option: -u
+"""
+    assert p1.read_text() == "\"Well - that's not what I had expected.\""
+    assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
+
+
+def test_main__unknown_option_int(capsys, tmp_path):
+    """An unknown option is given as an int"""
+    import degrotesque
+    p1 = tmp_path / "hello1.html"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.html"
+    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
+    try:
+        degrotesque.main(["-i", tmp_path, "--foo", "bar"])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==2
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Usage: 
+  degrotesque.py [options]
+
+degrotesque.py: error: no such option: --foo
+"""
+    assert p1.read_text() == "\"Well - that's not what I had expected.\""
+    assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
+
+
+def test_main__format__unknown(capsys, tmp_path):
+    """An unknown option is given as bool"""
+    import degrotesque
+    p1 = tmp_path / "hello1.html"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.html"
+    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
+    try:
+        degrotesque.main(["-i", tmp_path, "--format", "foo"])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==3
+    captured = capsys.readouterr()
+    assert captured.err == ""
+    assert captured.out.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Unknown target format 'foo'
+"""
+    assert p1.read_text() == "\"Well - that's not what I had expected.\""
+    assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
+
