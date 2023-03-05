@@ -30,10 +30,10 @@ nav:
     - License (BSD): license.md
     - Legal: legal.md
     - Appendices:
-        - AppendixA: appendixA.md
-        - AppendixB: appendixB.md
-        - AppendixC: appendixC.md
-        - AppendixD: appendixD.md
+        - Appendix A: appendixA.md
+        - Appendix B: appendixB.md
+        - Appendix C: appendixC.md
+        - Appendix D: appendixD.md
 
 markdown_extensions:
     - admonition
