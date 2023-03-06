@@ -76,7 +76,7 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "degrotesque.py") == """degrotesque.py 2.0.6
+    assert captured.out.replace("__main__.py", "degrotesque") == """degrotesque 2.0.6
 """
     assert captured.err == ""
 
