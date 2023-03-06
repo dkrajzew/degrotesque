@@ -236,21 +236,16 @@ class Degrotesque():
         self._restoreDefaultElementsToSkip()
         # the actions to apply
         self._restoreDefaultActions()
-        # the destination format converter
+        # the target format converter
         self._replFunc = _replFunc_KEEP
+        # the target format regexp
+        self._targetRegex = re.compile("(&#[xX]?[0-9a-fA-F]*;)")
 
 
     # --- restoreDefaultActions
     def _restoreDefaultActions(self):
         """Instantiates default actions"""
-        self._actions = []
-        self._actions.extend(actionsDB["masks"])
-        self._actions.extend(actionsDB["quotes.english"])
-        self._actions.extend(actionsDB["dashes"])
-        self._actions.extend(actionsDB["ellipsis"])
-        self._actions.extend(actionsDB["math"])
-        self._actions.extend(actionsDB["apostrophe"])
-        self._actions.extend(actionsDB["commercial"])
+        self.setActions("masks,quotes.english,dashes,ellipsis,math,apostrophe,commercial")
 
 
     # --- setActions
@@ -271,10 +266,15 @@ class Degrotesque():
         actNames = actNames.split(",")
         self._actions = []
         for an in actNames:
-            if an in actionsDB:
-                self._actions.extend(actionsDB[an])
-            else:
+            if an not in actionsDB:
                 raise ValueError("Action '%s' is not known." % (an))
+            for a in actionsDB[an]:
+                n = list(a)
+                n[0][0] = re.compile(n[0][0])
+                if n[0][1] is not None:
+                    n[0][1] = re.compile(n[0][1])
+                self._actions.append(n)
+                
 
 
     # --- restoreDefaultActions
@@ -468,21 +468,20 @@ class Degrotesque():
             # (both - opening and closing regexp must be found, if a closing exists)
             for a in actions:
                 bpos = pos
-                opening = re.search(a[0][0], document[bpos:])
+                opening = a[0][0].search(document[bpos:])
                 while opening and marks[bpos+opening.start():bpos+opening.end()].find("1")>=0:
                     bpos = bpos + opening.start() + 1
-                    opening = re.search(a[0][0], document[bpos:])
+                    opening = a[0][0].search(document[bpos:])
                 if not opening:
                     continue
                 bpos = bpos + opening.start()
-
                 epos = bpos + opening.end() - opening.start()
                 closing = None
                 if a[0][1] is not None:
-                    closing = re.search(a[0][1], document[epos:])
+                    closing = a[0][1].search(document[epos:])
                     while closing and marks[epos+closing.start():epos+closing.end()].find("1")>=0:
                         epos = epos + closing.start() + 1
-                        closing = re.search(a[0][0], document[epos:])
+                        closing = a[0][1].search(document[epos:])
                     if not closing:
                         continue
                     epos = epos + closing.start()
@@ -499,16 +498,16 @@ class Degrotesque():
             closing, epos = a[-1]
             # perform replacement
             if closing is not None:
-                closing = re.match(a[0][1], document[epos:])
-                dest = re.sub("(&#[xX]?[0-9a-fA-F]*;)", self._replFunc, a[1][1])
-                tmp = re.sub(a[0][1], dest, document[epos:], 1)
+                closing = a[0][1].match(document[epos:])
+                dest = self._targetRegex.sub(self._replFunc, a[1][1])
+                tmp = a[0][1].sub(dest, document[epos:], 1)
                 repLength = closing.end() - closing.start() + len(tmp) - len(document[epos:])
                 document = document[:epos] + tmp
                 marks = marks[:epos+closing.start()] + "1"*repLength + marks[epos+closing.end():]
                 assert (len(document)==len(marks))
-            opening = re.match(a[0][0], document[bpos:])
-            dest = re.sub("(&#[xX]?[0-9a-fA-F]*;)", self._replFunc, a[1][0])
-            tmp = re.sub(a[0][0], dest, document[bpos:], 1)
+            opening = a[0][0].match(document[bpos:])
+            dest = self._targetRegex.sub(self._replFunc, a[1][0])
+            tmp = a[0][0].sub(dest, document[bpos:], 1)
             repLength = opening.end() + len(tmp) - len(document[bpos:])
             document = document[:bpos] + tmp
             marks = marks[:bpos] + "1"*repLength + marks[bpos+opening.end():]
@@ -650,7 +649,7 @@ def main(arguments=None):
     """
     sys.tracebacklimit = 0
     # parse options
-    optParser = OptionParser(usage="\n  degrotesque.py [options]", version="degrotesque.py 2.0.6")
+    optParser = OptionParser(usage="\n  degrotesque.py [options]", version="degrotesque 2.0.6")
     optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
     optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
     optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
@@ -679,6 +678,8 @@ def main(arguments=None):
     # collect files
     extensions = getExtensions(options.extensions)
     files = getFiles(options.input, options.recursive, extensions)
+    # the HTML recognition regexp
+    htmlRegex = re.compile("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
     # loop through files
     for f in files:
         print("Processing %s" % f)
@@ -690,7 +691,7 @@ def main(arguments=None):
             n, e = os.path.splitext(f)
             isHTML = options.html or e[1:] in htmlExtensions
             # https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454
-            if not options.text and not isHTML and re.search("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>", document) is not None:
+            if not options.text and not isHTML and htmlRegex.search(document) is not None:
                 isHTML = True
             # apply the beautifications
             document = degrotesque.prettify(document, isHTML)
