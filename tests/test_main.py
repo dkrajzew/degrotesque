@@ -20,7 +20,7 @@ def test_main_empty(capsys):
     import degrotesque
     try:
         degrotesque.main([])
-        assert False
+        assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==2
@@ -34,12 +34,12 @@ def test_main_help(capsys):
     import degrotesque
     try:
         degrotesque.main(["--help"])
-        assert False
+        assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "degrotesque.py") == """Usage: usage:
+    assert captured.out.replace("__main__.py", "degrotesque.py") == """Usage: 
   degrotesque.py [options]
 
 Options:
@@ -48,16 +48,35 @@ Options:
   -i INPUT, --input=INPUT
                         Defines files/folder to process
   -r, --recursive       Whether a given path shall be processed recursively
-  -B, --no-backup       Whether no backup shall be generated
-  -u, --unicode         Use unicode characters instead of HTML entities
   -e EXTENSIONS, --extensions=EXTENSIONS
                         Defines the extensions of files to process
   -E ENCODING, --encoding=ENCODING
                         File encoding (default: 'utf-8')
+  -H, --html            Files are HTML/XML-derivatives
+  -T, --text            Files are plain text files
+  -B, --no-backup       Whether no backup shall be generated
+  -f FORMAT, --format=FORMAT
+                        Defines the format of the replacements ['html',
+                        'unicode', 'text']
   -s SKIP, --skip=SKIP  Defines the elements which contents shall not be
                         changed
   -a ACTIONS, --actions=ACTIONS
                         Defines the actions to perform
+"""
+    assert captured.err == ""
+
+
+def test_main_version(capsys):
+    """Test behaviour when version information is wished"""
+    import degrotesque
+    try:
+        degrotesque.main(["--version"])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==0
+    captured = capsys.readouterr()
+    assert captured.out.replace("__main__.py", "degrotesque") == """degrotesque 2.0.6
 """
     assert captured.err == ""
 
@@ -70,17 +89,19 @@ def test_main_run1(capsys, tmp_path):
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
     degrotesque.main(["-i", tmp_path])
-    assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
-    assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
+    assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
+    assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
 
 
-def test_main_run2(capsys, tmp_path):
+def test_main_run1_2html(capsys, tmp_path):
     """Test behaviour on plain usage"""
     import degrotesque
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    degrotesque.main(["-i", tmp_path, "-u"])
-    assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
-    assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
+    degrotesque.main(["-i", tmp_path, "-f", "html"])
+    assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
+    assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
+
+

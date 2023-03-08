@@ -24,10 +24,10 @@ nav:
     - Legal: legal.md
     - API: api.md
     - Appendices:
-        - AppendixA: appendixA.md
-        - AppendixB: appendixB.md
-        - AppendixC: appendixC.md
-        - AppendixD: appendixD.md
+        - Appendix A: appendixA.md
+        - Appendix B: appendixB.md
+        - Appendix C: appendixC.md
+        - Appendix D: appendixD.md
     - Developer Docs:
         - Notes: notes.md
         - How To Release: release.md

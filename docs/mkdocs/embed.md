@@ -7,8 +7,23 @@ import degrotesque
 # build the degrotesque instance with default values
 degrotesque = degrotesque.Degrotesque()
 # apply degroteque
-prettyHTML = degrotesque.prettify(plainHTML)
+plain = ' <script> if(i<0) echo "a"</script> "Hello World" '
+pretty = degrotesque.prettify(plain, True)
+plain = ' <script> if(i<0) echo "a"</script> "Hello World" '
+pretty = degrotesque.prettify(plain, False)
 ```
+
+The first call will deliver:
+
+``` <script> if(i<0) echo "a"</script> &ldquo;Hello World&rdquo; ```
+
+while the second &mdash; as the string is interpreted as plain text, not HTML will deliver:
+
+``` <script> if(i<0) echo &ldquo;a&rdquo;</script> &ldquo;Hello World&rdquo; ```
+
+what is probably not what you wished.
+
+
 
 The default values can be replaced using some of the class&apos; interfaces (methods):
 ```console
