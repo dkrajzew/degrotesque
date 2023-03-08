@@ -26,7 +26,7 @@ When parsing XML/HTML files, the script does not change the quotation marks with
 
 After the actions have been applied to its contents, the file is saved. By default, a backup of the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
-The option __--help__ / __-h__ prints a help screen. The option __--version__ the __degrotesque&amp;s__ version number.
+The option __--help__ / __-h__ prints a help screen. The option __--version__ the __degrotesque&apos;s__ version number.
 
 Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks action set is given in [Appendix D](appendixD.md).
 
