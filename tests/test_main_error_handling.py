@@ -97,7 +97,7 @@ def test_main__document_broken1(capsys, tmp_path):
         assert e.code==4
     captured = capsys.readouterr()
     assert captured.err == ""
-    assert captured.out.replace(str(tmp_path), "<DIR>").replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Processing <DIR>\\hello1.html
+    assert captured.out.replace(str(tmp_path), "<DIR>").replace("\\", "/").replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Processing <DIR>\\hello1.html
 Unclosed element at 1
 """
     assert p1.read_text() == "<p \"Well - that's not what I had expected.\""
@@ -116,7 +116,7 @@ def test_main__document_broken2(capsys, tmp_path):
         assert e.code==4
     captured = capsys.readouterr()
     assert captured.err == ""
-    assert captured.out.replace(str(tmp_path), "<DIR>").replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Processing <DIR>\\hello1.html
+    assert captured.out.replace(str(tmp_path), "<DIR>").replace("\\", "/").replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Processing <DIR>\\hello1.html
 Unclosed '<pre' element at position 4.
 """
     assert p1.read_text() == "<pre> <pre \"Well - that's not what I had expected.\""
