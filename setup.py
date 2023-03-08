@@ -37,6 +37,7 @@ setuptools.setup(
         'Documentation': 'https://degrotesque.readthedocs.io/',
         'Source': 'https://github.com/dkrajzew/degrotesque',
         'Tracker': 'https://github.com/dkrajzew/degrotesque/issues',
+        'Discussions': 'https://github.com/dkrajzew/degrotesque/discussions',
     },
     license='BSD',
     # add modules
@@ -59,6 +60,7 @@ setuptools.setup(
         "Intended Audience :: Information Technology",
         "Intended Audience :: System Administrators",
         "Intended Audience :: Telecommunications Industry",
+        "Topic :: Documentation",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Software Development :: Localization",
         "Topic :: Text Processing :: Markup :: HTML",
