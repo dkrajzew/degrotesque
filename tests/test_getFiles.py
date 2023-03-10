@@ -5,10 +5,10 @@
 # Tests for the getFiles functions
 #
 # (c) Daniel Krajzewicz 2020-2023
-# - daniel@krajzewicz.de
-# - http://www.krajzewicz.de
+# daniel@krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
-# - http://www.krajzewicz.de/blog/degrotesque.php
+# - http://www.krajzewicz.de/docs/degrotesque/index.html
+# - http://www.krajzewicz.de
 #
 # Available under the BSD license.
 # ===================================================================
