@@ -1,7 +1,7 @@
 Appendix C: Skipped Elements
 ============================
 
-The contents of the following elements are not processed by default:
+When parsing HTML files, the contents of the following elements are not processed by default:
 
 * script
 * code
