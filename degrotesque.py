@@ -1,15 +1,14 @@
 from __future__ import print_function
 # ===================================================================
 # degrotesque - A web type setter.
-# Version 2.0.6
 #
 # Main module
 #
 # (c) Daniel Krajzewicz 2020-2023
-# - daniel@krajzewicz.de
-# - http://www.krajzewicz.de
+# daniel@krajzewicz.de
 # - https://github.com/dkrajzew/degrotesque
-# - http://www.krajzewicz.de/blog/degrotesque.php
+# - http://www.krajzewicz.de/docs/degrotesque/index.html
+# - http://www.krajzewicz.de
 #
 # Available under the BSD license.
 # ===================================================================
