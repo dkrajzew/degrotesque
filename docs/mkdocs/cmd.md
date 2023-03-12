@@ -20,9 +20,11 @@ Per default, Unicode entities are inserted (e.g. &#8216;&amp;#8211;&#8217; for a
 * &#8216;__text__&#8217;: uses plain (utf-8) characters (e.g. &#8216;—&#8217; for an &#8216;&mdash;&#8217;).
 
 
-__degrotesque__ tries to determine whether the read files are plain text files or XML or HTML derivatives using the files&amp; extensions and contents. To be secure, one may set __--html__ / __-H__ when processing HTML files or __--text__ / __-T__ when processing plain text files.
+__degrotesque__ tries to determine whether the read files are plain text files, markdown files, or XML or HTML derivatives using the files&amp; extensions and contents. [Appendix B](appendixB.md) lists the extensions by which files are recognized as HTML / markdown files. To be secure, one may set __--html__ / __-H__ when processing HTML files, __--markdown__ / __-M__ when processing markdown files, or __--text__ / __-T__ when processing plain text files.
 
 When parsing XML/HTML files, the script does not change the quotation marks within elements, of course. As well, the contents of several elements, such as &lt;code&gt; or &lt;pre&gt;, are skipped. You may change the list of elements which contents shall not be processed using the option __-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___ / __--skip _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]\*___. The list of elements that are skipped per default is given in [Appendix C](appendixC.md).
+
+When parsing markdown files, code &mdash; both indented and defined using ` &mdash; is skipped. Quotes as well.
 
 After the actions have been applied to its contents, the file is saved. By default, a backup of the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
@@ -43,7 +45,7 @@ Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by 
 degrotesque -i my_folder -r --no-backup
 ```
 
-Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.
+Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The files format of each file is determined using the file&apos;s extension.
 
 
 Command line arguments
@@ -57,6 +59,7 @@ The script can be started on the command line with the following options:
 * __--encoding/-E _&lt;ENCODING&gt;___: The assumed encoding of the files
 * __--html/-H__: Files are HTML/XML-derivatives
 * __--text/-T__: Files are plain text files
+* __--markdown/-M__: Files are markdown files
 * __--format/-f _&lt;FORMAT&gt;___: Define the format of the replacements [&#8216;_html_&#8217;, &#8216;_unicode_&#8217;, &#8216;_text_&#8217;]
 * __--no-backup/-B__: Set if no backup files shall be generated
 * __--skip/-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___: Elements which contents shall not be changed

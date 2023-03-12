@@ -8,7 +8,6 @@
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
 
 
-
 degrotesque &mdash; A web type setter.
 
 Introduction
@@ -16,7 +15,7 @@ Introduction
 
 *degrotesque beautifies the web.*
 
-**degrotesque** is a [Python](https://www.python.org/) script. It loads a text/HTML/XML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
+**degrotesque** is a [Python](https://www.python.org/) script. It loads a text/markdown/HTML/XML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
 
 E.g.:
 
@@ -30,7 +29,7 @@ I think it looks __much__ better.
 
 The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively, the ' by &apos; and the - by an &mdash;. Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
 
-It is meant to be a relatively **reliable post-processing step for web pages before releasing them**.
+It is meant to be a relatively **reliable post-processing step for web pages before releasing them**. In version 3.0.0 the support of markdown files was added.
 
 
 Examples
@@ -46,7 +45,7 @@ Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by 
 degrotesque -i my_folder -r --no-backup
 ```
 
-Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated.
+Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The files format of each file is determined using the file&apos;s extension.
 
 
 Background
