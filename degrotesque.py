@@ -118,7 +118,7 @@ actionsDB = {
 }
 
 
-# A database of extensions of files to process
+# A database of extensions of HTML derivatives
 htmlExtensions = [
     "html", "htm", "xhtml",
     "php", "phtml", "phtm", "php2", "php3", "php4", "php5",
@@ -128,6 +128,10 @@ htmlExtensions = [
     "vbhtml", "ppthtml", "ssp", "jhtml",
     "xml", "osm"
 ]
+
+
+# A database of markdown file extensions
+markdownExtensions = [ "md" ]
 
 
 # Mapping Unicode to HTML entities
@@ -283,7 +287,7 @@ class Degrotesque():
         self._elementsToSkip = [
             u"script", u"code", u"style", u"pre", u"?", u"?php",
             u"%", u"%=", u"%@", u"%--", u"%!",
-            u"!--", "!DOCTYPE"
+            u"!--", "!doctype"
         ]
 
 
@@ -345,7 +349,7 @@ class Degrotesque():
 
 
     # --- _mark
-    def _mark(self, html):
+    def _markHTML(self, html):
         """Returns a string where all HTML-elements are denoted as '1' and
         plain content as '0'.
 
@@ -355,7 +359,8 @@ class Degrotesque():
         Returns:
             (str): Annotation of the HTML document.
         """
-        # mark HTML elements, first
+        # mark HTML elements
+        html = html.lower()
         ret = ""
         i = 0
         while i<len(html):
@@ -397,7 +402,7 @@ class Degrotesque():
                 ie = html.find("-->", ib)
                 if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
                 ie += 2
-            elif tb=="!DOCTYPE":
+            elif tb=="!doctype":
                 # DOCTYPE: find matching >
                 ie = ib+1
                 num = 1
@@ -431,8 +436,42 @@ class Degrotesque():
         return ret
 
 
+    def _markMarkdown(self, document):
+        """Returns a string where all code and quotes are denoted as '1' and
+        plain content as '0'.
+
+        Args:
+            html (str): The markdown document (contents) to process
+
+        Returns:
+            (str): Annotation of the markdown document.
+        """
+        length = len(document)
+        ret = "0"*length
+        # find backtick-marked code
+        b = document.find("`")
+        while b>=0:
+            e = b + 1
+            while e<length and document[e]=="`":
+                e += 1
+            marker = document[b:e]
+            i = document.find(marker, e)
+            i = length if i<0 else i+len(marker)
+            ret = ret[:b] + ("1"*(i-b)) + ret[i:]
+            b = document.find("`", i)
+        # find indented code
+        b = 0
+        while b>=0 and b<length:
+            e = document.find("\n", b+1)
+            if e<0: e = length
+            else: e += 1
+            if document[b]==">" or document[b]=="\t" or (length>=b+3 and document[b:b+4]=="    "):
+                ret = ret[:b] + ("1"*(e-b)) + ret[e:]
+            b = e
+        return ret
+
     # --- prettify
-    def prettify(self, document, isHTML):
+    def prettify(self, document, isHTML, isMarkdown=False):
         """Prettifies (degrotesques) the given document.
 
         It is assumed that the input is given in utf-8.
@@ -448,8 +487,9 @@ class Degrotesque():
         """
         # extract text parts
         if isHTML:
-            lowerHTML = document.lower()
-            marks = self._mark(lowerHTML)
+            marks = self._markHTML(document)
+        elif isMarkdown:
+            marks = self._markMarkdown(document)
         else:
             marks = "0" * len(document)
         assert(len(document)==len(marks))
@@ -590,14 +630,25 @@ def main(arguments=None):
     """The main method using parameter from the command line.
 
     The application reads the given file or the files from the folder (optionally
-    recursive) defined by the -i/--input option that match either the default or
-    the extensions given using the -e/--extension option, applies the default
-    or the actions named using the -a/--actions option to the contents skipping
-    the contents of default elements to skip or those defined using -s/--skip and
-    save the files under their original name. If the option -B/--no-backup is not
+    recursive) defined by the -i/--input option. If -r/--recursive option is set, 
+    the input folder will be scanned recursively. All files are processed but can
+    be limited to those that match the extension defined using the -e/--extension
+    option. The default encoding for the files is utf-8. This can be changed 
+    using the -E/--encoding option.
+    
+    The default actions or those named using the -a/--actions option are
+    applied. When parsing HTML documents, elements are skipped. The contents of
+    default elements to skip or those defined using -s/--skip are skipped as well.
+    degrotesque tries to determine the file type using the respective extension.
+    The options -T/--text, -H/--html, and -M/--markdown overwrite this behaviour.
+    
+    The target format of the replacements is unicode entity but may be changed 
+    using the -f/--format option.
+    
+    The files are saved under their original name. If the option -B/--no-backup is not
     given, a backup of the original files is generated named as the original
-    file with the appendix ".orig". When -u/--unicode is set, the replacement
-    will use unicode numbers, otherwise HTML entities are used.
+    file with the appendix ".orig".
+    
 
     Args:
         arguments (List[str]): The command line arguments, parsed as options using OptionParser.
@@ -655,6 +706,7 @@ def main(arguments=None):
     optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8')")
     optParser.add_option("-H", "--html", dest="html", action="store_true", default=False, help="Files are HTML/XML-derivatives")
     optParser.add_option("-T", "--text", dest="text", action="store_true", default=False, help="Files are plain text files")
+    optParser.add_option("-M", "--markdown", dest="markdown", action="store_true", default=False, help="Files are markdown files")
     optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
     optParser.add_option("-f", "--format", dest="format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
     optParser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
@@ -678,6 +730,7 @@ def main(arguments=None):
     extensions = getExtensions(options.extensions)
     files = getFiles(options.input, options.recursive, extensions)
     # the HTML recognition regexp
+    # https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454
     htmlRegex = re.compile("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
     # loop through files
     for f in files:
@@ -688,12 +741,12 @@ def main(arguments=None):
                 document = fd.read()
             # determine file contents (html/text)
             n, e = os.path.splitext(f)
-            isHTML = options.html or e[1:] in htmlExtensions
-            # https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454
-            if not options.text and not isHTML and htmlRegex.search(document) is not None:
-                isHTML = True
+            isHTML = options.html
+            if not options.text and not options.markdown and not options.html:
+                isHTML = e[1:] in htmlExtensions or htmlRegex.search(document) is not None
+            isMarkdown = not options.html and not options.text and (options.markdown or e[1:] in markdownExtensions)
             # apply the beautifications
-            document = degrotesque.prettify(document, isHTML)
+            document = degrotesque.prettify(document, isHTML, isMarkdown)
             # build a backup
             if not options.no_backup:
                 shutil.copy(f, f+".orig")
