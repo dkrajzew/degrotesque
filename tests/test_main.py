@@ -54,6 +54,7 @@ Options:
                         File encoding (default: 'utf-8')
   -H, --html            Files are HTML/XML-derivatives
   -T, --text            Files are plain text files
+  -M, --markdown        Files are markdown files
   -B, --no-backup       Whether no backup shall be generated
   -f FORMAT, --format=FORMAT
                         Defines the format of the replacements ['html',
@@ -93,7 +94,7 @@ def test_main_run1(capsys, tmp_path):
     assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
 
 
-def test_main_run1_2html(capsys, tmp_path):
+def test_main_run1_html2html(capsys, tmp_path):
     """Test behaviour on plain usage"""
     import degrotesque
     p1 = tmp_path / "hello1.html"
@@ -103,5 +104,17 @@ def test_main_run1_2html(capsys, tmp_path):
     degrotesque.main(["-i", tmp_path, "-f", "html"])
     assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
     assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
+
+
+def test_main_run1_md2html(capsys, tmp_path):
+    """Test behaviour on plain usage"""
+    import degrotesque
+    p1 = tmp_path / "hello1.md"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.md"
+    p2.write_text("\"Well - `that's` not what I had expected.\"")
+    degrotesque.main(["-i", tmp_path, "-f", "html"])
+    assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
+    assert p2.read_text() == "&ldquo;Well &mdash; `that's` not what I had expected.&rdquo;"
 
 
