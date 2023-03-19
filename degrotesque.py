@@ -441,7 +441,7 @@ class Degrotesque():
         plain content as '0'.
 
         Args:
-            html (str): The markdown document (contents) to process
+            document (str): The markdown document (contents) to process
 
         Returns:
             (str): Annotation of the markdown document.
@@ -480,7 +480,8 @@ class Degrotesque():
 
         Args:
             document (str): The document (contents) to process.
-            useUnicode (bool): Whether unicode numbers instead of HTML entities shall be used.
+            isHTML (bool): Whether the document is a HTML document
+            isMarkdown (bool): Whether the document is a markdown document
 
         Returns:
             (str): The processed (prettified / degrotesqued) document.
