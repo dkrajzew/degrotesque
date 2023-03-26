@@ -11,11 +11,11 @@
 degrotesque &mdash; A web type setter.
 
 Introduction
-============
+------------
 
 *degrotesque beautifies the web.*
 
-**degrotesque** is a [Python](https://www.python.org/) script. It loads a text/markdown/HTML/XML file from the disc — or several in batch, one after the other — and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
+**degrotesque** is a [Python](https://www.python.org/) script. It loads a text/markdown/HTML/XML file from the disc &mdash; or several in batch &mdash; and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
 
 E.g.:
 
