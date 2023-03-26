@@ -9,12 +9,18 @@ edit_uri: ""
 
 theme:
     name: material
-    highlightjs: true
-    hljs_languages:
-        - yaml
+    custom_dir: materials_ext
+    font: false
     palette:
-        primary: light green
+        primary: green
         
+extra_css:
+    - stylesheets/extra.css
+    - stylesheets/prism.css
+
+extra_javascript:
+    - js/prism.js
+
 nav:
     - Home: index.md
     - Installation: install.md
