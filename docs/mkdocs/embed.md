@@ -2,7 +2,7 @@ Embed in own Applications
 =========================
 
 You may as well embedd __degrotesque__ within your own applications. The usage is very straightforward:
-```console
+```python
 import degrotesque
 # build the degrotesque instance with default values
 degrotesque = degrotesque.Degrotesque()
@@ -15,18 +15,22 @@ pretty = degrotesque.prettify(plain, False)
 
 The first call will deliver:
 
-``` <script> if(i<0) echo "a"</script> &ldquo;Hello World&rdquo; ```
+```console
+ <script> if(i<0) echo "a"</script> &ldquo;Hello World&rdquo;
+```
 
 while the second &mdash; as the string is interpreted as plain text, not HTML will deliver:
 
-``` <script> if(i<0) echo &ldquo;a&rdquo;</script> &ldquo;Hello World&rdquo; ```
+```console
+ <script> if(i<0) echo &ldquo;a&rdquo;</script> &ldquo;Hello World&rdquo; 
+```
 
 what is probably not what you wished.
 
 
 
 The default values can be replaced using some of the class&apos; interfaces (methods):
-```console
+```python
 # change the actions to apply (by naming them)
 # here: apply french quotes and math symbols
 degrotesque.setActions("quotes.french,math")
