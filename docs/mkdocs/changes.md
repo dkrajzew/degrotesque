@@ -1,8 +1,8 @@
 ChangeLog for degrotesque
 =========================
 
-to come: degrotesque-3.0.0
---------------------------
+degrotesque-3.0.0 (26.03.2023)
+------------------------------
 
 * Adding support for degrotesquing markdown files (contents of code and quotes are kept)
 * Added support for processing plain text files; The distinction whether a file is a plain text file or a HTML/XML derivative is done using the extension (see Appendix B for used extensions) and by evaluating the contents; Everything is replaced in text files. When processing a file as a XML/HTML derivative, elements are skipped. Introducing the options __--text__ / __-T__, __--markdown__ / __-M__, and __--html__ / __-H__ to explicitly set the file type.
@@ -11,6 +11,7 @@ to come: degrotesque-3.0.0
     * &#8216;__html__&#8217;: uses numeric entities (e.g. &#8216;&amp;mdash;&#8217; for an &#8216;&mdash;&#8217;);
     * &#8216;__text__&#8217;: uses plain (utf-8) characters (e.g. &#8216;—&#8217; for an &#8216;&mdash;&#8217;).
 * 100 % test coverage :-)
+* renamed master branch to main
 
 
 degrotesque-2.0.6 (05.02.2023)
