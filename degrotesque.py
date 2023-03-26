@@ -700,7 +700,7 @@ def main(arguments=None):
     """
     sys.tracebacklimit = 0
     # parse options
-    optParser = OptionParser(usage="\n  degrotesque.py [options]", version="degrotesque 2.0.6")
+    optParser = OptionParser(usage="\n  degrotesque.py [options]", version="degrotesque 3.0.0")
     optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
     optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
     optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
