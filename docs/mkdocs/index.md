@@ -29,7 +29,9 @@ I think it looks __much__ better.
 
 The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively, the ' by &apos; and the - by an &mdash;. Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
 
-It is meant to be a relatively **reliable post-processing step for web pages before releasing them**. In version 3.0.0 the support of markdown files was added.
+It is meant to be a relatively **reliable post-processing step for type setting web pages before releasing them**. Being a Python script, **it can be easily embedded in own workflows**. In version 3.0.0 the support of markdown files was added.
+
+**degrotesque** supports English, German, and French alternatives currently.
 
 
 Examples
@@ -60,6 +62,17 @@ I think it&rsquo;s a pity that major Desktop Publishing applications do this on 
 **degrotesque** does the job pretty fine. After writing / building my pages, the tool converts them to a prettier and typographically more correct form. The structure and format of the pages is completely remained. And as said, it works reliable.
 
 If you need any consultations, please let me know. If you know better, too.
+
+
+Future Plans
+------------
+
+As **degrotesque** can meanwhile parse not only HTML and plain text files, but as well Markdown files, the next step would be to open it to other file formats as well. As well, other languages besides English, German, and French could be covered.
+
+* Add support for further file and mark types.
+* Add support for further languages.
+
+We would love to extend **degrotesque** to cover these use cases, but only if someone is interested :-) You may drop us a mail at daniel@krajzewicz.de.
 
 
 License
