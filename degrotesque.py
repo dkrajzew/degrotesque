@@ -717,15 +717,15 @@ def main(arguments=None):
     # setup degrotesque
     degrotesque = Degrotesque()
     try:
-        degrotesque.setActions(options.actions)
-        degrotesque.setToSkip(options.skip)
-        degrotesque.setFormat(options.format)
+        degrotesque.set_actions(options.actions)
+        degrotesque.set_to_skip(options.skip)
+        degrotesque.set_format(options.format)
     except ValueError as err:
         print(str(err))
         sys.exit(3)
     # collect files
-    extensions = getExtensions(options.extensions)
-    files = getFiles(options.input, options.recursive, extensions)
+    extensions = get_extensions(options.extensions)
+    files = get_files(options.input, options.recursive, extensions)
     # the HTML recognition regexp
     # https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454
     htmlRegex = re.compile("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
