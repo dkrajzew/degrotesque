@@ -26,7 +26,7 @@ from optparse import OptionParser
 
 # --- variables and constants ---------------------------------------
 # A database of actions
-actionsDB = {
+actions_db = {
     # english quotes
     "quotes.english": [
         [[u"(\\s+)'", u"'"],             [u"\\1&#8216;", u"&#8217;"]],
@@ -119,7 +119,7 @@ actionsDB = {
 
 
 # A database of extensions of HTML derivatives
-htmlExtensions = [
+extensions_html = [
     "html", "htm", "xhtml",
     "php", "phtml", "phtm", "php2", "php3", "php4", "php5",
     "asp",
@@ -131,11 +131,11 @@ htmlExtensions = [
 
 
 # A database of markdown file extensions
-markdownExtensions = [ "md" ]
+extensions_md = [ "md" ]
 
 
 # Mapping Unicode to HTML entities
-encodingMap = {
+encoding_map = {
     "&#8216;"   : [ "&lsquo;" ],
     "&#8217;"   : [ "&rsquo;" ],
     "&#8220;"   : [ "&ldquo;" ],
@@ -173,7 +173,7 @@ encodingMap = {
 
 
 # --- _replFunc_keep
-def _replFunc_KEEP(matchobj):
+def _replace_keep(matchobj):
     """Unicode numbers conversion to itself
 
     Args:
@@ -185,7 +185,7 @@ def _replFunc_KEEP(matchobj):
     return matchobj.group(0)
 
 
-def _replFunc_HTML(matchobj):
+def _replace_html(matchobj):
     """Unicode numbers conversion to HTML entities
 
     Args:
@@ -197,7 +197,7 @@ def _replFunc_HTML(matchobj):
     return encodingMap[matchobj.group(0)][0]
 
 
-def _replFunc_UNICODE(matchobj):
+def _replace_unicode(matchobj):
     """Unicode numbers conversion to Unicode characters
 
     Args:
@@ -236,23 +236,23 @@ class Degrotesque():
         Sets defaults for actions to perform.
         """
         # the elements to skip
-        self._restoreDefaultElementsToSkip()
+        self._restore_default_elements_to_skip()
         # the actions to apply
-        self._restoreDefaultActions()
+        self._restore_default_actions()
         # the target format converter
-        self._replFunc = _replFunc_KEEP
+        self._replace_func = _replace_keep
         # the target format regexp
-        self._targetRegex = re.compile("(&#[xX]?[0-9a-fA-F]*;)")
+        self._target_regex = re.compile("(&#[xX]?[0-9a-fA-F]*;)")
 
 
     # --- restoreDefaultActions
-    def _restoreDefaultActions(self):
+    def _restore_default_actions(self):
         """Instantiates default actions"""
-        self.setActions("masks,quotes.english,dashes,ellipsis,math,apostrophe,commercial")
+        self.set_actions("masks,quotes.english,dashes,ellipsis,math,apostrophe,commercial")
 
 
     # --- setActions
-    def setActions(self, actNames):
+    def set_actions(self, action_names):
         """Sets the actions to apply.
 
         If the given names of actions are None or empty, the default actions
@@ -262,16 +262,16 @@ class Degrotesque():
         internal database and their list is returned.
 
         Args:
-            actNames (List[str]): The names of the actions to use (or None if default actions shall be used)
+            action_names (List[str]): The names of the actions to use (or None if default actions shall be used)
         """
-        if actNames is None or len(actNames)==0:
+        if action_names is None or len(action_names)==0:
             return
-        actNames = actNames.split(",")
+        action_names = action_names.split(",")
         self._actions = []
-        for an in actNames:
-            if an not in actionsDB:
+        for an in action_names:
+            if an not in actions_db:
                 raise ValueError("Action '%s' is not known." % (an))
-            for a in actionsDB[an]:
+            for a in actions_db[an]:
                 n = list(a)
                 n[0][0] = re.compile(n[0][0])
                 if n[0][1] is not None:
@@ -281,18 +281,19 @@ class Degrotesque():
 
 
     # --- restoreDefaultActions
-    def _restoreDefaultElementsToSkip(self):
+    def _restore_default_elements_to_skip(self):
         """Instantiates default elements to skip"""
         # list of elements which contents shall not be processed
-        self._elementsToSkip = [
-            u"script", u"code", u"style", u"pre", u"?", u"?php",
+        self._elements_to_skip = [
+            u"script", u"code", u"style", u"pre", u"samp", u"tt", u"kbd",
+            u"?", u"?php",
             u"%", u"%=", u"%@", u"%--", u"%!",
             u"!--", "!doctype"
         ]
 
 
     # --- setToSkip
-    def setToSkip(self, toSkipNames):
+    def set_to_skip(self, elements_to_skip):
         """Sets the elements which contents shall not be changed.
 
         If the given names of elements are None or empty, the default elements
@@ -301,35 +302,35 @@ class Degrotesque():
         Otherwise, a list with the elements to skip is built.
 
         Args:
-            toSkipNames (List[str]): The names of elements which shall not be changed
+            elements_to_skip (List[str]): The names of elements which shall not be changed
 
         Todo:
             Warn user if a non-XML-character occurs?
         """
-        if toSkipNames is None or len(toSkipNames)==0:
+        if elements_to_skip is None or len(elements_to_skip)==0:
             return
-        self._elementsToSkip = [x.strip() for x in toSkipNames.split(',')]
+        self._elements_to_skip = [x.strip() for x in elements_to_skip.split(',')]
 
 
     # --- setFormat
-    def setFormat(self, formatS):
+    def set_format(self, format_name):
         """Sets the target character representation
         
         Args:
-            formatS (str): The format to use, one of "html", "unicode", "text"
+            format_name (str): The format to use, one of "html", "unicode", "text"
         """
-        if formatS=="html":
-            self._replFunc = _replFunc_HTML
-        elif formatS=="unicode":
-            self._replFunc = _replFunc_KEEP
-        elif formatS=="text":
-            self._replFunc = _replFunc_UNICODE
+        if format_name=="html":
+            self._replace_func = _replace_html
+        elif format_name=="unicode":
+            self._replace_func = _replace_keep
+        elif format_name=="text":
+            self._replace_func = _replace_unicode
         else:
-            raise ValueError("Unknown target format '%s'" % formatS)
+            raise ValueError("Unknown target format '%s'" % format_name)
 
 
     # --- _getTagName
-    def _getTagName(self, html):
+    def _get_tag_name(self, html):
         """Returns the name of the tag that starts at the begin of the given string.
 
         Args:
@@ -349,7 +350,7 @@ class Degrotesque():
 
 
     # --- _mark
-    def _markHTML(self, html):
+    def _mark_html(self, html):
         """Returns a string where all HTML-elements are denoted as '1' and
         plain content as '0'.
 
@@ -376,10 +377,10 @@ class Degrotesque():
                 continue
             # process elements to skip contents of
             i += 1
-            tb = self._getTagName(html[i:])
+            tb = self._get_tag_name(html[i:])
             ret += "1"*(len(tb))
             i = i + len(tb)
-            if tb not in self._elementsToSkip:
+            if tb not in self._elements_to_skip:
                 ie = html.find(">", i)
                 if ie<0:
                     raise ValueError("Unclosed element at %s" % (i-len(tb)))
@@ -436,7 +437,7 @@ class Degrotesque():
         return ret
 
 
-    def _markMarkdown(self, document):
+    def _mark_markdown(self, document):
         """Returns a string where all code and quotes are denoted as '1' and
         plain content as '0'.
 
@@ -471,7 +472,7 @@ class Degrotesque():
         return ret
 
     # --- prettify
-    def prettify(self, document, isHTML, isMarkdown=False):
+    def prettify(self, document, is_html, is_markdown=False):
         """Prettifies (degrotesques) the given document.
 
         It is assumed that the input is given in utf-8.
@@ -480,17 +481,17 @@ class Degrotesque():
 
         Args:
             document (str): The document (contents) to process.
-            isHTML (bool): Whether the document is a HTML document
-            isMarkdown (bool): Whether the document is a markdown document
+            is_html (bool): Whether the document is a HTML document
+            is_markdown (bool): Whether the document is a markdown document
 
         Returns:
             (str): The processed (prettified / degrotesqued) document.
         """
         # extract text parts
-        if isHTML:
-            marks = self._markHTML(document)
-        elif isMarkdown:
-            marks = self._markMarkdown(document)
+        if is_html:
+            marks = self._mark_html(document)
+        elif is_markdown:
+            marks = self._mark_markdown(document)
         else:
             marks = "0" * len(document)
         assert(len(document)==len(marks))
@@ -539,18 +540,18 @@ class Degrotesque():
             # perform replacement
             if closing is not None:
                 closing = a[0][1].match(document[epos:])
-                dest = self._targetRegex.sub(self._replFunc, a[1][1])
+                dest = self._target_regex.sub(self._replace_func, a[1][1])
                 tmp = a[0][1].sub(dest, document[epos:], 1)
-                repLength = closing.end() - closing.start() + len(tmp) - len(document[epos:])
+                replacement_length = closing.end() - closing.start() + len(tmp) - len(document[epos:])
                 document = document[:epos] + tmp
-                marks = marks[:epos+closing.start()] + "1"*repLength + marks[epos+closing.end():]
+                marks = marks[:epos+closing.start()] + "1"*replacement_length + marks[epos+closing.end():]
                 assert (len(document)==len(marks))
             opening = a[0][0].match(document[bpos:])
-            dest = self._targetRegex.sub(self._replFunc, a[1][0])
+            dest = self._target_regex.sub(self._replace_func, a[1][0])
             tmp = a[0][0].sub(dest, document[bpos:], 1)
-            repLength = opening.end() + len(tmp) - len(document[bpos:])
+            replacement_length = opening.end() + len(tmp) - len(document[bpos:])
             document = document[:bpos] + tmp
-            marks = marks[:bpos] + "1"*repLength + marks[bpos+opening.end():]
+            marks = marks[:bpos] + "1"*replacement_length + marks[bpos+opening.end():]
             assert (len(document)==len(marks))
             # move in document, adapt actions list (found only)
             pos = bpos + opening.end() + 1
@@ -562,7 +563,7 @@ class Degrotesque():
 
 # --- functions -----------------------------------------------------
 # --- getExtensions
-def getExtensions(extNames):
+def get_extensions(names):
     """Returns the list of extensions of files to process.
 
     If the given names of extensions are None or empty, the default
@@ -571,7 +572,7 @@ def getExtensions(extNames):
     Otherwise, the given string is split and returned as a list.
 
     Args:
-        extNames (List[str]): The names of extensions to process (or None if default extensions shall be used)
+        names (List[str]): The names of extensions to process (or None if default extensions shall be used)
 
     Returns:
         (List[str]): The list of extensions to use.
@@ -579,16 +580,16 @@ def getExtensions(extNames):
     todo:
         What about removing dots?
     """
-    if extNames is None or len(extNames)==0:
+    if names is None or len(names)==0:
         return None
-    exts = [x.strip() for x in extNames.split(',')]
+    exts = [x.strip() for x in names.split(',')]
     if "*" in exts:
         return None
     return exts
 
 
 # --- getFiles
-def getFiles(name, recursive, extensions):
+def get_files(name, recursive, extensions):
     """Returns the files to process.
 
     If a file name is given, a list with only this file name is returned.
@@ -700,19 +701,19 @@ def main(arguments=None):
     """
     sys.tracebacklimit = 0
     # parse options
-    optParser = OptionParser(usage="\n  degrotesque.py [options]", version="degrotesque 3.0.0")
-    optParser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
-    optParser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
-    optParser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
-    optParser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8')")
-    optParser.add_option("-H", "--html", dest="html", action="store_true", default=False, help="Files are HTML/XML-derivatives")
-    optParser.add_option("-T", "--text", dest="text", action="store_true", default=False, help="Files are plain text files")
-    optParser.add_option("-M", "--markdown", dest="markdown", action="store_true", default=False, help="Files are markdown files")
-    optParser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
-    optParser.add_option("-f", "--format", dest="format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
-    optParser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
-    optParser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
-    options, remaining_args = optParser.parse_args(args=arguments)
+    options_parser = OptionParser(usage="\n  degrotesque.py [options]", version="degrotesque 3.0.0")
+    options_parser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
+    options_parser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
+    options_parser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
+    options_parser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8')")
+    options_parser.add_option("-H", "--html", dest="html", action="store_true", default=False, help="Files are HTML/XML-derivatives")
+    options_parser.add_option("-T", "--text", dest="text", action="store_true", default=False, help="Files are plain text files")
+    options_parser.add_option("-M", "--markdown", dest="markdown", action="store_true", default=False, help="Files are markdown files")
+    options_parser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
+    options_parser.add_option("-f", "--format", dest="format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
+    options_parser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
+    options_parser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
+    options, remaining_args = options_parser.parse_args(args=arguments)
     # check options
     if options.input is None:
         print("Error: no input file(s) given...", file=sys.stderr)
@@ -742,12 +743,12 @@ def main(arguments=None):
                 document = fd.read()
             # determine file contents (html/text)
             n, e = os.path.splitext(f)
-            isHTML = options.html
+            is_html = options.html
             if not options.text and not options.markdown and not options.html:
-                isHTML = e[1:] in htmlExtensions or htmlRegex.search(document) is not None
-            isMarkdown = not options.html and not options.text and (options.markdown or e[1:] in markdownExtensions)
+                is_html = e[1:] in extensions_html or htmlRegex.search(document) is not None
+            is_markdown = not options.html and not options.text and (options.markdown or e[1:] in extensions_md)
             # apply the beautifications
-            document = degrotesque.prettify(document, isHTML, isMarkdown)
+            document = degrotesque.prettify(document, is_html, is_markdown)
             # build a backup
             if not options.no_backup:
                 shutil.copy(f, f+".orig")

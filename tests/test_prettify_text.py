@@ -24,44 +24,44 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def setUp(self):
         self._degrotesque = degrotesque.Degrotesque()
-        self._degrotesque.setFormat("html")
+        self._degrotesque.set_format("html")
 
     def test_example(self):
         """The plain example test"""
-        self._degrotesque._restoreDefaultActions()
+        self._degrotesque._restore_default_actions()
         assert(self._degrotesque.prettify("\"Well - that's not what I had expected.\"", False)=="&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;")
 
     def test_example_between_elements(self):
         """Example embedded in a tag"""
-        self._degrotesque._restoreDefaultActions()
+        self._degrotesque._restore_default_actions()
         assert(self._degrotesque.prettify("<b>\"Well - that's not what I had expected.\"</b>", False)=="<b>&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;</b>")
 
     def test_example_in_pre(self):
         """Example in masked tag (pre)"""
-        self._degrotesque._restoreDefaultActions()
+        self._degrotesque._restore_default_actions()
         assert(self._degrotesque.prettify("<pre>\"Well - that's not what I had expected.\"</pre>", False)=="<pre>&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;</pre>")
 
     def test_action_quotes_english(self):
         """Testing 'quotes.english' action"""
-        self._degrotesque.setActions("quotes.english")
+        self._degrotesque.set_actions("quotes.english")
         assert(self._degrotesque.prettify(" \"tests\" ", False)==" &ldquo;tests&rdquo; ")
         assert(self._degrotesque.prettify(" \'tests\' ", False)==" &lsquo;tests&rsquo; ")
 
     def test_action_quotes_german(self):
         """Testing 'quotes.german' action"""
-        self._degrotesque.setActions("quotes.german")
+        self._degrotesque.set_actions("quotes.german")
         assert(self._degrotesque.prettify(" \"tests\" ", False)==" &bdquo;tests&rdquo; ")
         assert(self._degrotesque.prettify(" \'tests\' ", False)==" &sbquo;tests&rsquo; ")
 
     def test_action_quotes_french(self):
         """Testing 'quotes.french' action"""
-        self._degrotesque.setActions("quotes.french")
+        self._degrotesque.set_actions("quotes.french")
         assert(self._degrotesque.prettify(" &lt;&lt;tests&gt;&gt; ", False)==" &laquo;tests&raquo; ")
         assert(self._degrotesque.prettify(" &lt;tests&gt; ", False)==" &lsaquo;tests&rsaquo; ")
 
     def test_action_to_quotes(self):
         """Testing 'to_quotes' action"""
-        self._degrotesque.setActions("to_quotes")
+        self._degrotesque.set_actions("to_quotes")
         assert(self._degrotesque.prettify(" \"tests\" ", False)==" <q>tests</q> ")
         assert(self._degrotesque.prettify(" \'tests\' ", False)==" <q>tests</q> ")
         assert(self._degrotesque.prettify(" &lt;&lt;tests&gt;&gt; ", False)==" <q>tests</q> ")
@@ -69,7 +69,7 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def test_action_commercial(self):
         """Testing 'commercial' action"""
-        self._degrotesque.setActions("commercial")
+        self._degrotesque.set_actions("commercial")
         assert(self._degrotesque.prettify(" (c) ", False)==" &copy; ")
         assert(self._degrotesque.prettify(" (C) ", False)==" &copy; ")
         assert(self._degrotesque.prettify(" (r) ", False)==" &reg; ")
@@ -80,7 +80,7 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def test_action_dashes(self):
         """Testing 'dashes' action"""
-        self._degrotesque.setActions("dashes")
+        self._degrotesque.set_actions("dashes")
         assert(self._degrotesque.prettify(" - ", False)==" &mdash; ")
         assert(self._degrotesque.prettify(u" 123-321 ", False)==u" 123&ndash;321 ")
         #assert(self._degrotesque.prettify(u" -321 ")==u" &ndash;321 ")
@@ -88,22 +88,22 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def test_action_bullets(self):
         """Testing 'bullets' action"""
-        self._degrotesque.setActions("bullets")
+        self._degrotesque.set_actions("bullets")
         assert(self._degrotesque.prettify(" * ", False)==" &bull; ")
 
     def test_action_ellipsis(self):
         """Testing 'ellipsis' action"""
-        self._degrotesque.setActions("ellipsis")
+        self._degrotesque.set_actions("ellipsis")
         assert(self._degrotesque.prettify(" ... ", False)==" &hellip; ")
 
     def test_action_apostrophe(self):
         """Testing 'apostrophe' action"""
-        self._degrotesque.setActions("apostrophe")
+        self._degrotesque.set_actions("apostrophe")
         assert(self._degrotesque.prettify(" ' ", False)==" &apos; ")
 
     def test_action_math(self):
         """Testing 'math' action"""
-        self._degrotesque.setActions("math")
+        self._degrotesque.set_actions("math")
         assert(self._degrotesque.prettify(" +/- ", False)==" &plusmn; ")
         assert(self._degrotesque.prettify(" 1/2 ", False)==" &frac12; ")
         assert(self._degrotesque.prettify(" 1/4 ", False)==" &frac14; ")
@@ -120,14 +120,14 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def test_action_dagger(self):
         """Testing 'dagger' action"""
-        self._degrotesque.setActions("dagger")
+        self._degrotesque.set_actions("dagger")
         assert(self._degrotesque.prettify(" ** ", False)==" &Dagger; ")
         assert(self._degrotesque.prettify(" * ", False)==" &dagger; ")
 
     def test_masks(self):
         """Testing masks
         todo: Think about minusses and dealing with numbers"""
-        self._degrotesque.setActions("masks,dashes")
+        self._degrotesque.set_actions("masks,dashes")
         assert(self._degrotesque.prettify(" ISSN 1001-1001 ", False)==" ISSN 1001-1001 ")
         assert(self._degrotesque.prettify(" ISBN 978-3-86680-192-9 ", False)==" ISBN 978-3-86680-192-9 ")
         assert(self._degrotesque.prettify(" ISBN 979-3-86680-192-9 ", False)==" ISBN 979-3-86680-192-9 ")
@@ -135,24 +135,24 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def test_action_chem(self):
         """Testing 'chem' action"""
-        self._degrotesque.setActions("chem")
+        self._degrotesque.set_actions("chem")
         assert(self._degrotesque.prettify("CO2", False)=="CO<sub>2</sub>")
         assert(self._degrotesque.prettify("C20H25N3O", False)=="C<sub>20</sub>H<sub>25</sub>N<sub>3</sub>O")
 
     def test_skip(self):
         """Testing whether skipping code works"""
-        self._degrotesque.setActions("quotes.english")
+        self._degrotesque.set_actions("quotes.english")
         assert(self._degrotesque.prettify(" <script> if(i<0) echo \"a\"</script> \"Hello World\" ", False)==" <script> if(i<0) echo &ldquo;a&rdquo;</script> &ldquo;Hello World&rdquo; ")
 
     def test_attributes(self):
         """Testing whether skipping code works"""
-        self._degrotesque.setActions("quotes.english")
+        self._degrotesque.set_actions("quotes.english")
         assert(self._degrotesque.prettify("\"<a href=\"test.html\">Hello World\"</a>\"", False)=="&ldquo;<a href=&rdquo;test.html&ldquo;>Hello World&rdquo;</a>\"")
 
 
     def test_real1(self):
         """A previously failing real-life example"""
-        self._degrotesque._restoreDefaultActions()
+        self._degrotesque._restore_default_actions()
         text = """<p>The rendering of .css-tables can be altered as well. The parameter
     <code class="option">--css.attribute <em class="replaceable"><code>&lt;NAME&gt;</code></em></code>
     sets the name of the written attribute, e.g. "font-color". The default is
@@ -176,8 +176,8 @@ class TestDegrotesquePrettify(unittest.TestCase):
 
     def test_prettify_toSkip_oddity(self):
         """Oddity#1"""
-        self._degrotesque._restoreDefaultActions()
-        self._degrotesque.setToSkip("(tm)")
+        self._degrotesque._restore_default_actions()
+        self._degrotesque.set_to_skip("(tm)")
         assert(self._degrotesque.prettify(" <(tm)>a</(tm)> ", False)==" <&trade;>a</&trade;> ")
 
 

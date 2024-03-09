@@ -2,7 +2,7 @@
 # ===================================================================
 # degrotesque - A web type setter.
 #
-# Tests for the getFiles functions
+# Tests for the get_files functions
 #
 # (c) Daniel Krajzewicz 2020-2023
 # daniel@krajzewicz.de
@@ -15,7 +15,6 @@
 
 
 # --- test functions ------------------------------------------------
-# ------ getFiles ---------------------------------------------------
 def checkFiles(wanted, got, path):
     got2 = []
     for f in got:
@@ -26,35 +25,35 @@ def checkFiles(wanted, got, path):
         got2.append(f)
     assert wanted==got2
 
-def test_getFiles_one(tmp_path):
-    """Test getFiles behaviour if one file is given"""
+def test_get_files_one(tmp_path):
+    """Test get_files behaviour if one file is given"""
     import degrotesque
     p = tmp_path / "hello.html"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.getFiles(tmp_path / "hello.html", False, ["html"])
+    files = degrotesque.get_files(tmp_path / "hello.html", False, ["html"])
     checkFiles(["hello.html"], files, tmp_path)
 
-def test_getFiles_multiple1(tmp_path):
-    """Test getFiles behaviour if two files is given"""
+def test_get_files_multiple1(tmp_path):
+    """Test get_files behaviour if two files is given"""
     import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.html"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.getFiles(tmp_path, False, ["html"])
+    files = degrotesque.get_files(tmp_path, False, ["html"])
     checkFiles(["hello1.html", "hello2.html"], files, tmp_path)
 
-def test_getFiles_multiple2(tmp_path):
-    """Test getFiles behaviour if two files exist but only .html-files shall be processed"""
+def test_get_files_multiple2(tmp_path):
+    """Test get_files behaviour if two files exist but only .html-files shall be processed"""
     import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.txt"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.getFiles(tmp_path, False, ["html"])
+    files = degrotesque.get_files(tmp_path, False, ["html"])
     checkFiles(["hello1.html"], files, tmp_path)
 
-def test_getFiles_multiple_recursive1(tmp_path):
+def test_get_files_multiple_recursive1(tmp_path):
     """Tests recusrsive folder structure with recursion disabled"""
     import degrotesque
     p = tmp_path / "hello1.html"
@@ -63,10 +62,10 @@ def test_getFiles_multiple_recursive1(tmp_path):
     d.mkdir()
     p = d / "hello2.html"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.getFiles(tmp_path, False, ["html"])
+    files = degrotesque.get_files(tmp_path, False, ["html"])
     checkFiles(["hello1.html"], files, tmp_path)
 
-def test_getFiles_multiple_recursive2(tmp_path):
+def test_get_files_multiple_recursive2(tmp_path):
     """Tests recusrsive folder structure with recursion enabled"""
     import degrotesque
     p = tmp_path / "hello1.html"
@@ -75,7 +74,7 @@ def test_getFiles_multiple_recursive2(tmp_path):
     d.mkdir()
     p = d / "hello2.html"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.getFiles(tmp_path, True, ["html"])
+    files = degrotesque.get_files(tmp_path, True, ["html"])
     checkFiles(["hello1.html", "sub/hello2.html"], files, tmp_path)
 
 

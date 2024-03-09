@@ -1,7 +1,7 @@
 # ===================================================================
 # degrotesque - A web type setter.
 #
-# Tests for the _markHTML method
+# Tests for the _mark_html method
 #
 # (c) Daniel Krajzewicz 2020-2023
 # daniel@krajzewicz.de
@@ -19,118 +19,118 @@ import degrotesque
 
 
 # --- classes -------------------------------------------------------
-class TestDegrotesque_markHTML(unittest.TestCase):
-    """Testing the _markHTML method"""
+class TestDegrotesque_mark_html(unittest.TestCase):
+    """Testing the _mark_html method"""
 
     def setUp(self):
         self._degrotesque = degrotesque.Degrotesque()
 
-    def test__markHTML_textOnly1(self):
+    def test__mark_html_textOnly1(self):
         """Text without markups only"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("Hallo")=="00000")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("Hallo")=="00000")
 
-    def test__markHTML_textOnly2(self):
+    def test__mark_html_textOnly2(self):
         """Text without markups only"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("a")=="0")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("a")=="0")
 
 
-    def test__markHTML_simpleHTML1(self):
+    def test__mark_html_simpleHTML1(self):
         """Some simple HTML markups"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("Hallo <b>Mama!</b>")=="000000111000001111")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("Hallo <b>Mama!</b>")=="000000111000001111")
 
-    def test__markHTML_simpleHTML2(self):
+    def test__mark_html_simpleHTML2(self):
         """Some simple HTML markups"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("a<b></b>")=="01111111")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("a<b></b>")=="01111111")
 
-    def test__markHTML_simpleHTML3(self):
+    def test__mark_html_simpleHTML3(self):
         """Some simple HTML markups"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("a<b>a</b>")=="011101111")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("a<b>a</b>")=="011101111")
 
-    def test__markHTML_simpleHTML4(self):
+    def test__mark_html_simpleHTML4(self):
         """Some simple HTML markups"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("<b>a</b>")=="11101111")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("<b>a</b>")=="11101111")
 
-    def test__markHTML_simpleHTML5(self):
+    def test__mark_html_simpleHTML5(self):
         """Some simple HTML markups"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("<b>a</b>a")=="111011110")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("<b>a</b>a")=="111011110")
 
 
-    def test__markHTML_php_plain1(self):
+    def test__mark_html_php_plain1(self):
         """Parsing php"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("Hallo <?php a ?> ")=="00000011111111110")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("Hallo <?php a ?> ")=="00000011111111110")
 
-    def test__markHTML_php_plain2(self):
+    def test__mark_html_php_plain2(self):
         """Parsing php"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("Hallo <? a ?> ")=="00000011111110")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("Hallo <? a ?> ")=="00000011111110")
 
-    def test__markHTML_php_unclosed(self):
+    def test__mark_html_php_unclosed(self):
         """Parsing php"""
-        self._degrotesque._restoreDefaultElementsToSkip()
+        self._degrotesque._restore_default_elements_to_skip()
         try:
-            self._degrotesque._markHTML("Hallo <? a")
+            self._degrotesque._mark_html("Hallo <? a")
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
             assert (str(e)=="Unclosed '<?' element at position 8.")
 
 
-    def test__markHTML_default1(self):
+    def test__mark_html_default1(self):
         """Parsing to skip"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("Hallo <code>a</code> ")=="000000111111111111110")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("Hallo <code>a</code> ")=="000000111111111111110")
 
-    def test__markHTML_default_unclosed(self):
+    def test__mark_html_default_unclosed(self):
         """Parsing unclosed to skip"""
-        self._degrotesque._restoreDefaultElementsToSkip()
+        self._degrotesque._restore_default_elements_to_skip()
         try:
-            self._degrotesque._markHTML("Hallo <code>")
+            self._degrotesque._mark_html("Hallo <code>")
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
             assert (str(e)=="Unclosed '<code' element at position 11.")
 
-    def test__markHTML_customToSkip(self):
+    def test__mark_html_customToSkip(self):
         """Parsing custom to skip"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        self._degrotesque.setToSkip("b")
-        assert(self._degrotesque._markHTML("Hallo <b>Mama!</b>")=="000000111111111111")
+        self._degrotesque._restore_default_elements_to_skip()
+        self._degrotesque.set_to_skip("b")
+        assert(self._degrotesque._mark_html("Hallo <b>Mama!</b>")=="000000111111111111")
 
 
-    def test__markHTML_jsp1(self):
+    def test__mark_html_jsp1(self):
         """Parsing jsp/asp"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("Hallo <% a %> ")=="00000011111110")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("Hallo <% a %> ")=="00000011111110")
 
 
-    def test__markHTML_comments1(self):
+    def test__mark_html_comments1(self):
         """Parsing comments"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("Hallo <!-- a --> ")=="00000011111111110")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("Hallo <!-- a --> ")=="00000011111111110")
 
 
-    def test__markHTML_doctype1(self):
+    def test__mark_html_doctype1(self):
         """Parsing doctypes"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("Hallo <!DOCTYPE >a")=="000000111111111110")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("Hallo <!DOCTYPE >a")=="000000111111111110")
 
-    def test__markHTML_doctype2(self):
+    def test__mark_html_doctype2(self):
         """Parsing doctypes"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        assert(self._degrotesque._markHTML("Hallo <!DOCTYPE <!ELEMENT >>a")=="00000011111111111111111111110")
+        self._degrotesque._restore_default_elements_to_skip()
+        assert(self._degrotesque._mark_html("Hallo <!DOCTYPE <!ELEMENT >>a")=="00000011111111111111111111110")
 
 
-    def test__markHTML_toSkip_oddity1(self):
+    def test__mark_html_toSkip_oddity1(self):
         """Oddity#1"""
-        self._degrotesque._restoreDefaultElementsToSkip()
-        self._degrotesque.setToSkip("(tm)")
-        assert(self._degrotesque._markHTML(" <(tm)>a</(tm)> ")=="0111111111111110")
+        self._degrotesque._restore_default_elements_to_skip()
+        self._degrotesque.set_to_skip("(tm)")
+        assert(self._degrotesque._mark_html(" <(tm)>a</(tm)> ")=="0111111111111110")
 
