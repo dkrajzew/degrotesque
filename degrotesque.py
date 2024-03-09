@@ -194,7 +194,7 @@ def _replace_html(matchobj):
     Returns:
         (str): The converted string (here: as HTML entity)
     """
-    return encodingMap[matchobj.group(0)][0]
+    return encoding_map[matchobj.group(0)][0]
 
 
 def _replace_unicode(matchobj):
