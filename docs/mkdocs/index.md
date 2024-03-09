@@ -2,34 +2,41 @@
 [![PyPI version](https://badge.fury.io/py/degrotesque.svg)](https://pypi.python.org/pypi/degrotesque)
 ![test](https://github.com/dkrajzew/degrotesque/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
+[![Downloads](https://static.pepy.tech/badge/degrotesque/week)](https://pepy.tech/project/degrotesque)
 [![Coverage](https://img.shields.io/badge/coverage-100%25-success)](https://img.shields.io/badge/coverage-100%25-success)
 [![Documentation Status](https://readthedocs.org/projects/degrotesque/badge/?version=latest)](https://degrotesque.readthedocs.io/en/latest/?badge=latest)
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
 
 
-degrotesque &mdash; A web type setter.
+degrotesque &mdash; A web type setter written in Python.
 
 Introduction
 ------------
 
 *degrotesque beautifies the web.*
 
-**degrotesque** is a [Python](https://www.python.org/) script. It loads a text/markdown/HTML/XML file from the disc &mdash; or several in batch &mdash; and for each, it replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
+**degrotesque** is a [Python](https://www.python.org/) script that loads a text/markdown/HTML/XML file from the 
+disc &mdash; or several in batch &mdash; and for each, it replaces some commonly used non-typographic characters,
+such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
 
 E.g.:
 
- "Well - that's not what I had expected."
+<center><h1 class="degrotesque_example">"Well - that's not what I had expected."</h1></center>
 
 will become:
 
- &ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;
+<center><h1 class="degrotesque_example">&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;</h1></center>
 
 I think it looks __much__ better.
 
-The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively, the ' by &apos; and the - by an &mdash;. Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
+The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively.
+The 'have been replaced by &apos; and the - by an &mdash;.
+Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
 
-It is meant to be a relatively **reliable post-processing step for type setting web pages before releasing them**. Being a Python script, **it can be easily embedded in own workflows**. In version 3.0.0 the support of markdown files was added.
+It is meant to be a relatively **reliable post-processing step for type setting web pages or any plain character / ASCII written texts before releasing them**.
+Being a Python script, **it can be easily embedded in own workflows**.
+In version 3.0.0 the support of markdown files was added.
 
 **degrotesque** supports English, German, and French alternatives currently.
 
@@ -38,16 +45,16 @@ Examples
 --------
 
 ```console
-degrotesque -i my_page.html -a quotes.german
+degrotesque --input my_page.html --actions quotes.german
 ```
 
 Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by their typographic German counterparts.
 
 ```console
-degrotesque -i my_folder -r --no-backup
+degrotesque --input my_folder --recursive --no-backup
 ```
 
-Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The files format of each file is determined using the file&apos;s extension.
+Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The format of each file is determined using the respective file&apos;s extension.
 
 
 Background

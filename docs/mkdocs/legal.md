@@ -7,6 +7,10 @@ Impressum
 
 These pages were made by Daniel Krajzewicz, 2020&ndash;2023.
 
+Daniel Krajzewicz, Jochen-Nüßler-Str. 5, 12359 Berlin, Germany
+
+USt-IdNr.: DE281155133
+
 
 Disclaimer
 ----------

@@ -1,4 +1,4 @@
-Appendix A: Default Extensions
+Appendix B: Default Extensions
 ==============================
 
 HTML / XML
@@ -13,8 +13,8 @@ Files with the following extensions are parsed as HTML / XML files per default:
 * shtml, shtm, sht, stm,
 * vbhtml,
 * ppthtml,
-* ssp, jhtml
-* xml
+* ssp, jhtml,
+* xml,
 * osm
 
 Markdown

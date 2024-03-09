@@ -7,6 +7,9 @@ When parsing HTML files, the contents of the following elements are not processe
 * code
 * style
 * pre
+* samp
+* tt
+* kbd
 * ?
 * ?php
 * %
