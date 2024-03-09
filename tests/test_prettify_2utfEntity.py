@@ -1,24 +1,29 @@
-# ===================================================================
-# degrotesque - A web type setter.
-#
-# Tests for the prettify method
-#
-# (c) Daniel Krajzewicz 2020-2023
-# daniel@krajzewicz.de
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# =============================================================================
+"""Tests for the prettify method using UTF entities."""
+# =============================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "3.0.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Production"
+# =============================================================================
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/docs/degrotesque/index.html
 # - http://www.krajzewicz.de
-#
-# Available under the BSD license.
-# ===================================================================
+# =============================================================================
 
 
-# --- imports -------------------------------------------------------
+# --- imports -----------------------------------------------------------------
 import unittest
 import degrotesque
 
 
-# --- classes -------------------------------------------------------
+# --- test classes ------------------------------------------------------------
 class TestDegrotesque_Prettify_UTFEntity(unittest.TestCase):
     """Testing the prettify method"""
 

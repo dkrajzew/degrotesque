@@ -1,20 +1,24 @@
-﻿from __future__ import print_function
-# ===================================================================
-# degrotesque - A web type setter.
-#
-# Tests for the get_files functions
-#
-# (c) Daniel Krajzewicz 2020-2023
-# daniel@krajzewicz.de
+﻿#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# =============================================================================
+"""Tests for the get_files function."""
+# =============================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "3.0.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Production"
+# =============================================================================
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/docs/degrotesque/index.html
 # - http://www.krajzewicz.de
-#
-# Available under the BSD license.
-# ===================================================================
+# =============================================================================
 
 
-# --- test functions ------------------------------------------------
+# --- test functions ----------------------------------------------------------
 def check_files(wanted, got, path):
     got2 = []
     for f in got:
