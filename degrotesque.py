@@ -1,20 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from __future__ import print_function
-# ===================================================================
-# degrotesque - A web type setter.
-#
-# Main module
-#
-# (c) Daniel Krajzewicz 2020-2023
-# daniel@krajzewicz.de
+# =============================================================================
+"""degrotesque - A web type setter.
+"""
+# =============================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "3.0.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Production"
+# =============================================================================
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/docs/degrotesque/index.html
 # - http://www.krajzewicz.de
-#
-# Available under the BSD license.
-# ===================================================================
+# =============================================================================
 
 
-# --- imports -------------------------------------------------------
+# --- imports -----------------------------------------------------------------
 import sys
 import os
 import io
@@ -24,7 +30,7 @@ from optparse import OptionParser
 
 
 
-# --- variables and constants ---------------------------------------
+# --- variables and constants -------------------------------------------------
 # A database of actions
 actions_db = {
     # english quotes
@@ -118,7 +124,7 @@ actions_db = {
 }
 
 
-# A database of extensions of HTML derivatives
+# A list of extensions of HTML/XML derivatives
 extensions_html = [
     "html", "htm", "xhtml",
     "php", "phtml", "phtm", "php2", "php3", "php4", "php5",
@@ -130,7 +136,7 @@ extensions_html = [
 ]
 
 
-# A database of markdown file extensions
+# A list of markdown file extensions
 extensions_md = [ "md" ]
 
 
@@ -172,7 +178,7 @@ encoding_map = {
 }
 
 
-# --- _replFunc_keep
+# --- replacement functions
 def _replace_keep(matchobj):
     """Unicode numbers conversion to itself
 
@@ -213,7 +219,7 @@ def _replace_unicode(matchobj):
 
 
 
-# --- class ---------------------------------------------------------
+# --- class -------------------------------------------------------------------
 class Degrotesque():
     """A tiny web type setter.
 
@@ -245,13 +251,11 @@ class Degrotesque():
         self._target_regex = re.compile("(&#[xX]?[0-9a-fA-F]*;)")
 
 
-    # --- restoreDefaultActions
     def _restore_default_actions(self):
         """Instantiates default actions"""
         self.set_actions("masks,quotes.english,dashes,ellipsis,math,apostrophe,commercial")
 
 
-    # --- setActions
     def set_actions(self, action_names):
         """Sets the actions to apply.
 
@@ -279,8 +283,6 @@ class Degrotesque():
                 self._actions.append(n)
                 
 
-
-    # --- restoreDefaultActions
     def _restore_default_elements_to_skip(self):
         """Instantiates default elements to skip"""
         # list of elements which contents shall not be processed
@@ -292,7 +294,6 @@ class Degrotesque():
         ]
 
 
-    # --- setToSkip
     def set_to_skip(self, elements_to_skip):
         """Sets the elements which contents shall not be changed.
 
@@ -312,7 +313,6 @@ class Degrotesque():
         self._elements_to_skip = [x.strip() for x in elements_to_skip.split(',')]
 
 
-    # --- setFormat
     def set_format(self, format_name):
         """Sets the target character representation
         
@@ -329,7 +329,6 @@ class Degrotesque():
             raise ValueError("Unknown target format '%s'" % format_name)
 
 
-    # --- _getTagName
     def _get_tag_name(self, html):
         """Returns the name of the tag that starts at the begin of the given string.
 
@@ -349,7 +348,6 @@ class Degrotesque():
         return html[ib:ie]
 
 
-    # --- _mark
     def _mark_html(self, html):
         """Returns a string where all HTML-elements are denoted as '1' and
         plain content as '0'.
@@ -471,7 +469,7 @@ class Degrotesque():
             b = e
         return ret
 
-    # --- prettify
+
     def prettify(self, document, is_html, is_markdown=False):
         """Prettifies (degrotesques) the given document.
 
@@ -561,8 +559,7 @@ class Degrotesque():
 
 
 
-# --- functions -----------------------------------------------------
-# --- getExtensions
+# --- functions ---------------------------------------------------------------
 def get_extensions(names):
     """Returns the list of extensions of files to process.
 
@@ -588,7 +585,6 @@ def get_extensions(names):
     return exts
 
 
-# --- getFiles
 def get_files(name, recursive, extensions):
     """Returns the files to process.
 
@@ -627,7 +623,6 @@ def get_files(name, recursive, extensions):
     return files
 
 
-# --- main
 def main(arguments=None):
     """The main method using parameter from the command line.
 
