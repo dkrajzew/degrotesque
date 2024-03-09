@@ -19,7 +19,7 @@ import degrotesque
 
 
 # --- classes -------------------------------------------------------
-class TestDegrotesquePrettify(unittest.TestCase):
+class TestDegrotesque_Prettify_UTFEntity(unittest.TestCase):
     """Testing the prettify method"""
 
     def setUp(self):

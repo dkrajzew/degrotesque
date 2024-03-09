@@ -15,7 +15,7 @@
 
 
 # --- test functions ------------------------------------------------
-def checkFiles(wanted, got, path):
+def check_files(wanted, got, path):
     got2 = []
     for f in got:
         f = str(f).replace(str(path), "")
@@ -31,7 +31,7 @@ def test_get_files_one(tmp_path):
     p = tmp_path / "hello.html"
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.get_files(tmp_path / "hello.html", False, ["html"])
-    checkFiles(["hello.html"], files, tmp_path)
+    check_files(["hello.html"], files, tmp_path)
 
 def test_get_files_multiple1(tmp_path):
     """Test get_files behaviour if two files is given"""
@@ -41,7 +41,7 @@ def test_get_files_multiple1(tmp_path):
     p = tmp_path / "hello2.html"
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.get_files(tmp_path, False, ["html"])
-    checkFiles(["hello1.html", "hello2.html"], files, tmp_path)
+    check_files(["hello1.html", "hello2.html"], files, tmp_path)
 
 def test_get_files_multiple2(tmp_path):
     """Test get_files behaviour if two files exist but only .html-files shall be processed"""
@@ -51,7 +51,7 @@ def test_get_files_multiple2(tmp_path):
     p = tmp_path / "hello2.txt"
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.get_files(tmp_path, False, ["html"])
-    checkFiles(["hello1.html"], files, tmp_path)
+    check_files(["hello1.html"], files, tmp_path)
 
 def test_get_files_multiple_recursive1(tmp_path):
     """Tests recusrsive folder structure with recursion disabled"""
@@ -63,7 +63,7 @@ def test_get_files_multiple_recursive1(tmp_path):
     p = d / "hello2.html"
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.get_files(tmp_path, False, ["html"])
-    checkFiles(["hello1.html"], files, tmp_path)
+    check_files(["hello1.html"], files, tmp_path)
 
 def test_get_files_multiple_recursive2(tmp_path):
     """Tests recusrsive folder structure with recursion enabled"""
@@ -75,6 +75,6 @@ def test_get_files_multiple_recursive2(tmp_path):
     p = d / "hello2.html"
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.get_files(tmp_path, True, ["html"])
-    checkFiles(["hello1.html", "sub/hello2.html"], files, tmp_path)
+    check_files(["hello1.html", "sub/hello2.html"], files, tmp_path)
 
 

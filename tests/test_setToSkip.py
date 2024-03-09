@@ -19,7 +19,7 @@ import degrotesque
 
 
 # --- classes -------------------------------------------------------
-class TestDegrotesqueset_to_skip(unittest.TestCase):
+class TestDegrotesqueset_ToSkip(unittest.TestCase):
     """Testing the set_to_skip method"""
 
     def setUp(self):

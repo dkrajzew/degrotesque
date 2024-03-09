@@ -19,7 +19,7 @@ import degrotesque
 
 
 # --- classes -------------------------------------------------------
-class TestDegrotesqueset_actions(unittest.TestCase):
+class TestDegrotesque_SetActions(unittest.TestCase):
     """Testing the set_actions method"""
 
     def setUp(self):

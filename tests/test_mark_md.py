@@ -19,7 +19,7 @@ import degrotesque
 
 
 # --- classes -------------------------------------------------------
-class TestDegrotesque_mark_markdown(unittest.TestCase):
+class TestDegrotesque_MarkMarkdown(unittest.TestCase):
     """Testing the _mark_markdown method"""
 
     def setUp(self):

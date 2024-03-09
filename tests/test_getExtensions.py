@@ -15,7 +15,6 @@ from __future__ import print_function
 
 
 # --- test functions ------------------------------------------------
-# ------ get_extensions ----------------------------------------------
 def test_get_extensions_empty1():
     """Test get_extensions behaviour if no arguments are given (None)"""
     import degrotesque

@@ -19,7 +19,7 @@ import degrotesque
 
 
 # --- classes -------------------------------------------------------
-class TestDegrotesque_mark_html(unittest.TestCase):
+class TestDegrotesque_MarkHTML(unittest.TestCase):
     """Testing the _mark_html method"""
 
     def setUp(self):
