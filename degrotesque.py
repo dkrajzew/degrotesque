@@ -713,7 +713,7 @@ def main(arguments=None):
     if options.input is None:
         print("Error: no input file(s) given...", file=sys.stderr)
         print("Usage: degrotesque.py -i <FILE>[,<FILE>]* [options]+", file=sys.stderr)
-        sys.exit(2)
+        return 2
     # setup degrotesque
     degrotesque = Degrotesque()
     try:
@@ -722,7 +722,7 @@ def main(arguments=None):
         degrotesque.set_format(options.format)
     except ValueError as err:
         print(str(err))
-        sys.exit(3)
+        return 3
     # collect files
     extensions = get_extensions(options.extensions)
     files = get_files(options.input, options.recursive, extensions)
@@ -752,9 +752,11 @@ def main(arguments=None):
                 fd.write(document)
         except ValueError as err:
             print(str(err))
-            sys.exit(4)
+            return 4
+    return 0
 
 
 # -- main check
 if __name__ == '__main__':
-    main(sys.argv) # pragma: no cover
+    ret = main(sys.argv) # pragma: no cover
+    sys.exit(ret) # pragma: no cover

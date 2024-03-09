@@ -18,12 +18,8 @@ from __future__ import print_function
 def test_main_empty(capsys):
     """Test behaviour if no arguments are given"""
     import degrotesque
-    try:
-        degrotesque.main([])
-        assert False # pragma: no cover
-    except SystemExit as e:
-        assert type(e)==type(SystemExit())
-        assert e.code==2
+    ret = degrotesque.main([])
+    assert ret==2
     captured = capsys.readouterr()
     assert captured.err.replace("__main__.py", "degrotesque.py") == "Error: no input file(s) given...\nUsage: degrotesque.py -i <FILE>[,<FILE>]* [options]+\n"
     assert captured.out == ""
