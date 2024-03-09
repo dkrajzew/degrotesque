@@ -5,7 +5,7 @@ Legal Information
 Impressum
 ---------
 
-These pages were made by Daniel Krajzewicz, 2020&ndash;2023.
+These pages were made by Daniel Krajzewicz, 2020&ndash;2024.
 
 Daniel Krajzewicz, Jochen-Nüßler-Str. 5, 12359 Berlin, Germany
 

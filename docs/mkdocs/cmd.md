@@ -36,13 +36,13 @@ Examples
 --------
 
 ```console
-degrotesque -i my_page.html -a quotes.german
+degrotesque --input my_page.html --actions quotes.german
 ```
 
 Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by their typographic German counterparts.
 
 ```console
-degrotesque -i my_folder -r --no-backup
+degrotesque --input my_folder --recursive --no-backup
 ```
 
 Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The files format of each file is determined using the file&apos;s extension.
