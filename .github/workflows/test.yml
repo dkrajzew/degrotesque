@@ -22,18 +22,20 @@ jobs:
           pip install pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test with pytest
-        run: |
-          pytest
-
-  coveralls:
-    name: Indicate completion to coveralls.io
+        run: pytest
+      - name: Coveralls Parallel
+        uses: coverallsapp/github-action@v2
+        with:
+          flag-name: run-${{ join(matrix.*, '-') }}
+          parallel: true
+  finish:
     needs: test
+    if: ${{ always() }}
     runs-on: ubuntu-latest
-    container: python:3-slim
     steps:
-    - name: Finished
-      run: |
-        pip3 install --upgrade coveralls
-        coveralls --service=github --finish
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@v2
+      with:
+        parallel-finished: true
+        carryforward: "run-1,run-2"
+  
