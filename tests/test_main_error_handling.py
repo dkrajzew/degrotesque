@@ -18,10 +18,13 @@ __status__     = "Production"
 # =============================================================================
 
 
+# --- imports -----------------------------------------------------------------
+from degrotesque import degrotesque
+
+
 # --- test functions ----------------------------------------------------------
 def test_main__unknown_option_bool(capsys, tmp_path):
     """An unknown option is given as a bool"""
-    import degrotesque
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -45,7 +48,6 @@ degrotesque.py: error: no such option: -u
 
 def test_main__unknown_option_int(capsys, tmp_path):
     """An unknown option is given as an int"""
-    import degrotesque
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -69,7 +71,6 @@ degrotesque.py: error: no such option: --foo
 
 def test_main__format__unknown(capsys, tmp_path):
     """An unknown option is given as bool"""
-    import degrotesque
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -86,7 +87,6 @@ def test_main__format__unknown(capsys, tmp_path):
 
 def test_main__document_broken1(capsys, tmp_path):
     """An unknown option is given as bool"""
-    import degrotesque
     p1 = tmp_path / "hello1.html"
     p1.write_text("<p \"Well - that's not what I had expected.\"")
     ret = degrotesque.main(["-i", tmp_path])
@@ -101,7 +101,6 @@ Unclosed element at 1
 
 def test_main__document_broken2(capsys, tmp_path):
     """An unknown option is given as bool"""
-    import degrotesque
     p1 = tmp_path / "hello1.html"
     p1.write_text("<pre> <pre \"Well - that's not what I had expected.\"")
     ret = degrotesque.main(["-i", tmp_path])

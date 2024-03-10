@@ -18,10 +18,13 @@ __status__     = "Production"
 # =============================================================================
 
 
+# --- imports -----------------------------------------------------------------
+from degrotesque import degrotesque
+
+
 # --- test functions ----------------------------------------------------------
 def test_filetype__two_html(capsys, tmp_path):
     """Whether two HTML files are processed"""
-    import degrotesque
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -39,7 +42,6 @@ def test_filetype__two_text(capsys, tmp_path):
     
     The second file is recognized as HTML due to it's contents
     """
-    import degrotesque
     p1 = tmp_path / "hello1.txt"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
@@ -57,7 +59,6 @@ def test_filetype__two_text_explicit(capsys, tmp_path):
     
     The second file is recognized as HTML due to it's contents
     """
-    import degrotesque
     p1 = tmp_path / "hello1.txt"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"

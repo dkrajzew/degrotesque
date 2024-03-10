@@ -20,7 +20,8 @@ __status__     = "Production"
 
 # --- imports -----------------------------------------------------------------
 import unittest
-import degrotesque
+from degrotesque import degrotesque
+from degrotesque import marker_md
 
 
 # --- test classes ------------------------------------------------------------
@@ -29,97 +30,98 @@ class TestDegrotesque_MarkMarkdown(unittest.TestCase):
 
     def setUp(self):
         self._degrotesque = degrotesque.Degrotesque()
+        self._marker = marker_md.DegrotesqueMDMarker()
 
     def test__mark_markdown_textOnly1(self):
         """Text without markups only"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo")=="00000")
+        assert(self._marker.get_mask("Hallo", self._degrotesque._elements_to_skip)=="00000")
 
     def test__mark_markdown_textOnly2(self):
         """Text without markups only"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("a")=="0")
+        assert(self._marker.get_mask("a", self._degrotesque._elements_to_skip)=="0")
 
     def test__mark_markdown_textOnly3(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo Mama!")=="00000000000")
+        assert(self._marker.get_mask("Hallo Mama!", self._degrotesque._elements_to_skip)=="00000000000")
 
 
     def test__mark_markdown_indent1a(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo\n\tMama!")=="000000111111")
+        assert(self._marker.get_mask("Hallo\n\tMama!", self._degrotesque._elements_to_skip)=="000000111111")
 
     def test__mark_markdown_indent1b(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo\n    Mama!")=="000000111111111")
+        assert(self._marker.get_mask("Hallo\n    Mama!", self._degrotesque._elements_to_skip)=="000000111111111")
 
     def test__mark_markdown_indent2a(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo\n\tMama!\n\tIch bin ein\nCode")=="000000111111111111111111110000")
+        assert(self._marker.get_mask("Hallo\n\tMama!\n\tIch bin ein\nCode", self._degrotesque._elements_to_skip)=="000000111111111111111111110000")
 
     def test__mark_markdown_indent2b(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo\n\tMama!\n    Ich bin ein\nCode")=="000000111111111111111111111110000")
+        assert(self._marker.get_mask("Hallo\n\tMama!\n    Ich bin ein\nCode", self._degrotesque._elements_to_skip)=="000000111111111111111111111110000")
 
 
     def test__mark_markdown_backtick1(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo `Mama`!")=="0000001111110")
+        assert(self._marker.get_mask("Hallo `Mama`!", self._degrotesque._elements_to_skip)=="0000001111110")
 
     def test__mark_markdown_backtick2(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo ``Mama``!")=="000000111111110")
+        assert(self._marker.get_mask("Hallo ``Mama``!", self._degrotesque._elements_to_skip)=="000000111111110")
 
     def test__mark_markdown_backtick3(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo ```Mama```!")=="00000011111111110")
+        assert(self._marker.get_mask("Hallo ```Mama```!", self._degrotesque._elements_to_skip)=="00000011111111110")
 
     def test__mark_markdown_nested_backtick1(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo `` `Mama` ``!")=="0000001111111111110")
+        assert(self._marker.get_mask("Hallo `` `Mama` ``!", self._degrotesque._elements_to_skip)=="0000001111111111110")
 
 
     def test__mark_markdown_backtick1b(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo `Mama`")=="000000111111")
+        assert(self._marker.get_mask("Hallo `Mama`", self._degrotesque._elements_to_skip)=="000000111111")
 
     def test__mark_markdown_backtick2b(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo ``Mama``")=="00000011111111")
+        assert(self._marker.get_mask("Hallo ``Mama``", self._degrotesque._elements_to_skip)=="00000011111111")
 
     def test__mark_markdown_backtick3b(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo ```Mama```")=="0000001111111111")
+        assert(self._marker.get_mask("Hallo ```Mama```", self._degrotesque._elements_to_skip)=="0000001111111111")
 
     def test__mark_markdown_nested_backtick1b(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo `` `Mama` ``")=="000000111111111111")
+        assert(self._marker.get_mask("Hallo `` `Mama` ``", self._degrotesque._elements_to_skip)=="000000111111111111")
 
 
     def test__mark_markdown_backtick4a(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo `Mama``Code`")=="000000111111111111")
+        assert(self._marker.get_mask("Hallo `Mama``Code`", self._degrotesque._elements_to_skip)=="000000111111111111")
 
     def test__mark_markdown_backtick4b(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo ``Mama```Code`")=="00000011111111111111")
+        assert(self._marker.get_mask("Hallo ``Mama```Code`", self._degrotesque._elements_to_skip)=="00000011111111111111")
 
     def test__mark_markdown_backtick4c(self):
         """Some simple HTML markups"""
         self._degrotesque._restore_default_elements_to_skip()
-        assert(self._degrotesque._mark_markdown("Hallo `Mama```Code``")=="00000011111111111111")
+        assert(self._marker.get_mask("Hallo `Mama```Code``", self._degrotesque._elements_to_skip)=="00000011111111111111")

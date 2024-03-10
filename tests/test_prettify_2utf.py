@@ -20,7 +20,7 @@ __status__     = "Production"
 
 # --- imports -----------------------------------------------------------------
 import unittest
-import degrotesque
+from degrotesque import degrotesque
 
 
 # --- test classes ------------------------------------------------------------
