@@ -18,6 +18,10 @@ __status__     = "Production"
 # =============================================================================
 
 
+# --- imports -----------------------------------------------------------------
+from degrotesque import degrotesque
+
+
 # --- test functions ----------------------------------------------------------
 def check_files(wanted, got, path):
     got2 = []
@@ -31,7 +35,6 @@ def check_files(wanted, got, path):
 
 def test_get_files_one(tmp_path):
     """Test get_files behaviour if one file is given"""
-    import degrotesque
     p = tmp_path / "hello.html"
     p.write_text("Hallo <b>Mama</b>")
     files = degrotesque.get_files(tmp_path / "hello.html", False, ["html"])
@@ -39,7 +42,6 @@ def test_get_files_one(tmp_path):
 
 def test_get_files_multiple1(tmp_path):
     """Test get_files behaviour if two files is given"""
-    import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.html"
@@ -49,7 +51,6 @@ def test_get_files_multiple1(tmp_path):
 
 def test_get_files_multiple2(tmp_path):
     """Test get_files behaviour if two files exist but only .html-files shall be processed"""
-    import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.txt"
@@ -59,7 +60,6 @@ def test_get_files_multiple2(tmp_path):
 
 def test_get_files_multiple_recursive1(tmp_path):
     """Tests recusrsive folder structure with recursion disabled"""
-    import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"
@@ -71,7 +71,6 @@ def test_get_files_multiple_recursive1(tmp_path):
 
 def test_get_files_multiple_recursive2(tmp_path):
     """Tests recusrsive folder structure with recursion enabled"""
-    import degrotesque
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"
