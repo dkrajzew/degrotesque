@@ -55,7 +55,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [..]
+                paths: [../degrotesque]
                 options:
                     filters: [""]
                     show_source: False
