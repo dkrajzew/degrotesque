@@ -3,7 +3,7 @@
 ![test](https://github.com/dkrajzew/degrotesque/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
 [![Downloads](https://static.pepy.tech/badge/degrotesque/week)](https://pepy.tech/project/degrotesque)
-[![Coverage](https://img.shields.io/badge/coverage-100%25-success)](https://img.shields.io/badge/coverage-100%25-success)
+[![Coverage Status](https://coveralls.io/repos/github/dkrajzew/degrotesque/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/degrotesque?branch=main)
 [![Documentation Status](https://readthedocs.org/projects/degrotesque/badge/?version=latest)](https://degrotesque.readthedocs.io/en/latest/?badge=latest)
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
