@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 # =============================================================================
-"""degrotesque - A web type setter.
-"""
+"""degrotesque - A web type setter."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -178,6 +177,7 @@ encoding_map = {
 }
 
 
+# --- functions ---------------------------------------------------------------
 # --- replacement functions
 def _replace_keep(matchobj):
     """Unicode numbers conversion to itself
@@ -329,146 +329,6 @@ class Degrotesque():
             raise ValueError("Unknown target format '%s'" % format_name)
 
 
-    def _get_tag_name(self, html):
-        """Returns the name of the tag that starts at the begin of the given string.
-
-        Args:
-            html (str): The HTML-subpart
-
-        Returns:
-            (str): The name of the tag
-        """
-        i = 0
-        while i<len(html) and (ord(html[i])<=32 or html[i]=="/"):
-            i = i + 1
-        ib = i
-        ie = i
-        while ie<len(html) and html[ie] not in " \n\r\t>/":
-            ie += 1
-        return html[ib:ie]
-
-
-    def _mark_html(self, html):
-        """Returns a string where all HTML-elements are denoted as '1' and
-        plain content as '0'.
-
-        Args:
-            html (str): The HTML document (contents) to process
-
-        Returns:
-            (str): Annotation of the HTML document.
-        """
-        # mark HTML elements
-        html = html.lower()
-        ret = ""
-        i = 0
-        while i<len(html):
-            if html[i]=='<':
-                ret = ret + "1"
-            elif html[i]=='>':
-                ret = ret + "1"
-                i += 1
-                continue
-            else:
-                ret = ret + "0"
-                i += 1
-                continue
-            # process elements to skip contents of
-            i += 1
-            tb = self._get_tag_name(html[i:])
-            ret += "1"*(len(tb))
-            i = i + len(tb)
-            if tb not in self._elements_to_skip:
-                ie = html.find(">", i)
-                if ie<0:
-                    raise ValueError("Unclosed element at %s" % (i-len(tb)))
-                ret += "1"*(ie-i+1)
-                i = ie + 1
-                continue
-            ib = i
-            if tb=="?" or tb=="?php":
-                # assumption: php stuff is always closed by ?>
-                ie = html.find("?>", ib)
-                if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
-                ie += 1
-            elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
-                # assumption: jsp/asp stuff is always closed by %>
-                ie = html.find("%>", ib)
-                if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
-                ie += 1
-            elif tb=="!--":
-                # comments are always closed by -->
-                ie = html.find("-->", ib)
-                if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
-                ie += 2
-            elif tb=="!doctype":
-                # DOCTYPE: find matching >
-                ie = ib+1
-                num = 1
-                while ie<len(html):
-                    if html[ie]=="<": num = num + 1
-                    elif html[ie]==">": num = num + 1
-                    if num==0: break
-                    ie = ie + 1
-                ie -= 1
-            else:
-                # everything else (code, script, etc. that may contain < or >) should
-                # be parsed until a closing tag
-                # but: you may find <code> in <code>!?
-                num = 1
-                ie = i + 1
-                while True:
-                    ie1 = html.find("</"+tb, ie)
-                    ie2 = html.find("<"+tb, ie)
-                    if ie1<0 and ie2<0:
-                        raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
-                    if ie1>=0 and (ie1<ie2 or ie2<0):
-                        num = num - 1
-                        ie = ie1 + len("</"+tb)
-                    if ie2>=0 and (ie2<ie1 or ie1<0):
-                        num = num + 1
-                        ie = ie2 + len("<"+tb)
-                    if num==0: break
-            ret += "1"*(ie-ib)
-            i = ie
-        assert (len(ret)==len(html))
-        return ret
-
-
-    def _mark_markdown(self, document):
-        """Returns a string where all code and quotes are denoted as '1' and
-        plain content as '0'.
-
-        Args:
-            document (str): The markdown document (contents) to process
-
-        Returns:
-            (str): Annotation of the markdown document.
-        """
-        length = len(document)
-        ret = "0"*length
-        # find backtick-marked code
-        b = document.find("`")
-        while b>=0:
-            e = b + 1
-            while e<length and document[e]=="`":
-                e += 1
-            marker = document[b:e]
-            i = document.find(marker, e)
-            i = length if i<0 else i+len(marker)
-            ret = ret[:b] + ("1"*(i-b)) + ret[i:]
-            b = document.find("`", i)
-        # find indented code
-        b = 0
-        while b>=0 and b<length:
-            e = document.find("\n", b+1)
-            if e<0: e = length
-            else: e += 1
-            if document[b]==">" or document[b]=="\t" or (length>=b+3 and document[b:b+4]=="    "):
-                ret = ret[:b] + ("1"*(e-b)) + ret[e:]
-            b = e
-        return ret
-
 
     def prettify(self, document, is_html, is_markdown=False):
         """Prettifies (degrotesques) the given document.
@@ -487,9 +347,11 @@ class Degrotesque():
         """
         # extract text parts
         if is_html:
-            marks = self._mark_html(document)
+            from . import html_marker
+            marks = html_marker.DegrotesqueHTMLMarker().get_mask(document, self._elements_to_skip)
         elif is_markdown:
-            marks = self._mark_markdown(document)
+            from . import md_marker
+            marks = md_marker.DegrotesqueMDMarker().get_mask(document, self._elements_to_skip)
         else:
             marks = "0" * len(document)
         assert(len(document)==len(marks))
@@ -675,11 +537,14 @@ def main(arguments=None):
     --text / -T:
         Files are plain text files
 
-    --format / -f _&lt;FORMAT&gt;_:
-        Define the format of the replacements ['html', 'unicode', 'text']
+    --markdown / -M:
+        Files are markdown files
 
     --no-backup / -B:
         Set if no backup files shall be generated
+
+    --format / -f _&lt;FORMAT&gt;_:
+        Define the format of the replacements ['html', 'unicode', 'text']
 
     --skip / -s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]\*_:
         Elements which contents shall not be changed
