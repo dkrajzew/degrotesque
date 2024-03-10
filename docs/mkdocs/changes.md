@@ -1,6 +1,15 @@
 ChangeLog for degrotesque
 =========================
 
+degrotesque-4.0.0 (to come)
+------------------------------
+
+* Proper Python documentation
+* Proper variable and function / methods names
+* [Coveralls](https://coveralls.io/) integration ([![Coverage Status](https://coveralls.io/repos/github/dkrajzew/degrotesque/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/degrotesque?branch=main))
+* File type dependent functions for marking things to degrotesque were extracted
+
+
 degrotesque-3.0.0 (26.03.2023)
 ------------------------------
 
