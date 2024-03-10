@@ -21,7 +21,7 @@ __status__     = "Production"
 # --- imports -----------------------------------------------------------------
 import unittest
 from degrotesque import degrotesque
-from degrotesque import md_marker
+from degrotesque import marker_md
 
 
 # --- test classes ------------------------------------------------------------
@@ -30,7 +30,7 @@ class TestDegrotesque_MarkMarkdown(unittest.TestCase):
 
     def setUp(self):
         self._degrotesque = degrotesque.Degrotesque()
-        self._marker = md_marker.DegrotesqueMDMarker()
+        self._marker = marker_md.DegrotesqueMDMarker()
 
     def test__mark_markdown_textOnly1(self):
         """Text without markups only"""

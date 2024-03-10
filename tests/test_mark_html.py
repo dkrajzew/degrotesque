@@ -21,7 +21,7 @@ __status__     = "Production"
 # --- imports -----------------------------------------------------------------
 import unittest
 from degrotesque import degrotesque
-from degrotesque import html_marker
+from degrotesque import marker_html
 
 
 # --- test classes ------------------------------------------------------------
@@ -30,7 +30,7 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
 
     def setUp(self):
         self._degrotesque = degrotesque.Degrotesque()
-        self._marker = html_marker.DegrotesqueHTMLMarker()
+        self._marker = marker_html.DegrotesqueHTMLMarker()
 
     def test__mark_html_textOnly1(self):
         """Text without markups only"""

@@ -347,11 +347,11 @@ class Degrotesque():
         """
         # extract text parts
         if is_html:
-            from . import html_marker
-            marks = html_marker.DegrotesqueHTMLMarker().get_mask(document, self._elements_to_skip)
+            from . import marker_html
+            marks = marker_html.DegrotesqueHTMLMarker().get_mask(document, self._elements_to_skip)
         elif is_markdown:
-            from . import md_marker
-            marks = md_marker.DegrotesqueMDMarker().get_mask(document, self._elements_to_skip)
+            from . import marker_md
+            marks = marker_md.DegrotesqueMDMarker().get_mask(document, self._elements_to_skip)
         else:
             marks = "0" * len(document)
         assert(len(document)==len(marks))
