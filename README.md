@@ -88,7 +88,7 @@ The files are read one by one and the replacement of plain ASCII chars by some n
 Per default, Unicode entities are inserted (e.g. &#8216;&amp;#8211;&#8217; for an &#8216;&mdash;&#8217;). You may change this using the __--format _&lt;FORMAT&gt;___ / __-f _&lt;FORMAT&gt;___. The following formats are currently supported:
 
 * &#8216;__unicode__&#8217;: uses numeric entities (e.g. &#8216;&amp;#8211;&#8217; for an &#8216;&mdash;&#8217;);
-* &#8216;__html__&#8217;: uses numeric entities (e.g. &#8216;&amp;mdash;&#8217; for an &#8216;&mdash;&#8217;);
+* &#8216;__html__&#8217;: uses HTML entities (e.g. &#8216;&amp;mdash;&#8217; for an &#8216;&mdash;&#8217;);
 * &#8216;__text__&#8217;: uses plain (utf-8) characters (e.g. &#8216;—&#8217; for an &#8216;&mdash;&#8217;).
 
 
@@ -129,13 +129,13 @@ Usage Examples
 --------------
 
 ```console
-degrotesque -i my_page.html -a quotes.german
+degrotesque --input my_page.html --actions quotes.german
 ```
 
 Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by their typographic German counterparts.
 
 ```console
-degrotesque -i my_folder -r --no-backup
+degrotesque --input my_folder --recursive --no-backup
 ```
 
 Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The files format of each file is determined using the file&apos;s extension.
