@@ -90,13 +90,13 @@ def test_main__document_broken1(capsys, tmp_path):
     p1 = tmp_path / "hello1.html"
     p1.write_text("<p \"Well - that's not what I had expected.\"")
     ret = degrotesque.main(["-i", tmp_path])
-    assert ret==4
     captured = capsys.readouterr()
     assert captured.err == ""
     assert captured.out.replace(str(tmp_path), "<DIR>").replace("\\", "/").replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Processing <DIR>/hello1.html
 Unclosed element at 1
 """
     assert p1.read_text() == "<p \"Well - that's not what I had expected.\""
+    assert ret==4
 
 
 def test_main__document_broken2(capsys, tmp_path):

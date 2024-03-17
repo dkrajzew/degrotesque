@@ -22,9 +22,19 @@ __status__     = "Production"
 from abc import ABCMeta, abstractmethod
 
 
-
 # --- variables and constants -------------------------------------------------
 class DegrotesqueMarker(metaclass=ABCMeta):
+    @abstractmethod
+    def get_extensions(self):
+        """Returns the extensions of file types that can be processed using
+        this marker.
+
+        Returns:
+            (list[str]): A list of extensions
+        """
+        pass
+
+
     @abstractmethod
     def get_mask(self, document, to_skip=[]):
         """Returns a string where all parts to exclude from replacements

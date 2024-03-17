@@ -22,9 +22,18 @@ __status__     = "Production"
 from . import marker
 
 
-
 # --- variables and constants -------------------------------------------------
 class DegrotesqueMDMarker(marker.DegrotesqueMarker):
+    def get_extensions(self):
+        """Returns the extensions of file types that can be processed using
+        this marker.
+
+        Returns:
+            (list[str]): A list of extensions
+        """
+        return [ "md" ]
+
+
     def get_mask(self, document, to_skip=[]):
         """Returns a string where all code and quotes are denoted as '1' and
         plain content as '0'.

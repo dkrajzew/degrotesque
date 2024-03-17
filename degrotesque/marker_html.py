@@ -22,9 +22,26 @@ __status__     = "Production"
 from . import marker
 
 
-
 # --- variables and constants -------------------------------------------------
 class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
+    def get_extensions(self):
+        """Returns the extensions of file types that can be processed using
+        this marker.
+
+        Returns:
+            (list[str]): A list of extensions
+        """
+        return [
+            "html", "htm", "xhtml",
+            "php", "phtml", "phtm", "php2", "php3", "php4", "php5",
+            "asp",
+            "jsp", "jspx",
+            "shtml", "shtm", "sht", "stm",
+            "vbhtml", "ppthtml", "ssp", "jhtml",
+            "xml", "osm"
+        ]
+
+
     def get_mask(self, document, to_skip=[]):
         """Returns a string where all HTML-elements are denoted as '1' and
         plain content as '0'.

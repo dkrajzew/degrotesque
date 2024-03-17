@@ -330,7 +330,7 @@ class Degrotesque():
 
 
 
-    def prettify(self, document, is_html, is_markdown=False):
+    def prettify(self, document, marker):
         """Prettifies (degrotesques) the given document.
 
         It is assumed that the input is given in utf-8.
@@ -346,19 +346,12 @@ class Degrotesque():
             (str): The processed (prettified / degrotesqued) document.
         """
         # extract text parts
-        if is_html:
-            from . import marker_html
-            marks = marker_html.DegrotesqueHTMLMarker().get_mask(document, self._elements_to_skip)
-        elif is_markdown:
-            from . import marker_md
-            marks = marker_md.DegrotesqueMDMarker().get_mask(document, self._elements_to_skip)
-        else:
-            marks = "0" * len(document)
+        marks = marker.get_mask(document, self._elements_to_skip)
         assert(len(document)==len(marks))
         # build a copy of actions to use (not found will be removed from it)
         actions = list(self._actions)
+        # add placeholder for opening / closing regexp
         for a in actions:
-            # add placeholder for opening / closing regexp
             a.append(None)
             a.append(None)
         # start processing
@@ -579,6 +572,14 @@ def main(arguments=None):
         print("Error: no input file(s) given...", file=sys.stderr)
         print("Usage: degrotesque.py -i <FILE>[,<FILE>]* [options]+", file=sys.stderr)
         return 2
+    num = 0
+    num += 1 if options.html else 0
+    num += 1 if options.text else 0
+    num += 1 if options.markdown else 0
+    if num>1:
+        print("Error: only one of the options '--html', '--markdown', and '--text' can be set.", file=sys.stderr)
+        print("Usage: degrotesque.py -i <FILE>[,<FILE>]* [options]+", file=sys.stderr)
+        return 2
     # setup degrotesque
     degrotesque = Degrotesque()
     try:
@@ -588,6 +589,17 @@ def main(arguments=None):
     except ValueError as err:
         print(str(err))
         return 3
+    # get marker
+    marker = None
+    if options.text:
+        from . import marker_text
+        marker = marker_text.DegrotesqueTextMarker()
+    if options.markdown:
+        from . import marker_md
+        marker = marker_md.DegrotesqueMDMarker()
+    if options.html:
+        from . import marker_html
+        marker = marker_html.DegrotesqueHTMLMarker()
     # collect files
     extensions = get_extensions(options.extensions)
     files = get_files(options.input, options.recursive, extensions)
@@ -602,13 +614,23 @@ def main(arguments=None):
             with io.open(f, mode="r", encoding=options.encoding) as fd:
                 document = fd.read()
             # determine file contents (html/text)
-            n, e = os.path.splitext(f)
-            is_html = options.html
-            if not options.text and not options.markdown and not options.html:
-                is_html = e[1:] in extensions_html or htmlRegex.search(document) is not None
-            is_markdown = not options.html and not options.text and (options.markdown or e[1:] in extensions_md)
+            tmarker = marker
+            if tmarker is None:
+                n, e = os.path.splitext(f)
+                e = e[1:]
+                is_html = options.html
+                if not options.text and not options.markdown and not options.html:
+                    if e in extensions_html or htmlRegex.search(document) is not None:
+                        from . import marker_html
+                        tmarker = marker_html.DegrotesqueHTMLMarker()
+                if tmarker is None and not options.html and not options.text and (options.markdown or e in extensions_md):
+                    from . import marker_md
+                    tmarker = marker_md.DegrotesqueMDMarker()
+            if tmarker is None:
+                from . import marker_text
+                tmarker = marker_text.DegrotesqueTextMarker()
             # apply the beautifications
-            document = degrotesque.prettify(document, is_html, is_markdown)
+            document = degrotesque.prettify(document, tmarker)
             # build a backup
             if not options.no_backup:
                 shutil.copy(f, f+".orig")
