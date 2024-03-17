@@ -216,29 +216,6 @@ degrotesque-3.0.0 (26.03.2023)
 * 100 % test coverage :-)
 * renamed master branch to main
 
-
-degrotesque-2.0.6 (05.02.2023)
-------------------------------
-
-* Patched documentation (return types)
-* Set proper formatting for [readthedocs](https://degrotesque.readthedocs.io/en/2.0.6/)
-* It&apos;s not 2.0.4 due to caching by readthedocs
-
-
-degrotesque-2.0.2 (04.02.2023)
-------------------------------
-
-* Corrected installation and execution as a console script
-
-
-degrotesque-2.0 (05.01.2023)
-----------------------------
-
-* Changed the license to [BSD](https://github.com/dkrajzew/degrotesque/LICENSE).
-* Using github actions for testing on push instead of using Travis CI
-* Cleaned up project tree
-* Adding an [mkdocs](https://www.mkdocs.org/) documentation
-
 Older Versions
 --------------
 
