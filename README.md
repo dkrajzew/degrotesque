@@ -88,7 +88,7 @@ The files are read one by one and the replacement of plain ASCII chars by some n
 Per default, Unicode entities are inserted (e.g. &#8216;&amp;#8211;&#8217; for an &#8216;&mdash;&#8217;). You may change this using the __--format _&lt;FORMAT&gt;___ / __-f _&lt;FORMAT&gt;___. The following formats are currently supported:
 
 * &#8216;__unicode__&#8217;: uses numeric entities (e.g. &#8216;&amp;#8211;&#8217; for an &#8216;&mdash;&#8217;);
-* &#8216;__html__&#8217;: uses numeric entities (e.g. &#8216;&amp;mdash;&#8217; for an &#8216;&mdash;&#8217;);
+* &#8216;__html__&#8217;: uses HTML entities (e.g. &#8216;&amp;mdash;&#8217; for an &#8216;&mdash;&#8217;);
 * &#8216;__text__&#8217;: uses plain (utf-8) characters (e.g. &#8216;—&#8217; for an &#8216;&mdash;&#8217;).
 
 
@@ -129,13 +129,13 @@ Usage Examples
 --------------
 
 ```console
-degrotesque -i my_page.html -a quotes.german
+degrotesque --input my_page.html --actions quotes.german
 ```
 
 Replaces single and double quotes within the file &ldquo;my_page.html&rdquo; by their typographic German counterparts.
 
 ```console
-degrotesque -i my_folder -r --no-backup
+degrotesque --input my_folder --recursive --no-backup
 ```
 
 Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The files format of each file is determined using the file&apos;s extension.
@@ -215,29 +215,6 @@ degrotesque-3.0.0 (26.03.2023)
     * &#8216;__text__&#8217;: uses plain (utf-8) characters (e.g. &#8216;—&#8217; for an &#8216;&mdash;&#8217;).
 * 100 % test coverage :-)
 * renamed master branch to main
-
-
-degrotesque-2.0.6 (05.02.2023)
-------------------------------
-
-* Patched documentation (return types)
-* Set proper formatting for [readthedocs](https://degrotesque.readthedocs.io/en/2.0.6/)
-* It&apos;s not 2.0.4 due to caching by readthedocs
-
-
-degrotesque-2.0.2 (04.02.2023)
-------------------------------
-
-* Corrected installation and execution as a console script
-
-
-degrotesque-2.0 (05.01.2023)
-----------------------------
-
-* Changed the license to [BSD](https://github.com/dkrajzew/degrotesque/LICENSE).
-* Using github actions for testing on push instead of using Travis CI
-* Cleaned up project tree
-* Adding an [mkdocs](https://www.mkdocs.org/) documentation
 
 Older Versions
 --------------
