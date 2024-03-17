@@ -1,24 +1,29 @@
-# ===================================================================
-# degrotesque - A web type setter.
-#
-# Setup module
-#
-# (c) Daniel Krajzewicz 2020-2023
-# daniel@krajzewicz.de
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import print_function
+# =============================================================================
+"""degrotesque - A web type setter."""
+# =============================================================================
+__author__     = "Daniel Krajzewicz"
+__copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
+__credits__    = ["Daniel Krajzewicz"]
+__license__    = "BSD"
+__version__    = "3.0.0"
+__maintainer__ = "Daniel Krajzewicz"
+__email__      = "daniel@krajzewicz.de"
+__status__     = "Production"
+# =============================================================================
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/docs/degrotesque/index.html
 # - http://www.krajzewicz.de
-#
-# Available under the BSD license.
-# ===================================================================
+# =============================================================================
 
 
-
-# --- imports -------------------------------------------------------
+# --- imports -----------------------------------------------------------------
 import setuptools
 
 
-# --- definitions ---------------------------------------------------
+# --- definitions -------------------------------------------------------------
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
@@ -40,7 +45,7 @@ setuptools.setup(
     },
     license='BSD',
     # add modules
-    py_modules = ['degrotesque'],
+    packages=setuptools.find_packages(),
     entry_points = {
         'console_scripts': [
             'degrotesque = degrotesque:main'
