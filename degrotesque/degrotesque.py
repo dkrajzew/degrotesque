@@ -123,22 +123,6 @@ actions_db = {
 }
 
 
-# A list of extensions of HTML/XML derivatives
-extensions_html = [
-    "html", "htm", "xhtml",
-    "php", "phtml", "phtm", "php2", "php3", "php4", "php5",
-    "asp",
-    "jsp", "jspx",
-    "shtml", "shtm", "sht", "stm",
-    "vbhtml", "ppthtml", "ssp", "jhtml",
-    "xml", "osm"
-]
-
-
-# A list of markdown file extensions
-extensions_md = [ "md" ]
-
-
 # Mapping Unicode to HTML entities
 encoding_map = {
     "&#8216;"   : [ "&lsquo;" ],
@@ -264,7 +248,6 @@ class Degrotesque():
             raise ImportError("Could not load standard marker")
 
 
-
     def _restore_default_actions(self):
         """Instantiates default actions"""
         self.set_actions("masks,quotes.english,dashes,ellipsis,math,apostrophe,commercial")
@@ -385,8 +368,6 @@ class Degrotesque():
 
         Args:
             document (str): The document (contents) to process.
-            is_html (bool): Whether the document is a HTML document
-            is_markdown (bool): Whether the document is a markdown document
 
         Returns:
             (str): The processed (prettified / degrotesqued) document.
