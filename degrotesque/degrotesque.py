@@ -249,6 +249,20 @@ class Degrotesque():
         self._replace_func = _replace_keep
         # the target format regexp
         self._target_regex = re.compile("(&#[xX]?[0-9a-fA-F]*;)")
+        # set up markers
+        self._markers = {}
+        try:
+            from . import marker_text
+            self._markers["text"] = marker_text.DegrotesqueTextMarker()
+            from . import marker_md
+            self._markers["md"] = marker_md.DegrotesqueMDMarker()
+            from . import marker_html
+            self._markers["sgml"] = marker_html.DegrotesqueHTMLMarker()
+            from . import marker_python
+            self._markers["python"] = marker_python.DegrotesquePythonMarker()
+        except:
+            raise ImportError("Could not load standard marker")
+
 
 
     def _restore_default_actions(self):
@@ -327,6 +341,38 @@ class Degrotesque():
             self._replace_func = _replace_unicode
         else:
             raise ValueError("Unknown target format '%s'" % format_name)
+
+
+    def get_marker(self, filename, document):
+        """Returns the marker to use.
+        
+        In a first step, the marker to use is tried to be determined using
+        the file's extension. If the extension matches a marker, this
+        marker is returned.
+        
+        If the extension is not listed in the markers' extensions lists,
+        it is tried to check whether it is a SGML derivative (HTML/XML/...).
+        In this case, a DegrotesqueHTMLMarker is returned.
+        
+        If no other marker could be found, a DegrotesqueTextMarker is
+        returned.
+        
+        Args:
+            filename (str): The name / path of the file
+            document (str): The file's contents
+        """
+        name, ext = os.path.splitext(filename)
+        ext = ext[1:]
+        tmarker = None
+        for m in self._markers:
+            if ext in self._markers[m].get_extensions():
+                return self._markers[m]
+        # the HTML recognition regexp
+        # https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454
+        html_regex = re.compile("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
+        if html_regex.search(document) is not None:
+            return self._markers["sgml"]
+        return self._markers["text"]
 
 
 
@@ -592,20 +638,14 @@ def main(arguments=None):
     # get marker
     marker = None
     if options.text:
-        from . import marker_text
-        marker = marker_text.DegrotesqueTextMarker()
+        marker = degrotesque._markers["text"]
     if options.markdown:
-        from . import marker_md
-        marker = marker_md.DegrotesqueMDMarker()
+        marker = degrotesque._markers["md"]
     if options.html:
-        from . import marker_html
-        marker = marker_html.DegrotesqueHTMLMarker()
+        marker = degrotesque._markers["sgml"]
     # collect files
     extensions = get_extensions(options.extensions)
     files = get_files(options.input, options.recursive, extensions)
-    # the HTML recognition regexp
-    # https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454
-    htmlRegex = re.compile("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
     # loop through files
     for f in files:
         print("Processing %s" % f)
@@ -613,22 +653,10 @@ def main(arguments=None):
             # read the file
             with io.open(f, mode="r", encoding=options.encoding) as fd:
                 document = fd.read()
-            # determine file contents (html/text)
+            # get the contents marker to use
             tmarker = marker
             if tmarker is None:
-                n, e = os.path.splitext(f)
-                e = e[1:]
-                is_html = options.html
-                if not options.text and not options.markdown and not options.html:
-                    if e in extensions_html or htmlRegex.search(document) is not None:
-                        from . import marker_html
-                        tmarker = marker_html.DegrotesqueHTMLMarker()
-                if tmarker is None and not options.html and not options.text and (options.markdown or e in extensions_md):
-                    from . import marker_md
-                    tmarker = marker_md.DegrotesqueMDMarker()
-            if tmarker is None:
-                from . import marker_text
-                tmarker = marker_text.DegrotesqueTextMarker()
+                tmarker = degrotesque.get_marker(f, document)
             # apply the beautifications
             document = degrotesque.prettify(document, tmarker)
             # build a backup

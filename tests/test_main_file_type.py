@@ -51,7 +51,7 @@ def test_filetype__two_text(capsys, tmp_path):
     #assert captured.out == ""
     #assert captured.err == ""
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
-    assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
+    assert p2.read_text() == "&#8220;Well &#8212; <code>that&#39;s</code> not what I had expected.&#8221;"
 
 
 def test_filetype__two_text_explicit(capsys, tmp_path):
