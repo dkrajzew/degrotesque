@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# =============================================================================
+# ===========================================================================
 """degrotesque - base marker class definition."""
-# =============================================================================
+# ===========================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
@@ -11,18 +11,18 @@ __version__    = "3.0.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Production"
-# =============================================================================
+# ===========================================================================
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/docs/degrotesque/index.html
 # - http://www.krajzewicz.de
-# =============================================================================
+# ===========================================================================
 
 
-# --- imports -----------------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 from abc import ABCMeta, abstractmethod
 
 
-# --- variables and constants -------------------------------------------------
+# --- variables and constants -----------------------------------------------
 class DegrotesqueMarker(metaclass=ABCMeta):
     @abstractmethod
     def get_extensions(self):
@@ -32,7 +32,7 @@ class DegrotesqueMarker(metaclass=ABCMeta):
         Returns:
             (list[str]): A list of extensions
         """
-        pass
+        pass # pragma: no cover 
 
 
     @abstractmethod
@@ -47,4 +47,4 @@ class DegrotesqueMarker(metaclass=ABCMeta):
         Returns:
             (str): Annotation of the document.
         """
-        pass
+        pass # pragma: no cover
