@@ -1,7 +1,7 @@
 API
 ===
 
-::: marker_html
+::: degrotesque.marker_html
     docstring_style: "google"
     filters: [""]
     show_source: False

@@ -35,9 +35,10 @@ nav:
         - Appendix C: appendixC.md
         - Appendix D: appendixD.md
     - Developer Docs:
-        - Notes: notes.md
+        - Workflow: workflow.md
         - How To Extend: extend.md
         - How To Release: release.md
+        - Notes: notes.md
     - Services: services.md
  
 

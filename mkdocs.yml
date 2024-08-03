@@ -36,9 +36,10 @@ nav:
         - Python marker: api_marker_python.md
         - Text marker: api_marker_text.md
     - Developer Docs:
-        - Notes: notes.md
+        - Workflow: workflow.md
         - How To Extend: extend.md
         - How To Release: release.md
+        - Notes: notes.md
     - ChangeLog: changes.md
     - License (BSD): license.md
     - Legal: legal.md
@@ -48,6 +49,8 @@ nav:
         - Appendix C: appendixC.md
         - Appendix D: appendixD.md
     - Services: services.md
+
+exclude_docs:
 
 markdown_extensions:
     - admonition
@@ -62,7 +65,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [./degrotesque]
+                paths: [./]
                 options:
                     filters: [""]
                     show_source: False

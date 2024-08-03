@@ -8,6 +8,7 @@ degrotesque-4.0.0 (to come)
 * Proper variable and function / methods names
 * [Coveralls](https://coveralls.io/) integration ([![Coverage Status](https://coveralls.io/repos/github/dkrajzew/degrotesque/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/degrotesque?branch=main))
 * File type dependent functions for determining which parts of the respective document shall be processed were extracted into own sub-files
+* Added actions for arrows (see [Appendix A](appendixA.md))
 
 
 degrotesque-3.0.0 (26.03.2023)

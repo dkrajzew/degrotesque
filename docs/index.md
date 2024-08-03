@@ -18,9 +18,10 @@ Introduction
 *degrotesque beautifies the web.*
 
 **degrotesque** is a command line script written in the [Python](https://www.python.org/) programming language 
-that loads a text/markdown/HTML/XML file from the disc &mdash; or several in batch &mdash; and for each, it 
+that loads a text/markdown/HTML/XML/Python/Java/... file from the disc &mdash; or several in batch &mdash; and for each, it 
 replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic 
-representation for improving the pages&apos; appearance.
+representation for improving the text&apos;s appearance. Of course, non-text parts of the respective document, like e.g. 
+HTML-tags, code, or what, are omitted.
 
 E.g.:
 
@@ -36,7 +37,7 @@ The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respec
 The ' has been replaced by &apos; and the - by an &mdash;.
 Of course, this script omits HTML elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
 
-**degrotesque** is meant to be a relatively **reliable post-processing step for type setting web pages or any plain character / ASCII written texts before releasing them**.
+**degrotesque** is meant to be a relatively **reliable post-processing step for type setting web pages or any plain texts before releasing them**.
 Being a [Python](https://www.python.org/) script, **it can be easily embedded in own workflows** and can be used on almost all operating systems.
 
 **degrotesque** supports English, German, and French alternatives currently.
@@ -61,7 +62,7 @@ Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; a
 Background
 ----------
 
-I often write my texts and web pages using a plain editor. As such, the character " is always used for quotes, a dash is always a minus, etc.
+I often write my texts, documentation and web pages using a plain editor. As such, the character " is always used for quotes, a dash is always a minus, etc.
 
 I wanted to have a tool that automatically recognizes which characters should be replaced by their more typographic counterpart and applies the according rules.
 
@@ -75,12 +76,9 @@ If you need any consultations, please let me know. If you know better, too.
 Future Plans
 ------------
 
-As **degrotesque** can meanwhile parse not only HTML and plain text files, but as well Markdown files. The next step would be to open it to other file formats as well. As well, other languages besides English, German, and French could be covered. As such, the next extensions could be:
-
-* Add support for further file and mark types.
-* Add support for further languages.
-
-I&apos;d love to extend **degrotesque** to cover these use cases, but only if someone is interested :-) You may drop me a mail at daniel@krajzewicz.de.
+**degrotesque** is working for me as intended.
+With the current release, all features I had in mind were implemented.
+As such, I suppose that new versions of **degrotesque** will only be released if someone puts new features on the table. If you need something, you may drop me a mail at daniel@krajzewicz.de.
 
 
 License

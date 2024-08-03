@@ -1,7 +1,7 @@
 Running on the Command Line
 ===========================
 
-__degrotesque__ is implemented in [Python](https://www.python.org/). It is started on the command line.
+__degrotesque__ is started on the command line.
 
 
 Description
@@ -9,11 +9,13 @@ Description
 
 The option __-i _&lt;PATH&gt;___ / __--input _&lt;PATH&gt;___ tells the script which file(s) shall be read &mdash; you may name a file or a folder, here. If the option __-r__ / __--recursive__ is set, the given folder will be processed recursively.
 
-The tool processes text files, HTML files, XML files, and their derivatives. Per default, all files are processed when **-i**  points to a folder. You may limit the files to process by their extension using the __-e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]\*___ / __--extensions _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___ option. The files are assumed to be encoded using UTF-8 per default. You may change the encoding using the option __-E _&lt;ENCODING&gt;___ / __--encoding _&lt;ENCODING&gt;___.
+The tool processes text files, HTML files, XML files, and their derivatives. Per default, all files are processed when **-i**  points to a folder. You may limit the files to process by their extension using the __-e _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]\*___ / __--extensions _&lt;EXTENSION&gt;[,&lt;EXTENSION&gt;]*___ option - multiple file extensions can be given, separated using a ','.
+
+The files are assumed to be encoded using UTF-8 per default. You may change the encoding using the option __-E _&lt;ENCODING&gt;___ / __--encoding _&lt;ENCODING&gt;___.
 
 The files are read one by one and the replacement of plain ASCII chars by some nicer ones is based upon a chosen set of &ldquo;actions&rdquo;. Known and default actions are given in [Appendix A](appendixA.md). You may select the actions to apply using the __-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ / __--actions _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]\*___ option. The default actions are &#8216;_masks_&#8217;, &#8216;_quotes.english_&#8217;, &#8216;_dashes_&#8217;, &#8216;_ellipsis_&#8217;, &#8216;_math_&#8217;, &#8216;_apostrophe_&#8217;, and &#8216;_commercial_&#8217;.
 
-Per default, Unicode entities are inserted (e.g. &#8216;&amp;#8211;&#8217; for an &#8216;&mdash;&#8217;). You may change this using the __--format _&lt;FORMAT&gt;___ / __-f _&lt;FORMAT&gt;___. The following formats are currently supported:
+Per default, Unicode characters are inserted (e.g. &#8216;—;&#8217; for an mdash). You may change this using the __--format _&lt;FORMAT&gt;___ / __-f _&lt;FORMAT&gt;___. The following formats are currently supported:
 
 * &#8216;__unicode__&#8217;: uses numeric entities (e.g. &#8216;&amp;#8211;&#8217; for an &#8216;&mdash;&#8217;);
 * &#8216;__html__&#8217;: uses HTML entities (e.g. &#8216;&amp;mdash;&#8217; for an &#8216;&mdash;&#8217;);

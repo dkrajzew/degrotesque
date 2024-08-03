@@ -38,3 +38,11 @@ Please note that the actions are realized using regular expressions. I decided n
 | | &lt;NUMBER&gt;/&lt;NUMBER&gt; | | &lt;NUMBER&gt;&divide;&lt;NUMBER&gt; | |
 | dagger | ** | | &Dagger; | |
 | | * | | &dagger; | |
+| arrows | &lt;- | | &larr; | |
+| | &lt;-- | | &larr; | |
+| | -&gt; | | &rarr; | |
+| | --&gt; | | &rarr; | |
+| | &lt;= | | &lArr; | |
+| | &lt;== | | &lArr; | |
+| | =&gt; | | &rArr; | |
+| | ==&gt; | | &rArr; | |

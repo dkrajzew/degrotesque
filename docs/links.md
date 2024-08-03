@@ -13,6 +13,6 @@ Further Links
 
 ## Users
 
-* <http://www.krajzewicz.de>
-* <http://www.palettewb.com>
+* <http://www.krajzewicz.de> - I use **degrotesque** for my own pages
+* <http://www.palettewb.com> - Both, the web pages, and the docbook-documentation were **degrotesqued**
 
