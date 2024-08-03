@@ -67,7 +67,12 @@ setuptools.setup(
         "Topic :: Documentation",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Software Development :: Localization",
+        "Topic :: Text Processing :: Filters",
+        "Topic :: Text Processing :: Markup",
         "Topic :: Text Processing :: Markup :: HTML",
+        "Topic :: Text Processing :: Markup :: Markdown",
+        "Topic :: Text Processing :: Markup :: SGML",
+        "Topic :: Text Processing :: Markup :: XML",
         "Topic :: Other/Nonlisted Topic",
         "Topic :: Artistic Software"
     ],
