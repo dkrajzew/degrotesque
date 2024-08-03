@@ -16,11 +16,11 @@ The files are read one by one and the replacement of plain ASCII chars by some n
 Per default, Unicode entities are inserted (e.g. &#8216;&amp;#8211;&#8217; for an &#8216;&mdash;&#8217;). You may change this using the __--format _&lt;FORMAT&gt;___ / __-f _&lt;FORMAT&gt;___. The following formats are currently supported:
 
 * &#8216;__unicode__&#8217;: uses numeric entities (e.g. &#8216;&amp;#8211;&#8217; for an &#8216;&mdash;&#8217;);
-* &#8216;__html__&#8217;: uses numeric entities (e.g. &#8216;&amp;mdash;&#8217; for an &#8216;&mdash;&#8217;);
+* &#8216;__html__&#8217;: uses HTML entities (e.g. &#8216;&amp;mdash;&#8217; for an &#8216;&mdash;&#8217;);
 * &#8216;__text__&#8217;: uses plain (utf-8) characters (e.g. &#8216;—&#8217; for an &#8216;&mdash;&#8217;).
 
 
-__degrotesque__ tries to determine whether the read files are plain text files, markdown files, or XML or HTML derivatives using the files&amp; extensions and contents. [Appendix B](appendixB.md) lists the extensions by which files are recognized as HTML / markdown files. To be secure, one may set __--html__ / __-H__ when processing HTML files, __--markdown__ / __-M__ when processing markdown files, or __--text__ / __-T__ when processing plain text files.
+__degrotesque__ tries to determine whether the read files are plain text files, markdown files, or XML/HTML derivatives using the files&apos; extensions and contents. [Appendix B](appendixB.md) lists the extensions by which files are recognized as HTML / markdown files. To be secure, one may set __--html__ / __-H__ when processing HTML files, __--markdown__ / __-M__ when processing markdown files, or __--text__ / __-T__ when processing plain text files.
 
 When parsing XML/HTML files, the script does not change the quotation marks within elements, of course. As well, the contents of several elements, such as &lt;code&gt; or &lt;pre&gt;, are skipped. You may change the list of elements which contents shall not be processed using the option __-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___ / __--skip _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]\*___. The list of elements that are skipped per default is given in [Appendix C](appendixC.md).
 

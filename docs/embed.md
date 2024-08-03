@@ -2,6 +2,7 @@ Embed in own Applications
 =========================
 
 You may as well embed __degrotesque__ within your own applications. The usage is very straightforward:
+
 ```python
 import degrotesque
 # build the degrotesque instance with default values

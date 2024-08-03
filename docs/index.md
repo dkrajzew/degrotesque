@@ -3,7 +3,7 @@
 ![test](https://github.com/dkrajzew/degrotesque/actions/workflows/test.yml/badge.svg)
 [![Downloads](https://pepy.tech/badge/degrotesque)](https://pepy.tech/project/degrotesque)
 [![Downloads](https://static.pepy.tech/badge/degrotesque/week)](https://pepy.tech/project/degrotesque)
-[![Coverage](https://img.shields.io/badge/coverage-100%25-success)](https://img.shields.io/badge/coverage-100%25-success)
+[![Coverage Status](https://coveralls.io/repos/github/dkrajzew/degrotesque/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/degrotesque?branch=main)
 [![Dependecies](https://img.shields.io/badge/dependencies-none-green)](https://img.shields.io/badge/dependencies-none-green)
 [![Documentation Status](https://readthedocs.org/projects/degrotesque/badge/?version=latest)](https://degrotesque.readthedocs.io/en/latest/?badge=latest)
 
@@ -17,9 +17,10 @@ Introduction
 
 *degrotesque beautifies the web.*
 
-**degrotesque** is a [Python](https://www.python.org/) script that loads a text/markdown/HTML/XML file from the 
-disc &mdash; or several in batch &mdash; and for each, it replaces some commonly used non-typographic characters,
-such as ", ', -, etc. into their typographic representation for improving the pages&apos; appearance.
+**degrotesque** is a command line script written in the [Python](https://www.python.org/) programming language 
+that loads a text/markdown/HTML/XML file from the disc &mdash; or several in batch &mdash; and for each, it 
+replaces some commonly used non-typographic characters, such as ", ', -, etc. into their typographic 
+representation for improving the pages&apos; appearance.
 
 E.g.:
 
@@ -32,12 +33,11 @@ will become:
 I think it looks __much__ better.
 
 The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively.
-The 'have been replaced by &apos; and the - by an &mdash;.
-Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
+The ' has been replaced by &apos; and the - by an &mdash;.
+Of course, this script omits HTML elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
 
-It is meant to be a relatively **reliable post-processing step for type setting web pages or any plain character / ASCII written texts before releasing them**.
-Being a Python script, **it can be easily embedded in own workflows**.
-In version 3.0.0 the support of markdown files was added.
+**degrotesque** is meant to be a relatively **reliable post-processing step for type setting web pages or any plain character / ASCII written texts before releasing them**.
+Being a [Python](https://www.python.org/) script, **it can be easily embedded in own workflows** and can be used on almost all operating systems.
 
 **degrotesque** supports English, German, and French alternatives currently.
 
@@ -65,9 +65,9 @@ I often write my texts and web pages using a plain editor. As such, the characte
 
 I wanted to have a tool that automatically recognizes which characters should be replaced by their more typographic counterpart and applies the according rules.
 
-I think it&rsquo;s a pity that major Desktop Publishing applications do this on the fly but many and even major web sites still show us plain ASCII characters.
+I think it&apos;s a pity that major Desktop Publishing applications do this on the fly but many and even major web sites still show us plain ASCII characters.
 
-**degrotesque** does the job pretty fine. After writing / building my pages, the tool converts them to a prettier and typographically more correct form. The structure and format of the pages is completely remained. And as said, it works reliable.
+**degrotesque** does the job pretty fine. After writing / building my pages, the tool converts them to a prettier and typographically more correct form. The structure and format of the pages is completely remained. And as said, **degrotesque** works reliable.
 
 If you need any consultations, please let me know. If you know better, too.
 
@@ -75,12 +75,12 @@ If you need any consultations, please let me know. If you know better, too.
 Future Plans
 ------------
 
-As **degrotesque** can meanwhile parse not only HTML and plain text files, but as well Markdown files, the next step would be to open it to other file formats as well. As well, other languages besides English, German, and French could be covered.
+As **degrotesque** can meanwhile parse not only HTML and plain text files, but as well Markdown files. The next step would be to open it to other file formats as well. As well, other languages besides English, German, and French could be covered. As such, the next extensions could be:
 
 * Add support for further file and mark types.
 * Add support for further languages.
 
-We would love to extend **degrotesque** to cover these use cases, but only if someone is interested :-) You may drop us a mail at daniel@krajzewicz.de.
+I&apos;d love to extend **degrotesque** to cover these use cases, but only if someone is interested :-) You may drop me a mail at daniel@krajzewicz.de.
 
 
 License

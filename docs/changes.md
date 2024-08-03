@@ -2,12 +2,12 @@ ChangeLog for degrotesque
 =========================
 
 degrotesque-4.0.0 (to come)
-------------------------------
+---------------------------
 
 * Proper Python documentation
 * Proper variable and function / methods names
 * [Coveralls](https://coveralls.io/) integration ([![Coverage Status](https://coveralls.io/repos/github/dkrajzew/degrotesque/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/degrotesque?branch=main))
-* File type dependent functions for marking things to degrotesque were extracted
+* File type dependent functions for determining which parts of the respective document shall be processed were extracted into own sub-files
 
 
 degrotesque-3.0.0 (26.03.2023)
@@ -19,7 +19,7 @@ degrotesque-3.0.0 (26.03.2023)
     * &#8216;__unicode__&#8217;: uses numeric entities (e.g. &#8216;&amp;#8211;&#8217; for an &#8216;&mdash;&#8217;);
     * &#8216;__html__&#8217;: uses numeric entities (e.g. &#8216;&amp;mdash;&#8217; for an &#8216;&mdash;&#8217;);
     * &#8216;__text__&#8217;: uses plain (utf-8) characters (e.g. &#8216;—&#8217; for an &#8216;&mdash;&#8217;).
-* 100 % test coverage :-)
+* 100% test coverage :-)
 * renamed master branch to main
 
 
