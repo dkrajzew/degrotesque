@@ -2,7 +2,7 @@ site_name: degrotesque
 site_url: https://github.com/dkrajzew/degrotesque
 site_description: A web type setter
 site_author: Daniel Krajzewicz
-docs_dir: ./mkdocs
+docs_dir: ./docs
 
 repo_url: https://github.com/dkrajzew/degrotesque.git
 edit_uri: ""
@@ -16,14 +16,19 @@ theme:
 nav:
     - Home: index.md
     - Installation: install.md
-    - Services: services.md
     - Command Line Usage: cmd.md
     - Embedded Usage: embed.md
     - Links: links.md
     - ChangeLog: changes.md
     - License (BSD): license.md
     - Legal: legal.md
-    - API: api.md
+    - API:
+        - degrotesque: api_degrotesque.md
+        - marker API: api_marker.md
+        - HTML marker: api_marker_html.md
+        - Markdown marker: api_marker_md.md
+        - Python marker: api_marker_python.md
+        - Text marker: api_marker_text.md
     - Appendices:
         - Appendix A: appendixA.md
         - Appendix B: appendixB.md
@@ -31,14 +36,16 @@ nav:
         - Appendix D: appendixD.md
     - Developer Docs:
         - Notes: notes.md
+        - How To Extend: extend.md
         - How To Release: release.md
+    - Services: services.md
  
 
 markdown_extensions:
     - admonition
     - sane_lists
   
-copyright: "&copy; Copyright 2020&ndash;2023 Daniel Krajzewicz."
+copyright: "&copy; Copyright 2020&ndash;2024 Daniel Krajzewicz."
 
 use_directory_urls: false
 
@@ -47,7 +54,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [../degrotesque]
+                paths: [./degrotesque]
                 options:
                     filters: [""]
                     show_source: False
