@@ -105,6 +105,28 @@ def test_main_run1_html2html(capsys, tmp_path):
     assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
 
 
+def test_main_run1_html2html_namedtype(capsys, tmp_path):
+    """Test behaviour on plain usage"""
+    p1 = tmp_path / "hello1.html"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.html"
+    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
+    degrotesque.main(["-i", tmp_path, "--html", "-f", "html"])
+    assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
+    assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
+
+
+def test_main_run1_html2html_sgmlguess(capsys, tmp_path):
+    """Test behaviour on plain usage"""
+    p1 = tmp_path / "hello1.xxx"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.xxx"
+    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
+    degrotesque.main(["-i", tmp_path, "-f", "html"])
+    assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
+    assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
+
+
 def test_main_run1_md2html(capsys, tmp_path):
     """Test behaviour on plain usage"""
     p1 = tmp_path / "hello1.md"
@@ -114,5 +136,30 @@ def test_main_run1_md2html(capsys, tmp_path):
     degrotesque.main(["-i", tmp_path, "-f", "html"])
     assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
     assert p2.read_text() == "&ldquo;Well &mdash; `that's` not what I had expected.&rdquo;"
+
+
+def test_main_run1_md2html_namedtype(capsys, tmp_path):
+    """Test behaviour on plain usage"""
+    p1 = tmp_path / "hello1.md"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.md"
+    p2.write_text("\"Well - `that's` not what I had expected.\"")
+    degrotesque.main(["-i", tmp_path, "--markdown", "-f", "html"])
+    assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
+    assert p2.read_text() == "&ldquo;Well &mdash; `that's` not what I had expected.&rdquo;"
+
+
+def test_main_error_multiplemarkers(capsys, tmp_path):
+    """Test behaviour on plain usage"""
+    p1 = tmp_path / "hello1.md"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.md"
+    p2.write_text("\"Well - `that's` not what I had expected.\"")
+    ret = degrotesque.main(["-i", tmp_path, "--html", "--markdown"])
+    assert ret==2
+    captured = capsys.readouterr()
+    assert captured.err.replace("__main__.py", "degrotesque") == """Error: only one of the options '--html', '--markdown', and '--text' can be set.
+Usage: degrotesque.py -i <FILE>[,<FILE>]* [options]+
+"""
 
 

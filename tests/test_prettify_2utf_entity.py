@@ -84,6 +84,13 @@ class TestDegrotesque_Prettify_UTFEntity(unittest.TestCase):
         assert(self._degrotesque.prettify(" (tm) ", self._marker)==" &#8482; ")
         assert(self._degrotesque.prettify(" (TM) ", self._marker)==" &#8482; ")
         assert(self._degrotesque.prettify(" (tM) ", self._marker)==" &#8482; ")
+        assert(self._degrotesque.prettify("(c)", self._marker)=="&#169;")
+        assert(self._degrotesque.prettify("(C)", self._marker)=="&#169;")
+        assert(self._degrotesque.prettify("(r)", self._marker)=="&#174;")
+        assert(self._degrotesque.prettify("(R)", self._marker)=="&#174;")
+        assert(self._degrotesque.prettify("(tm)", self._marker)=="&#8482;")
+        assert(self._degrotesque.prettify("(TM)", self._marker)=="&#8482;")
+        assert(self._degrotesque.prettify("(tM)", self._marker)=="&#8482;")
 
     def test_action_dashes(self):
         """Testing 'dashes' action"""

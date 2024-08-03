@@ -84,6 +84,13 @@ class TestDegrotesque_Prettify_HTML(unittest.TestCase):
         assert(self._degrotesque.prettify(" (tm) ", self._marker)==" &trade; ")
         assert(self._degrotesque.prettify(" (TM) ", self._marker)==" &trade; ")
         assert(self._degrotesque.prettify(" (tM) ", self._marker)==" &trade; ")
+        assert(self._degrotesque.prettify("(c)", self._marker)=="&copy;")
+        assert(self._degrotesque.prettify("(C)", self._marker)=="&copy;")
+        assert(self._degrotesque.prettify("(r)", self._marker)=="&reg;")
+        assert(self._degrotesque.prettify("(R)", self._marker)=="&reg;")
+        assert(self._degrotesque.prettify("(tm)", self._marker)=="&trade;")
+        assert(self._degrotesque.prettify("(TM)", self._marker)=="&trade;")
+        assert(self._degrotesque.prettify("(tM)", self._marker)=="&trade;")
 
     def test_action_dashes(self):
         """Testing 'dashes' action"""
