@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from __future__ import print_function
-# =============================================================================
+# ===========================================================================
 """degrotesque - A web type setter."""
-# =============================================================================
+# ===========================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
@@ -12,14 +12,14 @@ __version__    = "3.0.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Production"
-# =============================================================================
+# ===========================================================================
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/docs/degrotesque/index.html
 # - http://www.krajzewicz.de
-# =============================================================================
+# ===========================================================================
 
 
-# --- imports -----------------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 import sys
 import os
 import io
@@ -29,7 +29,7 @@ from optparse import OptionParser
 
 
 
-# --- variables and constants -------------------------------------------------
+# --- variables and constants -----------------------------------------------
 # A database of actions
 actions_db = {
     # english quotes
@@ -70,6 +70,18 @@ actions_db = {
         # missing: ndash for number ranges
         [[u"(\\s+)-(\\s+)", None],       [u"\\1&#8212;\\2", None]],
         [[u"([\\d]+)-([\\d]+)", None],   [u"\\1&#8211;\\2", None]]
+    ],
+
+    # arrows
+    "arrows": [
+        [[u"<-", None],      [u"\\1&#8592;\\2", None]],
+        [[u"<--", None],     [u"\\1&#8592;\\2", None]],
+        [[u"->", None],      [u"\\1&#8594;\\2", None]],
+        [[u"-->", None],     [u"\\1&#8594;\\2", None]],
+        [[u"<=", None],      [u"\\1&#8656;\\2", None]],
+        [[u"<==", None],     [u"\\1&#8656;\\2", None]],
+        [[u"=>", None],      [u"\\1&#8658;\\2", None]],
+        [[u"==>", None],     [u"\\1&#8658;\\2", None]]
     ],
 
     # bullets
@@ -156,12 +168,15 @@ encoding_map = {
     "&#8804;"   : [ "&le;" ],
     "&#8805;"   : [ "&ge;" ],
     "&#215;"    : [ "&times;" ],
-    "&#247;"    : [ "&divide;" ]
-
+    "&#247;"    : [ "&divide;" ],
+    "&#8592;"   : [ "&larr;" ],
+    "&#8594;"   : [ "&rarr;" ],
+    "&#8656;"   : [ "&lArr;" ],
+    "&#8658;"   : [ "&rArr;" ]
 }
 
 
-# --- functions ---------------------------------------------------------------
+# --- functions -------------------------------------------------------------
 # --- replacement functions
 def _replace_keep(matchobj):
     """Unicode numbers conversion to itself
@@ -203,7 +218,7 @@ def _replace_unicode(matchobj):
 
 
 
-# --- class -------------------------------------------------------------------
+# --- class -----------------------------------------------------------------
 class Degrotesque():
     """A tiny web type setter.
 
@@ -441,7 +456,7 @@ class Degrotesque():
 
 
 
-# --- functions ---------------------------------------------------------------
+# --- functions -------------------------------------------------------------
 def get_extensions(names):
     """Returns the list of extensions of files to process.
 
