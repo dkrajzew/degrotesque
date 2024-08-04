@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ===========================================================================
-"""degrotesque - Python masking class definition."""
+"""degrotesque - A masking class with begin / end strings."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -19,11 +19,18 @@ __status__     = "Production"
 
 
 # --- imports ---------------------------------------------------------------
-from . import marker
+#from . import marker
+import marker
 
 
 # --- variables and constants -----------------------------------------------
-class DegrotesquePythonMarker(marker.DegrotesqueMarker):
+class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
+    def __init__(self, begin, end, extensions):
+        self._begin = begin
+        self._end = end
+        self._extensions = extensions
+
+        
     def get_extensions(self):
         """Returns the extensions of file types that can be processed using
         this marker.
@@ -31,8 +38,8 @@ class DegrotesquePythonMarker(marker.DegrotesqueMarker):
         Returns:
             (list[str]): A list of extensions
         """
-        return [ "py" ]
-
+        return self._extensions
+        
 
     def get_mask(self, document, to_skip=[]):
         """Returns a string where all text in triple quotes 
@@ -47,14 +54,14 @@ class DegrotesquePythonMarker(marker.DegrotesqueMarker):
         length = len(document)
         ret = "1"*length
         # find opening triple quotes
-        b = document.find('"""')
+        b = document.find(self._begin)
         while b>=0:
             b = b + 3
             e = b
-            e = document.find('"""', e)
+            e = document.find(self._end, e)
             if e<0:
-                raise ValueError("Not a valid Python document")
+                raise ValueError("Not a valid document")
             ret = ret[:b] + ("0"*(e-b)) + ret[e:]
-            b = document.find('"""', e+3)
+            b = document.find(self._begin, e+len(self._end))
         return ret
 

@@ -19,7 +19,10 @@ __status__     = "Production"
 
 
 # --- imports -----------------------------------------------------------------
-from degrotesque import degrotesque
+import sys
+import os
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "degrotesque"))
+import degrotesque
 
 
 # --- test functions ----------------------------------------------------------
@@ -43,6 +46,7 @@ def test_filetype__two_html_explicit(capsys, tmp_path):
     degrotesque.main(["-i", tmp_path, "--html"])
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
+
 
 
 def test_filetype__two_text(capsys, tmp_path):
@@ -73,6 +77,7 @@ def test_filetype__two_text_explicit(capsys, tmp_path):
     assert p2.read_text() == "&#8220;Well &#8212; <code>that&#39;s</code> not what I had expected.&#8221;"
 
 
+
 def test_filetype__two_md(capsys, tmp_path):
     """Whether two text files are processed
     
@@ -92,9 +97,9 @@ def test_filetype__two_md_explicit(capsys, tmp_path):
     
     The second file is recognized as HTML due to it's contents
     """
-    p1 = tmp_path / "hello1.md"
+    p1 = tmp_path / "hello1.txt"
     p1.write_text("\"Well - that's not what I had expected.\"")
-    p2 = tmp_path / "hello2.md"
+    p2 = tmp_path / "hello2.txt"
     p2.write_text("\"Well - ```that's``` not what I had expected.\"")
     degrotesque.main(["-i", tmp_path, "--markdown"])
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
@@ -102,7 +107,7 @@ def test_filetype__two_md_explicit(capsys, tmp_path):
 
 
 
-def test_filetype__two_python(capsys, tmp_path):
+def test_filetype__three_python(capsys, tmp_path):
     """Whether two text files are processed
     
     The second file is recognized as HTML due to it's contents
@@ -111,6 +116,61 @@ def test_filetype__two_python(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.py"
     p2.write_text("\"Well - \"\"\"that's\"\"\" not what I had expected.\"")
+    p3 = tmp_path / "hello3.py"
+    p3.write_text("\"\"\"Well - that's not what I had expected.\"\"\"")
     degrotesque.main(["-i", tmp_path])
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - \"\"\"that&#39;s\"\"\" not what I had expected.\""
+    assert p3.read_text() == "\"\"\"Well &#8212; that&#39;s not what I had expected.\"\"\""
+
+
+def test_filetype__three_python_explicit(capsys, tmp_path):
+    """Whether two text files are processed
+    
+    The second file is recognized as HTML due to it's contents
+    """
+    p1 = tmp_path / "hello1.txt"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.txt"
+    p2.write_text("\"Well - \"\"\"that's\"\"\" not what I had expected.\"")
+    p3 = tmp_path / "hello3.txt"
+    p3.write_text("\"\"\"Well - that's not what I had expected.\"\"\"")
+    degrotesque.main(["-i", tmp_path, "--python"])
+    assert p1.read_text() == "\"Well - that's not what I had expected.\""
+    assert p2.read_text() == "\"Well - \"\"\"that&#39;s\"\"\" not what I had expected.\""
+    assert p3.read_text() == "\"\"\"Well &#8212; that&#39;s not what I had expected.\"\"\""
+
+
+
+def test_filetype__three_doxygen(capsys, tmp_path):
+    """Whether two text files are processed
+    
+    The second file is recognized as HTML due to it's contents
+    """
+    p1 = tmp_path / "hello1.java"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.java"
+    p2.write_text("\"Well - /**that's*/ not what I had expected.\"")
+    p3 = tmp_path / "hello3.java"
+    p3.write_text("/**Well - that's not what I had expected.*/")
+    degrotesque.main(["-i", tmp_path])
+    assert p1.read_text() == "\"Well - that's not what I had expected.\""
+    assert p2.read_text() == "\"Well - /**that&#39;s*/ not what I had expected.\""
+    assert p3.read_text() == "/**Well &#8212; that&#39;s not what I had expected.*/"
+
+
+def test_filetype__three_doxygen_explicit(capsys, tmp_path):
+    """Whether two text files are processed
+    
+    The second file is recognized as HTML due to it's contents
+    """
+    p1 = tmp_path / "hello1.txt"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.txt"
+    p2.write_text("\"Well - /**that's*/ not what I had expected.\"")
+    p3 = tmp_path / "hello3.txt"
+    p3.write_text("/**Well - that's not what I had expected.*/")
+    degrotesque.main(["-i", tmp_path, "--doxygen"])
+    assert p1.read_text() == "\"Well - that's not what I had expected.\""
+    assert p2.read_text() == "\"Well - /**that&#39;s*/ not what I had expected.\""
+    assert p3.read_text() == "/**Well &#8212; that&#39;s not what I had expected.*/"

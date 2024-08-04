@@ -19,7 +19,10 @@ __status__     = "Production"
 
 
 # --- imports -----------------------------------------------------------------
-from degrotesque import degrotesque
+import sys
+import os
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "degrotesque"))
+import degrotesque
 
 
 # --- test functions ----------------------------------------------------------
@@ -57,6 +60,8 @@ Options:
   -H, --html            Files are HTML/XML-derivatives
   -T, --text            Files are plain text files
   -M, --markdown        Files are markdown files
+  -D, --doxygen         Files are doxygen files
+  -P, --python          Files are Python files
   -B, --no-backup       Whether no backup shall be generated
   -f FORMAT, --format=FORMAT
                         Defines the format of the replacements ['html',
@@ -158,7 +163,7 @@ def test_main_error_multiplemarkers(capsys, tmp_path):
     ret = degrotesque.main(["-i", tmp_path, "--html", "--markdown"])
     assert ret==2
     captured = capsys.readouterr()
-    assert captured.err.replace("__main__.py", "degrotesque") == """Error: only one of the options '--html', '--markdown', and '--text' can be set.
+    assert captured.err.replace("__main__.py", "degrotesque") == """Error: only one of the options '--html', '--markdown', '--doxygen', '--python', and '--text' can be set.
 Usage: degrotesque.py -i <FILE>[,<FILE>]* [options]+
 """
 

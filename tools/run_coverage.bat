@@ -1,7 +1,7 @@
-cd ..
-coverage run -m pytest tests\
+cd ..\tests
+coverage run -m pytest 
 coverage report -m
-cd tools
+cd ..\tools
 
 
 

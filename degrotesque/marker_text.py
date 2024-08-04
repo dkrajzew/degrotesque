@@ -19,7 +19,7 @@ __status__     = "Production"
 
 
 # --- imports ---------------------------------------------------------------
-from . import marker
+import marker
 
 
 # --- variables and constants -----------------------------------------------

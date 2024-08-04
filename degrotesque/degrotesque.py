@@ -26,6 +26,10 @@ import io
 import shutil
 import re
 from optparse import OptionParser
+import marker_text
+import marker_md
+import marker_html
+import marker_begend
 
 
 
@@ -250,17 +254,11 @@ class Degrotesque():
         self._target_regex = re.compile("(&#[xX]?[0-9a-fA-F]*;)")
         # set up markers
         self._markers = {}
-        try:
-            from . import marker_text
-            self._markers["text"] = marker_text.DegrotesqueTextMarker()
-            from . import marker_md
-            self._markers["md"] = marker_md.DegrotesqueMDMarker()
-            from . import marker_html
-            self._markers["sgml"] = marker_html.DegrotesqueHTMLMarker()
-            from . import marker_python
-            self._markers["python"] = marker_python.DegrotesquePythonMarker()
-        except:
-            raise ImportError("Could not load standard marker")
+        self._markers["text"] = marker_text.DegrotesqueTextMarker()
+        self._markers["md"] = marker_md.DegrotesqueMDMarker()
+        self._markers["sgml"] = marker_html.DegrotesqueHTMLMarker()
+        self._markers["python"] = marker_begend.DegrotesqueBeginEndMarker('"""', '"""', ["py"])
+        self._markers["doxygen"] = marker_begend.DegrotesqueBeginEndMarker('/**', '*/', ["java", "h", "cpp"])
 
 
     def _restore_default_actions(self):
@@ -604,6 +602,8 @@ def main(arguments=None):
     options_parser.add_option("-H", "--html", dest="html", action="store_true", default=False, help="Files are HTML/XML-derivatives")
     options_parser.add_option("-T", "--text", dest="text", action="store_true", default=False, help="Files are plain text files")
     options_parser.add_option("-M", "--markdown", dest="markdown", action="store_true", default=False, help="Files are markdown files")
+    options_parser.add_option("-D", "--doxygen", dest="doxygen", action="store_true", default=False, help="Files are doxygen files")
+    options_parser.add_option("-P", "--python", dest="python", action="store_true", default=False, help="Files are Python files")
     options_parser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
     options_parser.add_option("-f", "--format", dest="format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
     options_parser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
@@ -618,8 +618,10 @@ def main(arguments=None):
     num += 1 if options.html else 0
     num += 1 if options.text else 0
     num += 1 if options.markdown else 0
+    num += 1 if options.doxygen else 0
+    num += 1 if options.python else 0
     if num>1:
-        print("Error: only one of the options '--html', '--markdown', and '--text' can be set.", file=sys.stderr)
+        print("Error: only one of the options '--html', '--markdown', '--doxygen', '--python', and '--text' can be set.", file=sys.stderr)
         print("Usage: degrotesque.py -i <FILE>[,<FILE>]* [options]+", file=sys.stderr)
         return 2
     # setup degrotesque
@@ -639,6 +641,10 @@ def main(arguments=None):
         marker = degrotesque._markers["md"]
     if options.html:
         marker = degrotesque._markers["sgml"]
+    if options.doxygen:
+        marker = degrotesque._markers["doxygen"]
+    if options.python:
+        marker = degrotesque._markers["python"]
     # collect files
     extensions = get_extensions(options.extensions)
     files = get_files(options.input, options.recursive, extensions)

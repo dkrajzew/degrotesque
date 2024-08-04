@@ -16,3 +16,9 @@ __status__     = "Production"
 # - http://www.krajzewicz.de/docs/degrotesque/index.html
 # - http://www.krajzewicz.de
 # ===========================================================================
+import degrotesque
+import marker
+import marker_begend
+import marker_html
+import marker_md
+import marker_text

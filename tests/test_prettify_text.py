@@ -20,8 +20,11 @@ __status__     = "Production"
 
 # --- imports -----------------------------------------------------------------
 import unittest
-from degrotesque import degrotesque
-from degrotesque import marker_text
+import sys
+import os
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "degrotesque"))
+import degrotesque
+import marker_text
 
 
 # --- test classes ------------------------------------------------------------
