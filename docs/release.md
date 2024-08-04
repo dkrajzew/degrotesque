@@ -5,8 +5,8 @@ Release Steps
 * patch the release number and the copyright information in
     * the [README.md](https://github.com/dkrajzew/degrotesque/blob/master/README.md) file
     * the [setup.py](https://github.com/dkrajzew/degrotesque/blob/master/setup.py) file
-    * [degrotesque.py](https://github.com/dkrajzew/degrotesque/blob/master/degrotesque.py)
-    * the [install.md](https://github.com/dkrajzew/degrotesque/blob/master/docs/mkdocs/install.md) file
+    * all python files
+    * the [install.md](https://github.com/dkrajzew/degrotesque/blob/master/docs/install.md) file
 * run the tests (run tests/run_tests.bat)
 * build the pydoc documentation, copy it to the web pages
 * commit changes

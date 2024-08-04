@@ -26,6 +26,7 @@ nav:
     - Installation: install.md
     - Usage: 
         - Command Line: cmd.md
+        - Use Cases: use_cases.md
         - Embedded: embed.md
     - Links: links.md
     - API:

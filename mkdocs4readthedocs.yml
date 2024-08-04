@@ -16,6 +16,7 @@ theme:
 nav:
     - Home: index.md
     - Installation: install.md
+    - Use Cases: use_cases.md
     - Command Line Usage: cmd.md
     - Embedded Usage: embed.md
     - Links: links.md
