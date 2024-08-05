@@ -25,9 +25,8 @@ import marker
 
 # --- variables and constants -----------------------------------------------
 class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
-    def __init__(self, begin, end, extensions):
-        self._begin = begin
-        self._end = end
+    def __init__(self, begends, extensions):
+        self._begends = begends
         self._extensions = extensions
 
         
@@ -54,14 +53,18 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
         length = len(document)
         ret = "1"*length
         # find opening triple quotes
-        b = document.find(self._begin)
-        while b>=0:
-            b = b + 3
-            e = b
-            e = document.find(self._end, e)
-            if e<0:
-                raise ValueError("Not a valid document")
-            ret = ret[:b] + ("0"*(e-b)) + ret[e:]
-            b = document.find(self._begin, e+len(self._end))
+        for be in self._begends:
+            b = document.find(be[0])
+            while b>=0:
+                b = b + len(be[0])
+                e = b
+                e = document.find(be[1], e)
+                if e<0:
+                    if be[1]=="\n":
+                        e = len(document)
+                    else:
+                        raise ValueError("Not a valid document")
+                ret = ret[:b] + ("0"*(e-b)) + ret[e:]
+                b = document.find(be[0], e+len(be[1]))
         return ret
 

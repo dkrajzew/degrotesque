@@ -33,7 +33,7 @@ class TestDegrotesque_MarkDoxygen(unittest.TestCase):
 
     def setUp(self):
         self._degrotesque = degrotesque.Degrotesque()
-        self._marker = marker_begend.DegrotesqueBeginEndMarker('/**', '*/', ["java", "h", "cpp"])
+        self._marker = marker_begend.DegrotesqueBeginEndMarker([['/**', '*/'], ["///", "\n"]], ["java", "h", "cpp"])
 
     def test__mark_doxygen_textOnly1(self):
         """Text without markups only"""
@@ -48,17 +48,44 @@ class TestDegrotesque_MarkDoxygen(unittest.TestCase):
         assert(self._marker.get_mask("Hallo Mama!")=="11111111111")
 
 
-    def test__mark_doxygen_comment1(self):
+
+    def test__mark_python_comment_singleline1(self):
+        """A single comment in one line"""
+        assert(self._marker.get_mask('Hallo\n/// Mama!\n')=="1111111110000001")
+
+    def test__mark_python_comment_singleline2(self):
+        """A single comment in an own line"""
+        assert(self._marker.get_mask('Hallo\n///Mama!\n')=="111111111000001")
+
+    def test__mark_python_comment_singleline3(self):
+        """A multiple comments in multiple lines"""
+        assert(self._marker.get_mask('Hallo\n/// Mama!\n/// I am a comment.\n')=="111111111000000111100000000000000001")
+
+    def test__mark_python_comment_singleline_double(self):
+        """A multiple comments in multiple lines"""
+        assert(self._marker.get_mask('Hallo\n/// Mama!/// I am a comment.\n')=="11111111100000000000000000000000001")
+
+    def test__mark_python_comment_singleline_noend(self):
+        """A multiple comments in multiple lines"""
+        assert(self._marker.get_mask('Hallo\n/// Mama!\n/// I am a comment.')=="11111111100000011110000000000000000")
+
+
+
+    def test__mark_doxygen_comment_multiline1(self):
         """A single comment in one line"""
         assert(self._marker.get_mask('Hallo\n/**Mama!*/')=="1111111110000011")
 
-    def test__mark_doxygen_comment2(self):
+    def test__mark_doxygen_comment_multiline2(self):
         """A single comment in an own line"""
         assert(self._marker.get_mask('Hallo\n/**\nMama!\n*/')=="111111111000000011")
 
-    def test__mark_doxygen_comment3(self):
+    def test__mark_doxygen_comment_multiline3(self):
         """A single comment with multiple lines"""
         assert(self._marker.get_mask('Hallo\n/**\nMama!\nI am a comment.*/')=="111111111000000000000000000000011")
+
+    def test__mark_python_comment_multiline_double1(self):
+        """A single comment with multiple lines"""
+        assert(self._marker.get_mask('Hallo /**Mama!*/ I am a /**comment.*/')=="1111111110000011111111111110000000011")
 
 
     def test__mark_doxygen_broken(self):

@@ -257,8 +257,8 @@ class Degrotesque():
         self._markers["text"] = marker_text.DegrotesqueTextMarker()
         self._markers["md"] = marker_md.DegrotesqueMDMarker()
         self._markers["sgml"] = marker_html.DegrotesqueHTMLMarker()
-        self._markers["python"] = marker_begend.DegrotesqueBeginEndMarker('"""', '"""', ["py"])
-        self._markers["doxygen"] = marker_begend.DegrotesqueBeginEndMarker('/**', '*/', ["java", "h", "cpp"])
+        self._markers["python"] = marker_begend.DegrotesqueBeginEndMarker([['"""', '"""'], ["#", "\n"]], ["py"])
+        self._markers["doxygen"] = marker_begend.DegrotesqueBeginEndMarker([['/**', '*/'], ["///", "\n"]], ["java", "h", "cpp"])
 
 
     def _restore_default_actions(self):
