@@ -126,7 +126,7 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
             ret += "1"*(ie-ib)
             i = ie
         assert (len(ret)==len(document))
-        return ret
+        return self.mark_links(document, ret)
 
 
     def _get_tag_name(self, document):

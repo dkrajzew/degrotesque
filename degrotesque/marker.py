@@ -20,6 +20,7 @@ __status__     = "Production"
 
 # --- imports ---------------------------------------------------------------
 from abc import ABCMeta, abstractmethod
+import re
 
 
 # --- variables and constants -----------------------------------------------
@@ -48,3 +49,14 @@ class DegrotesqueMarker(metaclass=ABCMeta):
             (str): Annotation of the document.
         """
         pass # pragma: no cover
+
+
+    def mark_links(self, document, mask):
+        # https://stackoverflow.com/questions/6718633/python-regular-expression-again-match-url
+        mre = re.compile("((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,6}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*")
+        res = mre.finditer(document)
+        for r in res:
+            f = "1" * (r.end()-r.start())
+            mask = mask[:r.start()] + f + mask[r.end():]
+        return mask
+        

@@ -88,6 +88,13 @@ class TestDegrotesque_MarkPython(unittest.TestCase):
         assert(self._marker.get_mask('Hallo """Mama!""" I am a """comment."""')=="111111111000001111111111111100000000111")
 
 
+
+    def test__mark_python_link1(self):
+        """A single comment with multiple lines"""
+        assert(self._marker.get_mask('Hallo """ hallo http://www.krajzewicz.de hallo """')=="11111111100000001111111111111111111111110000000111")
+
+
+
     def test__mark_python_broken(self):
         """Missing closing"""
         try:

@@ -191,3 +191,7 @@ class TestDegrotesque_Prettify(unittest.TestCase):
         assert(self._degrotesque.prettify(" <(tm)>a</(tm)> ", self._marker)==" <&trade;>a</&trade;> ")
 
 
+
+    def test_link1(self):
+        """A single comment with multiple lines"""
+        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de hallo')=="000000111111111111111111111111000000")

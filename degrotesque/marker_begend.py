@@ -66,5 +66,5 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
                         raise ValueError("Not a valid document")
                 ret = ret[:b] + ("0"*(e-b)) + ret[e:]
                 b = document.find(be[0], e+len(be[1]))
-        return ret
+        return self.mark_links(document, ret)
 
