@@ -33,7 +33,7 @@ python degrotesque.py --input userdocs.xml -B -f unicode
 
 ## Making source code pretty
 
-Applying **degrotesque** to source code may be interesting when using, e.g. 
+Applying **degrotesque** to source code may be interesting when using, e.g.
 doxygen or mkdocs for generating a documentation.
 
 ```shell

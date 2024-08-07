@@ -64,7 +64,7 @@ degrotesque-1.4 (19.07.2021)
 
 degrotesque-1.2 (30.05.2020)
 ----------------------------
-* [issue #8](https://github.com/dkrajzew/degrotesque/issues/8): added a [ChangeLog](https://github.com/dkrajzew/degrotesque/blob/master/CHANGES.md) file 
+* [issue #8](https://github.com/dkrajzew/degrotesque/issues/8): added a [ChangeLog](https://github.com/dkrajzew/degrotesque/blob/master/CHANGES.md) file
 * [issue #6](https://github.com/dkrajzew/degrotesque/issues/6): using a lower-case version of HTML when skipping elements
 * [issue #9](https://github.com/dkrajzew/degrotesque/issues/9): change LICENCE to LGPL
 * [issue #7](https://github.com/dkrajzew/degrotesque/issues/7): add an API description

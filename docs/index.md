@@ -17,10 +17,10 @@ Introduction
 
 *degrotesque beautifies the web.*
 
-**degrotesque** is a command line script written in the [Python](https://www.python.org/) programming language 
-that loads a text/markdown/HTML/XML/Python/Java/... file from the disc &mdash; or several in batch &mdash; and for each, it 
-replaces some commonly used non-typographic characters like hyphens, single and double quotes, etc. into their typographic 
-representation for improving the text&apos;s appearance. Of course, non-text parts of the respective document, like e.g. 
+**degrotesque** is a command line script written in the [Python](https://www.python.org/) programming language
+that loads a text/markdown/HTML/XML/Python/Java/... file from the disc &mdash; or several in batch &mdash; and for each, it
+replaces some commonly used non-typographic characters like hyphens, single and double quotes, etc. into their typographic
+representation for improving the text&apos;s appearance. Of course, non-text parts of the respective document, like e.g.
 HTML-tags, code, or what, are omitted.
 
 E.g.:

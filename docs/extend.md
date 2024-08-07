@@ -9,7 +9,7 @@ the mask that says which parts shall be processed and which not (see [Workflow](
 
 To improve the extensibility of degrotesque, the methods that compute the masks
 in dependence to the file type have been extracted from the Degrotesque class
-and are now subclasses of the class "DegrotesqueMarker", defined in marker.py. 
+and are now subclasses of the class "DegrotesqueMarker", defined in marker.py.
 
 Two methods must be implemented:
 
@@ -28,6 +28,6 @@ to be done:
 
 # Closing notes
 
-If you have extended **degrotesque**, please let me know. I am accepting code from 
+If you have extended **degrotesque**, please let me know. I am accepting code from
 third parties and people may need what you have done.
 

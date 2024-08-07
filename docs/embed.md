@@ -23,7 +23,7 @@ The first call will deliver:
 while the second &mdash; as the string is interpreted as plain text, not HTML will deliver:
 
 ```console
- <script> if(i<0) echo &ldquo;a&rdquo;</script> &ldquo;Hello World&rdquo; 
+ <script> if(i<0) echo &ldquo;a&rdquo;</script> &ldquo;Hello World&rdquo;
 ```
 
 what is probably not what you wished.
