@@ -29,7 +29,7 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
         self._begends = begends
         self._extensions = extensions
 
-        
+
     def get_extensions(self):
         """Returns the extensions of file types that can be processed using
         this marker.
@@ -38,10 +38,10 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
             (list[str]): A list of extensions
         """
         return self._extensions
-        
+
 
     def get_mask(self, document, to_skip=[]):
-        """Returns a string where all text in triple quotes 
+        """Returns a string where all text in triple quotes
         is denoted as '0' and everything else as '1'.
 
         Args:

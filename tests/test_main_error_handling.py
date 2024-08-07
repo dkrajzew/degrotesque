@@ -40,7 +40,7 @@ def test_main__unknown_option_bool(capsys, tmp_path):
         assert e.code==2
     captured = capsys.readouterr()
     assert captured.out == ""
-    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Usage: 
+    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Usage:
   degrotesque.py [options]
 
 degrotesque.py: error: no such option: -u
@@ -63,7 +63,7 @@ def test_main__unknown_option_int(capsys, tmp_path):
         assert e.code==2
     captured = capsys.readouterr()
     assert captured.out == ""
-    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Usage: 
+    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Usage:
   degrotesque.py [options]
 
 degrotesque.py: error: no such option: --foo

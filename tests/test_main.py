@@ -44,7 +44,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "degrotesque.py") == """Usage: 
+    assert captured.out.replace("__main__.py", "degrotesque.py") == """Usage:
   degrotesque.py [options]
 
 Options:

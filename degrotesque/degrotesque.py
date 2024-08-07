@@ -187,7 +187,7 @@ def _replace_keep(matchobj):
 
     Args:
         matchobj (Match): The match object to get a new representation for
-    
+
     Returns:
         (str): The converted string (here: as Unicode number)
     """
@@ -199,7 +199,7 @@ def _replace_html(matchobj):
 
     Args:
         matchobj (Match): The match object to get a new representation for
-    
+
     Returns:
         (str): The converted string (here: as HTML entity)
     """
@@ -211,11 +211,11 @@ def _replace_unicode(matchobj):
 
     Args:
         matchobj (Match): The match object to get a new representation for
-    
+
     Returns:
         (str): The converted string (here: as Unicode character)
     """
-    c = matchobj.group(0)[2] 
+    c = matchobj.group(0)[2]
     if c=='x' or c=='X':
         return chr(int("0" + matchobj.group(0)[2:-1], 16))
     return chr(int(matchobj.group(0)[2:-1]))
@@ -291,7 +291,7 @@ class Degrotesque():
                 if n[0][1] is not None:
                     n[0][1] = re.compile(n[0][1])
                 self._actions.append(n)
-                
+
 
     def _restore_default_elements_to_skip(self):
         """Instantiates default elements to skip"""
@@ -325,7 +325,7 @@ class Degrotesque():
 
     def set_format(self, format_name):
         """Sets the target character representation
-        
+
         Args:
             format_name (str): The format to use, one of "html", "unicode", "text"
         """
@@ -341,18 +341,18 @@ class Degrotesque():
 
     def get_marker(self, filename, document):
         """Returns the marker to use.
-        
+
         In a first step, the marker to use is tried to be determined using
         the file's extension. If the extension matches a marker, this
         marker is returned.
-        
+
         If the extension is not listed in the markers' extensions lists,
         it is tried to check whether it is a SGML derivative (HTML/XML/...).
         In this case, a DegrotesqueHTMLMarker is returned.
-        
+
         If no other marker could be found, a DegrotesqueTextMarker is
         returned.
-        
+
         Args:
             filename (str): The name / path of the file
             document (str): The file's contents
@@ -522,25 +522,25 @@ def main(arguments=None):
     """The main method using parameter from the command line.
 
     The application reads the given file or the files from the folder (optionally
-    recursive) defined by the -i/--input option. If -r/--recursive option is set, 
+    recursive) defined by the -i/--input option. If -r/--recursive option is set,
     the input folder will be scanned recursively. All files are processed but can
     be limited to those that match the extension defined using the -e/--extension
-    option. The default encoding for the files is utf-8. This can be changed 
+    option. The default encoding for the files is utf-8. This can be changed
     using the -E/--encoding option.
-    
+
     The default actions or those named using the -a/--actions option are
     applied. When parsing HTML documents, elements are skipped. The contents of
     default elements to skip or those defined using -s/--skip are skipped as well.
     degrotesque tries to determine the file type using the respective extension.
     The options -T/--text, -H/--html, and -M/--markdown overwrite this behaviour.
-    
-    The target format of the replacements is unicode entity but may be changed 
+
+    The target format of the replacements is unicode entity but may be changed
     using the -f/--format option.
-    
+
     The files are saved under their original name. If the option -B/--no-backup is not
     given, a backup of the original files is generated named as the original
     file with the appendix ".orig".
-    
+
 
     Args:
         arguments (List[str]): The command line arguments, parsed as options using OptionParser.

@@ -51,7 +51,7 @@ def test_filetype__two_html_explicit(capsys, tmp_path):
 
 def test_filetype__two_text(capsys, tmp_path):
     """Whether two text files are processed
-    
+
     The second file is recognized as HTML due to it's contents
     """
     p1 = tmp_path / "hello1.txt"
@@ -65,7 +65,7 @@ def test_filetype__two_text(capsys, tmp_path):
 
 def test_filetype__two_text_explicit(capsys, tmp_path):
     """Whether two text files are processed
-    
+
     The second file is recognized as HTML due to it's contents
     """
     p1 = tmp_path / "hello1.txt"
@@ -80,7 +80,7 @@ def test_filetype__two_text_explicit(capsys, tmp_path):
 
 def test_filetype__two_md(capsys, tmp_path):
     """Whether two text files are processed
-    
+
     The second file is recognized as HTML due to it's contents
     """
     p1 = tmp_path / "hello1.md"
@@ -94,7 +94,7 @@ def test_filetype__two_md(capsys, tmp_path):
 
 def test_filetype__two_md_explicit(capsys, tmp_path):
     """Whether two text files are processed
-    
+
     The second file is recognized as HTML due to it's contents
     """
     p1 = tmp_path / "hello1.txt"
@@ -109,7 +109,7 @@ def test_filetype__two_md_explicit(capsys, tmp_path):
 
 def test_filetype__three_python(capsys, tmp_path):
     """Whether two text files are processed
-    
+
     The second file is recognized as HTML due to it's contents
     """
     p1 = tmp_path / "hello1.py"
@@ -126,7 +126,7 @@ def test_filetype__three_python(capsys, tmp_path):
 
 def test_filetype__three_python_explicit(capsys, tmp_path):
     """Whether two text files are processed
-    
+
     The second file is recognized as HTML due to it's contents
     """
     p1 = tmp_path / "hello1.txt"
@@ -144,7 +144,7 @@ def test_filetype__three_python_explicit(capsys, tmp_path):
 
 def test_filetype__three_doxygen(capsys, tmp_path):
     """Whether two text files are processed
-    
+
     The second file is recognized as HTML due to it's contents
     """
     p1 = tmp_path / "hello1.java"
@@ -161,7 +161,7 @@ def test_filetype__three_doxygen(capsys, tmp_path):
 
 def test_filetype__three_doxygen_explicit(capsys, tmp_path):
     """Whether two text files are processed
-    
+
     The second file is recognized as HTML due to it's contents
     """
     p1 = tmp_path / "hello1.txt"

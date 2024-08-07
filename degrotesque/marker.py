@@ -33,13 +33,13 @@ class DegrotesqueMarker(metaclass=ABCMeta):
         Returns:
             (list[str]): A list of extensions
         """
-        pass # pragma: no cover 
+        pass # pragma: no cover
 
 
     @abstractmethod
     def get_mask(self, document, to_skip=[]):
         """Returns a string where all parts to exclude from replacements
-        denoted as '1' and all with plain content that shall be processed 
+        denoted as '1' and all with plain content that shall be processed
         as '0'.
 
         Args:
@@ -59,4 +59,3 @@ class DegrotesqueMarker(metaclass=ABCMeta):
             f = "1" * (r.end()-r.start())
             mask = mask[:r.start()] + f + mask[r.end():]
         return mask
-        
