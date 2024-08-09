@@ -1,6 +1,6 @@
-pytest
-mkdocs
-mkdocs-material
-mkdocstrings
-mkdocstrings-python
-coverage
+pytest==8.1.1
+mkdocs==1.5.3
+mkdocs-material==9.5.13
+mkdocstrings==0.24.1
+mkdocstrings-python==1.8.0
+coverage==7.4.3
