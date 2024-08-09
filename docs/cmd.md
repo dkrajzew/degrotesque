@@ -1,11 +1,9 @@
-Running on the Command Line
-===========================
+# Running on the Command Line
 
 __degrotesque__ is started on the command line.
 
 
-Description
------------
+## Description
 
 The option __-i _&lt;PATH&gt;___ / __--input _&lt;PATH&gt;___ tells the script which file(s) shall be read &mdash; you may name a file or a folder, here. If the option __-r__ / __--recursive__ is set, the given folder will be processed recursively.
 
@@ -34,8 +32,7 @@ The option __--help__ / __-h__ prints a help screen. The option __--version__ th
 
 Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks action set is given in [Appendix D](appendixD.md).
 
-Examples
---------
+## Examples
 
 ```console
 degrotesque --input my_page.html --actions quotes.german
@@ -50,8 +47,7 @@ degrotesque --input my_folder --recursive --no-backup
 Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The files format of each file is determined using the file&apos;s extension.
 
 
-Command line arguments
-----------------------
+## Command line arguments
 
 The script can be started on the command line with the following options:
 

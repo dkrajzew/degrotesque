@@ -1,8 +1,6 @@
-Appendix B: Default Extensions
-==============================
+# Appendix B: Default Extensions
 
-HTML / XML
-----------
+## HTML / XML
 
 Files with the following extensions are parsed as HTML / XML files per default:
 
@@ -17,8 +15,7 @@ Files with the following extensions are parsed as HTML / XML files per default:
 * xml,
 * osm
 
-Markdown
---------
+## Markdown
 
 Files with the following extensions are parsed as markdown files default:
 

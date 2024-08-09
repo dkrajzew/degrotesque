@@ -1,8 +1,6 @@
-Extending degrotesque
-=====================
+# Extending degrotesque
 
-Adding a new file format
-------------------------
+## Adding a new file format
 
 Adding a new file format is mainly done by implementing a new computation of
 the mask that says which parts shall be processed and which not (see [Workflow](workflow.md)).
@@ -26,7 +24,7 @@ to be done:
 * implement the mask computation in the class' **get_mask** method; the mask must have the same length as the original text and should be made of the characters '0' (which will be processed) and '1' (which will be skipped)
 * add your marker class to degrotesque's \_\_init\_\_ method
 
-# Closing notes
+## Closing notes
 
 If you have extended **degrotesque**, please let me know. I am accepting code from
 third parties and people may need what you have done.

@@ -1,10 +1,9 @@
-Download and Installation
-=========================
+# Download and Installation
 
 __degrotesque__ is a [Python](https://www.python.org/) script. To run it, you must have [Python](https://www.python.org/) installed. If you have not installed [Python](https://www.python.org/), yet, please read instructions on installing [Python](https://www.python.org/) first.
 
-Installing Python
------------------
+
+## Installing Python
 
 For installing [Python](https://www.python.org/), use an installer for your system from <https://www.python.org>.
 
@@ -21,8 +20,7 @@ pip install --upgrade pip
 ```
 
 
-Installing degrotesque
-----------------------
+## Installing degrotesque
 
 The __current version__ is [degrotesque-3.0.0](https://github.com/dkrajzew/degrotesque/releases/tag/3.0.0).
 

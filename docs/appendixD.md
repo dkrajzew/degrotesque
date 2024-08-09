@@ -1,5 +1,4 @@
-Appendix D: Masking Action Set
-==============================
+# Appendix D: Masking Action Set
 
 The &ldquo;masks&rdquo; action set is masking some patterns to avoid replacements. When matching, the matching string is kept. The actions are given in the following. Please note that the numbers in { } brackets give the number of subsequent elements.
 

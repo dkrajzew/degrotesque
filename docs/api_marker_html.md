@@ -1,5 +1,4 @@
-API
-===
+# API
 
 ::: degrotesque.marker_html
     docstring_style: "google"

@@ -1,5 +1,4 @@
-Services
-========
+# Services
 
 It is too complicated or too expensive for you to include **degrotesque** in your workflows? Let us know, we may help you.
 

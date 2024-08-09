@@ -1,5 +1,4 @@
-How degrotesque works
-=====================
+# How degrotesque works
 
 **degrotesque** is quite a simple tool.
 

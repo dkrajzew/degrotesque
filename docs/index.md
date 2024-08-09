@@ -12,8 +12,7 @@
 
 degrotesque &mdash; A type setter written in Python.
 
-Introduction
-------------
+## Introduction
 
 *degrotesque beautifies text.*
 
@@ -45,8 +44,7 @@ Being a [Python](https://www.python.org/) script, **it can be easily embedded in
 And, **degrotesque** is free (you may donate).
 
 
-Examples
---------
+## Examples
 
 ```console
 degrotesque --input my_page.html --actions quotes.german
@@ -61,8 +59,7 @@ degrotesque --input my_folder --recursive --no-backup
 Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The format of each file is determined using the respective file&apos;s extension.
 
 
-Background
-----------
+## Background
 
 I often write my texts, documentation and web pages using a plain editor. As such, the character " is always used for quotes, a dash is always a minus, etc.
 
@@ -75,15 +72,13 @@ I think it&apos;s a pity that major Desktop Publishing applications do this on t
 If you need any consultations, please let me know. If you know better, too.
 
 
-Future Plans
-------------
+## Future Plans
 
 **degrotesque** is working for me as intended.
 With the current release, all features I had in mind were implemented.
 As such, I suppose that new versions of **degrotesque** will only be released if someone puts new features on the table. Adding some further laguage-specific things beyon German, French, and English may be of interest. If you need something, you may drop me a mail at daniel@krajzewicz.de.
 
 
-License
--------
+## License
 
 __degrotesque__ is licensed under the [BSD license](license.md).

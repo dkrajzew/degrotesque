@@ -1,5 +1,4 @@
-API
-===
+# API
 
 ::: degrotesque.degrotesque
     docstring_style: "google"

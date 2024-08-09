@@ -1,5 +1,4 @@
-Release Steps
-=============
+# Release Steps
 
 * check the [ChangeLog](https://github.com/dkrajzew/degrotesque/blob/master/docs/mkdocs/changes.md)
 * patch the release number and the copyright information in

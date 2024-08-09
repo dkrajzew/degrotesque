@@ -1,5 +1,4 @@
-Use Cases
-=========
+# Use Cases
 
 ## Improving web pages
 

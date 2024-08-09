@@ -1,5 +1,4 @@
-Appendix A: Named Actions
-=========================
+# Appendix A: Named Actions
 
 The following action sets are currently implemented.
 

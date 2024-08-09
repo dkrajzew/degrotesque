@@ -1,5 +1,4 @@
-Appendix C: Skipped Elements
-============================
+# Appendix C: Skipped Elements
 
 When parsing HTML files, the contents of the following elements are not processed by default:
 
