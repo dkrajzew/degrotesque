@@ -49,6 +49,7 @@ nav:
         - Appendix B: appendixB.md
         - Appendix C: appendixC.md
         - Appendix D: appendixD.md
+    - Known Issues: issues.md
     - Services: services.md
 
 exclude_docs:

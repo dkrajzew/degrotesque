@@ -31,6 +31,18 @@ python degrotesque.py --input userdocs.xml -B -f unicode
 ```
 
 
+## Type setting for Markdown documentation
+
+The pages with **degrotesque** documentation you currently look at were written 
+using Markdown (mkdocs). To make them pretty, **degrotesque** was applied to them
+
+The call is:
+
+```shell
+python degrotesque.py --input docs/* -B
+```
+
+
 ## Making source code pretty
 
 Applying **degrotesque** to source code may be interesting when using, e.g.

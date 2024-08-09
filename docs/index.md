@@ -10,12 +10,12 @@
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
 
 
-degrotesque &mdash; A web type setter written in Python.
+degrotesque &mdash; A type setter written in Python.
 
 Introduction
 ------------
 
-*degrotesque beautifies the web.*
+*degrotesque beautifies text.*
 
 **degrotesque** is a command line script written in the [Python](https://www.python.org/) programming language
 that loads a text/markdown/HTML/XML/Python/Java/... file from the disc &mdash; or several in batch &mdash; and for each, it
@@ -41,6 +41,8 @@ Of course, this script omits HTML elements. It keeps the complete format as-is, 
 Being a [Python](https://www.python.org/) script, **it can be easily embedded in own workflows** and can be used on almost all operating systems.
 
 **degrotesque** supports English, German, and French alternatives currently.
+
+And, **degrotesque** is free (you may donate).
 
 
 Examples
@@ -78,7 +80,7 @@ Future Plans
 
 **degrotesque** is working for me as intended.
 With the current release, all features I had in mind were implemented.
-As such, I suppose that new versions of **degrotesque** will only be released if someone puts new features on the table. If you need something, you may drop me a mail at daniel@krajzewicz.de.
+As such, I suppose that new versions of **degrotesque** will only be released if someone puts new features on the table. Adding some further laguage-specific things beyon German, French, and English may be of interest. If you need something, you may drop me a mail at daniel@krajzewicz.de.
 
 
 License
