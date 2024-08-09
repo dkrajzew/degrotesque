@@ -34,7 +34,7 @@ nav:
         - marker API: api_marker.md
         - HTML marker: api_marker_html.md
         - Markdown marker: api_marker_md.md
-        - Python marker: api_marker_python.md
+        - Abstract beg/end marker: api_marker_begend.md
         - Text marker: api_marker_text.md
     - Developer Docs:
         - Workflow: workflow.md
