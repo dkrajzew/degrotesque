@@ -21,7 +21,7 @@ __status__     = "Production"
 
 
 # --- imports ---------------------------------------------------------------
-#from . import marker
+from typing import List
 import marker
 
 
@@ -44,17 +44,17 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
         self._extensions = extensions
 
 
-    def get_extensions(self) -> list[str]:
+    def get_extensions(self) -> List[str]:
         """Returns the extensions of file types that can be processed using
         this marker.
 
         Returns:
-            (list[str]): A list of extensions
+            (List[str]): A list of extensions
         """
         return self._extensions
 
 
-    def get_mask(self, document : str, to_skip : list[str] = []) -> str:
+    def get_mask(self, document : str, to_skip : List[str] = []) -> str:
         """Returns a string where all text in triple quotes
         is denoted as '0' and everything else as '1'.
 

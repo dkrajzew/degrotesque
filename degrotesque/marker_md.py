@@ -19,6 +19,7 @@ __status__     = "Production"
 
 
 # --- imports ---------------------------------------------------------------
+from typing import List
 import marker
 
 
@@ -30,17 +31,17 @@ class DegrotesqueMDMarker(marker.DegrotesqueMarker):
     masked as well as links.
     """
 
-    def get_extensions(self) -> list[str]:
+    def get_extensions(self) -> List[str]:
         """Returns the extensions of file types that can be processed using
         this marker.
 
         Returns:
-            (list[str]): A list of extensions
+            (List[str]): A list of extensions
         """
         return [ "md" ]
 
 
-    def get_mask(self, document : str, to_skip : list[str] = []) -> str:
+    def get_mask(self, document : str, to_skip : List[str] = []) -> str:
         """Returns a string where all code and quotes are denoted as '1' and
         plain content as '0'.
 

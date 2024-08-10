@@ -25,6 +25,7 @@ import os
 import io
 import shutil
 import re
+from typing import List
 from optparse import OptionParser
 import marker
 import marker_text
@@ -259,7 +260,7 @@ class Degrotesque:
         self.set_actions("quotes.english,dashes,ellipsis,math,apostrophe,commercial")
 
 
-    def set_actions(self, action_names : list[str]):
+    def set_actions(self, action_names : List[str]):
         """Sets the actions to apply.
 
         If the given names of actions are None or empty, the default actions
@@ -297,7 +298,7 @@ class Degrotesque:
         ]
 
 
-    def set_to_skip(self, elements_to_skip : list[str]):
+    def set_to_skip(self, elements_to_skip : List[str]):
         """Sets the elements which contents shall not be changed.
 
         If the given names of elements are None or empty, the default elements
@@ -449,7 +450,7 @@ class Degrotesque:
 
 
 # --- functions -------------------------------------------------------------
-def get_extensions(names : list[str]) -> list[str]:
+def get_extensions(names : List[str]) -> List[str]:
     """Returns the list of extensions of files to process.
 
     If the given names of extensions are None or empty, the default
@@ -474,7 +475,7 @@ def get_extensions(names : list[str]) -> list[str]:
     return exts
 
 
-def get_files(name : str, recursive : bool, extensions : list[str]) -> list[str]:
+def get_files(name : str, recursive : bool, extensions : List[str]) -> List[str]:
     """Returns the files to process.
 
     If a file name is given, a list with only this file name is returned.
@@ -512,7 +513,7 @@ def get_files(name : str, recursive : bool, extensions : list[str]) -> list[str]
     return files
 
 
-def main(arguments : list[str] = None) -> int:
+def main(arguments : List[str] = None) -> int:
     """The main method using parameter from the command line.
 
     The application reads the given file or the files from the folder (optionally

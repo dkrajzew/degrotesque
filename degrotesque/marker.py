@@ -21,6 +21,7 @@ __status__     = "Production"
 
 # --- imports ---------------------------------------------------------------
 from abc import ABCMeta, abstractmethod
+from typing import List
 import re
 
 
@@ -30,18 +31,18 @@ class DegrotesqueMarker(metaclass=ABCMeta):
     process."""
 
     @abstractmethod
-    def get_extensions(self) -> list[str]:
+    def get_extensions(self) -> List[str]:
         """Returns the extensions of file types that can be processed using
         this marker.
 
         Returns:
-            (list[str]): A list of extensions
+            (List[str]): A list of extensions
         """
         pass # pragma: no cover
 
 
     @abstractmethod
-    def get_mask(self, document : str, to_skip : list[str] = []) -> str:
+    def get_mask(self, document : str, to_skip : List[str] = []) -> str:
         """Returns a string where all parts to exclude from replacements
         denoted as '1' and all with plain content that shall be processed
         as '0'.

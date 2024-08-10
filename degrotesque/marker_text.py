@@ -20,6 +20,7 @@ __status__     = "Production"
 
 
 # --- imports ---------------------------------------------------------------
+from typing import List
 import marker
 
 
