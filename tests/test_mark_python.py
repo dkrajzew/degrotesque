@@ -32,8 +32,7 @@ class TestDegrotesque_MarkPython(unittest.TestCase):
     """Testing the _mark_markdown method"""
 
     def setUp(self):
-        self._degrotesque = degrotesque.Degrotesque()
-        self._marker = marker_begend.DegrotesqueBeginEndMarker([['"""', '"""'], ["#", "\n"]], ["py"])
+        self._marker = marker_begend.DegrotesquePythonMarker()
 
     def test__mark_python_textOnly1(self):
         """Text without markups only"""

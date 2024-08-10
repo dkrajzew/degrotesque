@@ -32,8 +32,7 @@ class TestDegrotesque_MarkDoxygen(unittest.TestCase):
     """Testing the _mark_markdown method"""
 
     def setUp(self):
-        self._degrotesque = degrotesque.Degrotesque()
-        self._marker = marker_begend.DegrotesqueBeginEndMarker([['/**', '*/'], ["///", "\n"]], ["java", "h", "cpp"])
+        self._marker = marker_begend.DegrotesqueDoxygenMarker()
 
     def test__mark_doxygen_textOnly1(self):
         """Text without markups only"""

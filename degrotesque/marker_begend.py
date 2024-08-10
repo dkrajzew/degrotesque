@@ -82,3 +82,25 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
                 b = document.find(be[0], e+len(be[1]))
         return self.mark_links(document, ret)
 
+
+
+class DegrotesquePythonMarker(DegrotesqueBeginEndMarker):
+    """A class that returns the mask for a Python document.
+    
+    Everything is masked despite comments, excluding links.
+    """
+
+    def __init__(self):
+        DegrotesqueBeginEndMarker.__init__(self, [['"""', '"""'], ["#", "\n"]], ["py"])
+
+
+
+class DegrotesqueDoxygenMarker(DegrotesqueBeginEndMarker):
+    """A class that returns the mask for a doxygen-documented document.
+    
+    Everything is masked despite doxygen comments, excluding links.
+    """
+
+    def __init__(self):
+        DegrotesqueBeginEndMarker.__init__(self, [['/**', '*/'], ["///", "\n"]], ["java", "h", "cpp"])
+

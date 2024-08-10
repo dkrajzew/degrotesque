@@ -32,7 +32,6 @@ class TestDegrotesque_MarkMarkdown(unittest.TestCase):
     """Testing the _mark_markdown method"""
 
     def setUp(self):
-        self._degrotesque = degrotesque.Degrotesque()
         self._marker = marker_md.DegrotesqueMDMarker()
 
     def test__mark_markdown_textOnly1(self):
