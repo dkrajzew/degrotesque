@@ -26,6 +26,7 @@ import io
 import shutil
 import re
 from optparse import OptionParser
+import marker
 import marker_text
 import marker_md
 import marker_html
@@ -174,7 +175,7 @@ encoding_map = {
 
 # --- functions -------------------------------------------------------------
 # --- replacement functions
-def _replace_keep(matchobj):
+def _replace_keep(matchobj : re.Match) -> str:
     """Unicode numbers conversion to itself
 
     Args:
@@ -186,7 +187,7 @@ def _replace_keep(matchobj):
     return matchobj.group(0)
 
 
-def _replace_html(matchobj):
+def _replace_html(matchobj : re.Match) -> str:
     """Unicode numbers conversion to HTML entities
 
     Args:
@@ -198,7 +199,7 @@ def _replace_html(matchobj):
     return encoding_map[matchobj.group(0)][0]
 
 
-def _replace_unicode(matchobj):
+def _replace_unicode(matchobj : re.Match) -> str:
     """Unicode numbers conversion to Unicode characters
 
     Args:
@@ -215,7 +216,7 @@ def _replace_unicode(matchobj):
 
 
 # --- class definitions -----------------------------------------------------
-class Degrotesque():
+class Degrotesque:
     """A tiny web type setter.
 
     The main method "prettify" uses the list of actions to change the
@@ -258,7 +259,7 @@ class Degrotesque():
         self.set_actions("quotes.english,dashes,ellipsis,math,apostrophe,commercial")
 
 
-    def set_actions(self, action_names):
+    def set_actions(self, action_names : list[str]):
         """Sets the actions to apply.
 
         If the given names of actions are None or empty, the default actions
@@ -296,7 +297,7 @@ class Degrotesque():
         ]
 
 
-    def set_to_skip(self, elements_to_skip):
+    def set_to_skip(self, elements_to_skip : list[str]):
         """Sets the elements which contents shall not be changed.
 
         If the given names of elements are None or empty, the default elements
@@ -315,7 +316,7 @@ class Degrotesque():
         self._elements_to_skip = [x.strip() for x in elements_to_skip.split(',')]
 
 
-    def set_format(self, format_name):
+    def set_format(self, format_name : str):
         """Sets the target character representation
 
         Args:
@@ -331,7 +332,7 @@ class Degrotesque():
             raise ValueError("Unknown target format '%s'" % format_name)
 
 
-    def get_marker(self, filename, document):
+    def get_marker(self, filename : str, document : str) -> marker.DegrotesqueMarker:
         """Returns the marker to use.
 
         In a first step, the marker to use is tried to be determined using
@@ -364,7 +365,7 @@ class Degrotesque():
 
 
 
-    def prettify(self, document, marker):
+    def prettify(self, document : str, marker : marker.DegrotesqueMarker) -> str:
         """Prettifies (degrotesques) the given document.
 
         It is assumed that the input is given in utf-8.
@@ -373,6 +374,7 @@ class Degrotesque():
 
         Args:
             document (str): The document (contents) to process.
+            marker (marker.DegrotesqueMarker): The marker object to use for computing the mask of document parts to skip
 
         Returns:
             (str): The processed (prettified / degrotesqued) document.
@@ -447,7 +449,7 @@ class Degrotesque():
 
 
 # --- functions -------------------------------------------------------------
-def get_extensions(names):
+def get_extensions(names : list[str]) -> list[str]:
     """Returns the list of extensions of files to process.
 
     If the given names of extensions are None or empty, the default
@@ -472,7 +474,7 @@ def get_extensions(names):
     return exts
 
 
-def get_files(name, recursive, extensions):
+def get_files(name : str, recursive : bool, extensions : list[str]) -> list[str]:
     """Returns the files to process.
 
     If a file name is given, a list with only this file name is returned.
@@ -510,7 +512,7 @@ def get_files(name, recursive, extensions):
     return files
 
 
-def main(arguments=None):
+def main(arguments : list[str] = None) -> int:
     """The main method using parameter from the command line.
 
     The application reads the given file or the files from the folder (optionally

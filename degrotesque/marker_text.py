@@ -30,7 +30,7 @@ class DegrotesqueTextMarker(marker.DegrotesqueMarker):
     Only links are masked out, everything else can be changed.
     """
 
-    def get_extensions(self):
+    def get_extensions(self) -> list[str]:
         """Returns the extensions of file types that can be processed using
         this marker.
 
@@ -40,7 +40,7 @@ class DegrotesqueTextMarker(marker.DegrotesqueMarker):
         return [ "txt" ]
 
 
-    def get_mask(self, document, to_skip=[]):
+    def get_mask(self, document : str, to_skip : list[str] = []) -> str:
         """Returns a string where all code and quotes are denoted as '1' and
         plain content as '0'.
 

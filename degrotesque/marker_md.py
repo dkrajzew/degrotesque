@@ -30,7 +30,7 @@ class DegrotesqueMDMarker(marker.DegrotesqueMarker):
     masked as well as links.
     """
 
-    def get_extensions(self):
+    def get_extensions(self) -> list[str]:
         """Returns the extensions of file types that can be processed using
         this marker.
 
@@ -40,7 +40,7 @@ class DegrotesqueMDMarker(marker.DegrotesqueMarker):
         return [ "md" ]
 
 
-    def get_mask(self, document, to_skip=[]):
+    def get_mask(self, document : str, to_skip : list[str] = []) -> str:
         """Returns a string where all code and quotes are denoted as '1' and
         plain content as '0'.
 

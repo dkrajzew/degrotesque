@@ -30,7 +30,7 @@ class DegrotesqueMarker(metaclass=ABCMeta):
     process."""
 
     @abstractmethod
-    def get_extensions(self):
+    def get_extensions(self) -> list[str]:
         """Returns the extensions of file types that can be processed using
         this marker.
 
@@ -41,7 +41,7 @@ class DegrotesqueMarker(metaclass=ABCMeta):
 
 
     @abstractmethod
-    def get_mask(self, document, to_skip=[]):
+    def get_mask(self, document : str, to_skip : list[str] = []) -> str:
         """Returns a string where all parts to exclude from replacements
         denoted as '1' and all with plain content that shall be processed
         as '0'.
@@ -55,7 +55,7 @@ class DegrotesqueMarker(metaclass=ABCMeta):
         pass # pragma: no cover
 
 
-    def apply_masks(self, document, mask):
+    def apply_masks(self, document : str, mask : str) -> str:
         """Masks (sets the contents of the mask to '1') all URLs and
         ISSN / ISBN.
         
