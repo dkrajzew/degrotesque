@@ -76,4 +76,14 @@ class DegrotesqueMarker(metaclass=ABCMeta):
         for r in res:
             f = "1" * (r.end()-r.start())
             mask = mask[:r.start()] + f + mask[r.end():]
+        # mask ISSN and ISBN numbers
+        for to_mask in [
+                "978-[\d]+-[\d]+-[\d]+-[\d]", "979-[\d]+-[\d]+-[\d]+-[\d]",
+                "[\d]+-[\d]+-[\d]+-[\d]", "ISSN \d{4}-\d{4}"
+                ]:
+            mre = re.compile(to_mask)
+            res = mre.finditer(document)
+            for r in res:
+                f = "1" * (r.end()-r.start())
+                mask = mask[:r.start()] + f + mask[r.end():]
         return mask

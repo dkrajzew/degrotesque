@@ -60,13 +60,13 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
             (str): Annotation of the HTML document.
         """
         # mark HTML elements
-        document = document.lower()
+        ldocument = document.lower()
         ret = ""
         i = 0
-        while i<len(document):
-            if document[i]=='<':
+        while i<len(ldocument):
+            if ldocument[i]=='<':
                 ret = ret + "1"
-            elif document[i]=='>':
+            elif ldocument[i]=='>':
                 ret = ret + "1"
                 i += 1
                 continue
@@ -76,11 +76,11 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
                 continue
             # process elements to skip contents of
             i += 1
-            tb = self._get_tag_name(document[i:])
+            tb = self._get_tag_name(ldocument[i:])
             ret += "1"*(len(tb))
             i = i + len(tb)
             if tb not in to_skip:
-                ie = document.find(">", i)
+                ie = ldocument.find(">", i)
                 if ie<0:
                     raise ValueError("Unclosed element at %s" % (i-len(tb)))
                 ret += "1"*(ie-i+1)
@@ -89,26 +89,26 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
             ib = i
             if tb=="?" or tb=="?php":
                 # assumption: php stuff is always closed by ?>
-                ie = document.find("?>", ib)
+                ie = ldocument.find("?>", ib)
                 if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
                 ie += 1
             elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
                 # assumption: jsp/asp stuff is always closed by %>
-                ie = document.find("%>", ib)
+                ie = ldocument.find("%>", ib)
                 if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
                 ie += 1
             elif tb=="!--":
                 # comments are always closed by -->
-                ie = document.find("-->", ib)
+                ie = ldocument.find("-->", ib)
                 if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
                 ie += 2
             elif tb=="!doctype":
                 # DOCTYPE: find matching >
                 ie = ib+1
                 num = 1
-                while ie<len(document):
-                    if document[ie]=="<": num = num + 1
-                    elif document[ie]==">": num = num + 1
+                while ie<len(ldocument):
+                    if ldocument[ie]=="<": num = num + 1
+                    elif ldocument[ie]==">": num = num + 1
                     if num==0: break
                     ie = ie + 1
                 ie -= 1
@@ -119,8 +119,8 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
                 num = 1
                 ie = i + 1
                 while True:
-                    ie1 = document.find("</"+tb, ie)
-                    ie2 = document.find("<"+tb, ie)
+                    ie1 = ldocument.find("</"+tb, ie)
+                    ie2 = ldocument.find("<"+tb, ie)
                     if ie1<0 and ie2<0:
                         raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
                     if ie1>=0 and (ie1<ie2 or ie2<0):
@@ -132,7 +132,7 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
                     if num==0: break
             ret += "1"*(ie-ib)
             i = ie
-        assert (len(ret)==len(document))
+        assert (len(ret)==len(ldocument))
         return self.mark_links(document, ret)
 
 

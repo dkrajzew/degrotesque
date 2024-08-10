@@ -127,14 +127,6 @@ actions_db = {
     # chem
     "chem": [
         [[u"([a-zA-Z]+)([\\d]+)", None],        [u"\\1<sub>\\2</sub>", None]]
-    ],
-
-    # masks
-    "masks": [
-        [[u"978-([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"978-\\1-\\2-\\3-\\4\\5", None]],
-        [[u"979-([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None], [u"979-\\1-\\2-\\3-\\4\\5", None]],
-        [[u"([\\d]+)-([\\d]+)-([\\d]+)-([\\d])(\\D)", None],     [u"\\1-\\2-\\3-\\4\\5", None]],
-        [[u"ISSN (\\d{4})-(\\d{4})(\\D)", None],                 [u"ISSN \\1-\\2\\3", None]]
     ]
 }
 
@@ -263,7 +255,7 @@ class Degrotesque():
 
     def _restore_default_actions(self):
         """Instantiates default actions"""
-        self.set_actions("masks,quotes.english,dashes,ellipsis,math,apostrophe,commercial")
+        self.set_actions("quotes.english,dashes,ellipsis,math,apostrophe,commercial")
 
 
     def set_actions(self, action_names):

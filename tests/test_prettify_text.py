@@ -137,7 +137,7 @@ class TestDegrotesque_Prettify(unittest.TestCase):
     def test_masks(self):
         """Testing masks
         todo: Think about minusses and dealing with numbers"""
-        self._degrotesque.set_actions("masks,dashes")
+        self._degrotesque.set_actions("dashes")
         assert(self._degrotesque.prettify(" ISSN 1001-1001 ", self._marker)==" ISSN 1001-1001 ")
         assert(self._degrotesque.prettify(" ISBN 978-3-86680-192-9 ", self._marker)==" ISBN 978-3-86680-192-9 ")
         assert(self._degrotesque.prettify(" ISBN 979-3-86680-192-9 ", self._marker)==" ISBN 979-3-86680-192-9 ")

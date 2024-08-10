@@ -141,15 +141,6 @@ class TestDegrotesque_Prettify_UTF(unittest.TestCase):
         assert(self._degrotesque.prettify(" ** ", self._marker)==" ‡ ")
         assert(self._degrotesque.prettify(" * ", self._marker)==" † ")
 
-    def test_masks(self):
-        """Testing masks
-        todo: Think about minusses and dealing with numbers"""
-        self._degrotesque.set_actions("masks,dashes")
-        assert(self._degrotesque.prettify(" ISSN 1001-1001 ", self._marker)==" ISSN 1001-1001 ")
-        assert(self._degrotesque.prettify(" ISBN 978-3-86680-192-9 ", self._marker)==" ISBN 978-3-86680-192-9 ")
-        assert(self._degrotesque.prettify(" ISBN 979-3-86680-192-9 ", self._marker)==" ISBN 979-3-86680-192-9 ")
-        #assert(self._degrotesque.prettify(" ISBN 978-3-86680-192 ")==" ISBN 978–3–86680–192 ")
-
     def test_action_chem(self):
         """Testing 'chem' action"""
         self._degrotesque.set_actions("chem")
@@ -189,6 +180,16 @@ class TestDegrotesque_Prettify_UTF(unittest.TestCase):
     “<code class="constant">.pal_%n_%i</code>” — %n is replaced by the palette's name,
     &amp;i is replaced by the entry's index.</p>"""
         assert(self._degrotesque.prettify(text, self._marker)==ctext)
+
+
+    def test_masks(self):
+        """Testing masks
+        todo: Think about minusses and dealing with numbers"""
+        self._degrotesque.set_actions("dashes")
+        assert(self._degrotesque.prettify(" ISSN 1001-1001 ", self._marker)==" ISSN 1001-1001 ")
+        assert(self._degrotesque.prettify(" ISBN 978-3-86680-192-9 ", self._marker)==" ISBN 978-3-86680-192-9 ")
+        assert(self._degrotesque.prettify(" ISBN 979-3-86680-192-9 ", self._marker)==" ISBN 979-3-86680-192-9 ")
+        #assert(self._degrotesque.prettify(" ISBN 978-3-86680-192 ")==" ISBN 978–3–86680–192 ")
 
 
     def test_prettify_toSkip_oddity(self):

@@ -72,8 +72,6 @@ class TestDegrotesque_SetActions(unittest.TestCase):
         assert(self._degrotesque._actions==degrotesque.actions_db["math"])
         self._degrotesque.set_actions("dagger")
         assert(self._degrotesque._actions==degrotesque.actions_db["dagger"])
-        self._degrotesque.set_actions("masks")
-        assert(self._degrotesque._actions==degrotesque.actions_db["masks"])
 
     def test_set_actions_fromDB_multiple(self):
         """Setting multiple actions from the DB"""
