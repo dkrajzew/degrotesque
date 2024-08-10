@@ -31,6 +31,10 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
     and everything else that is within < and >. Masks the contents of code
     elements (<pre>, <code> and others). Masks links.
     """
+    
+    def __init__(self):
+        self._restore_default_elements_to_skip()
+        
 
     def get_extensions(self) -> List[str]:
         """Returns the extensions of file types that can be processed using
@@ -50,7 +54,7 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
         ]
 
 
-    def get_mask(self, document : str, to_skip : List[str] = []) -> str:
+    def get_mask(self, document : str) -> str:
         """Returns a string where all HTML-elements are denoted as '1' and
         plain content as '0'.
 
@@ -80,7 +84,7 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
             tb = self._get_tag_name(ldocument[i:])
             ret += "1"*(len(tb))
             i = i + len(tb)
-            if tb not in to_skip:
+            if tb not in self._elements_to_skip:
                 ie = ldocument.find(">", i)
                 if ie<0:
                     raise ValueError("Unclosed element at %s" % (i-len(tb)))
@@ -137,6 +141,37 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
         return self.apply_masks(document, ret)
 
 
+
+    def _restore_default_elements_to_skip(self):
+        """Instantiates default elements to skip"""
+        # list of elements which contents shall not be processed
+        self._elements_to_skip = [
+            u"script", u"code", u"style", u"pre", u"samp", u"tt", u"kbd",
+            u"?", u"?php",
+            u"%", u"%=", u"%@", u"%--", u"%!",
+            u"!--", "!doctype"
+        ]
+
+
+    def set_to_skip(self, elements_to_skip : List[str]):
+        """Sets the elements which contents shall not be changed.
+
+        If the given names of elements are None or empty, the default elements
+        to skip are used.
+
+        Otherwise, a list with the elements to skip is built.
+
+        Args:
+            elements_to_skip (List[str]): The names of elements which shall not be changed
+
+        Todo:
+            Warn user if a non-XML-character occurs?
+        """
+        if elements_to_skip is None or len(elements_to_skip)==0:
+            return
+        self._elements_to_skip = [x.strip() for x in elements_to_skip.split(',')]
+        
+        
     def _get_tag_name(self, document : str) -> str:
         """Returns the name of the tag that starts at the begin of the given string.
 

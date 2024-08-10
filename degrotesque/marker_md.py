@@ -41,7 +41,7 @@ class DegrotesqueMDMarker(marker.DegrotesqueMarker):
         return [ "md" ]
 
 
-    def get_mask(self, document : str, to_skip : List[str] = []) -> str:
+    def get_mask(self, document : str) -> str:
         """Returns a string where all code and quotes are denoted as '1' and
         plain content as '0'.
 

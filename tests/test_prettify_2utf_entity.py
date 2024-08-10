@@ -202,7 +202,7 @@ class TestDegrotesque_Prettify_UTFEntity(unittest.TestCase):
     def test_prettify_toSkip_oddity(self):
         """Oddity#1"""
         self._degrotesque._restore_default_actions()
-        self._degrotesque.set_to_skip("(tm)")
+        self._marker.set_to_skip("(tm)")
         assert(self._degrotesque.prettify(" <(tm)>a</(tm)> ", self._marker)==" <(tm)>a</(tm)> ")
 
 

@@ -42,7 +42,7 @@ class DegrotesqueMarker(metaclass=ABCMeta):
 
 
     @abstractmethod
-    def get_mask(self, document : str, to_skip : List[str] = []) -> str:
+    def get_mask(self, document : str) -> str:
         """Returns a string where all parts to exclude from replacements
         denoted as '1' and all with plain content that shall be processed
         as '0'.

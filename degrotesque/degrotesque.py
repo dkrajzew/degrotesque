@@ -238,8 +238,6 @@ class Degrotesque:
 
         Sets defaults for actions to perform.
         """
-        # the elements to skip
-        self._restore_default_elements_to_skip()
         # the actions to apply
         self._restore_default_actions()
         # the target format converter
@@ -285,36 +283,6 @@ class Degrotesque:
                 if n[0][1] is not None:
                     n[0][1] = re.compile(n[0][1])
                 self._actions.append(n)
-
-
-    def _restore_default_elements_to_skip(self):
-        """Instantiates default elements to skip"""
-        # list of elements which contents shall not be processed
-        self._elements_to_skip = [
-            u"script", u"code", u"style", u"pre", u"samp", u"tt", u"kbd",
-            u"?", u"?php",
-            u"%", u"%=", u"%@", u"%--", u"%!",
-            u"!--", "!doctype"
-        ]
-
-
-    def set_to_skip(self, elements_to_skip : List[str]):
-        """Sets the elements which contents shall not be changed.
-
-        If the given names of elements are None or empty, the default elements
-        to skip are used.
-
-        Otherwise, a list with the elements to skip is built.
-
-        Args:
-            elements_to_skip (List[str]): The names of elements which shall not be changed
-
-        Todo:
-            Warn user if a non-XML-character occurs?
-        """
-        if elements_to_skip is None or len(elements_to_skip)==0:
-            return
-        self._elements_to_skip = [x.strip() for x in elements_to_skip.split(',')]
 
 
     def set_format(self, format_name : str):
@@ -381,7 +349,7 @@ class Degrotesque:
             (str): The processed (prettified / degrotesqued) document.
         """
         # extract text parts
-        marks = marker.get_mask(document, self._elements_to_skip)
+        marks = marker.get_mask(document)
         assert(len(document)==len(marks))
         # build a copy of actions to use (not found will be removed from it)
         actions = list(self._actions)
@@ -623,7 +591,7 @@ def main(arguments : List[str] = None) -> int:
     degrotesque = Degrotesque()
     try:
         degrotesque.set_actions(options.actions)
-        degrotesque.set_to_skip(options.skip)
+        degrotesque._markers["sgml"].set_to_skip(options.skip)
         degrotesque.set_format(options.format)
     except ValueError as err:
         print(str(err))

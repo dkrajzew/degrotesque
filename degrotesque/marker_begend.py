@@ -54,7 +54,7 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
         return self._extensions
 
 
-    def get_mask(self, document : str, to_skip : List[str] = []) -> str:
+    def get_mask(self, document : str) -> str:
         """Returns a string where all text in triple quotes
         is denoted as '0' and everything else as '1'.
 
