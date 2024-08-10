@@ -182,14 +182,21 @@ class TestDegrotesque_Prettify_UTFEntity(unittest.TestCase):
         assert(self._degrotesque.prettify(text, self._marker)==ctext)
 
 
-    def test_masks(self):
+    def test_masks_issn1(self):
         """Testing masks
         todo: Think about minusses and dealing with numbers"""
         self._degrotesque.set_actions("dashes")
         assert(self._degrotesque.prettify(" ISSN 1001-1001 ", self._marker)==" ISSN 1001-1001 ")
         assert(self._degrotesque.prettify(" ISBN 978-3-86680-192-9 ", self._marker)==" ISBN 978-3-86680-192-9 ")
         assert(self._degrotesque.prettify(" ISBN 979-3-86680-192-9 ", self._marker)==" ISBN 979-3-86680-192-9 ")
-        #assert(self._degrotesque.prettify(" ISBN 978-3-86680-192 ")==" ISBN 978&#8211;3&#8211;86680&#8211;192 ")
+        assert(self._degrotesque.prettify(" ISBN 978-3-86680-192 ", self._marker)==" ISBN 978-3-86680-192 ")
+
+    def test_masks_URL1(self):
+        """Testing URL masking"""
+        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de hallo')=="000000111111111111111111111111000000")
+        assert(self._marker.get_mask('http://www.krajzewicz.de hallo')=="111111111111111111111111000000")
+        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de')=="000000111111111111111111111111")
+        assert(self._marker.get_mask('http://www.krajzewicz.de')=="111111111111111111111111")
 
 
     def test_prettify_toSkip_oddity(self):
