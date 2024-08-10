@@ -11,7 +11,7 @@ The tool processes text files, HTML files, XML files, and their derivatives. Per
 
 The files are assumed to be encoded using UTF-8 per default. You may change the encoding using the option __-E _&lt;ENCODING&gt;___ / __--encoding _&lt;ENCODING&gt;___.
 
-The files are read one by one and the replacement of plain ASCII chars by some nicer ones is based upon a chosen set of &ldquo;actions&rdquo;. Known and default actions are given in [Appendix A](appendixA.md). You may select the actions to apply using the __-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ / __--actions _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]\*___ option. The default actions are &#8216;_masks_&#8217;, &#8216;_quotes.english_&#8217;, &#8216;_dashes_&#8217;, &#8216;_ellipsis_&#8217;, &#8216;_math_&#8217;, &#8216;_apostrophe_&#8217;, and &#8216;_commercial_&#8217;.
+The files are read one by one and the replacement of plain ASCII chars by some nicer ones is based upon a chosen set of &ldquo;actions&rdquo;. Known and default actions are given in [Appendix A](appendixA.md). You may select the actions to apply using the __-a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]*___ / __--actions _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]\*___ option. The default actions are &#8216;_quotes.english_&#8217;, &#8216;_dashes_&#8217;, &#8216;_ellipsis_&#8217;, &#8216;_math_&#8217;, &#8216;_apostrophe_&#8217;, and &#8216;_commercial_&#8217;.
 
 Per default, Unicode characters are inserted (e.g. &#8216;—;&#8217; for an mdash). You may change this using the __--format _&lt;FORMAT&gt;___ / __-f _&lt;FORMAT&gt;___. The following formats are currently supported:
 
@@ -29,8 +29,6 @@ When parsing markdown files, code &mdash; both indented and defined using ` &mda
 After the actions have been applied to its contents, the file is saved. By default, a backup of the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
 The option __--help__ / __-h__ prints a help screen. The option __--version__ the __degrotesque&apos;s__ version number.
-
-Please note that &ldquo;masks&rdquo; is a special action set that disallows the application of some other actions so that, e.g., the dividers in ISBN numbers are not replaced by &amp;ndash;. The masks action set is given in [Appendix D](appendixD.md).
 
 ## Examples
 
