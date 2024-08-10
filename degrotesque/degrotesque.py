@@ -222,7 +222,7 @@ def _replace_unicode(matchobj):
 
 
 
-# --- class -----------------------------------------------------------------
+# --- class definitions -----------------------------------------------------
 class Degrotesque():
     """A tiny web type setter.
 

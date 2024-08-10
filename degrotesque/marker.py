@@ -23,8 +23,11 @@ from abc import ABCMeta, abstractmethod
 import re
 
 
-# --- variables and constants -----------------------------------------------
+# --- class definitions -----------------------------------------------------
 class DegrotesqueMarker(metaclass=ABCMeta):
+    """The base class for computing the mask with document parts not to
+    process."""
+
     @abstractmethod
     def get_extensions(self):
         """Returns the extensions of file types that can be processed using

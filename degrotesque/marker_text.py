@@ -22,8 +22,13 @@ __status__     = "Production"
 import marker
 
 
-# --- variables and constants -----------------------------------------------
+# --- class definitions -----------------------------------------------------
 class DegrotesqueTextMarker(marker.DegrotesqueMarker):
+    """A class that returns the mask for plain text.
+    
+    Only links are masked out, everything else can be changed.
+    """
+
     def get_extensions(self):
         """Returns the extensions of file types that can be processed using
         this marker.

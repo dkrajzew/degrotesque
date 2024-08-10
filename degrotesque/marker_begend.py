@@ -23,8 +23,20 @@ __status__     = "Production"
 import marker
 
 
-# --- variables and constants -----------------------------------------------
+# --- class definitions -----------------------------------------------------
 class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
+    """A class that returns the mask based on a set of opening / closing
+    tags.
+    
+    The class is initialised with a list of pairs consiting of the 
+    opening / closing markers, e.g. for doxygen-documented files, items
+    gets a pair consisting of '/**' and '*/' as well as one consisting
+    of '///' and '\\n'.
+    
+    Masks all parts of a given document that are not within the opening /
+    closing tags.
+    """
+
     def __init__(self, begends, extensions):
         self._begends = begends
         self._extensions = extensions

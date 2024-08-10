@@ -22,8 +22,14 @@ __status__     = "Production"
 import marker
 
 
-# --- variables and constants -----------------------------------------------
+# --- class definitions -----------------------------------------------------
 class DegrotesqueMDMarker(marker.DegrotesqueMarker):
+    """A class that returns the mask for markdown text.
+    
+    Code elements - indented and ones that use tripe-` are
+    masked as well as links.
+    """
+
     def get_extensions(self):
         """Returns the extensions of file types that can be processed using
         this marker.

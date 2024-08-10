@@ -22,8 +22,15 @@ __status__     = "Production"
 import marker
 
 
-# --- variables and constants -----------------------------------------------
+# --- class definitions -----------------------------------------------------
 class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
+    """A class that returns the mask for SGML (HTML/XML) documents.
+    
+    Masks all element (opening, closing, single) element definitions
+    and everything else that is within < and >. Masks the contents of code
+    elements (<pre>, <code> and others). Masks links.
+    """
+
     def get_extensions(self):
         """Returns the extensions of file types that can be processed using
         this marker.
