@@ -52,4 +52,4 @@ class DegrotesqueTextMarker(marker.DegrotesqueMarker):
         """
         length = len(document)
         ret = "0"*length
-        return self.mark_links(document, ret)
+        return self.apply_masks(document, ret)

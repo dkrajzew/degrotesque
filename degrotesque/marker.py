@@ -55,9 +55,9 @@ class DegrotesqueMarker(metaclass=ABCMeta):
         pass # pragma: no cover
 
 
-    def mark_links(self, document, mask):
-        """Masks all URLs (sets the contents of the mask to '1' where links
-        are located in the given document.
+    def apply_masks(self, document, mask):
+        """Masks (sets the contents of the mask to '1') all URLs and
+        ISSN / ISBN.
         
         The method is assumed to be called after an initial mask has been 
         computed.

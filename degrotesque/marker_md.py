@@ -72,5 +72,5 @@ class DegrotesqueMDMarker(marker.DegrotesqueMarker):
             if document[b]==">" or document[b]=="\t" or (length>=b+3 and document[b:b+4]=="    "):
                 ret = ret[:b] + ("1"*(e-b)) + ret[e:]
             b = e
-        return self.mark_links(document, ret)
+        return self.apply_masks(document, ret)
 
