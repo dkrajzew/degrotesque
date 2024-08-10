@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ===========================================================================
-"""degrotesque - base marker class definition."""
+"""Module holding the base class for computing the mask holding
+document parts not to process."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -25,7 +26,7 @@ import re
 
 # --- class definitions -----------------------------------------------------
 class DegrotesqueMarker(metaclass=ABCMeta):
-    """The base class for computing the mask with document parts not to
+    """The base class for computing the mask holding document parts not to
     process."""
 
     @abstractmethod

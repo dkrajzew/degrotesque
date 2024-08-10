@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ===========================================================================
-"""degrotesque - A masking class with begin / end strings."""
+""""Module holding a class that computes the mask based on a list
+of beginning / closing tags as well as classes derived from this class
+meant to process Python and Doxygen-documented files."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
