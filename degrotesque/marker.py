@@ -56,6 +56,20 @@ class DegrotesqueMarker(metaclass=ABCMeta):
 
 
     def mark_links(self, document, mask):
+        """Masks all URLs (sets the contents of the mask to '1' where links
+        are located in the given document.
+        
+        The method is assumed to be called after an initial mask has been 
+        computed.
+
+        Args:
+            document (str): The document (contents) to process
+            mask (str): A previously computed mask
+
+        Returns:
+            (str): Annotation of the document.
+        """
+        # mask URLs
         # https://stackoverflow.com/questions/6718633/python-regular-expression-again-match-url
         mre = re.compile("((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z]){2,6}([a-zA-Z0-9\.\&\/\?\:@\-_=#])*")
         res = mre.finditer(document)
