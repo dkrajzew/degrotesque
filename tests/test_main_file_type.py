@@ -32,7 +32,7 @@ def test_filetype__two_html(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    degrotesque.main(["-i", tmp_path])
+    degrotesque.main([str(tmp_path)])
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
 
@@ -43,7 +43,7 @@ def test_filetype__two_html_explicit(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    degrotesque.main(["-i", tmp_path, "--html"])
+    degrotesque.main(["--html", str(tmp_path)])
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
 
@@ -58,7 +58,7 @@ def test_filetype__two_text(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    degrotesque.main(["-i", tmp_path])
+    degrotesque.main([str(tmp_path)])
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; <code>that&#39;s</code> not what I had expected.&#8221;"
 
@@ -72,7 +72,7 @@ def test_filetype__two_text_explicit(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    degrotesque.main(["-i", tmp_path, "--text"])
+    degrotesque.main(["--text", str(tmp_path)])
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; <code>that&#39;s</code> not what I had expected.&#8221;"
 
@@ -87,7 +87,7 @@ def test_filetype__two_md(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.md"
     p2.write_text("\"Well - ```that's``` not what I had expected.\"")
-    degrotesque.main(["-i", tmp_path])
+    degrotesque.main([str(tmp_path)])
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; ```that's``` not what I had expected.&#8221;"
 
@@ -101,7 +101,7 @@ def test_filetype__two_md_explicit(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
     p2.write_text("\"Well - ```that's``` not what I had expected.\"")
-    degrotesque.main(["-i", tmp_path, "--markdown"])
+    degrotesque.main(["--markdown", str(tmp_path)])
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; ```that's``` not what I had expected.&#8221;"
 
@@ -118,7 +118,7 @@ def test_filetype__three_python(capsys, tmp_path):
     p2.write_text("\"Well - \"\"\"that's\"\"\" not what I had expected.\"")
     p3 = tmp_path / "hello3.py"
     p3.write_text("\"\"\"Well - that's not what I had expected.\"\"\"")
-    degrotesque.main(["-i", tmp_path])
+    degrotesque.main([str(tmp_path)])
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - \"\"\"that&#39;s\"\"\" not what I had expected.\""
     assert p3.read_text() == "\"\"\"Well &#8212; that&#39;s not what I had expected.\"\"\""
@@ -135,7 +135,7 @@ def test_filetype__three_python_explicit(capsys, tmp_path):
     p2.write_text("\"Well - \"\"\"that's\"\"\" not what I had expected.\"")
     p3 = tmp_path / "hello3.txt"
     p3.write_text("\"\"\"Well - that's not what I had expected.\"\"\"")
-    degrotesque.main(["-i", tmp_path, "--python"])
+    degrotesque.main(["--python", str(tmp_path)])
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - \"\"\"that&#39;s\"\"\" not what I had expected.\""
     assert p3.read_text() == "\"\"\"Well &#8212; that&#39;s not what I had expected.\"\"\""
@@ -153,7 +153,7 @@ def test_filetype__three_doxygen(capsys, tmp_path):
     p2.write_text("\"Well - /**that's*/ not what I had expected.\"")
     p3 = tmp_path / "hello3.java"
     p3.write_text("/**Well - that's not what I had expected.*/")
-    degrotesque.main(["-i", tmp_path])
+    degrotesque.main([str(tmp_path)])
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - /**that&#39;s*/ not what I had expected.\""
     assert p3.read_text() == "/**Well &#8212; that&#39;s not what I had expected.*/"
@@ -170,7 +170,7 @@ def test_filetype__three_doxygen_explicit(capsys, tmp_path):
     p2.write_text("\"Well - /**that's*/ not what I had expected.\"")
     p3 = tmp_path / "hello3.txt"
     p3.write_text("/**Well - that's not what I had expected.*/")
-    degrotesque.main(["-i", tmp_path, "--doxygen"])
+    degrotesque.main(["--doxygen", str(tmp_path)])
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - /**that&#39;s*/ not what I had expected.\""
     assert p3.read_text() == "/**Well &#8212; that&#39;s not what I had expected.*/"

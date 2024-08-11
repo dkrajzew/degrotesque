@@ -26,7 +26,7 @@ import io
 import shutil
 import re
 from typing import List
-from optparse import OptionParser
+import argparse
 import marker
 import marker_text
 import marker_md
@@ -481,7 +481,7 @@ def get_files(name : str, recursive : bool, extensions : List[str]) -> List[str]
     return files
 
 
-def main(arguments : List[str] = None) -> int:
+def main(arguments : List[str] = []) -> int:
     """The main method using parameter from the command line.
 
     The application reads the given file or the files from the folder (optionally
@@ -557,66 +557,65 @@ def main(arguments : List[str] = None) -> int:
     """
     sys.tracebacklimit = 0
     # parse options
-    options_parser = OptionParser(usage="\n  degrotesque.py [options]", version="degrotesque 3.0.0")
-    options_parser.add_option("-i", "--input", dest="input", default=None, help="Defines files/folder to process")
-    options_parser.add_option("-r", "--recursive", dest="recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
-    options_parser.add_option("-e", "--extensions", dest="extensions", default=None, help="Defines the extensions of files to process")
-    options_parser.add_option("-E", "--encoding", dest="encoding", default="utf-8", help="File encoding (default: 'utf-8')")
-    options_parser.add_option("-H", "--html", dest="html", action="store_true", default=False, help="Files are HTML/XML-derivatives")
-    options_parser.add_option("-T", "--text", dest="text", action="store_true", default=False, help="Files are plain text files")
-    options_parser.add_option("-M", "--markdown", dest="markdown", action="store_true", default=False, help="Files are markdown files")
-    options_parser.add_option("-D", "--doxygen", dest="doxygen", action="store_true", default=False, help="Files are doxygen files")
-    options_parser.add_option("-P", "--python", dest="python", action="store_true", default=False, help="Files are Python files")
-    options_parser.add_option("-B", "--no-backup", dest="no_backup", action="store_true", default=False, help="Whether no backup shall be generated")
-    options_parser.add_option("-f", "--format", dest="format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
-    options_parser.add_option("-s", "--skip", dest="skip", default=None, help="Defines the elements which contents shall not be changed")
-    options_parser.add_option("-a", "--actions", dest="actions", default=None, help="Defines the actions to perform")
-    options, remaining_args = options_parser.parse_args(args=arguments)
+    parser = argparse.ArgumentParser(prog='degrotesque', 
+        description='A weg type setter; Exchanges simple ascii letters by their typographic counterparts', 
+        epilog='(c) Daniel Krajzewicz 2020-2024')
+    parser.add_argument("input")
+    parser.add_argument('--version', action='version', version='%(prog)s 3.0.0')
+    parser.add_argument("-r", "--recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
+    parser.add_argument("-e", "--extensions",default=None, help="Defines the extensions of files to process")
+    parser.add_argument("-E", "--encoding", default="utf-8", help="File encoding (default: 'utf-8')")
+    parser.add_argument("-H", "--html", action="store_true", help="Files are HTML/XML-derivatives")
+    parser.add_argument("-T", "--text", action="store_true", help="Files are plain text files")
+    parser.add_argument("-M", "--markdown", action="store_true", help="Files are markdown files")
+    parser.add_argument("-D", "--doxygen", action="store_true", help="Files are doxygen files")
+    parser.add_argument("-P", "--python", action="store_true", help="Files are Python files")
+    parser.add_argument("-B", "--no-backup", dest="no_backup", action="store_true", help="Whether no backup shall be generated")
+    parser.add_argument("-f", "--format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
+    parser.add_argument("-s", "--skip", default=None, help="Defines the elements which contents shall not be changed")
+    parser.add_argument("-a", "--actions", default=None, help="Defines the actions to perform")
+    args = parser.parse_args(arguments)
     # check options
-    if options.input is None:
-        print("Error: no input file(s) given...", file=sys.stderr)
-        print("Usage: degrotesque.py -i <FILE>[,<FILE>]* [options]+", file=sys.stderr)
-        return 2
     num = 0
-    num += 1 if options.html else 0
-    num += 1 if options.text else 0
-    num += 1 if options.markdown else 0
-    num += 1 if options.doxygen else 0
-    num += 1 if options.python else 0
+    num += 1 if args.html else 0
+    num += 1 if args.text else 0
+    num += 1 if args.markdown else 0
+    num += 1 if args.doxygen else 0
+    num += 1 if args.python else 0
     if num>1:
-        print("Error: only one of the options '--html', '--markdown', '--doxygen', '--python', and '--text' can be set.", file=sys.stderr)
-        print("Usage: degrotesque.py -i <FILE>[,<FILE>]* [options]+", file=sys.stderr)
+        parser.print_usage(sys.stderr)
+        print("degrotesque: error: only one of the options '--html', '--markdown', '--doxygen', '--python', and '--text' can be set.", file=sys.stderr)
         return 2
     # setup degrotesque
     degrotesque = Degrotesque()
     try:
-        degrotesque.set_actions(options.actions)
-        degrotesque._markers["sgml"].set_to_skip(options.skip)
-        degrotesque.set_format(options.format)
+        degrotesque.set_actions(args.actions)
+        degrotesque._markers["sgml"].set_to_skip(args.skip)
+        degrotesque.set_format(args.format)
     except ValueError as err:
         print(str(err))
         return 3
     # get marker
     marker = None
-    if options.text:
+    if args.text:
         marker = degrotesque._markers["text"]
-    if options.markdown:
+    if args.markdown:
         marker = degrotesque._markers["md"]
-    if options.html:
+    if args.html:
         marker = degrotesque._markers["sgml"]
-    if options.doxygen:
+    if args.doxygen:
         marker = degrotesque._markers["doxygen"]
-    if options.python:
+    if args.python:
         marker = degrotesque._markers["python"]
     # collect files
-    extensions = get_extensions(options.extensions)
-    files = get_files(options.input, options.recursive, extensions)
+    extensions = get_extensions(args.extensions)
+    files = get_files(args.input, args.recursive, extensions)
     # loop through files
     for f in files:
         print("Processing %s" % f)
         try:
             # read the file
-            with io.open(f, mode="r", encoding=options.encoding) as fd:
+            with io.open(f, mode="r", encoding=args.encoding) as fd:
                 document = fd.read()
             # get the contents marker to use
             tmarker = marker
@@ -625,10 +624,10 @@ def main(arguments : List[str] = None) -> int:
             # apply the beautifications
             document = degrotesque.prettify(document, tmarker)
             # build a backup
-            if not options.no_backup:
+            if not args.no_backup:
                 shutil.copy(f, f+".orig")
             # save the new contents
-            with io.open(f, mode="w", encoding=options.encoding) as fd:
+            with io.open(f, mode="w", encoding=args.encoding) as fd:
                 fd.write(document)
         except ValueError as err:
             print(str(err))
@@ -638,5 +637,5 @@ def main(arguments : List[str] = None) -> int:
 
 # -- main check
 if __name__ == '__main__':
-    ret = main(sys.argv) # pragma: no cover
+    ret = main(sys.argv[1:]) # pragma: no cover
     sys.exit(ret) # pragma: no cover

@@ -33,40 +33,40 @@ def test_main__unknown_option_bool(capsys, tmp_path):
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
     try:
-        degrotesque.main(["-i", tmp_path, "-u"])
+        degrotesque.main(["-u", str(tmp_path)])
         assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
     assert captured.out == ""
-    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Usage: 
-  degrotesque.py [options]
-
-degrotesque.py: error: no such option: -u
+    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
+                   [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   input
+degrotesque: error: unrecognized arguments: -u
 """
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
 
 
-def test_main__unknown_option_int(capsys, tmp_path):
+def test_main__unknown_option_string(capsys, tmp_path):
     """An unknown option is given as an int"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
     try:
-        degrotesque.main(["-i", tmp_path, "--foo", "bar"])
+        degrotesque.main(["--foo", "bar"])
         assert False # pragma: no cover
     except SystemExit as e:
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
     assert captured.out == ""
-    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Usage: 
-  degrotesque.py [options]
-
-degrotesque.py: error: no such option: --foo
+    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
+                   [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   input
+degrotesque: error: unrecognized arguments: --foo
 """
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
@@ -78,7 +78,7 @@ def test_main__format__unknown(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    ret = degrotesque.main(["-i", tmp_path, "--format", "foo"])
+    ret = degrotesque.main(["--format", "foo", str(tmp_path)])
     assert ret==3
     captured = capsys.readouterr()
     assert captured.err == ""
@@ -92,7 +92,7 @@ def test_main__document_broken1(capsys, tmp_path):
     """An unknown option is given as bool"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("<p \"Well - that's not what I had expected.\"")
-    ret = degrotesque.main(["-i", tmp_path])
+    ret = degrotesque.main([str(tmp_path)])
     captured = capsys.readouterr()
     assert captured.err == ""
     assert captured.out.replace(str(tmp_path), "<DIR>").replace("\\", "/").replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Processing <DIR>/hello1.html
@@ -106,7 +106,7 @@ def test_main__document_broken2(capsys, tmp_path):
     """An unknown option is given as bool"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("<pre> <pre \"Well - that's not what I had expected.\"")
-    ret = degrotesque.main(["-i", tmp_path])
+    ret = degrotesque.main([str(tmp_path)])
     assert ret==4
     captured = capsys.readouterr()
     assert captured.err == ""
