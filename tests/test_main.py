@@ -69,7 +69,7 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
+    assert captured.out.replace("__main__.py", "degrotesque.py").replace("optional arguments", "options") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
                    [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
                    input
 
