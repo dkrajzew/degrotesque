@@ -22,36 +22,36 @@ __status__     = "Production"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "degrotesque"))
-import degrotesque
+import helper
 
 
 # --- test functions ----------------------------------------------------------
 def test_get_extensions_empty1():
     """Test get_extensions behaviour if no arguments are given (None)"""
-    assert degrotesque.get_extensions(None) == None
+    assert helper.get_extensions(None) == None
 
 
 def test_get_extensions_empty2():
     """Test get_extensions behaviour if no arguments are given (empty string)"""
-    assert degrotesque.get_extensions("") == None
+    assert helper.get_extensions("") == None
 
 
 def test_get_extensions_one():
     """Test get_extensions behaviour if one argument is given"""
-    assert degrotesque.get_extensions("foo") == ["foo"]
+    assert helper.get_extensions("foo") == ["foo"]
 
 
 def test_get_extensions_two():
     """Test get_extensions behaviour if two arguments are given"""
-    assert degrotesque.get_extensions("foo,bar") == ["foo", "bar"]
+    assert helper.get_extensions("foo,bar") == ["foo", "bar"]
 
 
 def test_get_extensions_strip():
     """Test get_extensions behaviour if two arguments with spaces are given"""
-    assert degrotesque.get_extensions(" foo, bar ") == ["foo", "bar"]
+    assert helper.get_extensions(" foo, bar ") == ["foo", "bar"]
 
 
 def test_get_extensions_asterisk():
     """Test get_extensions behaviour if one of the given items is an asterisk"""
-    assert degrotesque.get_extensions(" foo, * ") == None
+    assert helper.get_extensions(" foo, * ") == None
 

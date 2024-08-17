@@ -27,6 +27,7 @@ import shutil
 import re
 from typing import List
 import argparse
+import helper
 import marker
 import marker_text
 import marker_md
@@ -415,72 +416,7 @@ class Degrotesque:
         return document
 
 
-
-
 # --- functions -------------------------------------------------------------
-def get_extensions(names : List[str]) -> List[str]:
-    """Returns the list of extensions of files to process.
-
-    If the given names of extensions are None or empty, the default
-    extensions are used.
-
-    Otherwise, the given string is split and returned as a list.
-
-    Args:
-        names (List[str]): The names of extensions to process (or None if default extensions shall be used)
-
-    Returns:
-        (List[str]): The list of extensions to use.
-
-    todo:
-        What about removing dots?
-    """
-    if names is None or len(names)==0:
-        return None
-    exts = [x.strip() for x in names.split(',')]
-    if "*" in exts:
-        return None
-    return exts
-
-
-def get_files(name : str, recursive : bool, extensions : List[str]) -> List[str]:
-    """Returns the files to process.
-
-    If a file name is given, a list with only this file name is returned.
-
-    If a folder name is given, the files to process are determined by walking
-    through the folder — recursively if wished — and collecting all files
-    that match the extensions.
-
-    The list of collected files is returned.
-
-    Args:
-        name (str): The name of the file/folder
-        recursive (bool): Whether the folder (if given) shall be processed recursively
-        extensions (List[str]): The extensions of the files to process
-
-    Returns:
-        (List[str]): The list of collected files.
-    """
-    files = []
-    if os.path.isdir(name):
-        for root, dirs, dfiles in os.walk(name):
-            for f in dfiles:
-                n, e = os.path.splitext(os.path.join(root, f))
-                if extensions is not None and len(extensions)!=0 and e[1:] not in extensions:
-                    continue
-                files.append(os.path.join(root, f))
-            if not recursive:
-                break
-    elif os.path.isfile(name):
-        files.append(name)
-    else:
-        raise ValueError("Can not process '%s'" % name) # pragma: no cover
-    files.sort()
-    files.sort(key=lambda v: str(v).replace("\\", "/").count('/'))
-    return files
-
-
 def main(arguments : List[str] = []) -> int:
     """The main method using parameter from the command line.
 
@@ -608,8 +544,8 @@ def main(arguments : List[str] = []) -> int:
     if args.python:
         marker = degrotesque._markers["python"]
     # collect files
-    extensions = get_extensions(args.extensions)
-    files = get_files(args.input, args.recursive, extensions)
+    extensions = helper.get_extensions(args.extensions)
+    files = helper.get_files(args.input, args.recursive, extensions)
     # loop through files
     for f in files:
         print("Processing %s" % f)

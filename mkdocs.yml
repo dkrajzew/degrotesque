@@ -36,6 +36,7 @@ nav:
         - Markdown marker: api_marker_md.md
         - Abstract beg/end marker: api_marker_begend.md
         - Text marker: api_marker_text.md
+        - Helper: api_helper.md
     - Developer Docs:
         - Workflow: workflow.md
         - How To Extend: extend.md

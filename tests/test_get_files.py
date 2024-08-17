@@ -22,7 +22,7 @@ __status__     = "Production"
 import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "degrotesque"))
-import degrotesque
+import helper
 
 
 # --- test functions ----------------------------------------------------------
@@ -40,7 +40,7 @@ def test_get_files_one(tmp_path):
     """Test get_files behaviour if one file is given"""
     p = tmp_path / "hello.html"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.get_files(tmp_path / "hello.html", False, ["html"])
+    files = helper.get_files(tmp_path / "hello.html", False, ["html"])
     check_files(["hello.html"], files, tmp_path)
 
 def test_get_files_multiple1(tmp_path):
@@ -49,7 +49,7 @@ def test_get_files_multiple1(tmp_path):
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.html"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.get_files(tmp_path, False, ["html"])
+    files = helper.get_files(tmp_path, False, ["html"])
     check_files(["hello1.html", "hello2.html"], files, tmp_path)
 
 def test_get_files_multiple2(tmp_path):
@@ -58,7 +58,7 @@ def test_get_files_multiple2(tmp_path):
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.txt"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.get_files(tmp_path, False, ["html"])
+    files = helper.get_files(tmp_path, False, ["html"])
     check_files(["hello1.html"], files, tmp_path)
 
 def test_get_files_multiple_recursive1(tmp_path):
@@ -69,7 +69,7 @@ def test_get_files_multiple_recursive1(tmp_path):
     d.mkdir()
     p = d / "hello2.html"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.get_files(tmp_path, False, ["html"])
+    files = helper.get_files(tmp_path, False, ["html"])
     check_files(["hello1.html"], files, tmp_path)
 
 def test_get_files_multiple_recursive2(tmp_path):
@@ -80,7 +80,7 @@ def test_get_files_multiple_recursive2(tmp_path):
     d.mkdir()
     p = d / "hello2.html"
     p.write_text("Hallo <b>Mama</b>")
-    files = degrotesque.get_files(tmp_path, True, ["html"])
+    files = helper.get_files(tmp_path, True, ["html"])
     check_files(["hello1.html", "sub/hello2.html"], files, tmp_path)
 
 
