@@ -17,4 +17,4 @@ mkdocs:
   
 python:
    install:
-   - requirements: requirements-dev.txt
+   - requirements: requirements-readthedocs.txt
