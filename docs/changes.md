@@ -2,13 +2,20 @@
 
 ## degrotesque-4.0.0 (to come)
 
-* Proper Python documentation
-* Proper variable and function / methods names
-* [Coveralls](https://coveralls.io/) integration ([![Coverage Status](https://coveralls.io/repos/github/dkrajzew/degrotesque/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/degrotesque?branch=main))
-* File type dependent functions for determining which parts of the respective document shall be processed were extracted into own sub-files
-* Added actions for arrows (see [Appendix A](appendixA.md))
-* Added processing of comments in Python files and [doxygen](https://www.doxygen.nl/) documentation (*.cpp, *.h, *.java)
-
+* Integrations
+	* [Coveralls](https://coveralls.io/) integration ([![Coverage Status](https://coveralls.io/repos/github/dkrajzew/degrotesque/badge.svg?branch=main)](https://coveralls.io/github/dkrajzew/degrotesque?branch=main))
+	* [readthedocs](https://readthedocs.io/) integration ([![Documentation Status](https://readthedocs.org/projects/degrotesque/badge/?version=latest)](https://degrotesque.readthedocs.io/en/latest/?badge=latest))
+* Extensions
+	* Added processing of comments in Python files
+	* Added processing of comments in [doxygen](https://www.doxygen.nl/) documentation (\*.cpp, \*.h, \*.java)
+	* Added actions for arrows (see [Appendix A](appendixA.md))
+* Refactoring
+	* File type dependent functions for determining which parts of the respective document shall be processed were extracted into own sub-files
+	* moved helper methods to an own file
+	* Proper variable and function / methods names
+	* added type hints
+* Documentation
+	* Proper Python documentation
 
 ## degrotesque-3.0.0 (26.03.2023)
 
