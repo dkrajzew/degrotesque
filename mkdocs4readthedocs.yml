@@ -16,9 +16,10 @@ theme:
 nav:
     - Home: index.md
     - Installation: install.md
-    - Use Cases: use_cases.md
-    - Command Line Usage: cmd.md
-    - Embedded Usage: embed.md
+    - Usage: 
+        - Command Line: cmd.md
+        - Use Cases: use_cases.md
+        - Embedded: embed.md
     - Links: links.md
     - ChangeLog: changes.md
     - License (BSD): license.md
@@ -58,7 +59,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [./degrotesque]
+                paths: [./]
                 options:
                     filters: [""]
                     show_source: False
