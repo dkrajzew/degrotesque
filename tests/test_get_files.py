@@ -21,7 +21,7 @@ __status__     = "Production"
 # --- imports -----------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "degrotesque"))
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 import helper
 
 

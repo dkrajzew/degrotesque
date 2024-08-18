@@ -22,7 +22,7 @@ __status__     = "Production"
 import unittest
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "degrotesque"))
+sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 import degrotesque
 import marker_begend
 
