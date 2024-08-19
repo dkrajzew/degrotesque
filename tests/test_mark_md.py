@@ -109,3 +109,17 @@ class TestDegrotesque_MarkMarkdown(unittest.TestCase):
     def test__mark_markdown_backtick4c(self):
         """Some simple HTML markups"""
         assert(self._marker.get_mask("Hallo `Mama```Code``")=="00000011111111111111")
+
+
+    def test__mark_markdown_link1(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo <https://link.org> Mama")=="00000011111111111111111100000")
+
+
+    def test__mark_markdown_named_link1(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo [a link](https://www.krajzewicz.de) Mama")=="0000000000000001111111111111111111111111000000")
+
+    def test__mark_markdown_named_link2(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo [a link](file.md) Mama")=="0000000000000001111111000000")

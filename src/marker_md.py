@@ -20,6 +20,7 @@ __status__     = "Production"
 
 # --- imports ---------------------------------------------------------------
 from typing import List
+import re
 import marker
 
 
@@ -73,5 +74,16 @@ class DegrotesqueMDMarker(marker.DegrotesqueMarker):
             if document[b]==">" or document[b]=="\t" or (length>=b+3 and document[b:b+4]=="    "):
                 ret = ret[:b] + ("1"*(e-b)) + ret[e:]
             b = e
+        # mask markdown links
+        # https://stackoverflow.com/questions/67940820/how-to-extract-markdown-links-with-a-regex
+        expr = re.compile(f'\[[^\[]+]\((\s*.+\s*)\)')
+        for r in expr.finditer(document):
+            f = "1" * (r.end(1)-r.start(1))
+            ret = ret[:r.start(1)] + f + ret[r.end(1):]
+        expr = re.compile(f'\<http[s]?://.+?\>')
+        for r in expr.finditer(document):
+            f = "1" * (r.end()-r.start())
+            ret = ret[:r.start()] + f + ret[r.end():]
+        # apply standard masks (URLs, ISSN, ISBN)
         return self.apply_masks(document, ret)
 
