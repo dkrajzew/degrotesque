@@ -73,7 +73,7 @@ def test_main_help(capsys):
                    [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
                    input
 
-A weg type setter; Exchanges simple ascii letters by their typographic
+A type setter; Exchanges simple ascii letters by their typographic
 counterparts
 
 positional arguments:
