@@ -494,7 +494,7 @@ def main(arguments : List[str] = []) -> int:
     sys.tracebacklimit = 0
     # parse options
     parser = argparse.ArgumentParser(prog='degrotesque', 
-        description='A weg type setter; Exchanges simple ascii letters by their typographic counterparts', 
+        description='A type setter; Exchanges simple ascii letters by their typographic counterparts', 
         epilog='(c) Daniel Krajzewicz 2020-2024')
     parser.add_argument("input")
     parser.add_argument('--version', action='version', version='%(prog)s 3.0.0')
