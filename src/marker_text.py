@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ===========================================================================
-""""Module holding the base class that comoputes the mask for plain text
+"""Module holding the base class that comoputes the mask for plain text
 documents."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"

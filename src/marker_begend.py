@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ===========================================================================
-""""Module holding a class that computes the mask based on a list
+"""Module holding a class that computes the mask based on a list
 of beginning / closing tags as well as classes derived from this class
 meant to process Python and Doxygen-documented files."""
 # ===========================================================================
@@ -39,9 +39,10 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
     closing tags.
     """
 
-    def __init__(self, begends, extensions):
+    def __init__(self, begends, extensions, invert=False):
         self._begends = begends
         self._extensions = extensions
+        self._invert = invert
 
 
     def get_extensions(self) -> List[str]:
@@ -55,8 +56,9 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
 
 
     def get_mask(self, document : str) -> str:
-        """Returns a string where all text in triple quotes
-        is denoted as '0' and everything else as '1'.
+        """Returns a string where all text between each of the given
+        begin/end-string pairs is masked (set to '1') and everything
+        else is not masted (set to '0').
 
         Args:
             document (str): The markdown document (contents) to process
@@ -65,20 +67,32 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
             (str): Annotation of the markdown document.
         """
         length = len(document)
-        ret = "1"*length
+        ret = "1"*length if not self._invert else "0"*length
+        c = "0" if not self._invert else "1"
+        ic = "1" if not self._invert else "0"
         # find opening triple quotes
         for be in self._begends:
             b = document.find(be[0])
-            while b>=0:
-                b = b + len(be[0])
-                e = b
+            while b>=0 and b<len(document):
+                if ret[b]==c:
+                    b = ret.find(ic, b+1)
+                    if b<0:
+                        break
+                    b = document.find(be[0], b+1)
+                    continue
+                if not be[2]:
+                    b = b + len(be[0])
+                e = b + len(be[0]) + 1
                 e = document.find(be[1], e)
                 if e<0:
                     if be[1]=="\n":
                         e = len(document)
                     else:
-                        raise ValueError("Not a valid document")
-                ret = ret[:b] + ("0"*(e-b)) + ret[e:]
+                        b = b + 1
+                        continue
+                if be[2]:
+                    e = min(len(document), e + len(be[1]))
+                ret = ret[:b] + (c*(e-b)) + ret[e:]
                 b = document.find(be[0], e+len(be[1]))
         return self.apply_masks(document, ret)
 
@@ -91,7 +105,7 @@ class DegrotesquePythonMarker(DegrotesqueBeginEndMarker):
     """
 
     def __init__(self):
-        DegrotesqueBeginEndMarker.__init__(self, [['"""', '"""'], ["#", "\n"]], ["py"])
+        DegrotesqueBeginEndMarker.__init__(self, [['"""', '"""', False], ["#", "\n", False]], ["py"])
 
 
 
@@ -102,5 +116,5 @@ class DegrotesqueDoxygenMarker(DegrotesqueBeginEndMarker):
     """
 
     def __init__(self):
-        DegrotesqueBeginEndMarker.__init__(self, [['/**', '*/'], ["///", "\n"]], ["java", "h", "cpp"])
+        DegrotesqueBeginEndMarker.__init__(self, [['/**', '*/', False], ["///", "\n", False]], ["java", "h", "cpp"])
 
