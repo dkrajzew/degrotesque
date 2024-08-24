@@ -51,23 +51,24 @@ class DegrotesqueRSTMarker(marker_begend.DegrotesqueBeginEndMarker):
         b = document.find("::")
         while b>=0:
             e = document.find("\n", b)
-            if e<0:
-                e = len(document)-1
-                ret = ret[:b] + ("1"*(e-b)) + ret[e:]
-                break
-            while len(document)<e+1 and document[e+1].isspace():
+            while e>=0 and len(document)>e+1 and document[e+1].isspace():
                 e = document.find("\n", e+1)
+            if e<0:
+                e = len(document)
             ret = ret[:b] + ("1"*(e-b)) + ret[e:]
+            b = document.find("::", e)
         # doctest blocks
-        b = document.find("\"``>>>``\"")
+        b = document.find(">>>")
         while b>=0:
             e = document.find("\n", b)
-            if e<0:
-                ret = ret[:b] + ("1"*(e-b)) + ret[e:]
-                break
-            while len(document)<e+1 and not document[e+1].isspace():
+            while e>=0 and len(document)>e+1 and not document[e+1].isspace():
                 e = document.find("\n", e+1)
+            if e<0:
+                e = len(document)
+            else:
+                e = min(len(document), e+1)
             ret = ret[:b] + ("1"*(e-b)) + ret[e:]
+            b = document.find(">>>", e)
         # apply standard masks (URLs, ISSN, ISBN)
         return self.apply_masks(document, ret)
             

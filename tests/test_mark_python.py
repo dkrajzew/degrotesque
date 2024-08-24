@@ -96,9 +96,4 @@ class TestDegrotesque_MarkPython(unittest.TestCase):
 
     def test__mark_python_broken(self):
         """Missing closing"""
-        try:
-            self._marker.get_mask('Hallo\n"""Mama!')
-        except ValueError as e:
-            assert type(e)==type(ValueError())
-            assert str(e)=="Not a valid document"
-            assert True
+        assert(self._marker.get_mask('Hallo\n"""Mama!')=="11111111111111")

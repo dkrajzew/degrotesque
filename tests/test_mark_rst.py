@@ -34,6 +34,7 @@ class TestDegrotesque_MarkMarkdown(unittest.TestCase):
     def setUp(self):
         self._marker = marker_rst.DegrotesqueRSTMarker()
 
+
     def test__mark_markdown_textOnly1(self):
         """Text without markups only"""
         assert(self._marker.get_mask("Hallo")=="00000")
@@ -45,15 +46,6 @@ class TestDegrotesque_MarkMarkdown(unittest.TestCase):
     def test__mark_markdown_textOnly3(self):
         """Some simple HTML markups"""
         assert(self._marker.get_mask("Hallo Mama!")=="00000000000")
-
-
-    def test__mark_markdown_inline_literal1(self):
-        """Some simple HTML markups"""
-        assert(self._marker.get_mask("Hallo\n``Mama!``")=="000000111111111")
-
-    def test__mark_markdown_inline_literal2(self):
-        """Some simple HTML markups"""
-        assert(self._marker.get_mask("Hallo ``Mama!``")=="000000111111111")
 
 
     def test__mark_markdown_inline_literal1(self):
@@ -92,21 +84,68 @@ class TestDegrotesque_MarkMarkdown(unittest.TestCase):
         assert(self._marker.get_mask("Hallo _`Mama!`")=="00000011111111")
 
 
-    def test__mark_markdown_substitution_referece1(self):
+    def test__mark_markdown_substitution_reference1(self):
         """Some simple HTML markups"""
         assert(self._marker.get_mask("Hallo\n|Mama!|")=="0000001111111")
 
-    def test__mark_markdown_substitution_referece2(self):
+    def test__mark_markdown_substitution_reference2(self):
         """Some simple HTML markups"""
         assert(self._marker.get_mask("Hallo |Mama!|")=="0000001111111")
 
 
-    def test__mark_markdown_substitution_referece1(self):
+    def test__mark_markdown_reference1(self):
         """Some simple HTML markups"""
         assert(self._marker.get_mask("Hallo\n[Mama!]_")=="00000011111111")
 
-    def test__mark_markdown_substitution_referece2(self):
+    def test__mark_markdown_reference2(self):
         """Some simple HTML markups"""
         assert(self._marker.get_mask("Hallo [Mama!]_")=="00000011111111")
 
+
+    def test__mark_markdown_literal_block1(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo\n::\n\nHello Mama!")=="000000111000000000000")
+
+    def test__mark_markdown_literal_block2(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo\n::\n\tHello Mama!")=="000000111111111111111")
+
+    def test__mark_markdown_literal_block3(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo\n::\n\tHello Mama!\n\ntest")=="000000111111111111111100000")
+
+    def test__mark_markdown_literal_block4(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo\n::\n\tHello Mama!\n\ntest::\n\tHello Mama!")=="000000111111111111111100000111111111111111")
+
+    def test__mark_markdown_literal_block5(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("::\n\tHello Mama!")=="111111111111111")
+
+
+    def test__mark_markdown_pydoctest1(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo\n>>> Hello Mama!")=="000000111111111111111")
+
+    def test__mark_markdown_pydoctest2(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo\n>>> Hello Mama!\n\nHallo")=="0000001111111111111111000000")
+
+    def test__mark_markdown_pydoctest3(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo\n>>> Hello Mama!\nHallo\n\nHallo")=="0000001111111111111111111111000000")
+
+    def test__mark_markdown_pydoctest4(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo\n>>> Hello Mama!\nHallo\n\nHallo\n>>> Hello Mama!\n\n")=="0000001111111111111111111111000000011111111111111110")
+
+    def test__mark_markdown_pydoctest5(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask(">>> Hello Mama!")=="111111111111111")
+
+
+
+    def test__mixed1(self):
+        """Some simple HTML markups"""
+        assert(self._marker.get_mask("Hallo ``Mama!`` `Mama!` ``Mama!``")=="000000111111111011111110111111111")
 
