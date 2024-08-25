@@ -34,6 +34,7 @@ class TestDegrotesque_MarkMarkdown(unittest.TestCase):
     def setUp(self):
         self._marker = marker_md.DegrotesqueMDMarker()
 
+
     def test__mark_markdown_textOnly1(self):
         """Text without markups only"""
         assert(self._marker.get_mask("Hallo")=="00000")

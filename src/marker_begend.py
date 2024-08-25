@@ -70,7 +70,7 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
         ret = "1"*length if not self._invert else "0"*length
         c = "0" if not self._invert else "1"
         ic = "1" if not self._invert else "0"
-        # find opening triple quotes
+        #
         for be in self._begends:
             b = document.find(be[0])
             while b>=0 and b<len(document):
