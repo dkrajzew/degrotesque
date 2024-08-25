@@ -26,6 +26,7 @@ import io
 import shutil
 import re
 from typing import List
+from typing import Union
 import argparse
 import helper
 import marker
@@ -33,7 +34,7 @@ import marker_text
 import marker_md
 import marker_html
 import marker_begend
-
+import marker_rst
 
 
 # --- variables and constants -----------------------------------------------
@@ -252,6 +253,7 @@ class Degrotesque:
         self._markers["sgml"] = marker_html.DegrotesqueHTMLMarker()
         self._markers["python"] = marker_begend.DegrotesquePythonMarker()
         self._markers["doxygen"] = marker_begend.DegrotesqueDoxygenMarker()
+        self._markers["rst"] = marker_rst.DegrotesqueRSTMarker()
 
 
     def _restore_default_actions(self):
@@ -417,6 +419,37 @@ class Degrotesque:
 
 
 # --- functions -------------------------------------------------------------
+def prettify(document : str, marker : Union[marker.DegrotesqueMarker, str] = None, actions : Union[List[str], str] = None, to_skip : Union[List[str], str] = None, replacement_format : str = "text") -> str:
+    """Prettifies (degrotesques) the given document.
+
+    Builds a Degrotesque instance, inserts the given options, 
+    and applies it on the document.
+
+    Args:
+        document (str): The document (contents) to process.
+        marker (Union[marker.DegrotesqueMarker, str]): The marker object to use for computing the mask of document parts to skip or its name
+        actions (Union[List[str], str]): The named actions to perform; if given as string, they must be separated using a colon (,)
+        to_skip (Union[List[str], str]): The HTML-elements to skip; if given as string, they must be separated using a colon (,)
+        replacement_format (str): The type of replacements to use, one of 'html', 'text', 'unicode'
+
+    Returns:
+        (str): The processed (prettified / degrotesqued) document.
+    """
+    degrotesque = Degrotesque()
+    if actions is not None:
+        if isinstance(actions, list):
+            actions = ",".join(actions)
+        degrotesque.set_actions(actions)
+    if to_skip is not None:
+        if isinstance(to_skip, list):
+            to_skip = ",".join(to_skip)
+        degrotesque._markers["sgml"].set_to_skip(to_skip)
+    degrotesque.set_format(replacement_format)
+    if isinstance(marker, str):
+        marker = degrotesque._markers[marker]
+    return degrotesque.prettify(document, marker)
+    
+
 def main(arguments : List[str] = []) -> int:
     """The main method using parameter from the command line.
 
@@ -506,6 +539,7 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-M", "--markdown", action="store_true", help="Files are markdown files")
     parser.add_argument("-D", "--doxygen", action="store_true", help="Files are doxygen files")
     parser.add_argument("-P", "--python", action="store_true", help="Files are Python files")
+    parser.add_argument("-R", "--rst", action="store_true", help="Files are restructuredText files")
     parser.add_argument("-B", "--no-backup", dest="no_backup", action="store_true", help="Whether no backup shall be generated")
     parser.add_argument("-f", "--format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
     parser.add_argument("-s", "--skip", default=None, help="Defines the elements which contents shall not be changed")
@@ -518,9 +552,10 @@ def main(arguments : List[str] = []) -> int:
     num += 1 if args.markdown else 0
     num += 1 if args.doxygen else 0
     num += 1 if args.python else 0
+    num += 1 if args.rst else 0
     if num>1:
         parser.print_usage(sys.stderr)
-        print("degrotesque: error: only one of the options '--html', '--markdown', '--doxygen', '--python', and '--text' can be set.", file=sys.stderr)
+        print("degrotesque: error: only one of the options '--html', '--markdown', '--doxygen', '--python', '--rst', and '--text' can be set.", file=sys.stderr)
         return 2
     # setup degrotesque
     degrotesque = Degrotesque()
@@ -543,6 +578,8 @@ def main(arguments : List[str] = []) -> int:
         marker = degrotesque._markers["doxygen"]
     if args.python:
         marker = degrotesque._markers["python"]
+    if args.rst:
+        marker = degrotesque._markers["rst"]
     # collect files
     extensions = helper.get_extensions(args.extensions)
     files = helper.get_files(args.input, args.recursive, extensions)

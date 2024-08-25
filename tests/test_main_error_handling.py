@@ -41,7 +41,8 @@ def test_main__unknown_option_bool(capsys, tmp_path):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
+                   [-a ACTIONS]
                    input
 degrotesque: error: unrecognized arguments: -u
 """
@@ -64,7 +65,8 @@ def test_main__unknown_option_string(capsys, tmp_path):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
+                   [-a ACTIONS]
                    input
 degrotesque: error: unrecognized arguments: --foo
 """

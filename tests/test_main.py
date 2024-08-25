@@ -36,7 +36,8 @@ def test_main_empty1(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
+                   [-a ACTIONS]
                    input
 degrotesque: error: the following arguments are required: input
 """
@@ -53,7 +54,8 @@ def test_main_empty2(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
+                   [-a ACTIONS]
                    input
 degrotesque: error: the following arguments are required: input
 """
@@ -70,7 +72,8 @@ def test_main_help(capsys):
         assert e.code==0
     captured = capsys.readouterr()
     assert captured.out.replace("__main__.py", "degrotesque.py").replace("optional arguments", "options") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
+                   [-a ACTIONS]
                    input
 
 A type setter; Exchanges simple ascii letters by their typographic
@@ -92,6 +95,7 @@ options:
   -M, --markdown        Files are markdown files
   -D, --doxygen         Files are doxygen files
   -P, --python          Files are Python files
+  -R, --rst             Files are restructuredText files
   -B, --no-backup       Whether no backup shall be generated
   -f FORMAT, --format FORMAT
                         Defines the format of the replacements ['html',
@@ -196,9 +200,10 @@ def test_main_error_multiplemarkers(capsys, tmp_path):
     assert ret==2
     captured = capsys.readouterr()
     assert captured.err.replace("__main__.py", "degrotesque") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
+                   [-a ACTIONS]
                    input
-degrotesque: error: only one of the options '--html', '--markdown', '--doxygen', '--python', and '--text' can be set.
+degrotesque: error: only one of the options '--html', '--markdown', '--doxygen', '--python', '--rst', and '--text' can be set.
 """
 
 
