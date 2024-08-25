@@ -36,7 +36,8 @@ def test_main_empty1(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
-                   [-T TYPE] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
                    input
 degrotesque: error: the following arguments are required: input
 """
@@ -53,7 +54,8 @@ def test_main_empty2(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
-                   [-T TYPE] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
                    input
 degrotesque: error: the following arguments are required: input
 """
@@ -70,7 +72,8 @@ def test_main_help(capsys):
         assert e.code==0
     captured = capsys.readouterr()
     assert captured.out.replace("__main__.py", "degrotesque.py").replace("optional arguments", "options") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
-                   [-T TYPE] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
                    input
 
 A type setter; Exchanges simple ascii letters by their typographic
@@ -87,10 +90,11 @@ options:
                         Defines the extensions of files to process
   -E ENCODING, --encoding ENCODING
                         File encoding (default: 'utf-8')
-  -T TYPE, --type TYPE  Name the file type, one of ['sgml', 'text', 'md',
+  -T {sgml,text,md,doxygen,python,rst}, --type {sgml,text,md,doxygen,python,rst}
+                        Name the file type, one of ['sgml', 'text', 'md',
                         'doxygen', 'python', 'rst']
   -B, --no-backup       Whether no backup shall be generated
-  -f FORMAT, --format FORMAT
+  -f {html,unicode,text}, --format {html,unicode,text}
                         Defines the format of the replacements ['html',
                         'unicode', 'text']
   -s SKIP, --skip SKIP  Defines the elements which contents shall not be

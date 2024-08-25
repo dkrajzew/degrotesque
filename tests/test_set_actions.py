@@ -90,7 +90,7 @@ class TestDegrotesque_SetActions(unittest.TestCase):
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
-            assert (str(e)=="Action 'xxx' is not known.")
+            assert (str(e)=="action 'xxx' is not known")
 
     def test_set_actions_falseDivider(self):
         """Trying to set an unknown action"""
@@ -100,5 +100,5 @@ class TestDegrotesque_SetActions(unittest.TestCase):
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
-            assert (str(e)=="Action 'quotes.english;to_quotes' is not known.")
+            assert (str(e)=="action 'quotes.english;to_quotes' is not known")
 

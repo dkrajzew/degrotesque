@@ -41,7 +41,8 @@ def test_main__unknown_option_bool(capsys, tmp_path):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
-                   [-T TYPE] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
                    input
 degrotesque: error: unrecognized arguments: -u
 """
@@ -64,7 +65,8 @@ def test_main__unknown_option_string(capsys, tmp_path):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
-                   [-T TYPE] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
+                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
                    input
 degrotesque: error: unrecognized arguments: --foo
 """
@@ -78,12 +80,20 @@ def test_main__format__unknown(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    ret = degrotesque.main(["--format", "foo", str(tmp_path)])
-    assert ret==3
+    try:
+        ret = degrotesque.main(["--format", "foo", str(tmp_path)])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==2
     captured = capsys.readouterr()
-    assert captured.err == ""
-    assert captured.out.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """Unknown target format 'foo'
+    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
+                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
+                   input
+degrotesque: error: argument -f/--format: invalid choice: 'foo' (choose from 'html', 'unicode', 'text')
 """
+    assert captured.out == ""
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
 
@@ -94,12 +104,44 @@ def test_main__filetype__unknown(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    ret = degrotesque.main(["--type", "foo", str(tmp_path)])
-    assert ret==3
+    try:
+        ret = degrotesque.main(["--type", "foo", str(tmp_path)])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==2
     captured = capsys.readouterr()
-    assert captured.err == ""
-    assert captured.out.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """The given document type 'foo' is not known;\n Use one of ['sgml', 'text', 'md', 'doxygen', 'python', 'rst']
+    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
+                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
+                   input
+degrotesque: error: argument -T/--type: invalid choice: 'foo' (choose from 'sgml', 'text', 'md', 'doxygen', 'python', 'rst')
 """
+    assert captured.out == ""
+    assert p1.read_text() == "\"Well - that's not what I had expected.\""
+    assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
+
+
+def test_main__action__unknown(capsys, tmp_path):
+    """An unknown option is given as bool"""
+    p1 = tmp_path / "hello1.html"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.html"
+    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
+    try:
+        ret = degrotesque.main(["--actions", "foo", str(tmp_path)])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==2
+    captured = capsys.readouterr()
+    assert captured.err.replace("__main__.py", "degrotesque.py").replace("pytest", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
+                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
+                   input
+degrotesque: error: argument -a/--actions: action 'foo' is not known
+"""
+    assert captured.out == ""
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
 

@@ -279,7 +279,7 @@ class Degrotesque:
         self._actions = []
         for an in action_names:
             if an not in actions_db:
-                raise ValueError("Action '%s' is not known." % (an))
+                raise ValueError("action '%s' is not known" % (an))
             for a in actions_db[an]:
                 n = list(a)
                 n[0][0] = re.compile(n[0][0])
@@ -534,27 +534,25 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-r", "--recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
     parser.add_argument("-e", "--extensions",default=None, help="Defines the extensions of files to process")
     parser.add_argument("-E", "--encoding", default="utf-8", help="File encoding (default: 'utf-8')")
-    parser.add_argument("-T", "--type", help="Name the file type, one of  ['sgml', 'text', 'md', 'doxygen', 'python', 'rst']")
+    parser.add_argument("-T", "--type", choices=['sgml', 'text', 'md', 'doxygen', 'python', 'rst'], help="Name the file type, one of  ['sgml', 'text', 'md', 'doxygen', 'python', 'rst']")
     parser.add_argument("-B", "--no-backup", dest="no_backup", action="store_true", help="Whether no backup shall be generated")
-    parser.add_argument("-f", "--format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
+    parser.add_argument("-f", "--format", choices=['html', 'unicode', 'text'], default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
     parser.add_argument("-s", "--skip", default=None, help="Defines the elements which contents shall not be changed")
-    parser.add_argument("-a", "--actions", default=None, help="Defines the actions to perform")
+    actions_arg = parser.add_argument("-a", "--actions", default=None, help="Defines the actions to perform")
     args = parser.parse_args(arguments)
     # setup degrotesque
     degrotesque = Degrotesque()
     try:
         degrotesque.set_actions(args.actions)
-        degrotesque._markers["sgml"].set_to_skip(args.skip)
-        degrotesque.set_format(args.format)
     except ValueError as err:
-        print(str(err))
-        return 3
+        parser.print_usage(sys.stderr)
+        print ("degrotesque: error: argument -a/--actions: %s" % str(err), file=sys.stderr)
+        raise SystemExit(2)
+    degrotesque._markers["sgml"].set_to_skip(args.skip)
+    degrotesque.set_format(args.format)
     # get marker
     marker = None
     if args.type is not None:
-        if args.type not in degrotesque._markers:
-            print("The given document type '%s' is not known;\n Use one of ['sgml', 'text', 'md', 'doxygen', 'python', 'rst']" % args.type)
-            return 3
         marker = degrotesque._markers[args.type]
     # collect files
     extensions = helper.get_extensions(args.extensions)
