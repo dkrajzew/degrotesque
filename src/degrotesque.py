@@ -534,29 +534,12 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-r", "--recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
     parser.add_argument("-e", "--extensions",default=None, help="Defines the extensions of files to process")
     parser.add_argument("-E", "--encoding", default="utf-8", help="File encoding (default: 'utf-8')")
-    parser.add_argument("-H", "--html", action="store_true", help="Files are HTML/XML-derivatives")
-    parser.add_argument("-T", "--text", action="store_true", help="Files are plain text files")
-    parser.add_argument("-M", "--markdown", action="store_true", help="Files are markdown files")
-    parser.add_argument("-D", "--doxygen", action="store_true", help="Files are doxygen files")
-    parser.add_argument("-P", "--python", action="store_true", help="Files are Python files")
-    parser.add_argument("-R", "--rst", action="store_true", help="Files are restructuredText files")
+    parser.add_argument("-T", "--type", help="Name the file type, one of  ['sgml', 'text', 'md', 'doxygen', 'python', 'rst']")
     parser.add_argument("-B", "--no-backup", dest="no_backup", action="store_true", help="Whether no backup shall be generated")
     parser.add_argument("-f", "--format", default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
     parser.add_argument("-s", "--skip", default=None, help="Defines the elements which contents shall not be changed")
     parser.add_argument("-a", "--actions", default=None, help="Defines the actions to perform")
     args = parser.parse_args(arguments)
-    # check options
-    num = 0
-    num += 1 if args.html else 0
-    num += 1 if args.text else 0
-    num += 1 if args.markdown else 0
-    num += 1 if args.doxygen else 0
-    num += 1 if args.python else 0
-    num += 1 if args.rst else 0
-    if num>1:
-        parser.print_usage(sys.stderr)
-        print("degrotesque: error: only one of the options '--html', '--markdown', '--doxygen', '--python', '--rst', and '--text' can be set.", file=sys.stderr)
-        return 2
     # setup degrotesque
     degrotesque = Degrotesque()
     try:
@@ -568,18 +551,11 @@ def main(arguments : List[str] = []) -> int:
         return 3
     # get marker
     marker = None
-    if args.text:
-        marker = degrotesque._markers["text"]
-    if args.markdown:
-        marker = degrotesque._markers["md"]
-    if args.html:
-        marker = degrotesque._markers["sgml"]
-    if args.doxygen:
-        marker = degrotesque._markers["doxygen"]
-    if args.python:
-        marker = degrotesque._markers["python"]
-    if args.rst:
-        marker = degrotesque._markers["rst"]
+    if args.type is not None:
+        if args.type not in degrotesque._markers:
+            print("The given document type '%s' is not known;\n Use one of ['sgml', 'text', 'md', 'doxygen', 'python', 'rst']" % args.type)
+            return 3
+        marker = degrotesque._markers[args.type]
     # collect files
     extensions = helper.get_extensions(args.extensions)
     files = helper.get_files(args.input, args.recursive, extensions)

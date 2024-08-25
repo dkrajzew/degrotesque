@@ -35,9 +35,8 @@ def test_main_empty1(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
-                   [-a ACTIONS]
+    assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
+                   [-T TYPE] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
                    input
 degrotesque: error: the following arguments are required: input
 """
@@ -53,9 +52,8 @@ def test_main_empty2(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
-                   [-a ACTIONS]
+    assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
+                   [-T TYPE] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
                    input
 degrotesque: error: the following arguments are required: input
 """
@@ -71,9 +69,8 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "degrotesque.py").replace("optional arguments", "options") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
-                   [-a ACTIONS]
+    assert captured.out.replace("__main__.py", "degrotesque.py").replace("optional arguments", "options") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
+                   [-T TYPE] [-B] [-f FORMAT] [-s SKIP] [-a ACTIONS]
                    input
 
 A type setter; Exchanges simple ascii letters by their typographic
@@ -90,12 +87,8 @@ options:
                         Defines the extensions of files to process
   -E ENCODING, --encoding ENCODING
                         File encoding (default: 'utf-8')
-  -H, --html            Files are HTML/XML-derivatives
-  -T, --text            Files are plain text files
-  -M, --markdown        Files are markdown files
-  -D, --doxygen         Files are doxygen files
-  -P, --python          Files are Python files
-  -R, --rst             Files are restructuredText files
+  -T TYPE, --type TYPE  Name the file type, one of ['sgml', 'text', 'md',
+                        'doxygen', 'python', 'rst']
   -B, --no-backup       Whether no backup shall be generated
   -f FORMAT, --format FORMAT
                         Defines the format of the replacements ['html',
@@ -152,7 +145,7 @@ def test_main_run1_html2html_namedtype(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
     p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    degrotesque.main(["--html", "-f", "html", str(tmp_path)])
+    degrotesque.main(["--type", "sgml", "-f", "html", str(tmp_path)])
     assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
     assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
 
@@ -185,25 +178,6 @@ def test_main_run1_md2html_namedtype(capsys, tmp_path):
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.md"
     p2.write_text("\"Well - `that's` not what I had expected.\"")
-    degrotesque.main(["--markdown", "-f", "html", str(tmp_path)])
+    degrotesque.main(["--type", "md", "-f", "html", str(tmp_path)])
     assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
     assert p2.read_text() == "&ldquo;Well &mdash; `that's` not what I had expected.&rdquo;"
-
-
-def test_main_error_multiplemarkers(capsys, tmp_path):
-    """Test behaviour on plain usage"""
-    p1 = tmp_path / "hello1.md"
-    p1.write_text("\"Well - that's not what I had expected.\"")
-    p2 = tmp_path / "hello2.md"
-    p2.write_text("\"Well - `that's` not what I had expected.\"")
-    ret = degrotesque.main(["--html", "--markdown", str(tmp_path)])
-    assert ret==2
-    captured = capsys.readouterr()
-    assert captured.err.replace("__main__.py", "degrotesque") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING] [-H]
-                   [-T] [-M] [-D] [-P] [-R] [-B] [-f FORMAT] [-s SKIP]
-                   [-a ACTIONS]
-                   input
-degrotesque: error: only one of the options '--html', '--markdown', '--doxygen', '--python', '--rst', and '--text' can be set.
-"""
-
-
