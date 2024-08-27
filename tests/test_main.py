@@ -25,6 +25,13 @@ sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 import degrotesque
 
 
+
+# --- helper functions --------------------------------------------------------
+def patch(string):
+    return string.replace("__main__.py", "degrotesque").replace("pytest", "degrotesque").replace("optional arguments", "options")
+
+
+
 # --- test functions ----------------------------------------------------------
 def test_main_empty1(capsys):
     """Test behaviour if no arguments are given"""
@@ -35,13 +42,13 @@ def test_main_empty1(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
-                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
+    assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
+                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
                    input
 degrotesque: error: the following arguments are required: input
 """
-    assert captured.out.replace("__main__.py", "degrotesque.py") == ""
+    assert patch(captured.out) == ""
 
 
 def test_main_empty2(capsys):
@@ -53,13 +60,13 @@ def test_main_empty2(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert captured.err.replace("__main__.py", "degrotesque.py") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
-                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
+    assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
+                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
                    input
 degrotesque: error: the following arguments are required: input
 """
-    assert captured.out.replace("__main__.py", "degrotesque.py") == ""
+    assert patch(captured.out) == ""
 
 
 def test_main_help(capsys):
@@ -71,19 +78,20 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "degrotesque.py").replace("optional arguments", "options") == """usage: degrotesque [-h] [--version] [-r] [-e EXTENSIONS] [-E ENCODING]
-                   [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-a ACTIONS]
+    assert patch(captured.out) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
+                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
                    input
 
-A type setter; Exchanges simple ascii letters by their typographic
-counterparts
+A type setter that exchanges ascii letters by their typographic counterparts
 
 positional arguments:
   input
 
 options:
   -h, --help            show this help message and exit
+  -c FILE, --config FILE
+                        Reads the named configuration file
   --version             show program's version number and exit
   -r, --recursive       Whether a given path shall be processed recursively
   -e EXTENSIONS, --extensions EXTENSIONS
@@ -99,6 +107,9 @@ options:
                         'unicode', 'text']
   -s SKIP, --skip SKIP  Defines the elements which contents shall not be
                         changed
+  -w FILE, --write-config FILE
+                        Writes the current settings to the named configuration
+                        file
   -a ACTIONS, --actions ACTIONS
                         Defines the actions to perform
 
@@ -116,9 +127,9 @@ def test_main_version(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert captured.out.replace("__main__.py", "degrotesque") == """degrotesque 3.0.0
+    assert patch(captured.out) == """degrotesque 3.0.0
 """
-    assert captured.err == ""
+    assert patch(captured.err) == ""
 
 
 def test_main_run1(capsys, tmp_path):

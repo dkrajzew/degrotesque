@@ -28,6 +28,7 @@ import re
 from typing import List
 from typing import Union
 import argparse
+import configparser
 import helper
 import marker
 import marker_text
@@ -524,10 +525,21 @@ def main(arguments : List[str] = []) -> int:
         Prints the version
 
     """
-    sys.tracebacklimit = 0
     # parse options
-    parser = argparse.ArgumentParser(prog='degrotesque', 
-        description='A type setter; Exchanges simple ascii letters by their typographic counterparts', 
+    # https://stackoverflow.com/questions/3609852/which-is-the-best-way-to-allow-configuration-options-be-overridden-at-the-comman
+    defaults = {}
+    conf_parser = argparse.ArgumentParser(prog='degrotesque', add_help=False)
+    conf_parser.add_argument("-c", "--config", metavar="FILE", help="Reads the named configuration file")
+    args, remaining_argv = conf_parser.parse_known_args(arguments)
+    if args.config is not None:
+        if not os.path.exists(args.config):
+            print ("degrotesque: error: configuration file '%s' does not exist" % str(args.config), file=sys.stderr)
+            raise SystemExit(2)
+        config = configparser.ConfigParser()
+        config.read([args.config])
+        defaults.update(dict(config.items("DEFAULT")))
+    parser = argparse.ArgumentParser(prog='degrotesque', parents=[conf_parser], 
+        description='A type setter that exchanges ascii letters by their typographic counterparts', 
         epilog='(c) Daniel Krajzewicz 2020-2024')
     parser.add_argument("input")
     parser.add_argument('--version', action='version', version='%(prog)s 3.0.0')
@@ -538,8 +550,10 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-B", "--no-backup", dest="no_backup", action="store_true", help="Whether no backup shall be generated")
     parser.add_argument("-f", "--format", choices=['html', 'unicode', 'text'], default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
     parser.add_argument("-s", "--skip", default=None, help="Defines the elements which contents shall not be changed")
-    actions_arg = parser.add_argument("-a", "--actions", default=None, help="Defines the actions to perform")
-    args = parser.parse_args(arguments)
+    parser.add_argument("-w", "--write-config", metavar="FILE", help="Writes the current settings to the named configuration file")
+    parser.add_argument("-a", "--actions", default=None, help="Defines the actions to perform")
+    parser.set_defaults(**defaults)
+    args = parser.parse_args(remaining_argv)
     # setup degrotesque
     degrotesque = Degrotesque()
     try:
@@ -554,9 +568,23 @@ def main(arguments : List[str] = []) -> int:
     marker = None
     if args.type is not None:
         marker = degrotesque._markers[args.type]
+    # write config
+    if args.write_config:
+        tmp_args = vars(args).copy()
+        with open(args.write_config, "w") as fdo:
+            fdo.write("[DEFAULT]\n")
+            for arg in tmp_args:
+                if arg=="write_config" or arg=="config" or tmp_args[arg] is None:
+                    continue
+                fdo.write("%s=%s\n" % (arg, tmp_args[arg]))
     # collect files
     extensions = helper.get_extensions(args.extensions)
-    files = helper.get_files(args.input, args.recursive, extensions)
+    try:
+        files = helper.get_files(args.input, args.recursive, extensions)
+    except ValueError as err:
+        parser.print_usage(sys.stderr)
+        print ("degrotesque: error: %s" % str(err), file=sys.stderr)
+        raise SystemExit(2)
     # loop through files
     for f in files:
         print("Processing %s" % f)

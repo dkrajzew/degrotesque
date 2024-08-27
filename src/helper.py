@@ -81,7 +81,7 @@ def get_files(name : str, recursive : bool, extensions : List[str]) -> List[str]
     elif os.path.isfile(name):
         files.append(name)
     else:
-        raise ValueError("Can not process '%s'" % name) # pragma: no cover
+        raise ValueError("can not process '%s'" % name) # pragma: no cover
     files.sort()
     files.sort(key=lambda v: str(v).replace("\\", "/").count('/'))
     return files

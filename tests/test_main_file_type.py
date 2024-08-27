@@ -210,3 +210,19 @@ def test_filetype__three_rst_explicit(capsys, tmp_path):
     assert p2.read_text() == "&#8220;Well &#8212; ``that's`` not what I had expected.&#8221;"
     assert p3.read_text() == "``\"Well - that's not what I had expected.\"``"
 
+
+"""
+def test_filetype__three_rst_explicit(capsys, tmp_path):
+    "Whether two text files are processed
+
+    The second file is recognized as HTML due to it's contents
+    "
+    p1 = tmp_path / "hello1.txt"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    try:
+        degrotesque.main(["--type", "rst", str(tmp_path)])
+    s
+    assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
+    assert p2.read_text() == "&#8220;Well &#8212; ``that's`` not what I had expected.&#8221;"
+    assert p3.read_text() == "``\"Well - that's not what I had expected.\"``"
+"""
