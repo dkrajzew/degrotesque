@@ -165,12 +165,32 @@ def test_main_run1_html2html_namedtype(capsys, tmp_path):
     assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
 
 
-def test_main_run1_html2html_sgmlguess(capsys, tmp_path):
+def test_main_run1_html2html_sgmlguess1(capsys, tmp_path):
     """Test behaviour on plain usage"""
     p1 = tmp_path / "hello1.xxx"
-    p1.write_text("\"Well - that's not what I had expected.\"")
+    p1.write_text("<!DOCTYPE>\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.xxx"
-    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
+    p2.write_text("<!DOCTYPE>\"Well - <code>that's</code> not what I had expected.\"")
+    degrotesque.main(["-f", "html", str(tmp_path)])
+    assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
+    assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
+
+def test_main_run1_html2html_sgmlguess2(capsys, tmp_path):
+    """Test behaviour on plain usage"""
+    p1 = tmp_path / "hello1.xxx"
+    p1.write_text("<?xml>\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.xxx"
+    p2.write_text("<?xml>\"Well - <code>that's</code> not what I had expected.\"")
+    degrotesque.main(["-f", "html", str(tmp_path)])
+    assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
+    assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
+
+def test_main_run1_html2html_sgmlguess3(capsys, tmp_path):
+    """Test behaviour on plain usage"""
+    p1 = tmp_path / "hello1.xxx"
+    p1.write_text("<x>\"Well - that's not what I had expected.\"</x>")
+    p2 = tmp_path / "hello2.xxx"
+    p2.write_text("<x>\"Well - <code>that's</code> not what I had expected.\"</x>")
     degrotesque.main(["-f", "html", str(tmp_path)])
     assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
     assert p2.read_text() == "&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"

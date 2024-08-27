@@ -161,10 +161,10 @@ def test_get_untyped_files_multiple_recursive3(tmp_path):
     check_files(["hello1.html", "sub/hello2.html", "sub/hello3.txt"], files, tmp_path)
 
 
-def test_get_files_one(tmp_path):
+def test_get_files_not_existing(tmp_path):
     """Test get_files behaviour if one file is given"""
     try:
         files = helper.get_files(tmp_path / "hello.html", False, None)
     except ValueError as e:
         assert type(e)==type(ValueError())
-        assert str(e).replace(str(tmp_path), "<DIR>")=="can not process '<DIR>\\hello.html'"
+        assert str(e).replace(str(tmp_path).replace("\\", "/"), "<DIR>")=="can not process '<DIR>/hello.html'"

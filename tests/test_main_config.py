@@ -84,7 +84,6 @@ format=unicode
 """
 
 
-
 def test_main_config_error__not_exitsing1(capsys, tmp_path):
     """Test behaviour if no arguments are given"""
     p1 = tmp_path / "hello1.html"
