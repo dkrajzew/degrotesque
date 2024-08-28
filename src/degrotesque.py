@@ -330,9 +330,10 @@ class Degrotesque:
             if ext in self._markers[m].get_extensions():
                 return self._markers[m]
         # the HTML recognition regexp
-        # https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454
-        html_regex = re.compile("<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
-        if html_regex.search(document) is not None:
+        document = document.strip().lower()
+        if document.startswith("<?xml") or document.startswith("<!doctype"):
+            return self._markers["sgml"]
+        if document.startswith("<") and document.endswith(">"):
             return self._markers["sgml"]
         return self._markers["text"]
 

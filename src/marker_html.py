@@ -95,28 +95,31 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
             if tb=="?" or tb=="?php":
                 # assumption: php stuff is always closed by ?>
                 ie = ldocument.find("?>", ib)
-                if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+                if ie<0: 
+                    raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
                 ie += 1
             elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
                 # assumption: jsp/asp stuff is always closed by %>
                 ie = ldocument.find("%>", ib)
-                if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+                if ie<0: 
+                    raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
                 ie += 1
             elif tb=="!--":
                 # comments are always closed by -->
                 ie = ldocument.find("-->", ib)
-                if ie<0: raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+                if ie<0: 
+                    raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
                 ie += 2
             elif tb=="!doctype":
                 # DOCTYPE: find matching >
-                ie = ib+1
+                ie = ib
                 num = 1
                 while ie<len(ldocument):
                     if ldocument[ie]=="<": num = num + 1
-                    elif ldocument[ie]==">": num = num + 1
-                    if num==0: break
+                    elif ldocument[ie]==">": num = num - 1
+                    if num==0: 
+                        break
                     ie = ie + 1
-                ie -= 1
             else:
                 # everything else (code, script, etc. that may contain < or >) should
                 # be parsed until a closing tag

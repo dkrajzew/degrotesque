@@ -167,4 +167,4 @@ def test_get_files_not_existing(tmp_path):
         files = helper.get_files(tmp_path / "hello.html", False, None)
     except ValueError as e:
         assert type(e)==type(ValueError())
-        assert str(e).replace(str(tmp_path).replace("\\", "/"), "<DIR>")=="can not process '<DIR>/hello.html'"
+        assert str(e).replace(str(tmp_path), "<DIR>").replace("\\", "/")=="can not process '<DIR>/hello.html'"
