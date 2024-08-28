@@ -80,6 +80,7 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
                 i += 1
                 continue
             # process elements to skip contents of
+            opening_pos = i
             i += 1
             tb = self._get_tag_name(ldocument[i:])
             ret += "1"*(len(tb))
@@ -96,19 +97,19 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
                 # assumption: php stuff is always closed by ?>
                 ie = ldocument.find("?>", ib)
                 if ie<0: 
-                    raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+                    raise ValueError("Unclosed '<%s' element at position %s." % (tb, opening_pos))
                 ie += 1
             elif tb=="%" or tb=="%=" or tb=="%@" or tb=="%--" or tb=="%!":
                 # assumption: jsp/asp stuff is always closed by %>
                 ie = ldocument.find("%>", ib)
                 if ie<0: 
-                    raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+                    raise ValueError("Unclosed '<%s' element at position %s." % (tb, opening_pos))
                 ie += 1
             elif tb=="!--":
                 # comments are always closed by -->
                 ie = ldocument.find("-->", ib)
                 if ie<0: 
-                    raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+                    raise ValueError("Unclosed comment at position %s." % (opening_pos))
                 ie += 2
             elif tb=="!doctype":
                 # DOCTYPE: find matching >
@@ -130,7 +131,7 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
                     ie1 = ldocument.find("</"+tb, ie)
                     ie2 = ldocument.find("<"+tb, ie)
                     if ie1<0 and ie2<0:
-                        raise ValueError("Unclosed '<%s' element at position %s." % (tb, i))
+                        raise ValueError("Unclosed '<%s' element at position %s." % (tb, opening_pos))
                     if ie1>=0 and (ie1<ie2 or ie2<0):
                         num = num - 1
                         ie = ie1 + len("</"+tb)

@@ -215,6 +215,16 @@ def test_main_run1_html2html_sgmlguess5(capsys, tmp_path):
     assert p1.read_text() == "<x>&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;</x>\n"
     assert p2.read_text() == "<x>&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;</x>\n"
 
+def test_main_run1_html2html_sgmlguess_nosgml(capsys, tmp_path):
+    """Test behaviour on plain usage"""
+    p1 = tmp_path / "hello1.xxx"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.xxx"
+    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
+    degrotesque.main(["-f", "html", str(tmp_path)])
+    assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
+    assert p2.read_text() == "&ldquo;Well &mdash; <code>that&apos;s</code> not what I had expected.&rdquo;"
+
 
 def test_main_run1_md2html(capsys, tmp_path):
     """Test behaviour on plain usage"""

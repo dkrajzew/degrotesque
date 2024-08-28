@@ -176,7 +176,7 @@ def test_main__document_broken2(capsys, tmp_path):
     captured = capsys.readouterr()
     assert captured.err == ""
     assert patch(captured.out, tmp_path) == """Processing <DIR>/hello1.html
-Unclosed '<pre' element at position 4.
+Unclosed '<pre' element at position 0.
 """
     assert p1.read_text() == "<pre> <pre \"Well - that's not what I had expected.\""
 

@@ -89,7 +89,23 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
-            assert (str(e)=="Unclosed '<?' element at position 8.")
+            assert (str(e)=="Unclosed '<?' element at position 6.")
+
+
+    def test__mark_html_asp_plain1(self):
+        """Parsing php"""
+        self._marker._restore_default_elements_to_skip()
+        assert(self._marker.get_mask("Hallo <% a %> ")=="00000011111110")
+
+    def test__mark_html_asp_unclosed(self):
+        """Parsing php"""
+        self._marker._restore_default_elements_to_skip()
+        try:
+            self._marker.get_mask("Hallo <% a")
+            assert False # pragma: no cover
+        except ValueError as e:
+            assert (type(e)==type(ValueError()))
+            assert (str(e)=="Unclosed '<%' element at position 6.")
 
 
     def test__mark_html_default1(self):
@@ -105,7 +121,7 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
-            assert (str(e)=="Unclosed '<code' element at position 11.")
+            assert (str(e)=="Unclosed '<code' element at position 6.")
 
     def test__mark_html_customToSkip(self):
         """Parsing custom to skip"""
@@ -120,10 +136,21 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
         assert(self._marker.get_mask("Hallo <% a %> ")=="00000011111110")
 
 
-    def test__mark_html_comments1(self):
+    def test__mark_html_comments_plain1(self):
         """Parsing comments"""
         self._marker._restore_default_elements_to_skip()
         assert(self._marker.get_mask("Hallo <!-- a --> ")=="00000011111111110")
+
+    def test__mark_html_comments_unclosed(self):
+        """Parsing comments"""
+        """Parsing php"""
+        self._marker._restore_default_elements_to_skip()
+        try:
+            self._marker.get_mask("Hallo <!-- a")
+            assert False # pragma: no cover
+        except ValueError as e:
+            assert (type(e)==type(ValueError()))
+            assert (str(e)=="Unclosed comment at position 6.")
 
 
     def test__mark_html_doctype1(self):
