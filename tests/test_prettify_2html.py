@@ -24,6 +24,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 import degrotesque
+import helper
 import marker_html
 
 
@@ -203,7 +204,6 @@ class TestDegrotesque_Prettify_HTML(unittest.TestCase):
     def test_prettify_toSkip_oddity(self):
         """Oddity#1"""
         self._degrotesque._restore_default_actions()
-        self._marker.set_to_skip("(tm)")
-        assert(self._degrotesque.prettify(" <(tm)>a</(tm)> ", self._marker)==" <(tm)>a</(tm)> ")
+        assert(self._degrotesque.prettify(" <(tm)>a</(tm)> ", self._marker, "(tm)")==" <(tm)>a</(tm)> ")
 
 

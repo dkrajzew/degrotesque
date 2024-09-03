@@ -339,7 +339,7 @@ class Degrotesque:
 
 
 
-    def prettify(self, document : str, marker : marker.DegrotesqueMarker) -> str:
+    def prettify(self, document : str, marker : marker.DegrotesqueMarker, to_skip : List[str] = None) -> str:
         """Prettifies (degrotesques) the given document.
 
         It is assumed that the input is given in utf-8.
@@ -349,12 +349,14 @@ class Degrotesque:
         Args:
             document (str): The document (contents) to process.
             marker (marker.DegrotesqueMarker): The marker object to use for computing the mask of document parts to skip
+            to_skip (List[str]): List of elements to skip (HTML/SGML/XML)
 
         Returns:
             (str): The processed (prettified / degrotesqued) document.
         """
         # extract text parts
-        marks = marker.get_mask(document)
+        to_skip = helper.parse_to_skip(to_skip)
+        marks = marker.get_mask(document, to_skip)
         assert(len(document)==len(marks))
         # build a copy of actions to use (not found will be removed from it)
         actions = list(self._actions)
@@ -442,14 +444,10 @@ def prettify(document : str, marker : Union[marker.DegrotesqueMarker, str] = Non
         if isinstance(actions, list):
             actions = ",".join(actions)
         degrotesque.set_actions(actions)
-    if to_skip is not None:
-        if isinstance(to_skip, list):
-            to_skip = ",".join(to_skip)
-        degrotesque._markers["sgml"].set_to_skip(to_skip)
     degrotesque.set_format(replacement_format)
     if isinstance(marker, str):
         marker = degrotesque._markers[marker]
-    return degrotesque.prettify(document, marker)
+    return degrotesque.prettify(document, marker, to_skip)
     
 
 def main(arguments : List[str] = []) -> int:
@@ -563,7 +561,7 @@ def main(arguments : List[str] = []) -> int:
         parser.print_usage(sys.stderr)
         print ("degrotesque: error: argument -a/--actions: %s" % str(err), file=sys.stderr)
         raise SystemExit(2)
-    degrotesque._markers["sgml"].set_to_skip(args.skip)
+    to_skip = helper.parse_to_skip(args.skip)
     degrotesque.set_format(args.format)
     # get marker
     marker = None

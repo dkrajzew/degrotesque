@@ -86,3 +86,30 @@ def get_files(name : str, recursive : bool, extensions : List[str]) -> List[str]
     files.sort(key=lambda v: str(v).replace("\\", "/").count('/'))
     return files
 
+
+def get_default_to_skip():
+    return [
+        u"script", u"code", u"style", u"pre", u"samp", u"tt", u"kbd",
+        u"?", u"?php",
+        u"%", u"%=", u"%@", u"%--", u"%!",
+        u"!--", "!doctype"
+    ]
+
+
+def parse_to_skip(to_skip : List[str]):
+    """Sets the elements which contents shall not be changed.
+
+    Otherwise, a list with the elements to skip is built.
+
+    Args:
+        elements_to_skip (List[str]): The names of elements which shall not be changed
+
+    Todo:
+        Warn user if a non-XML-character occurs?
+    """
+    if to_skip is None or len(to_skip)==0:
+        return get_default_to_skip()
+    if isinstance(to_skip, list):
+        to_skip = ",".join(to_skip)
+    return [x.strip() for x in to_skip.split(',')]
+    

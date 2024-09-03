@@ -41,12 +41,13 @@ class DegrotesqueTextMarker(marker.DegrotesqueMarker):
         return [ "txt" ]
 
 
-    def get_mask(self, document : str) -> str:
+    def get_mask(self, document : str, to_skip : List[str] = None) -> str:
         """Returns a string where all code and quotes are denoted as '1' and
         plain content as '0'.
 
         Args:
             document (str): The markdown document (contents) to process
+            to_skip (List[str]): List of elements to skip (HTML/SGML/XML)
 
         Returns:
             (str): Annotation of the markdown document.
