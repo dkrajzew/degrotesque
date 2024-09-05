@@ -64,7 +64,7 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
         """
         # mark HTML elements
         if to_skip is None:
-            to_skip = helper.get_default_to_skip()
+            to_skip = []
         ldocument = document.lower()
         ret = ""
         i = 0

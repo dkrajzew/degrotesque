@@ -423,7 +423,7 @@ class Degrotesque:
 
 
 # --- functions -------------------------------------------------------------
-def prettify(document : str, marker : Union[marker.DegrotesqueMarker, str] = None, actions : Union[List[str], str] = None, to_skip : Union[List[str], str] = None, replacement_format : str = "text") -> str:
+def prettify(document : str, marker : Union[marker.DegrotesqueMarker, str] = None, actions : Union[List[str], str] = None, replacement_format : str = "text", to_skip : Union[List[str], str] = None) -> str:
     """Prettifies (degrotesques) the given document.
 
     Builds a Degrotesque instance, inserts the given options, 
@@ -433,8 +433,8 @@ def prettify(document : str, marker : Union[marker.DegrotesqueMarker, str] = Non
         document (str): The document (contents) to process.
         marker (Union[marker.DegrotesqueMarker, str]): The marker object to use for computing the mask of document parts to skip or its name
         actions (Union[List[str], str]): The named actions to perform; if given as string, they must be separated using a colon (,)
-        to_skip (Union[List[str], str]): The HTML-elements to skip; if given as string, they must be separated using a colon (,)
         replacement_format (str): The type of replacements to use, one of 'html', 'text', 'unicode'
+        to_skip (Union[List[str], str]): The HTML-elements to skip; if given as string, they must be separated using a colon (,)
 
     Returns:
         (str): The processed (prettified / degrotesqued) document.
@@ -444,6 +444,8 @@ def prettify(document : str, marker : Union[marker.DegrotesqueMarker, str] = Non
         if isinstance(actions, list):
             actions = ",".join(actions)
         degrotesque.set_actions(actions)
+    if to_skip is None:
+        to_skip = helper.get_default_to_skip()
     degrotesque.set_format(replacement_format)
     if isinstance(marker, str):
         marker = degrotesque._markers[marker]

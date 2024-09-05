@@ -33,49 +33,50 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
 
     def setUp(self):
         self._marker = marker_html.DegrotesqueHTMLMarker()
+        self._to_skip = helper.get_default_to_skip()
 
     def test__mark_html_textOnly1(self):
         """Text without markups only"""
-        assert(self._marker.get_mask("Hallo")=="00000")
+        assert(self._marker.get_mask("Hallo", self._to_skip)=="00000")
 
     def test__mark_html_textOnly2(self):
         """Text without markups only"""
-        assert(self._marker.get_mask("a")=="0")
+        assert(self._marker.get_mask("a", self._to_skip)=="0")
 
 
     def test__mark_html_simpleHTML1(self):
         """Some simple HTML markups"""
-        assert(self._marker.get_mask("Hallo <b>Mama!</b>")=="000000111000001111")
+        assert(self._marker.get_mask("Hallo <b>Mama!</b>", self._to_skip)=="000000111000001111")
 
     def test__mark_html_simpleHTML2(self):
         """Some simple HTML markups"""
-        assert(self._marker.get_mask("a<b></b>")=="01111111")
+        assert(self._marker.get_mask("a<b></b>", self._to_skip)=="01111111")
 
     def test__mark_html_simpleHTML3(self):
         """Some simple HTML markups"""
-        assert(self._marker.get_mask("a<b>a</b>")=="011101111")
+        assert(self._marker.get_mask("a<b>a</b>", self._to_skip)=="011101111")
 
     def test__mark_html_simpleHTML4(self):
         """Some simple HTML markups"""
-        assert(self._marker.get_mask("<b>a</b>")=="11101111")
+        assert(self._marker.get_mask("<b>a</b>", self._to_skip)=="11101111")
 
     def test__mark_html_simpleHTML5(self):
         """Some simple HTML markups"""
-        assert(self._marker.get_mask("<b>a</b>a")=="111011110")
+        assert(self._marker.get_mask("<b>a</b>a", self._to_skip)=="111011110")
 
 
     def test__mark_html_php_plain1(self):
         """Parsing php"""
-        assert(self._marker.get_mask("Hallo <?php a ?> ")=="00000011111111110")
+        assert(self._marker.get_mask("Hallo <?php a ?> ", self._to_skip)=="00000011111111110")
 
     def test__mark_html_php_plain2(self):
         """Parsing php"""
-        assert(self._marker.get_mask("Hallo <? a ?> ")=="00000011111110")
+        assert(self._marker.get_mask("Hallo <? a ?> ", self._to_skip)=="00000011111110")
 
     def test__mark_html_php_unclosed(self):
         """Parsing php"""
         try:
-            self._marker.get_mask("Hallo <? a")
+            self._marker.get_mask("Hallo <? a", self._to_skip)
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
@@ -84,12 +85,12 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
 
     def test__mark_html_asp_plain1(self):
         """Parsing php"""
-        assert(self._marker.get_mask("Hallo <% a %> ")=="00000011111110")
+        assert(self._marker.get_mask("Hallo <% a %> ", self._to_skip)=="00000011111110")
 
     def test__mark_html_asp_unclosed(self):
         """Parsing php"""
         try:
-            self._marker.get_mask("Hallo <% a")
+            self._marker.get_mask("Hallo <% a", self._to_skip)
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
@@ -98,12 +99,12 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
 
     def test__mark_html_default1(self):
         """Parsing to skip"""
-        assert(self._marker.get_mask("Hallo <code>a</code> ")=="000000111111111111110")
+        assert(self._marker.get_mask("Hallo <code>a</code> ", self._to_skip)=="000000111111111111110")
 
     def test__mark_html_default_unclosed(self):
         """Parsing unclosed to skip"""
         try:
-            self._marker.get_mask("Hallo <code>")
+            self._marker.get_mask("Hallo <code>", self._to_skip)
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
@@ -116,18 +117,18 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
 
     def test__mark_html_jsp1(self):
         """Parsing jsp/asp"""
-        assert(self._marker.get_mask("Hallo <% a %> ")=="00000011111110")
+        assert(self._marker.get_mask("Hallo <% a %> ", self._to_skip)=="00000011111110")
 
 
     def test__mark_html_comments_plain1(self):
         """Parsing comments"""
-        assert(self._marker.get_mask("Hallo <!-- a --> ")=="00000011111111110")
+        assert(self._marker.get_mask("Hallo <!-- a --> ", self._to_skip)=="00000011111111110")
 
     def test__mark_html_comments_unclosed(self):
         """Parsing comments"""
         """Parsing php"""
         try:
-            self._marker.get_mask("Hallo <!-- a")
+            self._marker.get_mask("Hallo <!-- a", self._to_skip)
             assert False # pragma: no cover
         except ValueError as e:
             assert (type(e)==type(ValueError()))
@@ -136,11 +137,11 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
 
     def test__mark_html_doctype1(self):
         """Parsing doctypes"""
-        assert(self._marker.get_mask("Hallo <!DOCTYPE >a")=="000000111111111110")
+        assert(self._marker.get_mask("Hallo <!DOCTYPE >a", self._to_skip)=="000000111111111110")
 
     def test__mark_html_doctype2(self):
         """Parsing doctypes"""
-        assert(self._marker.get_mask("Hallo <!DOCTYPE <!ELEMENT >>a")=="00000011111111111111111111110")
+        assert(self._marker.get_mask("Hallo <!DOCTYPE <!ELEMENT >>a", self._to_skip)=="00000011111111111111111111110")
 
 
     def test__mark_html_toSkip_oddity1(self):
