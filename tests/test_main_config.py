@@ -74,7 +74,7 @@ def test_main_config_write1(capsys, tmp_path):
     assert ret==0
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
-    assert patch(pc.read_text(), tmp_path) == """[DEFAULT]
+    assert patch(pc.read_text(), tmp_path) == """[degrotesque]
 input=<DIR>
 recursive=False
 encoding=utf-8

@@ -25,8 +25,6 @@ import os
 import io
 import shutil
 import re
-from typing import List
-from typing import Union
 import argparse
 import configparser
 import helper
@@ -36,6 +34,8 @@ import marker_md
 import marker_html
 import marker_begend
 import marker_rst
+from typing import List
+from typing import Union
 
 
 # --- variables and constants -----------------------------------------------
@@ -538,7 +538,7 @@ def main(arguments : List[str] = []) -> int:
             raise SystemExit(2)
         config = configparser.ConfigParser()
         config.read([args.config])
-        defaults.update(dict(config.items("DEFAULT")))
+        defaults.update(dict(config.items("degrotesque")))
     parser = argparse.ArgumentParser(prog='degrotesque', parents=[conf_parser], 
         description='A type setter that exchanges ascii letters by their typographic counterparts', 
         epilog='(c) Daniel Krajzewicz 2020-2024')
@@ -573,7 +573,7 @@ def main(arguments : List[str] = []) -> int:
     if args.write_config:
         tmp_args = vars(args).copy()
         with open(args.write_config, "w") as fdo:
-            fdo.write("[DEFAULT]\n")
+            fdo.write("[degrotesque]\n")
             for arg in tmp_args:
                 if arg=="write_config" or arg=="config" or tmp_args[arg] is None:
                     continue
