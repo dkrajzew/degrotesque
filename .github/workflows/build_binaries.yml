@@ -1,28 +1,22 @@
 # https://github.com/pyinstaller/pyinstaller/issues/6296
-on:
-  push:
-    branches: [ main ]
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-        os: ['windows-latest', 'ubuntu-latest']
+        os: ['windows-latest', 'ubuntu-latest, 'macos-latest']
 
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
         python-version: 3.7
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pyinstaller
+
     - run: pyinstaller degrotesque.spec
     # Optionally verify that it works (provided that it does not need user interaction)
     #- run: ./dist/your-code/your-code
     - uses: actions/upload-artifact@v2
       with:
-        path: bin/
+        name: degrotesque.*
+        path: dist
+        
