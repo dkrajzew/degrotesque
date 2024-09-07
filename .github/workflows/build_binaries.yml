@@ -1,4 +1,8 @@
 # https://github.com/pyinstaller/pyinstaller/issues/6296
+on:
+  push:
+    branches: [ main ]
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
