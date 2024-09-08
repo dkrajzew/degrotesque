@@ -23,6 +23,7 @@ jobs:
     #- run: ./dist/your-code/your-code
     - uses: actions/upload-artifact@v2
       with:
-        name: degrotesque.*
-        path: dist
+        name: degrotesque-${{ matrix.os }}
+        path: dist/degrotesque*
+        overwrite: true
         
