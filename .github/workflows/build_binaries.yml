@@ -1,8 +1,10 @@
 # https://github.com/pyinstaller/pyinstaller/issues/6296
 name: binaries
 
-on: [push]
-
+on:
+  release:
+    types: [published]
+    
 jobs:
   build:
     runs-on: ${{ matrix.os }}
