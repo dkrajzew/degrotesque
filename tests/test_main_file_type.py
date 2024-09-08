@@ -27,7 +27,7 @@ import degrotesque
 
 # --- test functions ----------------------------------------------------------
 def test_filetype__two_html(capsys, tmp_path):
-    """Whether two HTML files are processed"""
+    """Two HTML files (by extension)"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -38,7 +38,7 @@ def test_filetype__two_html(capsys, tmp_path):
 
 
 def test_filetype__two_html_explicit(capsys, tmp_path):
-    """Whether two HTML files are processed"""
+    """Two HTML files (explicit)"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -50,10 +50,7 @@ def test_filetype__two_html_explicit(capsys, tmp_path):
 
 
 def test_filetype__two_text(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Two text files (by extension)"""
     p1 = tmp_path / "hello1.txt"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
@@ -64,10 +61,7 @@ def test_filetype__two_text(capsys, tmp_path):
 
 
 def test_filetype__two_text_explicit(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Two text files (explicit)"""
     p1 = tmp_path / "hello1.txt"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
@@ -79,10 +73,7 @@ def test_filetype__two_text_explicit(capsys, tmp_path):
 
 
 def test_filetype__two_md(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Two md files (by extension)"""
     p1 = tmp_path / "hello1.md"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.md"
@@ -93,10 +84,7 @@ def test_filetype__two_md(capsys, tmp_path):
 
 
 def test_filetype__two_md_explicit(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Two md files (explicit)"""
     p1 = tmp_path / "hello1.txt"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
@@ -108,10 +96,7 @@ def test_filetype__two_md_explicit(capsys, tmp_path):
 
 
 def test_filetype__three_python(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Three Python files (by extension)"""
     p1 = tmp_path / "hello1.py"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.py"
@@ -125,10 +110,7 @@ def test_filetype__three_python(capsys, tmp_path):
 
 
 def test_filetype__three_python_explicit(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Three Python files (explicit)"""
     p1 = tmp_path / "hello1.txt"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
@@ -143,10 +125,7 @@ def test_filetype__three_python_explicit(capsys, tmp_path):
 
 
 def test_filetype__three_doxygen(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Three Java files (by extension)"""
     p1 = tmp_path / "hello1.java"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.java"
@@ -160,10 +139,7 @@ def test_filetype__three_doxygen(capsys, tmp_path):
 
 
 def test_filetype__three_doxygen_explicit(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Three Java files (explicit)"""
     p1 = tmp_path / "hello1.txt"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
@@ -178,10 +154,7 @@ def test_filetype__three_doxygen_explicit(capsys, tmp_path):
 
 
 def test_filetype__three_rst(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Three rst files (by extension)"""
     p1 = tmp_path / "hello1.rst"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.rst"
@@ -195,10 +168,7 @@ def test_filetype__three_rst(capsys, tmp_path):
 
 
 def test_filetype__three_rst_explicit(capsys, tmp_path):
-    """Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    """
+    """Three rst files (explicit)"""
     p1 = tmp_path / "hello1.txt"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.txt"
@@ -209,20 +179,3 @@ def test_filetype__three_rst_explicit(capsys, tmp_path):
     assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
     assert p2.read_text() == "&#8220;Well &#8212; ``that's`` not what I had expected.&#8221;"
     assert p3.read_text() == "``\"Well - that's not what I had expected.\"``"
-
-
-"""
-def test_filetype__three_rst_explicit(capsys, tmp_path):
-    "Whether two text files are processed
-
-    The second file is recognized as HTML due to it's contents
-    "
-    p1 = tmp_path / "hello1.txt"
-    p1.write_text("\"Well - that's not what I had expected.\"")
-    try:
-        degrotesque.main(["--type", "rst", str(tmp_path)])
-    s
-    assert p1.read_text() == "&#8220;Well &#8212; that&#39;s not what I had expected.&#8221;"
-    assert p2.read_text() == "&#8220;Well &#8212; ``that's`` not what I had expected.&#8221;"
-    assert p3.read_text() == "``\"Well - that's not what I had expected.\"``"
-"""

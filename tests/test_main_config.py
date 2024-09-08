@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # =============================================================================
-"""degrotesque - Tests for the main method."""
+"""degrotesque - Tests for using configurations."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -37,7 +37,7 @@ def patch(string, tmp_path=None):
 
 # --- test functions ----------------------------------------------------------
 def test_main_config_read1(capsys, tmp_path):
-    """Test behaviour if no arguments are given"""
+    """Reads a config (HTML parsing)"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -49,7 +49,7 @@ def test_main_config_read1(capsys, tmp_path):
     assert p2.read_text() == "&#8220;Well &#8212; <code>that's</code> not what I had expected.&#8221;"
 
 def test_main_config_read2(capsys, tmp_path):
-    """Test behaviour if no arguments are given"""
+    """Reads a config (text parsing)"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -63,7 +63,7 @@ def test_main_config_read2(capsys, tmp_path):
 
 
 def test_main_config_write1(capsys, tmp_path):
-    """Test behaviour if no arguments are given"""
+    """Writes a config"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -81,27 +81,6 @@ encoding=utf-8
 type=sgml
 no_backup=False
 format=unicode
-"""
-
-
-def test_main_config_error__not_existing1(capsys, tmp_path):
-    """Test behaviour if no arguments are given"""
-    p1 = tmp_path / "hello1.html"
-    p1.write_text("\"Well - that's not what I had expected.\"")
-    p2 = tmp_path / "hello2.html"
-    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
-    base_dir = os.path.split(__file__)[0]
-    try:
-        degrotesque.main(["-c", os.path.join(base_dir, "foo.cfg"), str(tmp_path)])
-        assert False # pragma: no cover
-    except SystemExit as e:
-        assert type(e)==type(SystemExit())
-        assert e.code==2
-    captured = capsys.readouterr()
-    assert p1.read_text() == "\"Well - that's not what I had expected.\""
-    assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
-    assert patch(captured.out) == ""
-    assert patch(captured.err, base_dir) == """degrotesque: error: configuration file '<DIR>/foo.cfg' does not exist
 """
 
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # =============================================================================
-"""degrotesque - Tests for the _mark_markdown method."""
+"""degrotesque - Tests for the doxygen marker."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -98,3 +98,34 @@ class TestDegrotesque_MarkDoxygen(unittest.TestCase):
     def test__mark_doxygen_broken(self):
         """Missing closing"""
         assert(self._marker.get_mask('Hallo\n/**Mama!')=="11111111111111")
+
+
+    def test_masks_issn1(self):
+        """Testing masks
+        todo: Think about minusses and dealing with numbers"""
+        assert(self._marker.get_mask(" ISSN 1001-1001 ")=="1111111111111111")
+        assert(self._marker.get_mask(" ISBN 978-3-86680-192-9 ")=="111111111111111111111111")
+        assert(self._marker.get_mask(" ISBN 979-3-86680-192-9 ")=="111111111111111111111111")
+        assert(self._marker.get_mask(" ISBN 978-3-86680-192 ")=="1111111111111111111111")
+
+    def test_masks_issn2(self):
+        """Testing masks
+        todo: Think about minusses and dealing with numbers"""
+        assert(self._marker.get_mask("/// ISSN 1001-1001 ")=="1110111111111111110")
+        assert(self._marker.get_mask("/// ISBN 978-3-86680-192-9 ")=="111000000111111111111111110")
+        assert(self._marker.get_mask("/// ISBN 979-3-86680-192-9 ")=="111000000111111111111111110")
+        assert(self._marker.get_mask("/// ISBN 978-3-86680-192 ")=="1110000001111111111111110")
+
+    def test_masks_URL1(self):
+        """Testing URL masking"""
+        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de hallo')=="111111111111111111111111111111111111")
+        assert(self._marker.get_mask('http://www.krajzewicz.de hallo')=="111111111111111111111111111111")
+        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de')=="111111111111111111111111111111")
+        assert(self._marker.get_mask('http://www.krajzewicz.de')=="111111111111111111111111")
+
+    def test_masks_URL2(self):
+        """Testing URL masking"""
+        assert(self._marker.get_mask('/// Hallo http://www.krajzewicz.de hallo')=="1110000000111111111111111111111111000000")
+        assert(self._marker.get_mask('/// http://www.krajzewicz.de hallo')=="1110111111111111111111111111000000")
+        assert(self._marker.get_mask('/// Hallo http://www.krajzewicz.de')=="1110000000111111111111111111111111")
+        assert(self._marker.get_mask('/// http://www.krajzewicz.de')=="1110111111111111111111111111")

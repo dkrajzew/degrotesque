@@ -1,7 +1,7 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # =============================================================================
-"""degrotesque - Tests for the get_files function."""
+"""degrotesque - Tests for the helper.get_files function."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -37,16 +37,16 @@ def check_files(wanted, got, path):
     assert wanted==got2
 
 
-
+# typed files (extension is given)
 def test_get_typed_files_one(tmp_path):
-    """Test get_files behaviour if one file is given"""
+    """One file is given (explicit)"""
     p = tmp_path / "hello.html"
     p.write_text("Hallo <b>Mama</b>")
     files = helper.get_files(tmp_path / "hello.html", False, ["html"])
     check_files(["hello.html"], files, tmp_path)
 
 def test_get_typed_files_multiple1(tmp_path):
-    """Test get_files behaviour if two files is given"""
+    """Two files are given (explicit)"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.html"
@@ -55,7 +55,7 @@ def test_get_typed_files_multiple1(tmp_path):
     check_files(["hello1.html", "hello2.html"], files, tmp_path)
 
 def test_get_typed_files_multiple2(tmp_path):
-    """Test get_files behaviour if two files exist but only .html-files shall be processed"""
+    """Two files exist but only .html-files shall be processed"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.txt"
@@ -64,7 +64,7 @@ def test_get_typed_files_multiple2(tmp_path):
     check_files(["hello1.html"], files, tmp_path)
 
 def test_get_typed_files_multiple_recursive1(tmp_path):
-    """Tests recusrsive folder structure with recursion disabled"""
+    """Recusrsive folder structure with recursion disabled"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"
@@ -75,7 +75,7 @@ def test_get_typed_files_multiple_recursive1(tmp_path):
     check_files(["hello1.html"], files, tmp_path)
 
 def test_get_typed_files_multiple_recursive2(tmp_path):
-    """Tests recusrsive folder structure with recursion enabled"""
+    """Recusrsive folder structure with recursion enabled"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"
@@ -86,7 +86,7 @@ def test_get_typed_files_multiple_recursive2(tmp_path):
     check_files(["hello1.html", "sub/hello2.html"], files, tmp_path)
 
 def test_get_typed_files_multiple_recursive3(tmp_path):
-    """Tests recusrsive folder structure with recursion enabled"""
+    """Recusrsive folder structure with recursion enabled, HTML files only"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"
@@ -100,15 +100,16 @@ def test_get_typed_files_multiple_recursive3(tmp_path):
 
 
 
+# untyped files (extension is not given)
 def test_get_untyped_files_one(tmp_path):
-    """Test get_files behaviour if one file is given"""
+    """One file is given"""
     p = tmp_path / "hello.html"
     p.write_text("Hallo <b>Mama</b>")
     files = helper.get_files(tmp_path / "hello.html", False, None)
     check_files(["hello.html"], files, tmp_path)
 
 def test_get_untyped_files_multiple1(tmp_path):
-    """Test get_files behaviour if two files is given"""
+    """Two files are given"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.html"
@@ -117,7 +118,7 @@ def test_get_untyped_files_multiple1(tmp_path):
     check_files(["hello1.html", "hello2.html"], files, tmp_path)
 
 def test_get_untyped_files_multiple2(tmp_path):
-    """Test get_files behaviour if two files exist but only .html-files shall be processed"""
+    """Two files are given"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     p = tmp_path / "hello2.txt"
@@ -126,7 +127,7 @@ def test_get_untyped_files_multiple2(tmp_path):
     check_files(["hello1.html", "hello2.txt"], files, tmp_path)
 
 def test_get_untyped_files_multiple_recursive1(tmp_path):
-    """Tests recusrsive folder structure with recursion disabled"""
+    """Recusrsive folder structure with recursion disabled"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"
@@ -137,7 +138,7 @@ def test_get_untyped_files_multiple_recursive1(tmp_path):
     check_files(["hello1.html"], files, tmp_path)
 
 def test_get_untyped_files_multiple_recursive2(tmp_path):
-    """Tests recusrsive folder structure with recursion enabled"""
+    """Recusrsive folder structure with recursion enabled"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"
@@ -148,7 +149,7 @@ def test_get_untyped_files_multiple_recursive2(tmp_path):
     check_files(["hello1.html", "sub/hello2.html"], files, tmp_path)
 
 def test_get_untyped_files_multiple_recursive3(tmp_path):
-    """Tests recusrsive folder structure with recursion enabled"""
+    """Recusrsive folder structure with recursion enabled"""
     p = tmp_path / "hello1.html"
     p.write_text("Hallo <b>Mama</b>")
     d = tmp_path / "sub"
@@ -161,8 +162,10 @@ def test_get_untyped_files_multiple_recursive3(tmp_path):
     check_files(["hello1.html", "sub/hello2.html", "sub/hello3.txt"], files, tmp_path)
 
 
+
+# error cases
 def test_get_files_not_existing(tmp_path):
-    """Test get_files behaviour if one file is given"""
+    """Named file does not exist"""
     try:
         files = helper.get_files(tmp_path / "hello.html", False, None)
     except ValueError as e:

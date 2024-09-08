@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # =============================================================================
-"""degrotesque - Tests for the _mark_markdown method."""
+"""degrotesque - Tests for the markdown marker."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -49,78 +49,95 @@ class TestDegrotesque_MarkMarkdown(unittest.TestCase):
 
 
     def test__mark_markdown_indent1a(self):
-        """Some simple HTML markups"""
+        """Indented text"""
         assert(self._marker.get_mask("Hallo\n\tMama!")=="000000111111")
 
     def test__mark_markdown_indent1b(self):
-        """Some simple HTML markups"""
+        """Indented text"""
         assert(self._marker.get_mask("Hallo\n    Mama!")=="000000111111111")
 
     def test__mark_markdown_indent2a(self):
-        """Some simple HTML markups"""
+        """Indented text"""
         assert(self._marker.get_mask("Hallo\n\tMama!\n\tIch bin ein\nCode")=="000000111111111111111111110000")
 
     def test__mark_markdown_indent2b(self):
-        """Some simple HTML markups"""
+        """Indented text"""
         assert(self._marker.get_mask("Hallo\n\tMama!\n    Ich bin ein\nCode")=="000000111111111111111111111110000")
 
 
     def test__mark_markdown_backtick1(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo `Mama`!")=="0000001111110")
 
     def test__mark_markdown_backtick2(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo ``Mama``!")=="000000111111110")
 
     def test__mark_markdown_backtick3(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo ```Mama```!")=="00000011111111110")
 
     def test__mark_markdown_nested_backtick1(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo `` `Mama` ``!")=="0000001111111111110")
 
 
     def test__mark_markdown_backtick1b(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo `Mama`")=="000000111111")
 
     def test__mark_markdown_backtick2b(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo ``Mama``")=="00000011111111")
 
     def test__mark_markdown_backtick3b(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo ```Mama```")=="0000001111111111")
 
     def test__mark_markdown_nested_backtick1b(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo `` `Mama` ``")=="000000111111111111")
 
 
     def test__mark_markdown_backtick4a(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo `Mama``Code`")=="000000111111111111")
 
     def test__mark_markdown_backtick4b(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo ``Mama```Code`")=="00000011111111111111")
 
     def test__mark_markdown_backtick4c(self):
-        """Some simple HTML markups"""
+        """Backticks"""
         assert(self._marker.get_mask("Hallo `Mama```Code``")=="00000011111111111111")
 
 
     def test__mark_markdown_link1(self):
-        """Some simple HTML markups"""
+        """Masking links"""
         assert(self._marker.get_mask("Hallo <https://link.org> Mama")=="00000011111111111111111100000")
 
 
     def test__mark_markdown_named_link1(self):
-        """Some simple HTML markups"""
+        """Named link"""
         assert(self._marker.get_mask("Hallo [a link](https://www.krajzewicz.de) Mama")=="0000000000000001111111111111111111111111000000")
 
     def test__mark_markdown_named_link2(self):
-        """Some simple HTML markups"""
+        """Named link"""
         assert(self._marker.get_mask("Hallo [a link](file.md) Mama")=="0000000000000001111111000000")
+
+
+
+    def test_masks_issn1(self):
+        """Testing masks
+        todo: Think about minusses and dealing with numbers"""
+        assert(self._marker.get_mask(" ISSN 1001-1001 ")=="0111111111111110")
+        assert(self._marker.get_mask(" ISBN 978-3-86680-192-9 ")=="000000111111111111111110")
+        assert(self._marker.get_mask(" ISBN 979-3-86680-192-9 ")=="000000111111111111111110")
+        assert(self._marker.get_mask(" ISBN 978-3-86680-192 ")=="0000001111111111111110")
+
+    def test_masks_URL1(self):
+        """Testing URL masking"""
+        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de hallo')=="000000111111111111111111111111000000")
+        assert(self._marker.get_mask('http://www.krajzewicz.de hallo')=="111111111111111111111111000000")
+        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de')=="000000111111111111111111111111")
+        assert(self._marker.get_mask('http://www.krajzewicz.de')=="111111111111111111111111")

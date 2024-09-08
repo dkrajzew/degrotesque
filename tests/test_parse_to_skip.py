@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # =============================================================================
-"""degrotesque - Tests for the set_to_skip method."""
+"""degrotesque - Tests for the helper.parse_to_skip method."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"

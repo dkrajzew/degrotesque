@@ -83,7 +83,7 @@ degrotesque: error: unrecognized arguments: --foo
 
 
 def test_main__format__unknown(capsys, tmp_path):
-    """An unknown option is given as bool"""
+    """An unknown format is given"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -107,7 +107,7 @@ degrotesque: error: argument -f/--format: invalid choice: 'foo' (choose from 'ht
 
 
 def test_main__filetype__unknown(capsys, tmp_path):
-    """An unknown option is given as bool"""
+    """An unknown type is given"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -131,7 +131,7 @@ degrotesque: error: argument -T/--type: invalid choice: 'foo' (choose from 'sgml
 
 
 def test_main__action__unknown(capsys, tmp_path):
-    """An unknown option is given as bool"""
+    """An unknown action is given"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -155,7 +155,7 @@ degrotesque: error: argument -a/--actions: action 'foo' is not known
 
 
 def test_main__document_broken1(capsys, tmp_path):
-    """An unknown option is given as bool"""
+    """Broken document"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("<p \"Well - that's not what I had expected.\"")
     ret = degrotesque.main([str(tmp_path)])
@@ -168,7 +168,7 @@ Unclosed element at 1
     assert ret==4
 
 def test_main__document_broken2(capsys, tmp_path):
-    """An unknown option is given as bool"""
+    """Broken document"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("<pre> <pre \"Well - that's not what I had expected.\"")
     ret = degrotesque.main([str(tmp_path)])
@@ -182,7 +182,7 @@ Unclosed '<pre' element at position 0.
 
 
 def test_main__file__not_existing1(capsys, tmp_path):
-    """An unknown option is given as bool"""
+    """A not existing document is given"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -203,3 +203,24 @@ degrotesque: error: can not process 'foo'
     assert captured.out == ""
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
+
+
+def test_main_config_error__not_existing1(capsys, tmp_path):
+    """The given configuration file does not exist"""
+    p1 = tmp_path / "hello1.html"
+    p1.write_text("\"Well - that's not what I had expected.\"")
+    p2 = tmp_path / "hello2.html"
+    p2.write_text("\"Well - <code>that's</code> not what I had expected.\"")
+    base_dir = os.path.split(__file__)[0]
+    try:
+        degrotesque.main(["-c", os.path.join(base_dir, "foo.cfg"), str(tmp_path)])
+        assert False # pragma: no cover
+    except SystemExit as e:
+        assert type(e)==type(SystemExit())
+        assert e.code==2
+    captured = capsys.readouterr()
+    assert p1.read_text() == "\"Well - that's not what I had expected.\""
+    assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
+    assert patch(captured.out) == ""
+    assert patch(captured.err, base_dir) == """degrotesque: error: configuration file '<DIR>/foo.cfg' does not exist
+"""

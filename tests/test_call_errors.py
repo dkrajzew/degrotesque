@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # =============================================================================
-"""degrotesque - Tests for the main method."""
+"""degrotesque - Tests for error cases when calling directly."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -29,6 +29,7 @@ import marker_html
 import marker_begend
 import marker_rst
 
+
 # --- test functions ----------------------------------------------------------
 def test_call_actions_unknown1(capsys):
     try: 
@@ -45,6 +46,7 @@ def test_call_actions_unknown2(capsys):
     except ValueError as e:
         assert type(e)==type(ValueError())
         assert str(e)=="action 'foo' is not known"
+
 
 
 def test_call_replacement_unknown1(capsys):

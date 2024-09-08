@@ -144,7 +144,7 @@ def test_main_run1(capsys, tmp_path):
 
 
 def test_main_run1_html2html(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Test behaviour with given extensions"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -155,7 +155,7 @@ def test_main_run1_html2html(capsys, tmp_path):
 
 
 def test_main_run1_html2html_namedtype(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Test behaviour within given file types"""
     p1 = tmp_path / "hello1.html"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.html"
@@ -166,7 +166,7 @@ def test_main_run1_html2html_namedtype(capsys, tmp_path):
 
 
 def test_main_run1_html2html_sgmlguess1(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Tests HTML gueassing"""
     p1 = tmp_path / "hello1.xxx"
     p1.write_text("<!DOCTYPE>\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.xxx"
@@ -176,7 +176,7 @@ def test_main_run1_html2html_sgmlguess1(capsys, tmp_path):
     assert p2.read_text() == "<!DOCTYPE>&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
 
 def test_main_run1_html2html_sgmlguess2(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Tests HTML gueassing"""
     p1 = tmp_path / "hello1.xxx"
     p1.write_text("<!doctype>\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.xxx"
@@ -186,7 +186,7 @@ def test_main_run1_html2html_sgmlguess2(capsys, tmp_path):
     assert p2.read_text() == "<!doctype>&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
 
 def test_main_run1_html2html_sgmlguess3(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Tests HTML gueassing"""
     p1 = tmp_path / "hello1.xxx"
     p1.write_text("<?xml>\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.xxx"
@@ -196,7 +196,7 @@ def test_main_run1_html2html_sgmlguess3(capsys, tmp_path):
     assert p2.read_text() == "<?xml>&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;"
 
 def test_main_run1_html2html_sgmlguess4(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Tests HTML gueassing"""
     p1 = tmp_path / "hello1.xxx"
     p1.write_text("<x>\"Well - that's not what I had expected.\"</x>")
     p2 = tmp_path / "hello2.xxx"
@@ -206,7 +206,7 @@ def test_main_run1_html2html_sgmlguess4(capsys, tmp_path):
     assert p2.read_text() == "<x>&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;</x>"
 
 def test_main_run1_html2html_sgmlguess5(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Tests HTML gueassing"""
     p1 = tmp_path / "hello1.xxx"
     p1.write_text("<x>\"Well - that's not what I had expected.\"</x>\n")
     p2 = tmp_path / "hello2.xxx"
@@ -216,7 +216,7 @@ def test_main_run1_html2html_sgmlguess5(capsys, tmp_path):
     assert p2.read_text() == "<x>&ldquo;Well &mdash; <code>that's</code> not what I had expected.&rdquo;</x>\n"
 
 def test_main_run1_html2html_sgmlguess_nosgml(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Tests HTML gueassing"""
     p1 = tmp_path / "hello1.xxx"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.xxx"
@@ -227,7 +227,7 @@ def test_main_run1_html2html_sgmlguess_nosgml(capsys, tmp_path):
 
 
 def test_main_run1_md2html(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Tests processing of md files"""
     p1 = tmp_path / "hello1.md"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.md"
@@ -238,7 +238,7 @@ def test_main_run1_md2html(capsys, tmp_path):
 
 
 def test_main_run1_md2html_namedtype(capsys, tmp_path):
-    """Test behaviour on plain usage"""
+    """Tests processing of md files"""
     p1 = tmp_path / "hello1.md"
     p1.write_text("\"Well - that's not what I had expected.\"")
     p2 = tmp_path / "hello2.md"

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # =============================================================================
-"""degrotesque - Tests for the _mark_html method."""
+"""degrotesque - Tests for the HTML/XML marker."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -84,11 +84,11 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
 
 
     def test__mark_html_asp_plain1(self):
-        """Parsing php"""
+        """Parsing asp"""
         assert(self._marker.get_mask("Hallo <% a %> ", self._to_skip)=="00000011111110")
 
     def test__mark_html_asp_unclosed(self):
-        """Parsing php"""
+        """Parsing asp"""
         try:
             self._marker.get_mask("Hallo <% a", self._to_skip)
             assert False # pragma: no cover
@@ -148,3 +148,19 @@ class TestDegrotesque_MarkHTML(unittest.TestCase):
         """Oddity#1"""
         assert(self._marker.get_mask(" <(tm)>a</(tm)> ", "(tm)")=="0111111111111110")
 
+
+
+    def test_masks_issn1(self):
+        """Testing masks
+        todo: Think about minusses and dealing with numbers"""
+        assert(self._marker.get_mask(" ISSN 1001-1001 ")=="0111111111111110")
+        assert(self._marker.get_mask(" ISBN 978-3-86680-192-9 ")=="000000111111111111111110")
+        assert(self._marker.get_mask(" ISBN 979-3-86680-192-9 ")=="000000111111111111111110")
+        assert(self._marker.get_mask(" ISBN 978-3-86680-192 ")=="0000001111111111111110")
+
+    def test_masks_URL1(self):
+        """Testing URL masking"""
+        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de hallo')=="000000111111111111111111111111000000")
+        assert(self._marker.get_mask('http://www.krajzewicz.de hallo')=="111111111111111111111111000000")
+        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de')=="000000111111111111111111111111")
+        assert(self._marker.get_mask('http://www.krajzewicz.de')=="111111111111111111111111")

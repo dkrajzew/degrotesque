@@ -24,8 +24,8 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 import degrotesque
-import helper
 import marker_html
+import helper
 
 
 # --- test classes ------------------------------------------------------------
@@ -95,14 +95,27 @@ class TestDegrotesque_Prettify_HTML(unittest.TestCase):
         assert(self._degrotesque.prettify("(tm)", self._marker)=="&trade;")
         assert(self._degrotesque.prettify("(TM)", self._marker)=="&trade;")
         assert(self._degrotesque.prettify("(tM)", self._marker)=="&trade;")
+        assert(self._degrotesque.prettify(" (c)", self._marker)==" &copy;")
+        assert(self._degrotesque.prettify(" (C)", self._marker)==" &copy;")
+        assert(self._degrotesque.prettify(" (r)", self._marker)==" &reg;")
+        assert(self._degrotesque.prettify(" (R)", self._marker)==" &reg;")
+        assert(self._degrotesque.prettify(" (tm)", self._marker)==" &trade;")
+        assert(self._degrotesque.prettify(" (TM)", self._marker)==" &trade;")
+        assert(self._degrotesque.prettify(" (tM)", self._marker)==" &trade;")
+        assert(self._degrotesque.prettify("(c) ", self._marker)=="&copy; ")
+        assert(self._degrotesque.prettify("(C) ", self._marker)=="&copy; ")
+        assert(self._degrotesque.prettify("(r) ", self._marker)=="&reg; ")
+        assert(self._degrotesque.prettify("(R) ", self._marker)=="&reg; ")
+        assert(self._degrotesque.prettify("(tm) ", self._marker)=="&trade; ")
+        assert(self._degrotesque.prettify("(TM) ", self._marker)=="&trade; ")
+        assert(self._degrotesque.prettify("(tM) ", self._marker)=="&trade; ")
 
     def test_action_dashes(self):
         """Testing 'dashes' action"""
         self._degrotesque.set_actions("dashes")
         assert(self._degrotesque.prettify(" - ", self._marker)==" &mdash; ")
         assert(self._degrotesque.prettify(u" 123-321 ", self._marker)==u" 123&ndash;321 ")
-        #assert(self._degrotesque.prettify(u" -321 ")==u" &ndash;321 ")
-        #assert(self._degrotesque.prettify(u" 123- ")==u" 123&ndash; ")
+        assert(self._degrotesque.prettify(u" 123-321", self._marker)==u" 123&ndash;321")
 
     def test_action_bullets(self):
         """Testing 'bullets' action"""
@@ -182,23 +195,6 @@ class TestDegrotesque_Prettify_HTML(unittest.TestCase):
     &amp;i is replaced by the entry&apos;s index.</p>"""
         assert(self._degrotesque.prettify(text, self._marker)==ctext)
 
-
-    def test_masks_issn1(self):
-        """Testing masks
-        todo: Think about minusses and dealing with numbers"""
-        self._degrotesque.set_actions("dashes")
-        assert(self._marker.get_mask(" ISSN 1001-1001 ")=="0111111111111110")
-        assert(self._degrotesque.prettify(" ISSN 1001-1001 ", self._marker)==" ISSN 1001-1001 ")
-        assert(self._degrotesque.prettify(" ISBN 978-3-86680-192-9 ", self._marker)==" ISBN 978-3-86680-192-9 ")
-        assert(self._degrotesque.prettify(" ISBN 979-3-86680-192-9 ", self._marker)==" ISBN 979-3-86680-192-9 ")
-        assert(self._degrotesque.prettify(" ISBN 978-3-86680-192 ", self._marker)==" ISBN 978-3-86680-192 ")
-
-    def test_masks_URL1(self):
-        """Testing URL masking"""
-        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de hallo')=="000000111111111111111111111111000000")
-        assert(self._marker.get_mask('http://www.krajzewicz.de hallo')=="111111111111111111111111000000")
-        assert(self._marker.get_mask('Hallo http://www.krajzewicz.de')=="000000111111111111111111111111")
-        assert(self._marker.get_mask('http://www.krajzewicz.de')=="111111111111111111111111")
 
 
     def test_prettify_toSkip_oddity(self):

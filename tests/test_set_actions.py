@@ -82,6 +82,7 @@ class TestDegrotesque_SetActions(unittest.TestCase):
         actions.extend(degrotesque.actions_db["to_quotes"])
         assert(self._degrotesque._actions==actions)
 
+
     def test_set_actions_unknown(self):
         """TRying to set an unknown action"""
         self._degrotesque._restore_default_actions()
