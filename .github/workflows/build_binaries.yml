@@ -1,9 +1,7 @@
 # https://github.com/pyinstaller/pyinstaller/issues/6296
 name: binaries
 
-on:
-  push:
-    branches: ['release']
+on: [push]
 
 jobs:
   build:
