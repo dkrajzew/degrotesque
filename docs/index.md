@@ -16,11 +16,7 @@ degrotesque &mdash; A type setter written in Python.
 
 *degrotesque beautifies text.*
 
-**degrotesque** is a command line script written in the [Python](https://www.python.org/) programming language
-that loads a text/markdown/HTML/XML/Python/Java/... file from the disc &mdash; or several in batch &mdash; and for each, it
-replaces some commonly used non-typographic characters like hyphens, single and double quotes, etc. into their typographic
-representation for improving the text&apos;s appearance. Of course, non-text parts of the respective document, like e.g.
-HTML-tags, code, or what, are omitted.
+**degrotesque** is a command line application and a [Python](https://www.python.org/) library that loads a HTML/XML/text/markdown/rst/Python/Java/... file &mdash; or several in batch &mdash; and for each, it replaces some commonly used non-typographic characters like hyphens, single and double quotes, etc. into their typographic representation for improving the text&apos;s appearance. Of course, non-text parts of the respective document, like e.g. HTML-tags, code, or what, are omitted.
 
 E.g.:
 
@@ -32,12 +28,9 @@ will become:
 
 I think it looks __much__ better.
 
-The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively.
-The ' has been replaced by &apos; and the - by an &mdash;.
-Of course, this script omits HTML elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
+The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively. The ' has been replaced by &apos; and the - by an &mdash;. Of course, this script omits HTML elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name, the unicode entity, or the respective unicode character.
 
-**degrotesque** is meant to be a relatively **reliable post-processing step for type setting web pages or any plain texts before releasing them**.
-Being a [Python](https://www.python.org/) script, **it can be easily embedded in own workflows** and can be used on almost all operating systems.
+**degrotesque** is meant to be a relatively **reliable post-processing step for type setting web pages or any plain texts before releasing them**. Being written in [Python](https://www.python.org/), **it can be easily embedded in own workflows** and can be used on almost all operating systems.
 
 **degrotesque** supports English, German, and French alternatives currently.
 
@@ -67,16 +60,16 @@ I wanted to have a tool that automatically recognizes which characters should be
 
 I think it&apos;s a pity that major Desktop Publishing applications do this on the fly but many and even major web sites still show us plain ASCII characters.
 
-**degrotesque** does the job pretty fine. After writing / building my pages, the tool converts them to a prettier and typographically more correct form. The structure and format of the pages is completely remained. And as said, **degrotesque** works reliable.
+**degrotesque** does the job pretty fine. After writing / building my pages, the tool converts them to a prettier and typographically more correct form. The structure and format of the pages is remained completely. And as said, **degrotesque** works reliable.
 
 If you need any consultations, please let me know. If you know better, too.
 
 
-## Future Plans
+## Future plans
 
 **degrotesque** is working for me as intended.
 With the current release, all features I had in mind were implemented.
-As such, I suppose that new versions of **degrotesque** will only be released if someone puts new features on the table. Adding some further laguage-specific things beyon German, French, and English may be of interest. If you need something, you may drop me a mail at daniel@krajzewicz.de.
+As such, I suppose that new versions of **degrotesque** will only be released if someone puts new features on the table. Adding some further language-specific things beyond German, French, and English may be of interest. If you need something, you may drop me a mail at daniel@krajzewicz.de.
 
 
 ## License

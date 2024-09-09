@@ -33,7 +33,8 @@ python degrotesque.py --input userdocs.xml -B -f unicode
 ## Type setting for Markdown documentation
 
 The pages with **degrotesque** documentation you currently look at were written 
-using Markdown (mkdocs). To make them pretty, **degrotesque** was applied to them
+using Markdown (mkdocs). To make them pretty, **degrotesque** was applied to the 
+source md-files.
 
 The call is:
 
@@ -55,4 +56,6 @@ This tells degrotesque to process all files in the folder *&lt;PATH_TO_SOURCE_CO
 (**--input *&lt;PATH_TO_SOURCE_CODE&gt;***) and all of its sub-folders (**--recursive**).
 The -!!! switch tells degrotesque that the files are HTML/XML.
 
+Please note that in my opinion, there is some magic in having a plain ASCII source code.
+Think whether you really want to have it type-setted.
 

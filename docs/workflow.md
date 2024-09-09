@@ -23,8 +23,8 @@ This cannot be done when processing XML, HTML, or Markdown files as some
 parts - elements, attributes in XML/HTML-files or code parts in Markdown
 files - must be omitted.
 
-As such, after loading a file, **degrotesque** computes a mask. The mask shows
-which parts of the file contents shall be processed and which ones shall be
+As such, after loading a file, **degrotesque** computes a mask, first. The mask 
+shows which parts of the file contents shall be processed and which ones shall be
 omitted.
 
 The mask is a string of the same length as the file contents. Parts that shall be

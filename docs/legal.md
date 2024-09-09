@@ -16,6 +16,9 @@ These pages were made by Daniel Krajzewicz, 2020&ndash;2024.
 
 ## Regards
 
-**degrotesque** uses [pytest](https://pytest.org) and [mkdocs](https://www.mkdocs.org/) together with the [material extension](https://squidfunk.github.io/mkdocs-material/).
+**degrotesque** uses [pytest](https://pytest.org) and [mkdocs](https://www.mkdocs.org/) together with the [material extension](https://squidfunk.github.io/mkdocs-material/). I like mkdocs very much. The docs can be read online at [readthedocs](!!!). Thank you!
+
+**degrotesque** is validated using Python's pytest and coverage libraries and the coverage is tracked on coveralls. Thank you!
+
 
 
