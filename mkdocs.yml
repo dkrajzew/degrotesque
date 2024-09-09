@@ -52,6 +52,7 @@ nav:
         - Appendix C: appendixC.md
         - Appendix D: appendixD.md
     - Known Issues: issues.md
+    - FAQ: faq.md
     - Services: services.md
 
 exclude_docs:
