@@ -577,6 +577,8 @@ def main(arguments : List[str] = []) -> int:
             for arg in tmp_args:
                 if arg=="write_config" or arg=="config" or tmp_args[arg] is None:
                     continue
+                if tmp_args[arg]==parser.get_default(arg):
+                    continue
                 fdo.write("%s=%s\n" % (arg, tmp_args[arg]))
     # collect files
     extensions = helper.get_extensions(args.extensions)
