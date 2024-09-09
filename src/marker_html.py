@@ -30,7 +30,7 @@ class DegrotesqueHTMLMarker(marker.DegrotesqueMarker):
     
     Masks all element (opening, closing, single) element definitions
     and everything else that is within < and >. Masks the contents of code
-    elements (<pre>, <code> and others). Masks links.
+    elements (&lt;pre&gt;, &lt;code&gt; and others). Masks links.
     """
     
     def get_extensions(self) -> List[str]:
