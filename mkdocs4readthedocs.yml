@@ -27,9 +27,10 @@ nav:
     - API:
         - degrotesque: api_degrotesque.md
         - marker API: api_marker.md
+        - Abstract beg/end marker: api_marker_begend.md
         - HTML marker: api_marker_html.md
         - Markdown marker: api_marker_md.md
-        - Abstract beg/end marker: api_marker_begend.md
+        - RST marker: api_marker_rst.md
         - Text marker: api_marker_text.md
         - Helper: api_helper.md
     - Appendices:
