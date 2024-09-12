@@ -49,8 +49,8 @@ def test_main__unknown_option_bool(capsys, tmp_path):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
 degrotesque: error: unrecognized arguments: -u
 """
@@ -73,8 +73,8 @@ def test_main__unknown_option_string(capsys, tmp_path):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
 degrotesque: error: unrecognized arguments: --foo
 """
@@ -96,10 +96,10 @@ def test_main__format__unknown(capsys, tmp_path):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
-degrotesque: error: argument -f/--format: invalid choice: 'foo' (choose from 'html', 'unicode', 'text')
+degrotesque: error: argument -f/--format: invalid choice: 'foo' (choose from 'html', 'unicode', 'char')
 """
     assert captured.out == ""
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
@@ -120,10 +120,10 @@ def test_main__filetype__unknown(capsys, tmp_path):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
-degrotesque: error: argument -T/--type: invalid choice: 'foo' (choose from 'sgml', 'text', 'md', 'doxygen', 'python', 'rst')
+degrotesque: error: argument -t/--type: invalid choice: 'foo' (choose from 'sgml', 'text', 'md', 'doxygen', 'python', 'rst')
 """
     assert captured.out == ""
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
@@ -144,8 +144,8 @@ def test_main__action__unknown(capsys, tmp_path):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
 degrotesque: error: argument -a/--actions: action 'foo' is not known
 """
@@ -195,8 +195,8 @@ def test_main__file__not_existing1(capsys, tmp_path):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
 degrotesque: error: can not process 'foo'
 """

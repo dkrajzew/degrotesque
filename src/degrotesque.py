@@ -179,7 +179,7 @@ encoding_map = {
 
 # --- functions -------------------------------------------------------------
 # --- replacement functions
-def _replace_keep(matchobj : re.Match) -> str:
+def _replace_unicode(matchobj : re.Match) -> str:
     """Unicode numbers conversion to itself
 
     Args:
@@ -203,7 +203,7 @@ def _replace_html(matchobj : re.Match) -> str:
     return encoding_map[matchobj.group(0)][0]
 
 
-def _replace_unicode(matchobj : re.Match) -> str:
+def _replace_character(matchobj : re.Match) -> str:
     """Unicode numbers conversion to Unicode characters
 
     Args:
@@ -244,7 +244,7 @@ class Degrotesque:
         # the actions to apply
         self._restore_default_actions()
         # the target format converter
-        self._replace_func = _replace_keep
+        self._replace_func = _replace_unicode
         # the target format regexp
         self._target_regex = re.compile("(&#[xX]?[0-9a-fA-F]*;)")
         # set up markers
@@ -293,14 +293,14 @@ class Degrotesque:
         """Sets the target character representation
 
         Args:
-            format_name (str): The format to use, one of "html", "unicode", "text"
+            format_name (str): The format to use, one of "html", "unicode", "char"
         """
         if format_name=="html":
             self._replace_func = _replace_html
         elif format_name=="unicode":
-            self._replace_func = _replace_keep
-        elif format_name=="text":
             self._replace_func = _replace_unicode
+        elif format_name=="char":
+            self._replace_func = _replace_character
         else:
             raise ValueError("Unknown target format '%s'" % format_name)
 
@@ -455,26 +455,31 @@ def prettify(document : str, marker : Union[marker.DegrotesqueMarker, str] = Non
 def main(arguments : List[str] = []) -> int:
     """The main method using parameter from the command line.
 
-    The application reads the given file or the files from the folder (optionally
-    recursive) defined by the -i/--input option. If -r/--recursive option is set,
-    the input folder will be scanned recursively. All files are processed but can
-    be limited to those that match the extension defined using the -e/--extension
-    option. The default encoding for the files is utf-8. This can be changed
-    using the -E/--encoding option.
+    The application reads the given file or the files from the folder
+    defined by the given name. If -r/--recursive option is set, the input
+    folder will be scanned recursively.
+    All files are processed but can be limited to those that match the
+    extension defined using the -e/--extension option. 
+    The default encoding for the files is utf-8. This can be changed using
+    the -E/--encoding option.
 
     The default actions or those named using the -a/--actions option are
-    applied. When parsing HTML documents, elements are skipped. The contents of
-    default elements to skip or those defined using -s/--skip are skipped as well.
-    degrotesque tries to determine the file type using the respective extension.
-    The options -T/--text, -H/--html, and -M/--markdown overwrite this behaviour.
+    applied. When parsing HTML / XML documents, elements are skipped. 
+    The contents of default elements to skip or those defined using -s/--skip
+    are skipped as well.
+    degrotesque tries to determine the file type using the respective 
+    extension. The options -t/--type can be used to set an explicit type.
 
     The target format of the replacements is unicode entity but may be changed
     using the -f/--format option.
 
-    The files are saved under their original name. If the option -B/--no-backup is not
-    given, a backup of the original files is generated named as the original
-    file with the appendix ".orig".
-
+    The files are saved under their original name. If the option 
+    -B/--no-backup is not given, a backup of the original files is generated
+    named as the original file with the appendix ".orig".
+    
+    degrotesque can read a configuration named using the -c/--config option.
+    It will save the current options into the file named using the option
+    -w/--write-config.
 
     Args:
         arguments (List[str]): The command line arguments, parsed as options using OptionParser.
@@ -482,10 +487,7 @@ def main(arguments : List[str] = []) -> int:
     Options
     -------
 
-    The following options must be set:
-
-    --input / -i _&lt;FILE or FOLDER NAME&gt;_:
-        the file or the folder to process
+    degrotesque must get the name(s) of the files/folders to process.
 
     The following options are optional:
 
@@ -498,14 +500,8 @@ def main(arguments : List[str] = []) -> int:
     --encoding / -E _&lt;ENCODING&gt;_:
         File encoding (default: 'utf-8')
 
-    --html / -H:
-        Files are HTML/XML-derivatives
-
-    --text / -T:
-        Files are plain text files
-
-    --markdown / -M:
-        Files are markdown files
+    --type / -t:
+        Sets the file type []
 
     --no-backup / -B:
         Set if no backup files shall be generated
@@ -518,6 +514,12 @@ def main(arguments : List[str] = []) -> int:
 
     --actions / -a _&lt;ACTION_NAME&gt;[,&lt;ACTION_NAME&gt;]\*_:
         Name the actions that shall be applied
+
+    --config / -c _&lt;FILE&gt;_:
+        Reads options from the named configuration file
+
+    --write-config / -w _&lt;FILE&gt;_:
+        Writes the set options into a configuration file
 
     --help / -h:
         Prints the help screen
@@ -547,12 +549,12 @@ def main(arguments : List[str] = []) -> int:
     parser.add_argument("-r", "--recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
     parser.add_argument("-e", "--extensions",default=None, help="Defines the extensions of files to process")
     parser.add_argument("-E", "--encoding", default="utf-8", help="File encoding (default: 'utf-8')")
-    parser.add_argument("-T", "--type", choices=['sgml', 'text', 'md', 'doxygen', 'python', 'rst'], help="Name the file type, one of  ['sgml', 'text', 'md', 'doxygen', 'python', 'rst']")
+    parser.add_argument("-t", "--type", choices=['sgml', 'text', 'md', 'doxygen', 'python', 'rst'], help="Name the file type, one of  ['sgml', 'text', 'md', 'doxygen', 'python', 'rst']")
     parser.add_argument("-B", "--no-backup", dest="no_backup", action="store_true", help="Whether no backup shall be generated")
-    parser.add_argument("-f", "--format", choices=['html', 'unicode', 'text'], default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'text']")
+    parser.add_argument("-f", "--format", choices=['html', 'unicode', 'char'], default="unicode", help="Defines the format of the replacements ['html', 'unicode', 'char']")
     parser.add_argument("-s", "--skip", default=None, help="Defines the elements which contents shall not be changed")
-    parser.add_argument("-w", "--write-config", metavar="FILE", help="Writes the current settings to the named configuration file")
     parser.add_argument("-a", "--actions", default=None, help="Defines the actions to perform")
+    parser.add_argument("-w", "--write-config", metavar="FILE", help="Writes the current settings to the named configuration file")
     parser.set_defaults(**defaults)
     args = parser.parse_args(remaining_argv)
     # setup degrotesque

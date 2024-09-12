@@ -33,7 +33,7 @@ class TestDegrotesque_Prettify_UTF(unittest.TestCase):
 
     def setUp(self):
         self._degrotesque = degrotesque.Degrotesque()
-        self._degrotesque.set_format("text")
+        self._degrotesque.set_format("char")
         self._marker = marker_html.DegrotesqueHTMLMarker()
 
     def test_example(self):

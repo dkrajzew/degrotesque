@@ -151,6 +151,6 @@ def test_call_replacement_html1(capsys):
 
 def test_call_replacement_text1(capsys):
     """Replace by text"""
-    assert(degrotesque.prettify("\"Well - that's not what I had expected.\"", "sgml", replacement_format="text")=="“Well — that's not what I had expected.”")
+    assert(degrotesque.prettify("\"Well - that's not what I had expected.\"", "sgml", replacement_format="char")=="“Well — that's not what I had expected.”")
 
 

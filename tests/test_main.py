@@ -43,8 +43,8 @@ def test_main_empty1(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
 degrotesque: error: the following arguments are required: input
 """
@@ -61,8 +61,8 @@ def test_main_empty2(capsys):
         assert e.code==2
     captured = capsys.readouterr()
     assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
 degrotesque: error: the following arguments are required: input
 """
@@ -79,8 +79,8 @@ def test_main_help(capsys):
         assert e.code==0
     captured = capsys.readouterr()
     assert patch(captured.out) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-T {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,text}] [-s SKIP] [-w FILE] [-a ACTIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
 
 A type setter that exchanges ascii letters by their typographic counterparts
@@ -98,20 +98,20 @@ options:
                         Defines the extensions of files to process
   -E ENCODING, --encoding ENCODING
                         File encoding (default: 'utf-8')
-  -T {sgml,text,md,doxygen,python,rst}, --type {sgml,text,md,doxygen,python,rst}
+  -t {sgml,text,md,doxygen,python,rst}, --type {sgml,text,md,doxygen,python,rst}
                         Name the file type, one of ['sgml', 'text', 'md',
                         'doxygen', 'python', 'rst']
   -B, --no-backup       Whether no backup shall be generated
-  -f {html,unicode,text}, --format {html,unicode,text}
+  -f {html,unicode,char}, --format {html,unicode,char}
                         Defines the format of the replacements ['html',
-                        'unicode', 'text']
+                        'unicode', 'char']
   -s SKIP, --skip SKIP  Defines the elements which contents shall not be
                         changed
+  -a ACTIONS, --actions ACTIONS
+                        Defines the actions to perform
   -w FILE, --write-config FILE
                         Writes the current settings to the named configuration
                         file
-  -a ACTIONS, --actions ACTIONS
-                        Defines the actions to perform
 
 (c) Daniel Krajzewicz 2020-2024
 """

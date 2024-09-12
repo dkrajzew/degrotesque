@@ -4,9 +4,11 @@ The following action sets are currently implemented.
 
 Please note that the actions are realized using regular expressions. I decided not to show them in the following for a better readability and show the visible changes only.
 
+Default actions are highlighted as bold.
+
 | Action Name | From Opening String | From Closing String | To Opening String | To Closing String |
 | ---- | ---- | ---- | ---- | ---- |
-| quotes.english | ' | ' | &lsquo; | &rsquo; |
+| **quotes.english** | ' | ' | &lsquo; | &rsquo; |
 | | " | " | &ldquo; | &rdquo; |
 | quotes.french | &lt; | &gt; | &lsaquo; | &rsaquo; |
 | | &lt;&lt; | &gt;&gt; | &laquo; | &raquo; |
@@ -16,15 +18,15 @@ Please note that the actions are realized using regular expressions. I decided n
 | | " | " | &lt;q&gt; | &lt;/q&gt; |
 | | &lt;&lt; | &gt;&gt; | &lt;q&gt; | &lt;/q&gt; |
 | | &lt; | &gt; | &lt;q&gt; | &lt;/q&gt; |
-| commercial | (c) | | &copy; | |
+| **commercial** | (c) | | &copy; | |
 | | (r) | | &reg; | |
 | | (tm) | | &trade; | |
-| dashes |  -  | | &mdash; | |
+| **dashes** |  -  | | &mdash; | |
 | | &lt;NUMBER&gt;-&lt;NUMBER&gt; | | &lt;NUMBER&gt;&ndash;&lt;NUMBER&gt; | |
 | bullets | * | | &bull; | |
-| ellipsis | ... | | &hellip; | |
-| apostrophe | ' | | &apos; | |
-| math | +/- | | &plusmn; | |
+| **ellipsis** | ... | | &hellip; | |
+| **apostrophe** | ' | | &apos; | |
+| **math** | +/- | | &plusmn; | |
 | | 1/2 | | &frac12; | |
 | | 1/4 | | &frac14; | |
 | | 3/4 | | &frac34; | |
