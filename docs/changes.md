@@ -8,14 +8,23 @@
 * Extensions
 	* Added processing of comments in Python files
 	* Added processing of comments in [doxygen](https://www.doxygen.nl/) documentation (\*.cpp, \*.h, \*.java)
+	* Added processing of Markdown files
+	* Added processing of restructuredText files
 	* Added actions for arrows (see [Appendix A](appendixA.md))
+	* Added support for configuration files
 * Refactoring
 	* File type dependent functions for determining which parts of the respective document shall be processed were extracted into own sub-files
-	* moved helper methods to an own file
+	* Moved helper methods to an own file
 	* Proper variable and function / methods names
-	* added type hints
+	* Added type hints
+	* Added a direct method to prettify / degrotesque a document
+	* Replaced OptionsParser by argparse
+	* Improved XML/HTML-file recognition from contents
+	* Using a single command line option for forcing a file type
 * Documentation
 	* Proper Python documentation
+* Deployment
+	* Different requirement files for different purposes
 
 ## degrotesque-3.0.0 (26.03.2023)
 

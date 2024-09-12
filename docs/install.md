@@ -50,4 +50,4 @@ You may find binaries of __degrotesque__ in the [latest release](https://github.
 * [Ubuntu](!!!)
 * [MacOS](!!!)
 
-The downloads consist of a .zip-file that has to be unpacked. The executable __degrotesque__ application can be found in the generated folder. Please not that I do not have the possibility to validate the Ubuntu and MacOS executables. Please let me know if they do not work.
+The downloads consist of a .zip-file that has to be unpacked. The executable __degrotesque__ application can be found in the generated folder. Please note that I do not have the possibility to validate the Ubuntu and MacOS executables. Please let me know if they do not work.

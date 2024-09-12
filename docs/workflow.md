@@ -4,10 +4,10 @@
 
 ![degrotesque workflow](workflow.png "degrotesque workflow")
 
-For each collected file, **degrotesque** performs the following steps:
+For each found file, **degrotesque** performs the following steps:
 
 * load the file;
-* compute the mask of what to process in dependence to the file type;
+* compute a mask of what to process in dependence to the file type;
 * apply the chosen actions to the unmasked part of the file contents;
 * write the file, optionally building a backup of the file, first.
 
@@ -36,13 +36,12 @@ when applying the actions.
 
 **degrotesque** builds a copy of the chosen actions, first.
 
-When processing the document, the next occurence of a thing to change is determined,
-first. If an action consists of two parts (e.g. " should occure twice), the second part is
-searched. If an action has a second part, but it cannot be found in the document, the
-action is skipped. Actions that would be applied to something that does not occure in the
-(remainder of) the document are removed for speeding up the processing.
-
-All found occurences are sorted by their position within the document. The first one
+When processing the document, the next occurences of each thing to change is determined
+for each action, first. The nearest of those occurences is taken. If an action consists
+of two parts (e.g. " should occure twice), the second part is searched.
+If an action has a second part, but it cannot be found in the document, the
+action is skipped. Actions for which no occurence has been found are removed from the
+current list of action. All found occurences are sorted by their position within the document. The first one
 is then applied by replacing the initial characters by their prettier representation.
 
 Then, the search for the action to process is repeated, starting after the performed

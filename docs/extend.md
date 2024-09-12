@@ -7,7 +7,7 @@ the mask that says which parts shall be processed and which not (see [Workflow](
 
 To improve the extensibility of degrotesque, the methods that compute the masks
 in dependence to the file type have been extracted from the Degrotesque class
-and are now subclasses of the class "DegrotesqueMarker", defined in marker.py.
+and are now subclasses of the class ```DegrotesqueMarker```, defined in ```marker.py```.
 
 Two methods must be implemented:
 
@@ -19,7 +19,7 @@ this marker;
 As such, to extend degrotesque by a new file format the following steps are
 to be done:
 
-* build a subclass of DegrotesqueMarker and store it in a file named "marker_*&lt;YOUR_FORMAT&gt;.py*";
+* build a subclass of DegrotesqueMarker and store it in a file named **marker_*&lt;YOUR_FORMAT&gt;.py***;
 * define the file extensions this marker is responsible for in the classes' **get_extensions** method;
 * implement the mask computation in the class' **get_mask** method; the mask must have the same length as the original text and should be made of the characters '0' and '1'. In the according document, parts marked as '0' will be processed, those marked with a '1' will be skipped;
 * add your marker class to degrotesque's ```__init_``` method;
