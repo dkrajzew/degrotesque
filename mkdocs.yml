@@ -26,8 +26,8 @@ nav:
     - Installation: install.md
     - Usage: 
         - Command Line: cmd.md
-        - Use Cases: use_cases.md
         - Embedded: embed.md
+        - Use Cases: use_cases.md
     - Links: links.md
     - API:
         - degrotesque: api_degrotesque.md
