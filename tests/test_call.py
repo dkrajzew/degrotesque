@@ -27,6 +27,7 @@ import marker_text
 import marker_md
 import marker_html
 import marker_begend
+import marker_python
 import marker_rst
 
 # --- test functions ----------------------------------------------------------
@@ -83,7 +84,7 @@ def test_call_obj_marker_doxygen1(capsys):
 
 def test_call_obj_marker_python1(capsys):
     """For Python (using a marker)"""
-    marker = marker_begend.DegrotesquePythonMarker()
+    marker = marker_python.DegrotesquePythonMarker()
     assert(degrotesque.prettify("\"Well - \"\"\"that's\"\"\" not what I had expected.\"", marker, replacement_format="unicode")=="\"Well - \"\"\"that&#39;s\"\"\" not what I had expected.\"")
 
 

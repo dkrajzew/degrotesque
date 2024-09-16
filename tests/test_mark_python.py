@@ -24,7 +24,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
 import degrotesque
-import marker_begend
+import marker_python
 
 
 # --- test classes ------------------------------------------------------------
@@ -32,7 +32,7 @@ class TestDegrotesque_MarkPython(unittest.TestCase):
     """Testing the _mark_markdown method"""
 
     def setUp(self):
-        self._marker = marker_begend.DegrotesquePythonMarker()
+        self._marker = marker_python.DegrotesquePythonMarker()
 
     def test__mark_python_textOnly1(self):
         """Text without markups only"""
@@ -87,6 +87,50 @@ class TestDegrotesque_MarkPython(unittest.TestCase):
         assert(self._marker.get_mask('Hallo """Mama!""" I am a """comment."""')=="111111111000001111111111111100000000111")
 
 
+
+    def test__mark_python_pydoctest1(self):
+        """pydoc"""
+        assert(self._marker.get_mask("Hallo\n>>> Hello Mama!")=="111111111111111111111")
+
+    def test__mark_python_pydoctest2(self):
+        """pydoc"""
+        assert(self._marker.get_mask("Hallo\n>>> Hello Mama!\n\nHallo")=="1111111111111111111111111111")
+
+    def test__mark_python_pydoctest3(self):
+        """pydoc"""
+        assert(self._marker.get_mask("Hallo\n>>> Hello Mama!\nHallo\n\nHallo")=="1111111111111111111111111111111111")
+
+    def test__mark_python_pydoctest4(self):
+        """pydoc"""
+        assert(self._marker.get_mask("Hallo\n>>> Hello Mama!\nHallo\n\nHallo\n>>> Hello Mama!\n\n")=="1111111111111111111111111111111111111111111111111111")
+
+    def test__mark_python_pydoctest5(self):
+        """pydoc"""
+        assert(self._marker.get_mask(">>> Hello Mama!")=="111111111111111")
+        
+    def test__mark_markdown_pydoctest6(self):
+        """pydoc"""
+        assert(self._marker.get_mask("\"\"\"Hallo\n>>> Hello Mama!\"\"\"")=="111000000111111111111111111")
+
+    def test__mark_markdown_pydoctest7(self):
+        """pydoc"""
+        assert(self._marker.get_mask("\"\"\"Hallo\n>>> Hello Mama!\n\nHallo\"\"\"")=="1110000001111111111111111000000111")
+
+    def test__mark_markdown_pydoctest8(self):
+        """pydoc"""
+        assert(self._marker.get_mask("\"\"\"Hallo\n>>> Hello Mama!\nHallo\n\nHallo\"\"\"")=="1110000001111111111111111111111000000111")
+
+    def test__mark_markdown_pydoctest9(self):
+        """pydoc"""
+        assert(self._marker.get_mask("\"\"\"Hallo\n>>> Hello Mama!\nHallo\n\nHallo\n>>> Hello Mama!\n\n\"\"\"")=="1110000001111111111111111111111000000011111111111111110111")
+
+    def test__mark_markdown_pydoctest10(self):
+        """pydoc"""
+        assert(self._marker.get_mask("\"\"\">>> Hello Mama!\"\"\"")=="111111111111111111111")
+
+
+
+        
 
     def test__mark_python_link1(self):
         """Masking links in comments"""

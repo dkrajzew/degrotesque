@@ -22,5 +22,6 @@ import marker
 import marker_begend
 import marker_html
 import marker_md
+import marker_python
 import marker_rst
 import marker_text

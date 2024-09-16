@@ -58,7 +58,7 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
     def get_mask(self, document : str, to_skip : List[str] = None) -> str:
         """Returns a string where all text between each of the given
         begin/end-string pairs is masked (set to '1') and everything
-        else is not masted (set to '0').
+        else is not masked (set to '0').
 
         Args:
             document (str): The markdown document (contents) to process
@@ -96,17 +96,6 @@ class DegrotesqueBeginEndMarker(marker.DegrotesqueMarker):
                 ret = ret[:b] + (c*(e-b)) + ret[e:]
                 b = document.find(be[0], e+len(be[1]))
         return self.apply_masks(document, ret)
-
-
-
-class DegrotesquePythonMarker(DegrotesqueBeginEndMarker):
-    """A class that returns the mask for a Python document.
-    
-    Everything is masked despite comments, excluding links.
-    """
-
-    def __init__(self):
-        DegrotesqueBeginEndMarker.__init__(self, [['"""', '"""', False], ["#", "\n", False]], ["py"])
 
 
 

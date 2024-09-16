@@ -29,11 +29,12 @@ import argparse
 import configparser
 import helper
 import marker
-import marker_text
-import marker_md
-import marker_html
 import marker_begend
+import marker_html
+import marker_md
+import marker_python
 import marker_rst
+import marker_text
 from typing import List
 from typing import Union
 
@@ -252,7 +253,7 @@ class Degrotesque:
         self._markers["text"] = marker_text.DegrotesqueTextMarker()
         self._markers["md"] = marker_md.DegrotesqueMDMarker()
         self._markers["sgml"] = marker_html.DegrotesqueHTMLMarker()
-        self._markers["python"] = marker_begend.DegrotesquePythonMarker()
+        self._markers["python"] = marker_python.DegrotesquePythonMarker()
         self._markers["doxygen"] = marker_begend.DegrotesqueDoxygenMarker()
         self._markers["rst"] = marker_rst.DegrotesqueRSTMarker()
 
@@ -465,8 +466,8 @@ def main(arguments : List[str] = []) -> int:
 
     The default actions or those named using the -a/--actions option are
     applied. When parsing HTML / XML documents, elements are skipped. 
-    The contents of default elements to skip or those defined using -s/--skip
-    are skipped as well.
+    There are default XML/HTML elements which contents will be skipped as well. 
+    The list of these elements may be changed using the -s/--skip option.
     degrotesque tries to determine the file type using the respective 
     extension. The options -t/--type can be used to set an explicit type.
 
@@ -498,16 +499,16 @@ def main(arguments : List[str] = []) -> int:
         The extensions of files that shall be processed
 
     --encoding / -E _&lt;ENCODING&gt;_:
-        File encoding (default: 'utf-8')
+        Sets the file encoding (default: 'utf-8')
 
     --type / -t:
-        Sets the file type []
+        Sets the file type ['sgml', 'text', 'md', 'doxygen', 'python', 'rst']
 
     --no-backup / -B:
         Set if no backup files shall be generated
 
     --format / -f _&lt;FORMAT&gt;_:
-        Define the format of the replacements ['html', 'unicode', 'text']
+        Defines the format of the replacements ['html', 'unicode', 'text']
 
     --skip / -s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]\*_:
         Elements which contents shall not be changed
