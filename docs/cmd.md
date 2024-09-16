@@ -3,6 +3,17 @@
 __degrotesque__ is started on the command line.
 
 
+## Synopsis
+
+```shell
+degrotesque [-h] [-c FILE] [--version] [-r] 
+            [-e EXTENSIONS] [-E ENCODING]
+            [-t {sgml,text,md,doxygen,python,rst}] 
+			[-B] [-f {html,unicode,char}] [-s SKIP] 
+			[-a ACTIONS] [-w FILE]
+            input
+```
+
 ## Description
 
 __degrotesque__ reads one or multiple files named on the command line. Multiple files are read if the given name contains an asteriks (__'\*'__) or is a folder. If the option __-r__ / __--recursive__ is set and a folder is given, it will be processed recursively.
@@ -31,7 +42,7 @@ Per default, Unicode characters are inserted (e.g. &#8216;—&#8217; for an mdas
 
 When parsing XML/HTML files, the script does not change the quotation marks within elements, of course. As well, the contents of several elements, such as &lt;code&gt; or &lt;pre&gt;, are skipped. You may change the list of elements which contents shall not be processed using the option __-s _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]*___ / __--skip _&lt;ELEMENT_NAME&gt;[,&lt;ELEMENT_NAME&gt;]\*___. The list of elements that are skipped per default is given in [Appendix C](appendixC.md). This works only if the set / determined file type is &#8216;__sgml__&#8217;.
 
-When parsing markdown and restructuredText files, code is skipped. Quotes as well. When parsing doxygen files, only the contents of the doxygen-comments are processed. Only comments are processed in Python files, skipping pydoctest parts. The complete content of text files is processed. URLs and ISBN/ISSN numbers are always skipped (as well in text files), see [Appendix D](appendixD.md).
+When parsing Markdown and restructuredText files, code is skipped. Quotes as well. When parsing doxygen files, only the contents of the doxygen-comments are processed. Only comments are processed in Python files, skipping pydoctest parts. The complete content of text files is processed. URLs and ISBN/ISSN numbers are always skipped (as well in text files), see [Appendix D](appendixD.md).
 
 After the actions have been applied to its contents, the file is saved. By default, a backup of the original file is saved under the same name, with the appendix &ldquo;.orig&rdquo;. You may omit the creation of these backup files using the option __-B / --no-backup__.
 
