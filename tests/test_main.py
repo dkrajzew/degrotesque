@@ -78,43 +78,8 @@ def test_main_help(capsys):
         assert type(e)==type(SystemExit())
         assert e.code==0
     captured = capsys.readouterr()
-    assert patch(captured.out) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
-                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
-                   input
-
-A type setter that exchanges ascii letters by their typographic counterparts
-
-positional arguments:
-  input
-
-options:
-  -h, --help            show this help message and exit
-  -c FILE, --config FILE
-                        Reads the named configuration file
-  --version             show program's version number and exit
-  -r, --recursive       Whether a given path shall be processed recursively
-  -e EXTENSIONS, --extensions EXTENSIONS
-                        Defines the extensions of files to process
-  -E ENCODING, --encoding ENCODING
-                        File encoding (default: 'utf-8')
-  -t {sgml,text,md,doxygen,python,rst}, --type {sgml,text,md,doxygen,python,rst}
-                        Name the file type, one of ['sgml', 'text', 'md',
-                        'doxygen', 'python', 'rst']
-  -B, --no-backup       Whether no backup shall be generated
-  -f {html,unicode,char}, --format {html,unicode,char}
-                        Defines the format of the replacements ['html',
-                        'unicode', 'char']
-  -s SKIP, --skip SKIP  Defines the elements which contents shall not be
-                        changed
-  -a ACTIONS, --actions ACTIONS
-                        Defines the actions to perform
-  -w FILE, --write-config FILE
-                        Writes the current settings to the named configuration
-                        file
-
-(c) Daniel Krajzewicz 2020-2024
-"""
+    help_text = HELP_PRE_3_13 if sys.version_info < (3, 13) else HELP_POST_3_13
+    assert patch(captured.out) == help_text
     assert captured.err == ""
 
 
@@ -246,3 +211,81 @@ def test_main_run1_md2html_namedtype(capsys, tmp_path):
     degrotesque.main(["--type", "md", "-f", "html", str(tmp_path)])
     assert p1.read_text() == "&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;"
     assert p2.read_text() == "&ldquo;Well &mdash; `that's` not what I had expected.&rdquo;"
+
+
+
+HELP_PRE_3_13 = """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
+                   input
+
+A type setter that exchanges ascii letters by their typographic counterparts
+
+positional arguments:
+  input
+
+options:
+  -h, --help            show this help message and exit
+  -c FILE, --config FILE
+                        Reads the named configuration file
+  --version             show program's version number and exit
+  -r, --recursive       Whether a given path shall be processed recursively
+  -e EXTENSIONS, --extensions EXTENSIONS
+                        Defines the extensions of files to process
+  -E ENCODING, --encoding ENCODING
+                        File encoding (default: 'utf-8')
+  -t {sgml,text,md,doxygen,python,rst}, --type {sgml,text,md,doxygen,python,rst}
+                        Name the file type, one of ['sgml', 'text', 'md',
+                        'doxygen', 'python', 'rst']
+  -B, --no-backup       Whether no backup shall be generated
+  -f {html,unicode,char}, --format {html,unicode,char}
+                        Defines the format of the replacements ['html',
+                        'unicode', 'char']
+  -s SKIP, --skip SKIP  Defines the elements which contents shall not be
+                        changed
+  -a ACTIONS, --actions ACTIONS
+                        Defines the actions to perform
+  -w FILE, --write-config FILE
+                        Writes the current settings to the named configuration
+                        file
+
+(c) Daniel Krajzewicz 2020-2024
+"""
+
+
+HELP_POST_3_13 = """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
+                   input
+
+A type setter that exchanges ascii letters by their typographic counterparts
+
+positional arguments:
+  input
+
+options:
+  -h, --help            show this help message and exit
+  -c, --config FILE     Reads the named configuration file
+  --version             show program's version number and exit
+  -r, --recursive       Whether a given path shall be processed recursively
+  -e, --extensions EXTENSIONS
+                        Defines the extensions of files to process
+  -E, --encoding ENCODING
+                        File encoding (default: 'utf-8')
+  -t {sgml,text,md,doxygen,python,rst}, --type {sgml,text,md,doxygen,python,rst}
+                        Name the file type, one of ['sgml', 'text', 'md',
+                        'doxygen', 'python', 'rst']
+  -B, --no-backup       Whether no backup shall be generated
+  -f {html,unicode,char}, --format {html,unicode,char}
+                        Defines the format of the replacements ['html',
+                        'unicode', 'char']
+  -s, --skip SKIP       Defines the elements which contents shall not be
+                        changed
+  -a, --actions ACTIONS
+                        Defines the actions to perform
+  -w, --write-config FILE
+                        Writes the current settings to the named configuration
+                        file
+
+(c) Daniel Krajzewicz 2020-2024
+"""

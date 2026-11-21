@@ -95,12 +95,20 @@ def test_main__format__unknown(capsys, tmp_path):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
+    if sys.version_info < (3, 12):
+        assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
                    [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
                    [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
 degrotesque: error: argument -f/--format: invalid choice: 'foo' (choose from 'html', 'unicode', 'char')
 """
+    else:
+        assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
+                       [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                       [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
+                       input
+    degrotesque: error: argument -f/--format: invalid choice: 'foo' (choose from html, unicode, char)
+    """
     assert captured.out == ""
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
@@ -119,12 +127,20 @@ def test_main__filetype__unknown(capsys, tmp_path):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
+    if sys.version_info < (3, 12):
+        assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
                    [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
                    [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
                    input
 degrotesque: error: argument -t/--type: invalid choice: 'foo' (choose from 'sgml', 'text', 'md', 'doxygen', 'python', 'rst')
 """
+    else:
+        assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
+                       [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                       [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
+                       input
+    degrotesque: error: argument -t/--type: invalid choice: 'foo' (choose from sgml, text, md, doxygen, python, rst)
+    """
     assert captured.out == ""
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
