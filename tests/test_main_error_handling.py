@@ -104,11 +104,11 @@ degrotesque: error: argument -f/--format: invalid choice: 'foo' (choose from 'ht
 """
     else:
         assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                       [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
-                       [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
-                       input
-    degrotesque: error: argument -f/--format: invalid choice: 'foo' (choose from html, unicode, char)
-    """
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
+                   input
+degrotesque: error: argument -f/--format: invalid choice: 'foo' (choose from html, unicode, char)
+"""
     assert captured.out == ""
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
@@ -136,11 +136,11 @@ degrotesque: error: argument -t/--type: invalid choice: 'foo' (choose from 'sgml
 """
     else:
         assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
-                       [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
-                       [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
-                       input
-    degrotesque: error: argument -t/--type: invalid choice: 'foo' (choose from sgml, text, md, doxygen, python, rst)
-    """
+                   [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
+                   [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
+                   input
+degrotesque: error: argument -t/--type: invalid choice: 'foo' (choose from sgml, text, md, doxygen, python, rst)
+"""
     assert captured.out == ""
     assert p1.read_text() == "\"Well - that's not what I had expected.\""
     assert p2.read_text() == "\"Well - <code>that's</code> not what I had expected.\""
