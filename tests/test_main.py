@@ -272,11 +272,11 @@ options:
                         Defines the extensions of files to process
   -E, --encoding ENCODING
                         File encoding (default: 'utf-8')
-  -t {sgml,text,md,doxygen,python,rst}, --type {sgml,text,md,doxygen,python,rst}
+  -t, --type {sgml,text,md,doxygen,python,rst}
                         Name the file type, one of ['sgml', 'text', 'md',
                         'doxygen', 'python', 'rst']
   -B, --no-backup       Whether no backup shall be generated
-  -f {html,unicode,char}, --format {html,unicode,char}
+  -f, --format {html,unicode,char}
                         Defines the format of the replacements ['html',
                         'unicode', 'char']
   -s, --skip SKIP       Defines the elements which contents shall not be

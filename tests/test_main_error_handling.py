@@ -95,7 +95,7 @@ def test_main__format__unknown(capsys, tmp_path):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    if sys.version_info < (3, 12):
+    if sys.version_info < (3, 12) or sys.version_info > (3, 13):
         assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
                    [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
                    [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
@@ -127,7 +127,7 @@ def test_main__filetype__unknown(capsys, tmp_path):
         assert type(e)==type(SystemExit())
         assert e.code==2
     captured = capsys.readouterr()
-    if sys.version_info < (3, 12):
+    if sys.version_info < (3, 12) or sys.version_info > (3, 13):
         assert patch(captured.err) == """usage: degrotesque [-h] [-c FILE] [--version] [-r] [-e EXTENSIONS]
                    [-E ENCODING] [-t {sgml,text,md,doxygen,python,rst}] [-B]
                    [-f {html,unicode,char}] [-s SKIP] [-a ACTIONS] [-w FILE]
