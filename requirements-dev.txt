@@ -4,3 +4,4 @@ mkdocs-material
 mkdocstrings
 mkdocstrings-python
 coverage
+build

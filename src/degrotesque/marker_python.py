@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # ===========================================================================
-"""Module holding the base class that comoputes the mask for plain text
-documents."""
+"""Module holding a class that computes the mask for Python documents."""
 # ===========================================================================
 __author__     = "Daniel Krajzewicz"
 __copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
@@ -20,30 +19,27 @@ __status__     = "Production"
 
 
 # --- imports ---------------------------------------------------------------
+import os
+import sys
 from typing import List
-import marker
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import degrotesque.marker_begend as marker_begend
 
 
 # --- class definitions -----------------------------------------------------
-class DegrotesqueTextMarker(marker.DegrotesqueMarker):
-    """A class that returns the mask for plain text.
+class DegrotesquePythonMarker(marker_begend.DegrotesqueBeginEndMarker):
+    """A class that returns the mask for Python documents.
     
-    Only links are masked out, everything else can be changed.
+    Code elements as well as links and references are masked.
     """
 
-    def get_extensions(self) -> List[str]:
-        """Returns the extensions of file types that can be processed using
-        this marker.
-
-        Returns:
-            (list[str]): A list of extensions
-        """
-        return [ "txt" ]
+    def __init__(self):
+        marker_begend.DegrotesqueBeginEndMarker.__init__(self, [['"""', '"""', False], ["#", "\n", False]], ["py"])
 
 
     def get_mask(self, document : str, to_skip : List[str] = None) -> str:
-        """Returns a string where all code and quotes are denoted as '1' and
-        plain content as '0'.
+        """Returns a string where all protected text 
+        is denoted as '1' and everything else as '0'.
 
         Args:
             document (str): The markdown document (contents) to process
@@ -52,6 +48,19 @@ class DegrotesqueTextMarker(marker.DegrotesqueMarker):
         Returns:
             (str): Annotation of the markdown document.
         """
-        length = len(document)
-        ret = "0"*length
+        ret = marker_begend.DegrotesqueBeginEndMarker.get_mask(self, document)
+        # doctest blocks
+        b = document.find(">>>")
+        while b>=0:
+            e = document.find("\n", b)
+            while e>=0 and len(document)>e+1 and not document[e+1].isspace():
+                e = document.find("\n", e+1)
+            if e<0:
+                e = len(document)
+            else:
+                e = min(len(document), e+1)
+            ret = ret[:b] + ("1"*(e-b)) + ret[e:]
+            b = document.find(">>>", e)
+        # apply standard masks (URLs, ISSN, ISBN)
         return self.apply_masks(document, ret)
+            

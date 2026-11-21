@@ -4,7 +4,7 @@ site_description: A web type setter
 site_author: Daniel Krajzewicz
 docs_dir: ./docs
 
-repo_url: https://github.com/dkrajzew/degrotesque.git
+repo_url: https://github.com/dkrajzew/degrotesque
 edit_uri: ""
 
 theme:
@@ -21,9 +21,6 @@ nav:
         - Embedded: embed.md
         - Use Cases: use_cases.md
     - Links: links.md
-    - ChangeLog: changes.md
-    - License (BSD): license.md
-    - Legal: legal.md
     - API:
         - degrotesque: api_degrotesque.md
         - marker API: api_marker.md
@@ -34,26 +31,26 @@ nav:
         - RST marker: api_marker_rst.md
         - Text marker: api_marker_text.md
         - Helper: api_helper.md
+    - Known Issues: issues.md
+    - Developer Docs:
+        - Workflow: workflow.md
+        - How To Extend: extend.md
+        - Notes: notes.md
+    - ChangeLog: changes.md
+    - License (BSD): license.md
+    - Legal: legal.md
     - Appendices:
         - Appendix A: appendixA.md
         - Appendix B: appendixB.md
         - Appendix C: appendixC.md
         - Appendix D: appendixD.md
-    - Developer Docs:
-        - Workflow: workflow.md
-        - How To Extend: extend.md
-        - How To Release: release.md
-        - Notes: notes.md
-    - Known Issues: issues.md
-    - FAQ: faq.md
-    - Services: services.md
  
 
 markdown_extensions:
     - admonition
     - sane_lists
   
-copyright: "&copy; Copyright 2020&ndash;2024 Daniel Krajzewicz."
+copyright: "&copy; Copyright 2020&ndash;2025 Daniel Krajzewicz."
 
 use_directory_urls: false
 
@@ -62,7 +59,7 @@ plugins:
     - mkdocstrings:
         handlers:
             python:
-                paths: [./]
+                paths: [./src]
                 options:
                     filters: [""]
                     show_source: False

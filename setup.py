@@ -1,29 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-# =============================================================================
-"""degrotesque - A web type setter."""
-# =============================================================================
+"""degrotesque - Setup module."""
+# ===========================================================================
 __author__     = "Daniel Krajzewicz"
-__copyright__  = "Copyright 2020-2024, Daniel Krajzewicz"
+__copyright__  = "Copyright 2020-2025, Daniel Krajzewicz"
 __credits__    = ["Daniel Krajzewicz"]
 __license__    = "BSD"
 __version__    = "3.0.0"
 __maintainer__ = "Daniel Krajzewicz"
 __email__      = "daniel@krajzewicz.de"
 __status__     = "Production"
-# =============================================================================
+# ===========================================================================
 # - https://github.com/dkrajzew/degrotesque
 # - http://www.krajzewicz.de/docs/degrotesque/index.html
 # - http://www.krajzewicz.de
-# =============================================================================
+# ===========================================================================
 
 
-# --- imports -----------------------------------------------------------------
+# --- imports ---------------------------------------------------------------
 import setuptools
 
 
-# --- definitions -------------------------------------------------------------
+# --- definitions -----------------------------------------------------------
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
@@ -44,11 +42,11 @@ setuptools.setup(
         'Discussions': 'https://github.com/dkrajzew/degrotesque/discussions',
     },
     license='BSD',
-    # add modules
-    packages=setuptools.find_packages(),
+    packages = [""],
+    package_dir = { "": "degrotesque" },
     entry_points = {
         'console_scripts': [
-            'degrotesque = degrotesque:main'
+            'degrotesque = degrotesque:script_run'
         ]
     },
     # see https://pypi.org/classifiers/

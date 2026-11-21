@@ -27,9 +27,9 @@ will become:
 
  &ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;
 
-I think it looks __much__ better.
+The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively, the ' by &apos; and the - by an &mdash;. __I think it looks much better__.
 
-The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively, the ' by &apos; and the - by an &mdash;. Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
+Of course, this script omits HTML-elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name or the respective unicode character.
 
 It is meant to be a relatively **reliable post-processing step for web pages before releasing them**. In version 3.0.0 the support of markdown files was added.
 

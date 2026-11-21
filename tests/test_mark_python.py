@@ -22,9 +22,8 @@ __status__     = "Production"
 import unittest
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
-import degrotesque
-import marker_python
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+import degrotesque.marker_python as marker_python
 
 
 # --- test classes ------------------------------------------------------------

@@ -21,13 +21,8 @@ __status__     = "Production"
 # --- imports -----------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
-import degrotesque
-import marker_text
-import marker_md
-import marker_html
-import marker_begend
-import marker_rst
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+import degrotesque.degrotesque as degrotesque
 
 
 # --- test functions ----------------------------------------------------------

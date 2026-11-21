@@ -22,9 +22,9 @@ __status__     = "Production"
 import unittest
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
-import marker_html
-import helper
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+import degrotesque.marker_html as marker_html
+import degrotesque.helper as helper
 
 
 # --- test classes ------------------------------------------------------------

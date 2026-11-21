@@ -2,7 +2,7 @@
 
 ## Impressum
 
-These pages were made by Daniel Krajzewicz, 2020&ndash;2024.
+These pages were made by Daniel Krajzewicz, 2020&ndash;2025.
 
 
 ## Disclaimer
@@ -16,9 +16,7 @@ These pages were made by Daniel Krajzewicz, 2020&ndash;2024.
 
 ## Regards
 
-**degrotesque** uses [pytest](https://pytest.org) and [mkdocs](https://www.mkdocs.org/) together with the [material extension](https://squidfunk.github.io/mkdocs-material/). I like mkdocs very much. The docs can be read online at [readthedocs](!!!). Thank you!
+**degrotesque** is validated using Python's [pytest](https://docs.pytest.org/) and [coverage](https://coverage.readthedocs.io/) packages and the coverage is tracked on [coveralls](https://coveralls.io/). Thank you!
 
-**degrotesque** is validated using Python's pytest and coverage libraries and the coverage is tracked on coveralls. Thank you!
-
-
+**degrotesque** uses [mkdocs](https://www.mkdocs.org/) together with the [material extension](https://squidfunk.github.io/mkdocs-material/) for documentation. I like mkdocs very much. Thank you!
 

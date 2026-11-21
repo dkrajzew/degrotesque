@@ -27,16 +27,16 @@ import shutil
 import re
 import argparse
 import configparser
-import helper
-import marker
-import marker_begend
-import marker_html
-import marker_md
-import marker_python
-import marker_rst
-import marker_text
-from typing import List
-from typing import Union
+from typing import List, Union
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import degrotesque.helper as helper
+import degrotesque.marker as marker
+import degrotesque.marker_begend as marker_begend
+import degrotesque.marker_html as marker_html
+import degrotesque.marker_md as marker_md
+import degrotesque.marker_python as marker_python
+import degrotesque.marker_rst as marker_rst
+import degrotesque.marker_text as marker_text
 
 
 # --- variables and constants -----------------------------------------------
@@ -545,7 +545,7 @@ def main(arguments : List[str] = []) -> int:
     parser = argparse.ArgumentParser(prog='degrotesque', parents=[conf_parser], 
         description='A type setter that exchanges ascii letters by their typographic counterparts', 
         epilog='(c) Daniel Krajzewicz 2020-2024')
-    parser.add_argument("input")
+    parser.add_argument("input" if "input" not in defaults else "--input")
     parser.add_argument('--version', action='version', version='%(prog)s 3.0.0')
     parser.add_argument("-r", "--recursive", action="store_true", default=False, help="Whether a given path shall be processed recursively")
     parser.add_argument("-e", "--extensions",default=None, help="Defines the extensions of files to process")

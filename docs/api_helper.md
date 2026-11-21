@@ -1,6 +1,6 @@
 # API
 
-::: src.helper
+::: degrotesque.helper
     docstring_style: "google"
     filters: [""]
     show_source: False

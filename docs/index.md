@@ -9,8 +9,9 @@
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVQQWZKB6FDES)
 
+#
 
-degrotesque &mdash; A type setter written in Python.
+__degrotesque__ &mdash; A type setter written in Python
 
 ## Introduction
 
@@ -26,18 +27,16 @@ will become:
 
 <center><h1 class="degrotesque_example">&ldquo;Well &mdash; that&apos;s not what I had expected.&rdquo;</h1></center>
 
-I think it looks __much__ better.
+The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively. __I think it looks much better__.
 
-The starting and ending quotes have been replaced by &ldquo; and &rdquo;, respectively. The ' has been replaced by &apos; and the - by an &mdash;. Of course, this script omits HTML elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name, the unicode entity, or the respective unicode character.
+The ' has been replaced by &apos; and the - by an &mdash;. Of course, this script omits HTML elements. It keeps the complete format as-is, and replaces characters by their proper HTML entity name, the unicode entity, or the respective unicode character.
 
 **degrotesque** is meant to be a relatively **reliable post-processing step for type setting web pages or any plain texts before releasing them**. Being written in [Python](https://www.python.org/), **it can be easily embedded in own workflows** and can be used on almost all operating systems.
 
 **degrotesque** supports English, German, and French alternatives currently.
 
-And, **degrotesque** is free (you may donate).
 
-
-## Examples
+## Usage
 
 ```console
 degrotesque --input my_page.html --actions quotes.german
@@ -50,6 +49,30 @@ degrotesque --input my_folder --recursive --no-backup
 ```
 
 Applies the default actions to all files in the folder &ldquo;my_folder&rdquo; and all subfolders. No backup files are generated. The format of each file is determined using the respective file&apos;s extension.
+
+
+## Documentation
+
+!!!The documentation consists of a [user manual](usage.md) and a [man-page like call documentation](cmd.md).
+
+If you want to contribute, you may check the [API documentation](api.md) or visit [degrotesque on github](https://github.com/dkrajzew/degrotesque) where besides the code you may find the [degrotesque issue tracker](https://github.com/dkrajzew/degrotesque/issues) or a [discussions about degrotesque](https://github.com/dkrajzew/degrotesque/discussions) section.
+
+Additional documentation includes a page with relevant [links](links.md) or the [ChangeLog](changes.md). You may find the complete documentation at the [degrotesque readthedocs pages](https://degrotesque.readthedocs.io/).
+
+## Installation
+
+The current version is 3.0.0. You may install the latest release using pip:
+
+```console
+python -m pip install degrotesque
+```
+
+Or download the [latest release](https://github.com/dkrajzew/degrotesque/releases/tag/3.0.0) from github. You may as well clone or download the [degrotesque git repository](https://github.com/dkrajzew/degrotesque). There is also a page about [installing degrotesque](install.md) which lists further options.
+
+
+## License
+
+**degrotesque** is licensed under the [BSD license](license.md).
 
 
 ## Background
@@ -65,13 +88,9 @@ I think it&apos;s a pity that major Desktop Publishing applications do this on t
 If you need any consultations, please let me know. If you know better, too.
 
 
-## Future plans
+## Status &amp; Contributing
 
-**degrotesque** is working for me as intended.
-With the current release, all features I had in mind were implemented.
-As such, I suppose that new versions of **degrotesque** will only be released if someone puts new features on the table. Adding some further language-specific things beyond German, French, and English may be of interest. If you need something, you may drop me a mail at daniel@krajzewicz.de.
+**degrotesque** works for me as intended and with the current release, all features I had in mind were implemented. 
 
+As such, I suppose that new versions of **degrotesque** will only be released if someone puts new features on the table. Adding some further language-specific things beyond German, French, and English may be of interest. If you need something, you may drop me a mail or [add an issue](https://github.com/dkrajzew/degrotesque/issues).
 
-## License
-
-__degrotesque__ is licensed under the [BSD license](license.md).

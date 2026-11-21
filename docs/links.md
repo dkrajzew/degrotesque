@@ -1,10 +1,8 @@
 # Further Links
 
-## Documentation
+## degrotesque pages
 
-* The complete documentation is located at:
-     * <https://degrotesque.readthedocs.io/en/latest/> and
-     * <https://krajzewicz.de/docs/degrotesque/index.html>
+* The complete documentation is located at: <https://degrotesque.readthedocs.io/en/latest/>
 * Discussions are open at <https://github.com/dkrajzew/degrotesque/discussions>
 * The github repository is located at: <https://github.com/dkrajzew/degrotesque>
 * The issue tracker is located at: <https://github.com/dkrajzew/degrotesque/issues>

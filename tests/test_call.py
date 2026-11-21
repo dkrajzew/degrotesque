@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# =============================================================================
 """degrotesque - Tests for direct call."""
 # =============================================================================
 __author__     = "Daniel Krajzewicz"
@@ -21,14 +20,14 @@ __status__     = "Production"
 # --- imports -----------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
-import degrotesque
-import marker_text
-import marker_md
-import marker_html
-import marker_begend
-import marker_python
-import marker_rst
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+import degrotesque.degrotesque as degrotesque
+import degrotesque.marker_text as marker_text
+import degrotesque.marker_md as marker_md
+import degrotesque.marker_html as marker_html
+import degrotesque.marker_begend as marker_begend
+import degrotesque.marker_python as marker_python
+import degrotesque.marker_rst as marker_rst
 
 # --- test functions ----------------------------------------------------------
 def test_call_str_marker_html1(capsys):

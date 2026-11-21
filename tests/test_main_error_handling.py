@@ -21,8 +21,8 @@ __status__     = "Production"
 # --- imports -----------------------------------------------------------------
 import sys
 import os
-sys.path.append(os.path.join(os.path.split(__file__)[0], "..", "src"))
-import degrotesque
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src"))
+import degrotesque.degrotesque as degrotesque
 
 
 # --- helper functions --------------------------------------------------------

@@ -1,6 +1,6 @@
 # API
 
-::: src.marker_md
+::: degrotesque.marker_md
     docstring_style: "google"
     filters: [""]
     show_source: False
